@@ -1,12 +1,14 @@
-import type { HomeTranslations } from "../types"
+import type { HomeTranslations } from "../types";
 
 export const home: HomeTranslations = {
   title: "生産性向上のための包括的無料オンラインツール",
-  subtitle: "意思決定、タスク管理、生産性向上をサポートする20以上の無料オンラインツールコレクション。",
+  subtitle:
+    "意思決定、タスク管理、生産性向上をサポートする20以上の無料オンラインツールコレクション。",
   tryRoulette: "ルーレットを試す",
   manageTasks: "タスク管理",
   chooseTool: "ツールを選択",
-  chooseToolDescription: "生産性を高めるために設計された、包括的な無料オンラインツールコレクションからお選びください。",
+  chooseToolDescription:
+    "生産性を高めるために設計された、包括的な無料オンラインツールコレクションからお選びください。",
   rouletteDescription:
     "インタラクティブなルーレットホイールで簡単に決断。オプションを追加して、ホイールに決めてもらいましょう。",
   todoDescription:
@@ -19,4 +21,5 @@ export const home: HomeTranslations = {
   allTools: "すべてのツール",
   featuredTools: "注目のツール",
   utilityTools: "ユーティリティツール",
-}
+  getStarted: "始める",
+};

@@ -35,6 +35,12 @@ export async function generateMetadata({
 
   const t = getTranslations(locale);
 
+  const openGraphLocale = {
+    "en-US": "en_US",
+    "ja-JP": "ja_JP",
+    "zh-CN": "zh_CN",
+    "es-ES": "es_ES",
+  };
   return {
     title: {
       template: t.common.seo.titleTemplate,
@@ -57,13 +63,7 @@ export async function generateMetadata({
       description: t.footer.description,
       type: "website",
       locale:
-        locale === "ja"
-          ? "ja_JP"
-          : locale === "zh"
-          ? "zh_CN"
-          : locale === "es"
-          ? "es_ES"
-          : "en_US",
+        openGraphLocale[locale as keyof typeof openGraphLocale] || "en_US",
       url: `${baseUrl}/${locale}`,
       siteName: t.common.seo.siteTitle,
       images: [

@@ -33,6 +33,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const sitemap: MetadataRoute.Sitemap = [];
 
+  const alternatesLanguages = {
+    "en-US": `${baseUrl}/en`,
+    "ja-JP": `${baseUrl}/ja`,
+    "zh-CN": `${baseUrl}/zh`,
+    "es-ES": `${baseUrl}/es`,
+  };
   // 各ロケールのルートを追加
   locales.forEach((locale) => {
     routes.forEach((route) => {
@@ -43,17 +49,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: route === "" ? 1 : 0.8,
         alternates: {
           languages: Object.fromEntries(
-            locales.map((loc) => {
-              const langCode =
-                loc === "ja"
-                  ? "ja-JP"
-                  : loc === "zh"
-                  ? "zh-CN"
-                  : loc === "es"
-                  ? "es-ES"
-                  : "en-US";
-              return [langCode, `${baseUrl}/${loc}${route}`];
-            })
+            Object.entries(alternatesLanguages).map(([lang, url]) => [
+              lang,
+              locale === lang.split("-")[0] ? `${url}/${locale}` : url,
+            ])
           ),
         },
       });

@@ -1,8 +1,9 @@
-import type { HomeTranslations } from "../types"
+import type { HomeTranslations } from "../types";
 
 export const home: HomeTranslations = {
   title: "Comprehensive Free Online Tools for Productivity",
-  subtitle: "A collection of 20+ free online tools to help you make decisions, manage tasks, and boost productivity.",
+  subtitle:
+    "A collection of 20+ free online tools to help you make decisions, manage tasks, and boost productivity.",
   tryRoulette: "Try Roulette",
   manageTasks: "Manage Tasks",
   chooseTool: "Choose a Tool",
@@ -13,10 +14,12 @@ export const home: HomeTranslations = {
   todoDescription:
     "Stay organized with our simple yet powerful todo manager. Track tasks, set priorities, and manage deadlines.",
   readyToStart: "Ready to boost your productivity?",
-  readyToStartDescription: "Our tools are designed to help you work smarter, not harder. Try them now for free.",
+  readyToStartDescription:
+    "Our tools are designed to help you work smarter, not harder. Try them now for free.",
   startUsingTools: "Start Using Tools",
   popularTools: "Popular Tools",
   allTools: "All Tools",
   featuredTools: "Featured Tools",
   utilityTools: "Utility Tools",
-}
+  getStarted: "Get Started",
+};

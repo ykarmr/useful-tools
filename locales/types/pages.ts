@@ -14,6 +14,7 @@ export interface HomeTranslations {
   allTools: string;
   featuredTools: string;
   utilityTools: string;
+  getStarted: string;
 }
 
 export interface ServicesTranslations {

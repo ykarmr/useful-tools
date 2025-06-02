@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { getTranslations } from "@/lib/i18n";
 import "./globals.css";
+import { baseUrl } from "@/lib/const";
 
 export const dynamic = "force-static";
 
@@ -12,7 +13,7 @@ const inter = Inter({ subsets: ["latin"] });
 const t = getTranslations("en");
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://useful-tools.vercel.app"),
+  metadataBase: new URL(baseUrl),
   title: {
     template: t.common.seo.titleTemplate,
     default: t.common.seo.defaultTitle,
@@ -36,7 +37,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://useful-tools.vercel.app",
+    url: baseUrl,
     siteName: t.common.seo.siteTitle,
     title: t.common.seo.siteTitle,
     description: t.common.seo.siteDescription,
@@ -62,10 +63,12 @@ export const metadata: Metadata = {
     yahoo: t.common.seo.verification.yahoo,
   },
   alternates: {
-    canonical: "https://useful-tools.vercel.app",
+    canonical: baseUrl,
     languages: {
-      "en-US": "https://useful-tools.vercel.app/en",
-      "ja-JP": "https://useful-tools.vercel.app/ja",
+      "en-US": baseUrl + "/en",
+      "zh-CN": baseUrl + "/zh",
+      "es-ES": baseUrl + "/es",
+      "ja-JP": baseUrl + "/ja",
     },
   },
   category: "technology",

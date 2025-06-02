@@ -50,14 +50,6 @@ export async function generateMetadata({
       title: t.home.title,
       description: t.home.subtitle,
       url: `${baseUrl}/${locale}`,
-      images: [
-        {
-          url: "/og-home.png",
-          width: 1200,
-          height: 630,
-          alt: t.home.title,
-        },
-      ],
     },
     alternates: {
       canonical: `${baseUrl}/${locale}`,
