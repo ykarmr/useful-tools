@@ -129,7 +129,21 @@ export default function AdBanner({
           {advertisementText}
         </div>
 
-        <h3 className="font-semibold text-gray-900 mb-2 text-sm">
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7007912278084791"
+          crossOrigin="anonymous"
+        ></script>
+        <ins
+          className="adsbygoogle"
+          style={{ display: "block" }}
+          data-ad-client="ca-pub-7007912278084791"
+          data-ad-slot="1637677382"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+
+        {/* <h3 className="font-semibold text-gray-900 mb-2 text-sm">
           {adContent.title}
         </h3>
         <p className="text-gray-600 text-xs mb-4 leading-relaxed">
@@ -144,7 +158,7 @@ export default function AdBanner({
           }`}
         >
           {adContent.cta}
-        </button>
+        </button> */}
       </div>
     </div>
   );

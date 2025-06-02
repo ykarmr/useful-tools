@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import { getTranslations } from "@/lib/i18n";
 import "./globals.css";
 import { baseUrl } from "@/lib/const";
+import Script from "next/script";
 
 export const dynamic = "force-static";
 
@@ -83,6 +84,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7007912278084791"
+          crossOrigin="anonymous"
+        ></Script>
         <link rel="canonical" href="https://useful-tools.vercel.app" />
         <link
           rel="alternate"
