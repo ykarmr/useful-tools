@@ -1,0 +1,32 @@
+import type { JsonFormatterTranslations } from "../types/tools";
+
+export const jsonFormatter: JsonFormatterTranslations = {
+  title: "JSON格式化器",
+  description: "格式化、验证和美化JSON数据",
+  keywords: [
+    "JSON格式化器",
+    "JSON验证器",
+    "JSON压缩器",
+    "JSON美化器",
+    "语法高亮",
+    "JSON工具",
+  ],
+  format: "格式化",
+  minify: "压缩",
+  download: "下载",
+  placeholder: "在此粘贴或输入您的JSON数据...",
+  invalidJson: "无效的JSON",
+  statistics: "统计",
+  characters: "字符数",
+  lines: "行数",
+  size: "大小",
+  objects: "对象",
+  arrays: "数组",
+  indentSize: "缩进大小",
+  input: "输入JSON",
+  output: "格式化输出",
+  uploadFile: "上传文件",
+  examples: "示例",
+  basicObject: "基本对象:",
+  objectWithArray: "包含数组的对象:",
+};

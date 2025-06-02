@@ -1,0 +1,26 @@
+import type { TeamGeneratorTranslations } from "../types/tools";
+
+export const teamGenerator: TeamGeneratorTranslations = {
+  title: "团队生成器",
+  description: "随机生成团队的工具",
+  keywords: ["团队生成器", "随机团队", "团队分配", "团队工具"],
+  addPlayer: "添加玩家",
+  playerName: "玩家名称...",
+  teamSize: "团队大小",
+  generateTeams: "生成团队",
+  players: "玩家",
+  teams: "团队",
+  noPlayers: "尚未添加玩家。添加一些玩家开始吧！",
+  notEnoughPlayers: "需要至少 {needed} 名玩家才能创建团队",
+  defaultTeamName: "团队",
+  duplicatePlayerError: "已存在同名玩家",
+  confirmClearAll: "确定要删除所有玩家吗？",
+  generating: "生成中...",
+  resetTeams: "重置团队",
+  clearAll: "清除所有",
+  teamGenerationInfo: "团队生成信息：",
+  teamsOfPlayers: "{teams} 个团队，每个团队 {size} 名玩家",
+  remainingPlayersDistributed: "{remaining} 名剩余玩家将分配到现有团队中",
+  failedToGenerate: "生成团队失败",
+  playersUnit: "玩家",
+};

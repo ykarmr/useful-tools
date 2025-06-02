@@ -1,0 +1,36 @@
+import type { RouletteTranslations } from "../types/tools";
+
+export const roulette: RouletteTranslations = {
+  title: "Ruleta",
+  description: "Herramienta de selección aleatoria tipo ruleta",
+  keywords: ["ruleta", "selección aleatoria", "juego", "sorteo", "azar"],
+  reset: "Reiniciar",
+  addItems: "Agregar elementos",
+  enterOption: "Ingrese una opción...",
+  currentItems: "Elementos actuales",
+  noItemsAdded: "No se han agregado elementos aún",
+  addItemsToStart: "Agrega elementos para comenzar",
+  spinWheel: "Girar la ruleta",
+  spinning: "Girando...",
+  winner: "¡Ganador!",
+  itemsCount: "{count}/20 elementos",
+  enabledCount: "{count} habilitados",
+  removeItem: "Eliminar {item}",
+  disableItem: "Deshabilitar {item}",
+  enableItem: "Habilitar {item}",
+  disabled: "Deshabilitado",
+  defaultItems: {
+    item1: "Pizza",
+    item2: "Sushi",
+    item3: "Hamburguesa",
+    item4: "Pasta",
+  },
+  winnerZone: "ZONA DE GANADORES",
+  landingArea: "Área de aterrizaje",
+  segmentsLandInZone: "Los segmentos que caen en la zona verde ganan",
+  needMoreItems:
+    "Se requieren al menos 2 elementos habilitados para girar la ruleta",
+  landedInZone: "¡Cayó en la zona ganadora!",
+  addItemsInstruction: "Agrega elementos usando el campo de arriba",
+  addItemLabel: "Agregar elemento",
+};

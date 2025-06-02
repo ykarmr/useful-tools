@@ -1,0 +1,31 @@
+import type { JsonFormatterTranslations } from "../types";
+
+export const jsonFormatter: JsonFormatterTranslations = {
+  title: "JSONフォーマッター",
+  description: "JSONデータの整形、圧縮、検証をシンタックスハイライト付きで実行",
+  keywords: [
+    "JSONフォーマッター",
+    "JSONバリデーター",
+    "JSONミニファイア",
+    "JSONツール",
+    "シンタックスハイライト",
+  ],
+  input: "入力JSON",
+  output: "整形済み出力",
+  format: "整形",
+  minify: "圧縮",
+  invalidJson: "無効なJSON",
+  indentSize: "インデント",
+  uploadFile: "ファイルアップロード",
+  statistics: "統計",
+  lines: "行数",
+  characters: "文字数",
+  size: "サイズ",
+  objects: "オブジェクト数",
+  arrays: "配列数",
+  examples: "例",
+  basicObject: "基本的なオブジェクト:",
+  objectWithArray: "配列を含むオブジェクト:",
+  download: "ダウンロード",
+  placeholder: "ここにJSONを貼り付けるか、ファイルをアップロードしてください",
+};
