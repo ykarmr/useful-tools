@@ -84,11 +84,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
-        <Script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7007912278084791"
-          crossOrigin="anonymous"
-        ></Script>
+        <meta name="google-adsense-account" content="ca-pub-7007912278084791" />
         <link rel="canonical" href="https://useful-tools.vercel.app" />
         <link
           rel="alternate"
