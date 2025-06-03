@@ -336,11 +336,6 @@ export default async function HomePage({ params }: HomePageProps) {
           </div>
         </section>
 
-        {/* Inline Ad */}
-        <section className="py-8" aria-label="Advertisement">
-          <AdBanner position="inline" t={t} />
-        </section>
-
         {/* Popular Tools Section */}
         <section className="py-16" aria-labelledby="popular-tools-title">
           <div className="text-center mb-12">

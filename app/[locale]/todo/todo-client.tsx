@@ -417,15 +417,7 @@ export default function TodoClient({ locale, t }: TodoClientProps) {
               )}
             </div>
           </div>
-
-          {/* Ad */}
-          <AdBanner position="sidebar" t={t} />
         </div>
-      </div>
-
-      {/* Inline Ad */}
-      <div className="mt-12">
-        <AdBanner position="inline" t={t} />
       </div>
     </div>
   );

@@ -145,11 +145,6 @@ export default function ServicesClient({ locale, t }: ServicesClientProps) {
           </div>
         ))}
       </div>
-
-      {/* Inline Ad */}
-      <section className="mb-16">
-        <AdBanner position="inline" t={t} />
-      </section>
     </div>
   );
 }

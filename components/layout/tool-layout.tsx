@@ -56,21 +56,21 @@ export default function ToolLayout({
         </div>
 
         {/* Sidebar */}
-        {showSidebar && (
+        {/* {showSidebar && (
           <aside className="lg:col-span-1" aria-label="Sidebar">
             <div className="sticky top-28">
               <AdBanner position="sidebar" t={t} />
             </div>
           </aside>
-        )}
+        )} */}
       </div>
 
       {/* Inline Ad */}
-      {showInlineAd && (
+      {/* {showInlineAd && (
         <section className="mt-8 lg:mt-12" aria-label="Advertisement">
           <AdBanner position="inline" t={t} />
         </section>
-      )}
+      )} */}
     </div>
   );
 }

@@ -20,7 +20,7 @@ export default function MainLayout({ children, locale, t }: MainLayoutProps) {
         <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 py-6 lg:py-8">
           <div className="flex gap-6 lg:gap-8">
             {/* Left Sidebar Ad */}
-            <aside className="hidden xl:block w-80 flex-shrink-0">
+            {/* <aside className="hidden xl:block w-80 flex-shrink-0">
               <div className="sticky top-28 space-y-1">
                 <AdBanner position="sidebar" t={t} />
                 <AdBanner position="sidebar" t={t} />
@@ -28,7 +28,7 @@ export default function MainLayout({ children, locale, t }: MainLayoutProps) {
                 <AdBanner position="sidebar" t={t} />
                 <AdBanner position="sidebar" t={t} />
               </div>
-            </aside>
+            </aside> */}
 
             {/* Main Content */}
             <main className="flex-1 min-w-0" role="main">
@@ -41,7 +41,7 @@ export default function MainLayout({ children, locale, t }: MainLayoutProps) {
       <Footer locale={locale} t={t} />
 
       {/* Floating Ad for Mobile */}
-      <AdBanner position="floating" className="xl:hidden" t={t} />
+      {/* <AdBanner position="floating" className="xl:hidden" t={t} /> */}
     </div>
   );
 }
