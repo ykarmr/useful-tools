@@ -37,9 +37,4 @@ export const contact: ContactTranslations = {
     error:
       "Sorry, there was an error sending your message. Please try again later.",
   },
-  info: {
-    title: "Other Ways to Reach Us",
-    response: "We typically respond within 24 hours",
-    businessHours: "Monday - Friday, 9:00 AM - 6:00 PM (UTC)",
-  },
 };
