@@ -10,16 +10,15 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Mail, Clock, CheckCircle, AlertCircle } from "lucide-react";
 import { getTranslations } from "@/lib/i18n";
-import type { Locale } from "@/locales";
+import type { Locale, Translations } from "@/locales";
 
 interface ContactClientProps {
-  locale: Locale;
+  t: Translations;
 }
 
 interface FormData {
   name: string;
   email: string;
-  subject: string;
   message: string;
 }
 
@@ -30,12 +29,10 @@ interface FormErrors {
   message?: string;
 }
 
-export default function ContactClient({ locale }: ContactClientProps) {
-  const t = getTranslations(locale);
+export default function ContactClient({ t }: ContactClientProps) {
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
-    subject: "",
     message: "",
   });
   const [errors, setErrors] = useState<FormErrors>({});
@@ -55,10 +52,6 @@ export default function ContactClient({ locale }: ContactClientProps) {
       newErrors.email = t.contact.form.emailRequired;
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = t.contact.form.emailInvalid;
-    }
-
-    if (!formData.subject.trim()) {
-      newErrors.subject = t.contact.form.subjectRequired;
     }
 
     if (!formData.message.trim()) {
@@ -83,13 +76,27 @@ export default function ContactClient({ locale }: ContactClientProps) {
 
     try {
       // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+
+      const formDataToSend = new FormData();
+      formDataToSend.append("お名前", formData.name);
+      formDataToSend.append("メールアドレス", formData.email);
+      formDataToSend.append("お問い合わせ内容", formData.message);
+      const res = await fetch("https://ssgform.com/s/iKgLTdV9LxsB", {
+        method: "POST",
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      });
+
+      if (!res.ok) {
+        throw new Error("Network response was not ok");
+      }
 
       // In a real application, you would send the form data to your backend
       console.log("Form submitted:", formData);
 
       setSubmitStatus("success");
-      setFormData({ name: "", email: "", subject: "", message: "" });
+      setFormData({ name: "", email: "", message: "" });
       setErrors({});
     } catch (error) {
       setSubmitStatus("error");
@@ -194,28 +201,6 @@ export default function ContactClient({ locale }: ContactClientProps) {
                         </p>
                       )}
                     </div>
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="subject"
-                      className="block text-sm font-medium text-gray-700 mb-2"
-                    >
-                      {t.contact.form.subject}
-                    </label>
-                    <Input
-                      id="subject"
-                      type="text"
-                      value={formData.subject}
-                      onChange={handleChange("subject")}
-                      placeholder={t.contact.form.subjectPlaceholder}
-                      className={errors.subject ? "border-red-500" : ""}
-                    />
-                    {errors.subject && (
-                      <p className="text-red-500 text-sm mt-1">
-                        {errors.subject}
-                      </p>
-                    )}
                   </div>
 
                   <div>

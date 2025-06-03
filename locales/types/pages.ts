@@ -67,9 +67,6 @@ export interface ContactTranslations {
     emailPlaceholder: string;
     emailRequired: string;
     emailInvalid: string;
-    subject: string;
-    subjectPlaceholder: string;
-    subjectRequired: string;
     message: string;
     messagePlaceholder: string;
     messageRequired: string;

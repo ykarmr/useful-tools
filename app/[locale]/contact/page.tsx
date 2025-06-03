@@ -43,5 +43,5 @@ export default async function ContactPage({ params }: Props) {
 
   const t = getTranslations(locale);
 
-  return <ContactClient locale={locale} />;
+  return <ContactClient t={t} />;
 }
