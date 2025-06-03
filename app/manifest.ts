@@ -18,39 +18,39 @@ export default function manifest(): MetadataRoute.Manifest {
     orientation: "portrait-primary",
     categories: t.common.seo.manifest.categories,
     lang: "en",
-    icons: [
-      {
-        src: "/android-chrome-192x192.png",
-        sizes: "192x192",
-        type: "image/png",
-        purpose: "maskable",
-      },
-      {
-        src: "/android-chrome-512x512.png",
-        sizes: "512x512",
-        type: "image/png",
-        purpose: "any",
-      },
-      {
-        src: "/apple-touch-icon.png",
-        sizes: "180x180",
-        type: "image/png",
-        purpose: "any",
-      },
-    ],
-    screenshots: [
-      {
-        src: "/screenshot-wide.png",
-        sizes: "1280x720",
-        type: "image/png",
-        form_factor: "wide",
-      },
-      {
-        src: "/screenshot-narrow.png",
-        sizes: "750x1334",
-        type: "image/png",
-        form_factor: "narrow",
-      },
-    ],
+    // icons: [
+    //   {
+    //     src: "/android-chrome-192x192.png",
+    //     sizes: "192x192",
+    //     type: "image/png",
+    //     purpose: "maskable",
+    //   },
+    //   {
+    //     src: "/android-chrome-512x512.png",
+    //     sizes: "512x512",
+    //     type: "image/png",
+    //     purpose: "any",
+    //   },
+    //   {
+    //     src: "/apple-touch-icon.png",
+    //     sizes: "180x180",
+    //     type: "image/png",
+    //     purpose: "any",
+    //   },
+    // ],
+    // screenshots: [
+    //   {
+    //     src: "/screenshot-wide.png",
+    //     sizes: "1280x720",
+    //     type: "image/png",
+    //     form_factor: "wide",
+    //   },
+    //   {
+    //     src: "/screenshot-narrow.png",
+    //     sizes: "750x1334",
+    //     type: "image/png",
+    //     form_factor: "narrow",
+    //   },
+    // ],
   };
 }

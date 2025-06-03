@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: t.common.seo.siteTitle,
     description: t.common.seo.siteDescription,
-    images: ["/og-image.png"],
+    // images: ["/og-image.png"],
     creator: t.common.seo.twitterCreator,
   },
   verification: {
@@ -72,8 +72,6 @@ export const metadata: Metadata = {
       "ja-JP": baseUrl + "/ja",
     },
   },
-  category: "technology",
-  generator: "v0.dev",
 };
 
 export default function RootLayout({
@@ -85,30 +83,24 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth">
       <head>
         <meta name="google-adsense-account" content="ca-pub-7007912278084791" />
-        <link rel="canonical" href="https://useful-tools.vercel.app" />
-        <link
-          rel="alternate"
-          hrefLang="en"
-          href="https://useful-tools.vercel.app/en"
-        />
-        <link
-          rel="alternate"
-          hrefLang="ja"
-          href="https://useful-tools.vercel.app/ja"
-        />
-        <link
-          rel="alternate"
-          hrefLang="x-default"
-          href="https://useful-tools.vercel.app/en"
-        />
+        <link rel="canonical" href={baseUrl} />
+
+        <link rel="alternate" hrefLang="en" href={`${baseUrl}/en`} />
+        <link rel="alternate" hrefLang="ja" href={`${baseUrl}/ja`} />
+        <link rel="alternate" hrefLang="zh" href={`${baseUrl}/zh`} />
+        <link rel="alternate" hrefLang="es" href={`${baseUrl}/es`} />
+
+        <link rel="alternate" hrefLang="x-default" href={`${baseUrl}/en`} />
         <meta name="theme-color" content="#3B82F6" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+
         <meta
           name="apple-mobile-web-app-title"
           content={t.common.seo.siteTitle}
         />
-        <link
+
+        {/* <link
           rel="apple-touch-icon"
           sizes="180x180"
           href="/apple-touch-icon.png"
@@ -124,7 +116,7 @@ export default function RootLayout({
           type="image/png"
           sizes="16x16"
           href="/favicon-16x16.png"
-        />
+        /> */}
         <link rel="manifest" href="/site.webmanifest" />
         <script
           type="application/ld+json"
