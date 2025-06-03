@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import {
   RotateCcw,
   CheckSquare,
@@ -121,7 +120,7 @@ export default function ServicesClient({ locale, t }: ServicesClientProps) {
               {category.tools.map((tool) => {
                 const Icon = tool.icon;
                 return (
-                  <Link
+                  <a
                     key={tool.key}
                     href={`/${locale}${tool.href}`}
                     className="group p-6 bg-white border border-gray-200 rounded-xl hover:border-primary-300 hover:shadow-lg transition-all duration-200"
@@ -139,7 +138,7 @@ export default function ServicesClient({ locale, t }: ServicesClientProps) {
                       {/* @ts-ignore */}
                       {services.tools?.[tool.key]?.description || ""}
                     </p>
-                  </Link>
+                  </a>
                 );
               })}
             </div>

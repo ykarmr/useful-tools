@@ -1,4 +1,3 @@
-import Link from "next/link";
 import {
   RotateCcw,
   CheckSquare,
@@ -253,24 +252,24 @@ export default async function HomePage({ params }: HomePageProps) {
               aria-label="Primary actions"
               className="flex flex-col sm:flex-row gap-4 justify-center"
             >
-              <Link
+              <a
                 href={`/${locale}/services`}
                 className="button-primary text-lg px-8 py-4"
                 aria-describedby="all-tools-desc"
               >
                 {t.home.allTools}
-              </Link>
+              </a>
               <span id="all-tools-desc" className="sr-only">
                 {t.common.seo.structuredData.searchActionDescription}
               </span>
 
-              <Link
+              <a
                 href={`/${locale}/roulette`}
                 className="button-secondary text-lg px-8 py-4"
                 aria-describedby="roulette-desc"
               >
                 {t.home.tryRoulette}
-              </Link>
+              </a>
               <span id="roulette-desc" className="sr-only">
                 {t.roulette.description}
               </span>
@@ -318,7 +317,7 @@ export default async function HomePage({ params }: HomePageProps) {
                     {tool.description}
                   </p>
 
-                  <Link
+                  <a
                     href={tool.href}
                     className="inline-flex items-center text-primary-600 font-medium group-hover:translate-x-2 transition-transform duration-300"
                     aria-label={`${t.home.getStarted} ${tool.title}`}
@@ -338,7 +337,7 @@ export default async function HomePage({ params }: HomePageProps) {
                         d="M9 5l7 7-7 7"
                       />
                     </svg>
-                  </Link>
+                  </a>
                 </article>
               );
             })}
@@ -368,7 +367,7 @@ export default async function HomePage({ params }: HomePageProps) {
             {popularTools.map((tool, index) => {
               const Icon = tool.icon;
               return (
-                <Link
+                <a
                   key={tool.title}
                   href={tool.href}
                   className="group flex flex-col items-center p-6 bg-white rounded-xl border border-gray-200 hover:border-primary-300 hover:shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
@@ -385,7 +384,7 @@ export default async function HomePage({ params }: HomePageProps) {
                   <span className="text-sm font-medium text-gray-900 text-center group-hover:text-primary-600 transition-colors">
                     {tool.title}
                   </span>
-                </Link>
+                </a>
               );
             })}
           </nav>
@@ -412,7 +411,7 @@ export default async function HomePage({ params }: HomePageProps) {
             {utilityTools.map((tool, index) => {
               const Icon = tool.icon;
               return (
-                <Link
+                <a
                   key={tool.title}
                   href={tool.href}
                   className="group flex flex-col items-center p-6 bg-white rounded-xl border border-gray-200 hover:border-primary-300 hover:shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
@@ -429,19 +428,19 @@ export default async function HomePage({ params }: HomePageProps) {
                   <span className="text-sm font-medium text-gray-900 text-center group-hover:text-primary-600 transition-colors">
                     {tool.title}
                   </span>
-                </Link>
+                </a>
               );
             })}
           </nav>
 
           <div className="text-center mt-12">
-            <Link
+            <a
               href={`/${locale}/services`}
               className="button-primary text-lg px-8 py-4"
               aria-label={t.common.viewAllTools}
             >
               {t.common.viewAll}
-            </Link>
+            </a>
           </div>
         </section>
       </main>

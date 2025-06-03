@@ -1,5 +1,4 @@
 import { Locale, Translations } from "@/locales";
-import Link from "next/link";
 
 interface FooterProps {
   locale: Locale;
@@ -33,7 +32,7 @@ export default function Footer({ locale, t }: FooterProps) {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="col-span-1">
-            <Link
+            <a
               href={`/${locale}`}
               className="flex items-center space-x-2 font-bold text-xl text-gray-900 hover:text-primary-600 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded-lg"
               aria-label={`${t.header.logo} - ${
@@ -48,7 +47,7 @@ export default function Footer({ locale, t }: FooterProps) {
                 <span className="text-white font-bold text-sm">UT</span>
               </div>
               <span>{t.header.logo}</span>
-            </Link>
+            </a>
             <p className="mt-4 text-gray-600 text-sm">{t.footer.description}</p>
           </div>
 
@@ -62,12 +61,12 @@ export default function Footer({ locale, t }: FooterProps) {
                 <ul className="space-y-2">
                   {section.links.map((link) => (
                     <li key={link.name}>
-                      <Link
+                      <a
                         href={link.href}
                         className="text-gray-600 hover:text-gray-900 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded"
                       >
                         {link.name}
-                      </Link>
+                      </a>
                     </li>
                   ))}
                 </ul>
