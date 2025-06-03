@@ -3,6 +3,16 @@ import type { HomeTranslations } from "../types";
 export const home: HomeTranslations = {
   title: "提升生产力的综合免费在线工具",
   subtitle: "20多个免费在线工具的集合，帮助您做决定、管理任务并提升生产力。",
+  keywords: [
+    "在线工具",
+    "免费工具",
+    "生产力工具",
+    "任务管理",
+    "决策工具",
+    "随机数生成器",
+    "转盘",
+    "待办事项列表",
+  ],
   tryRoulette: "尝试转盘",
   manageTasks: "管理任务",
   chooseTool: "选择工具",
@@ -21,6 +31,8 @@ export const home: HomeTranslations = {
   featuredTools: "精选工具",
   utilityTools: "实用工具",
   getStarted: "开始",
+  description:
+    "探索我们全面的免费在线工具集合，旨在帮助您做出明智的决定、管理任务并提升生产力。无论您是需要一个简单的转盘来做决定，还是一个强大的待办事项列表来组织您的生活，我们都有适合您的工具。",
 };
 
 export default home;

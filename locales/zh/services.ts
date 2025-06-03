@@ -4,6 +4,17 @@ export const services: ServicesTranslations = {
   title: "所有工具",
   subtitle:
     "发现我们精心设计的综合生产力工具集合，每个工具都经过精心设计和关注细节。",
+  keywords: [
+    "在线工具",
+    "免费工具",
+    "生产力工具",
+    "任务管理",
+    "决策工具",
+    "随机数生成器",
+    "轮盘",
+    "待办事项列表",
+    "计算器",
+  ],
   categories: {
     productivity: {
       title: "生产力",

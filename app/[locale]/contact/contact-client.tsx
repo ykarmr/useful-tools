@@ -8,9 +8,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Mail, Clock, CheckCircle, AlertCircle } from "lucide-react";
-import { getTranslations } from "@/lib/i18n";
-import type { Locale, Translations } from "@/locales";
+import { Mail, CheckCircle, AlertCircle } from "lucide-react";
+import type { Translations } from "@/locales";
 
 interface ContactClientProps {
   t: Translations;

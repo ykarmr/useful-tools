@@ -4,6 +4,18 @@ export const services: ServicesTranslations = {
   title: "All Tools",
   subtitle:
     "Discover our comprehensive collection of productivity tools, each designed with care and attention to detail.",
+  keywords: [
+    "online tools",
+    "free tools",
+    "productivity tools",
+    "task management",
+    "decision-making tools",
+    "random number generator",
+    "roulette",
+    "todo list",
+    "calculator",
+    "dice roller",
+  ],
   categories: {
     productivity: {
       title: "Productivity",

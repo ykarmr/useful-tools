@@ -4,6 +4,18 @@ export const services: ServicesTranslations = {
   title: "すべてのツール",
   subtitle:
     "細心の注意と配慮を持って設計された、包括的な生産性ツールのコレクションを発見してください。",
+  keywords: [
+    "オンラインツール",
+    "無料ツール",
+    "生産性ツール",
+    "タスク管理",
+    "意思決定ツール",
+    "ランダム数生成器",
+    "ルーレット",
+    "TODOリスト",
+    "電卓",
+    "サイコロ",
+  ],
   categories: {
     productivity: {
       title: "生産性",

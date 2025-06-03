@@ -42,14 +42,14 @@ export const metadata: Metadata = {
     siteName: t.common.seo.siteTitle,
     title: t.common.seo.siteTitle,
     description: t.common.seo.siteDescription,
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: t.common.seo.ogImageAlt,
-      },
-    ],
+    // images: [
+    //   {
+    //     url: "/og-image.png",
+    //     width: 1200,
+    //     height: 630,
+    //     alt: t.common.seo.ogImageAlt,
+    //   },
+    // ],
   },
   twitter: {
     card: "summary_large_image",

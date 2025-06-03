@@ -4,6 +4,18 @@ export const home: HomeTranslations = {
   title: "Comprehensive Free Online Tools for Productivity",
   subtitle:
     "A collection of 20+ free online tools to help you make decisions, manage tasks, and boost productivity.",
+  keywords: [
+    "online tools",
+    "free tools",
+    "productivity tools",
+    "task management",
+    "decision-making tools",
+    "random number generator",
+    "roulette",
+    "todo list",
+  ],
+  description:
+    "Explore our comprehensive collection of free online tools designed to help you make informed decisions, manage tasks, and enhance productivity. Whether you need a simple roulette wheel for decision-making or a powerful todo list to organize your life, we have the right tool for you.",
   tryRoulette: "Try Roulette",
   manageTasks: "Manage Tasks",
   chooseTool: "Choose a Tool",

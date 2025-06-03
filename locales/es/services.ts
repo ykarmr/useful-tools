@@ -4,6 +4,18 @@ export const services: ServicesTranslations = {
   title: "Todas las Herramientas",
   subtitle:
     "Descubre nuestra colección integral de herramientas de productividad, cada una diseñada con cuidado y atención al detalle.",
+  keywords: [
+    "herramientas en línea",
+    "herramientas gratuitas",
+    "herramientas de productividad",
+    "gestión de tareas",
+    "herramientas de decisión",
+    "generador de números aleatorios",
+    "ruleta",
+    "lista de tareas",
+    "calculadora",
+    "lanzador de dados",
+  ],
   categories: {
     productivity: {
       title: "Productividad",
