@@ -1,6 +1,8 @@
 export interface HomeTranslations {
   title: string;
   subtitle: string;
+  description: string;
+  keywords: string[];
   tryRoulette: string;
   manageTasks: string;
   chooseTool: string;
@@ -15,6 +17,68 @@ export interface HomeTranslations {
   featuredTools: string;
   utilityTools: string;
   getStarted: string;
+}
+
+export interface PrivacyTranslations {
+  title: string;
+  description: string;
+  keywords: string[];
+  lastUpdated: string;
+  introduction: string;
+  sections: {
+    informationCollection: { title: string; content: string };
+    howWeUse: { title: string; content: string };
+    dataSharing: { title: string; content: string };
+    cookies: { title: string; content: string };
+    dataSecurity: { title: string; content: string };
+    yourRights: { title: string; content: string };
+    contact: { title: string; content: string };
+  };
+}
+
+export interface TermsTranslations {
+  title: string;
+  lastUpdated: string;
+  introduction: string;
+  description: string;
+  keywords: string[];
+  sections: {
+    acceptance: { title: string; content: string };
+    useOfService: { title: string; content: string };
+    intellectualProperty: { title: string; content: string };
+    disclaimer: { title: string; content: string };
+    limitation: { title: string; content: string };
+    termination: { title: string; content: string };
+    changes: { title: string; content: string };
+    contact: { title: string; content: string };
+  };
+}
+
+export interface ContactTranslations {
+  title: string;
+  subtitle: string;
+  description: string;
+  keywords: string[];
+  form: {
+    name: string;
+    namePlaceholder: string;
+    nameRequired: string;
+    email: string;
+    emailPlaceholder: string;
+    emailRequired: string;
+    emailInvalid: string;
+    subject: string;
+    subjectPlaceholder: string;
+    subjectRequired: string;
+    message: string;
+    messagePlaceholder: string;
+    messageRequired: string;
+    messageMinLength: string;
+    submit: string;
+    submitting: string;
+    success: string;
+    error: string;
+  };
 }
 
 export interface ServicesTranslations {

@@ -8,7 +8,13 @@ import type {
   FooterTranslations,
   AdTranslations,
 } from "./common";
-import type { HomeTranslations, ServicesTranslations } from "./pages";
+import type {
+  ContactTranslations,
+  HomeTranslations,
+  PrivacyTranslations,
+  ServicesTranslations,
+  TermsTranslations,
+} from "./pages";
 import type {
   RouletteTranslations,
   TodoTranslations,
@@ -57,4 +63,7 @@ export interface Translations {
   jsonFormatter: JsonFormatterTranslations;
   urlEncoder: UrlEncoderTranslations;
   markdownPreview: MarkdownPreviewTranslations;
+  privacy: PrivacyTranslations;
+  contact: ContactTranslations;
+  terms: TermsTranslations;
 }

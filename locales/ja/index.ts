@@ -21,6 +21,9 @@ import { jsonFormatter } from "./json-formatter";
 import { urlEncoder } from "./url-encoder";
 import { markdownPreview } from "./markdown-preview";
 import type { Translations } from "../types";
+import { contact } from "./contact";
+import { privacy } from "./privacy";
+import { terms } from "./terms";
 
 const ja: Translations = {
   common,
@@ -48,6 +51,9 @@ const ja: Translations = {
   jsonFormatter,
   urlEncoder,
   markdownPreview,
+  privacy,
+  terms,
+  contact,
 };
 
 export default ja;

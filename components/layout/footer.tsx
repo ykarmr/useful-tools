@@ -1,13 +1,13 @@
-import Link from "next/link"
-import type { Locale, Translations } from "@/lib/i18n"
+import { Locale, Translations } from "@/locales";
+import Link from "next/link";
 
 interface FooterProps {
-  locale: Locale
-  t: Translations
+  locale: Locale;
+  t: Translations;
 }
 
 export default function Footer({ locale, t }: FooterProps) {
-  const currentYear = new Date().getFullYear()
+  const currentYear = new Date().getFullYear();
 
   const footerLinks = [
     {
@@ -16,19 +16,16 @@ export default function Footer({ locale, t }: FooterProps) {
     },
     {
       title: t.footer.support,
-      links: [
-        { name: t.footer.helpCenter, href: "#" },
-        { name: t.footer.contact, href: "#" },
-      ],
+      links: [{ name: t.footer.contact, href: `/${locale}/contact` }],
     },
     {
       title: t.footer.legal,
       links: [
-        { name: t.footer.privacyPolicy, href: "#" },
-        { name: t.footer.termsOfService, href: "#" },
+        { name: t.footer.privacyPolicy, href: `/${locale}/privacy` },
+        { name: t.footer.termsOfService, href: `/${locale}/terms` },
       ],
     },
-  ]
+  ];
 
   return (
     <footer className="bg-gray-50 border-t border-gray-200" role="contentinfo">
@@ -39,7 +36,9 @@ export default function Footer({ locale, t }: FooterProps) {
             <Link
               href={`/${locale}`}
               className="flex items-center space-x-2 font-bold text-xl text-gray-900 hover:text-primary-600 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded-lg"
-              aria-label={`${t.header.logo} - ${locale === "ja" ? "ホームページに戻る" : "Go to homepage"}`}
+              aria-label={`${t.header.logo} - ${
+                locale === "ja" ? "ホームページに戻る" : "Go to homepage"
+              }`}
             >
               <div
                 className="w-8 h-8 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg flex items-center justify-center"
@@ -56,7 +55,9 @@ export default function Footer({ locale, t }: FooterProps) {
           {/* Links */}
           {footerLinks.map((section) => (
             <div key={section.title} className="col-span-1">
-              <h3 className="font-semibold text-gray-900 mb-4">{section.title}</h3>
+              <h3 className="font-semibold text-gray-900 mb-4">
+                {section.title}
+              </h3>
               <nav aria-label={section.title}>
                 <ul className="space-y-2">
                   {section.links.map((link) => (
@@ -82,5 +83,5 @@ export default function Footer({ locale, t }: FooterProps) {
         </div>
       </div>
     </footer>
-  )
+  );
 }
