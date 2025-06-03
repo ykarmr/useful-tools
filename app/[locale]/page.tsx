@@ -51,7 +51,7 @@ export async function generateMetadata({
       description: t.home.subtitle,
       url: `${baseUrl}/${locale}`,
     },
-    alternates: getAlternates(locale, "/world-clock"),
+    alternates: getAlternates(locale),
   };
 }
 

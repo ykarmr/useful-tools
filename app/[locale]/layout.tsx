@@ -8,6 +8,8 @@ import {
 } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import { baseUrl } from "@/lib/const";
+import { Inter } from "next/font/google";
+import { getAlternates, getLocaleMapping } from "@/lib/getLocaleMapping";
 
 interface LocaleLayoutProps {
   children: React.ReactNode;
@@ -48,16 +50,21 @@ export async function generateMetadata({
     },
     description: t.common.seo.siteDescription,
     keywords: t.common.seo.keywords,
-    alternates: {
-      canonical: `${baseUrl}/${locale}`,
-      languages: {
-        "en-US": `${baseUrl}/en`,
-        "ja-JP": `${baseUrl}/ja`,
-        "zh-CN": `${baseUrl}/zh`,
-        "es-ES": `${baseUrl}/es`,
-        "x-default": `${baseUrl}/en`,
+    authors: [{ name: t.common.seo.structuredData.organizationName }],
+    creator: t.common.seo.structuredData.organizationName,
+    publisher: t.common.seo.structuredData.organizationName,
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
       },
     },
+    alternates: getAlternates(locale),
     openGraph: {
       title: t.common.seo.siteTitle,
       description: t.footer.description,
@@ -66,28 +73,22 @@ export async function generateMetadata({
         openGraphLocale[locale as keyof typeof openGraphLocale] || "en_US",
       url: `${baseUrl}/${locale}`,
       siteName: t.common.seo.siteTitle,
-      images: [
-        {
-          url: "/og-image.png",
-          width: 1200,
-          height: 630,
-          alt: t.common.seo.ogImageAlt,
-        },
-      ],
     },
     twitter: {
       card: "summary_large_image",
       title: t.common.seo.siteTitle,
       description: t.footer.description,
-      images: ["/og-image.png"],
       creator: t.common.seo.twitterCreator,
     },
-    robots: {
-      index: true,
-      follow: true,
+    verification: {
+      google: t.common.seo.verification.google,
+      yandex: t.common.seo.verification.yandex,
+      yahoo: t.common.seo.verification.yahoo,
     },
   };
 }
+
+const inter = Inter({ subsets: ["latin"] });
 
 export default async function LocaleLayout({
   children,
@@ -101,11 +102,76 @@ export default async function LocaleLayout({
 
   const t = getTranslations(locale);
 
+  const lang = getLocaleMapping(locale);
   return (
-    <div lang={locale}>
-      <MainLayout locale={locale} t={t}>
-        {children}
-      </MainLayout>
-    </div>
+    <html lang={lang} className="scroll-smooth">
+      <head>
+        <meta name="google-adsense-account" content="ca-pub-7007912278084791" />
+
+        <meta name="theme-color" content="#3B82F6" />
+        {/* <meta name="apple-mobile-web-app-capable" content="yes" /> */}
+        {/* <meta name="apple-mobile-web-app-status-bar-style" content="default" /> */}
+
+        <meta
+          name="apple-mobile-web-app-title"
+          content={t.common.seo.siteTitle}
+        />
+
+        {/* <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        /> */}
+        <link rel="manifest" href="/manifest.webmanifest" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebApplication",
+              name: t.common.seo.siteTitle,
+              description: t.common.seo.siteDescription,
+              url: "https://useful-tools.vercel.app",
+              applicationCategory:
+                t.common.seo.structuredData.applicationCategory,
+              operatingSystem: t.common.seo.structuredData.operatingSystem,
+              offers: {
+                "@type": "Offer",
+                price: "0",
+                priceCurrency: "USD",
+              },
+              author: {
+                "@type": "Organization",
+                name: t.common.seo.structuredData.organizationName,
+              },
+              aggregateRating: {
+                "@type": "AggregateRating",
+                ratingValue: t.common.seo.structuredData.ratingValue,
+                reviewCount: t.common.seo.structuredData.reviewCount,
+              },
+            }),
+          }}
+        />
+      </head>
+      <body
+        className={`${inter.className} antialiased bg-surface-light text-gray-900`}
+      >
+        <MainLayout locale={locale} t={t}>
+          {children}
+        </MainLayout>
+      </body>
+    </html>
   );
 }
