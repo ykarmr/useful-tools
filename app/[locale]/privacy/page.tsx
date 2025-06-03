@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { getTranslations, interpolate, isValidLocale } from "@/locales";
 import { baseUrl } from "@/lib/const";
+import { notFound } from "next/navigation";
+import { getLocaleMapping } from "@/lib/getLocaleMapping";
 
 interface Props {
   params: { locale: string };
@@ -32,18 +34,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function PrivacyPage({ params }: Props) {
-  const locale = isValidLocale(params.locale) ? params.locale : "en";
+export default async function PrivacyPage({ params }: Props) {
+  const { locale } = await params;
+  if (!isValidLocale(locale)) {
+    notFound();
+  }
   const t = getTranslations(locale);
-  const currentDate = new Date().toLocaleDateString(
-    locale === "ja"
-      ? "ja-JP"
-      : locale === "zh"
-      ? "zh-CN"
-      : locale === "es"
-      ? "es-ES"
-      : "en-US"
-  );
+  const currentDate = new Date().toLocaleDateString(getLocaleMapping(locale));
 
   return (
     <div className="min-h-screen bg-gray-50">
