@@ -1,1 +1,1 @@
-export const baseUrl = "https://useful-tools.ykarmr.com";
+export const baseUrl = "https://ykarmr.com";
