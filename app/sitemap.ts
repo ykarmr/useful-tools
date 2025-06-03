@@ -39,7 +39,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         url: `${baseUrl}/${locale}${route}`,
         lastModified: new Date(),
         changeFrequency: route === "" ? "daily" : "weekly",
-        priority: route === "" ? 1 : 0.8,
+        priority: route === "" ? 0.8 : 1,
         alternates: getAlternates(locale, route),
       });
     });
