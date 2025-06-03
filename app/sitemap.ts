@@ -1,11 +1,10 @@
 import { baseUrl } from "@/lib/const";
+import { getAlternates, locales } from "@/lib/getLocaleMapping";
 import type { MetadataRoute } from "next";
 
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const locales = ["en", "ja", "zh", "es"];
-
   // 共通ルート
   const routes = [
     "",
@@ -41,14 +40,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         lastModified: new Date(),
         changeFrequency: route === "" ? "daily" : "weekly",
         priority: route === "" ? 1 : 0.8,
-        alternates: {
-          languages: {
-            "en-US": `${baseUrl}/en${route}`,
-            "ja-JP": `${baseUrl}/ja${route}`,
-            "zh-CN": `${baseUrl}/zh${route}`,
-            "es-ES": `${baseUrl}/es${route}`,
-          },
-        },
+        alternates: getAlternates(locale, route),
       });
     });
   });

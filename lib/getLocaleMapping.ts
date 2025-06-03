@@ -1,11 +1,11 @@
 import { baseUrl } from "./const";
 
-type locales = "en" | "es" | "ja" | "zh";
+type Locales = "en" | "es" | "ja" | "zh";
 
-const locales: locales[] = ["en", "es", "ja", "zh"];
+export const locales: Locales[] = ["en", "es", "ja", "zh"];
 
-export const getLocaleMapping = (locale: locales) => {
-  const localeMapping: Record<locales, string> = {
+export const getLocaleMapping = (locale: Locales) => {
+  const localeMapping: Record<Locales, string> = {
     ja: "ja-JP",
     zh: "zh-CN",
     en: "en-US",
@@ -15,7 +15,7 @@ export const getLocaleMapping = (locale: locales) => {
   return localeMapping[locale] || "en-US";
 };
 
-export const getAlternates = (locale: locales, path: string = "") => {
+export const getAlternates = (locale: Locales, path: string = "") => {
   let languages: Record<string, string> = {};
   locales.forEach((loc) => {
     const langCode = getLocaleMapping(loc);
