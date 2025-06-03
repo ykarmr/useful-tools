@@ -3,6 +3,7 @@ import { getTranslations, isValidLocale } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { baseUrl } from "@/lib/const";
+import { getAlternates } from "@/lib/getLocaleMapping";
 
 interface TimerPageProps {
   params: Promise<{ locale: string }>;
@@ -31,18 +32,8 @@ export async function generateMetadata({
       title: t.timer.title,
       description: t.timer.description,
       url: `${baseUrl}/${locale}/timer`,
-      images: [
-        {
-          url: "/og-timer.png",
-          width: 1200,
-          height: 630,
-          alt: t.timer.title,
-        },
-      ],
     },
-    alternates: {
-      canonical: `${baseUrl}/${locale}/timer`,
-    },
+    alternates: getAlternates(locale, "/timer"),
   };
 }
 

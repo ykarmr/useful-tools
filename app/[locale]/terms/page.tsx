@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations, interpolate, isValidLocale } from "@/locales";
 import { baseUrl } from "@/lib/const";
 import { notFound } from "next/navigation";
+import { getAlternates } from "@/lib/getLocaleMapping";
 
 interface Props {
   params: { locale: string };
@@ -27,9 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: t.qrGenerator.description,
       url: `${baseUrl}/${locale}/terms`,
     },
-    alternates: {
-      canonical: `${baseUrl}/${locale}/terms`,
-    },
+    alternates: getAlternates(locale, "/terms"),
   };
 }
 

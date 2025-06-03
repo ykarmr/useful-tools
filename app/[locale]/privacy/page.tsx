@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations, interpolate, isValidLocale } from "@/locales";
 import { baseUrl } from "@/lib/const";
 import { notFound } from "next/navigation";
-import { getLocaleMapping } from "@/lib/getLocaleMapping";
+import { getAlternates, getLocaleMapping } from "@/lib/getLocaleMapping";
 
 interface Props {
   params: { locale: string };
@@ -28,9 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: t.privacy.description,
       url: `${baseUrl}/${locale}/privacy`,
     },
-    alternates: {
-      canonical: `${baseUrl}/${locale}/privacy`,
-    },
+    alternates: getAlternates(locale, "/privacy"),
   };
 }
 

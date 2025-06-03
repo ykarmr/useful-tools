@@ -3,6 +3,7 @@ import { getTranslations, isValidLocale } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { baseUrl } from "@/lib/const";
+import { getAlternates } from "@/lib/getLocaleMapping";
 
 interface ScoreboardPageProps {
   params: Promise<{ locale: string }>;
@@ -32,9 +33,7 @@ export async function generateMetadata({
       description: t.scoreboard.description,
       url: `${baseUrl}/${locale}/scoreboard`,
     },
-    alternates: {
-      canonical: `${baseUrl}/${locale}/scoreboard`,
-    },
+    alternates: getAlternates(locale, "/scoreboard"),
   };
 }
 

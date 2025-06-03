@@ -21,6 +21,7 @@ import { getTranslations, isValidLocale } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { baseUrl } from "@/lib/const";
+import { getAlternates } from "@/lib/getLocaleMapping";
 
 interface HomePageProps {
   params: Promise<{ locale: string }>;
@@ -50,16 +51,7 @@ export async function generateMetadata({
       description: t.home.subtitle,
       url: `${baseUrl}/${locale}`,
     },
-    alternates: {
-      canonical: `${baseUrl}/${locale}`,
-      languages: {
-        "en-US": `${baseUrl}/en`,
-        "ja-JP": `${baseUrl}/ja`,
-        "zh-CN": `${baseUrl}/zh`,
-        "es-ES": `${baseUrl}/es`,
-        "x-default": `${baseUrl}/en`,
-      },
-    },
+    alternates: getAlternates(locale, "/world-clock"),
   };
 }
 

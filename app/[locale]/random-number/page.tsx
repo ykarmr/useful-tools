@@ -2,6 +2,7 @@ import RandomNumberClient from "./random-number-client";
 import { getTranslations, isValidLocale } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { getAlternates } from "@/lib/getLocaleMapping";
 
 interface RandomNumberPageProps {
   params: Promise<{ locale: string }>;
@@ -32,9 +33,7 @@ export async function generateMetadata({
       description: t.randomNumber.description,
       url: `${baseUrl}/${locale}/random-number`,
     },
-    alternates: {
-      canonical: `${baseUrl}/${locale}/random-number`,
-    },
+    alternates: getAlternates(locale, "/random-number"),
   };
 }
 

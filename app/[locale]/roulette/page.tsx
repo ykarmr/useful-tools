@@ -2,6 +2,8 @@ import RouletteClient from "./roulette-client";
 import { getTranslations, isValidLocale } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { getAlternates } from "@/lib/getLocaleMapping";
+import { baseUrl } from "@/lib/const";
 
 interface RoulettePageProps {
   params: Promise<{ locale: string }>;
@@ -21,7 +23,6 @@ export async function generateMetadata({
   }
 
   const t = getTranslations(locale);
-  const baseUrl = "https://useful-tools.vercel.app";
 
   return {
     title: t.roulette.title,
@@ -32,9 +33,7 @@ export async function generateMetadata({
       description: t.roulette.description,
       url: `${baseUrl}/${locale}/roulette`,
     },
-    alternates: {
-      canonical: `${baseUrl}/${locale}/roulette`,
-    },
+    alternates: getAlternates(locale, "/roulette"),
   };
 }
 

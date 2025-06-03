@@ -3,6 +3,7 @@ import { getTranslations, isValidLocale } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { baseUrl } from "@/lib/const";
+import { getAlternates } from "@/lib/getLocaleMapping";
 
 interface RandomStringPageProps {
   params: Promise<{ locale: string }>;
@@ -32,9 +33,7 @@ export async function generateMetadata({
       description: t.randomString.description,
       url: `${baseUrl}/${locale}/random-string`,
     },
-    alternates: {
-      canonical: `${baseUrl}/${locale}/random-string`,
-    },
+    alternates: getAlternates(locale, "/random-string"),
   };
 }
 

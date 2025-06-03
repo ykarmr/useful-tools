@@ -3,6 +3,7 @@ import { getTranslations, isValidLocale } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { baseUrl } from "@/lib/const";
+import { getAlternates } from "@/lib/getLocaleMapping";
 
 interface ServicesPageProps {
   params: Promise<{ locale: string }>;
@@ -32,6 +33,7 @@ export async function generateMetadata({
       description: t.services.subtitle,
       url: `${baseUrl}${locale}/services`,
     },
+    alternates: getAlternates(locale, "/services"),
   };
 }
 

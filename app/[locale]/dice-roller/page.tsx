@@ -3,6 +3,7 @@ import { getTranslations, isValidLocale } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { baseUrl } from "@/lib/const";
+import { getAlternates } from "@/lib/getLocaleMapping";
 
 interface DiceRollerPageProps {
   params: Promise<{ locale: string }>;
@@ -32,9 +33,7 @@ export async function generateMetadata({
       description: t.diceRoller.description,
       url: `${baseUrl}/${locale}/dice-roller`,
     },
-    alternates: {
-      canonical: `${baseUrl}/${locale}/dice-roller`,
-    },
+    alternates: getAlternates(locale, "/dice-roller"),
   };
 }
 

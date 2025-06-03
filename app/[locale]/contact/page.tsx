@@ -4,6 +4,7 @@ import { isValidLocale } from "@/locales";
 import { baseUrl } from "@/lib/const";
 import ContactClient from "./contact-client";
 import { notFound } from "next/navigation";
+import { getAlternates } from "@/lib/getLocaleMapping";
 
 interface Props {
   params: { locale: string };
@@ -29,9 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: t.contact.description,
       url: `${baseUrl}/${locale}/contact`,
     },
-    alternates: {
-      canonical: `${baseUrl}/${locale}/contact`,
-    },
+    alternates: getAlternates(locale, "/contact"),
   };
 }
 

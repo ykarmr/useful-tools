@@ -3,6 +3,7 @@ import { getTranslations, isValidLocale } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { baseUrl } from "@/lib/const";
+import { getAlternates } from "@/lib/getLocaleMapping";
 
 interface UrlEncoderPageProps {
   params: Promise<{ locale: string }>;
@@ -32,9 +33,7 @@ export async function generateMetadata({
       description: t.urlEncoder.description,
       url: `${baseUrl}/${locale}/url-encoder`,
     },
-    alternates: {
-      canonical: `${baseUrl}/${locale}/url-encoder`,
-    },
+    alternates: getAlternates(locale, "/url-encoder"),
   };
 }
 

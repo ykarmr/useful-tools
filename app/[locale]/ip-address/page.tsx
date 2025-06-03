@@ -3,6 +3,7 @@ import { getTranslations, isValidLocale } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { baseUrl } from "@/lib/const";
+import { getAlternates } from "@/lib/getLocaleMapping";
 
 interface IpAddressPageProps {
   params: Promise<{ locale: string }>;
@@ -32,9 +33,7 @@ export async function generateMetadata({
       description: t.ipAddress.description,
       url: `${baseUrl}/${locale}/ip-address`,
     },
-    alternates: {
-      canonical: `${baseUrl}/${locale}/ip-address`,
-    },
+    alternates: getAlternates(locale, "/ip-address"),
   };
 }
 

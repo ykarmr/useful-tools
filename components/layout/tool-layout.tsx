@@ -1,17 +1,17 @@
-import type React from "react"
-import AdBanner from "./ad-banner"
-import type { Locale, Translations } from "@/lib/i18n"
+import type React from "react";
+import AdBanner from "./ad-banner";
+import { Locale, Translations } from "@/locales";
 
 interface ToolLayoutProps {
-  children: React.ReactNode
-  locale: Locale
-  t: Translations
-  title: string
-  description: string
-  icon?: React.ComponentType<{ size?: number; className?: string }>
-  showSidebar?: boolean
-  showInlineAd?: boolean
-  className?: string
+  children: React.ReactNode;
+  locale: Locale;
+  t: Translations;
+  title: string;
+  description: string;
+  icon?: React.ComponentType<{ size?: number; className?: string }>;
+  showSidebar?: boolean;
+  showInlineAd?: boolean;
+  className?: string;
 }
 
 export default function ToolLayout({
@@ -40,8 +40,12 @@ export default function ToolLayout({
                   </div>
                 </div>
               )}
-              <h1 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-4 lg:mb-6">{title}</h1>
-              <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">{description}</p>
+              <h1 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-4 lg:mb-6">
+                {title}
+              </h1>
+              <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                {description}
+              </p>
             </header>
 
             {/* Tool Content */}
@@ -68,5 +72,5 @@ export default function ToolLayout({
         </section>
       )}
     </div>
-  )
+  );
 }
