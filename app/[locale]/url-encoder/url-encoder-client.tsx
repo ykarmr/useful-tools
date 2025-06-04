@@ -8,6 +8,7 @@ import ToolControls from "@/components/layout/tool-controls";
 import ToolInput from "@/components/layout/tool-input";
 import ToolResult from "@/components/layout/tool-result";
 import { Locale, Translations } from "@/locales";
+import { set } from "react-hook-form";
 
 interface URLEncoderClientProps {
   locale: Locale;
@@ -19,33 +20,23 @@ export default function URLEncoderClient({ locale, t }: URLEncoderClientProps) {
   const [output, setOutput] = useState("");
   const [mode, setMode] = useState<"encode" | "decode">("encode");
 
-  const processURL = () => {
-    if (!input.trim()) {
-      setOutput("");
-      return;
-    }
+  const switchEncode = () => {
+    setMode("encode");
+    setInput("");
+    setOutput("");
+  };
 
-    try {
-      if (mode === "encode") {
-        setOutput(encodeURIComponent(input.trim()));
-      } else {
-        setOutput(decodeURIComponent(input.trim()));
-      }
-    } catch (error) {
-      console.error("URL processing error:", error);
-      setOutput(t.urlEncoder?.invalidInput || "Error: Invalid input");
-    }
+  const switchDecode = () => {
+    setMode("decode");
+    setInput("");
+    setOutput("");
   };
 
   const switchMode = () => {
     const newMode = mode === "encode" ? "decode" : "encode";
     setMode(newMode);
-
-    // Swap input and output if both have values
-    if (input && output) {
-      setInput(output);
-      setOutput(input);
-    }
+    setInput("");
+    setOutput("");
   };
 
   const clearAll = () => {
@@ -55,19 +46,14 @@ export default function URLEncoderClient({ locale, t }: URLEncoderClientProps) {
 
   const handleInputChange = (value: string) => {
     setInput(value);
-    // Auto-process as user types
-    if (value.trim()) {
-      try {
-        if (mode === "encode") {
-          setOutput(encodeURIComponent(value.trim()));
-        } else {
-          setOutput(decodeURIComponent(value.trim()));
-        }
-      } catch (error) {
-        setOutput(t.urlEncoder?.invalidInput || "Error: Invalid input");
+    try {
+      if (mode === "encode") {
+        setOutput(encodeURIComponent(value.trim()));
+      } else {
+        setOutput(decodeURIComponent(value.trim()));
       }
-    } else {
-      setOutput("");
+    } catch (error) {
+      setOutput(t.urlEncoder?.invalidInput || "Error: Invalid input");
     }
   };
 
@@ -84,7 +70,7 @@ export default function URLEncoderClient({ locale, t }: URLEncoderClientProps) {
         <div className="flex justify-center mb-6">
           <div className="bg-gray-100 rounded-lg p-1 flex">
             <button
-              onClick={() => setMode("encode")}
+              onClick={switchEncode}
               className={`px-4 py-2 rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 ${
                 mode === "encode"
                   ? "bg-white text-primary-600 shadow-sm"
@@ -94,7 +80,7 @@ export default function URLEncoderClient({ locale, t }: URLEncoderClientProps) {
               {t.urlEncoder.encode}
             </button>
             <button
-              onClick={() => setMode("decode")}
+              onClick={switchDecode}
               className={`px-4 py-2 rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 ${
                 mode === "decode"
                   ? "bg-white text-primary-600 shadow-sm"
