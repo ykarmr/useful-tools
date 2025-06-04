@@ -3,3 +3,32 @@
   to = "/en"
   status = 301
   force = true
+  conditions = { Language = "en" }
+
+[[redirects]]
+  from = "/"
+  to = "/ja"
+  status = 301
+  force = true
+  conditions = { Language = "ja" }
+
+
+[[redirects]]
+  from = "/"
+  to = "/es"
+  status = 301
+  force = true
+  conditions = { Language = "es" }
+
+[[redirects]]
+  from = "/"
+  to = "/zh"
+  status = 301
+  force = true
+  conditions = { Language = "zh" }
+
+[[redirects]]
+  from = "/"
+  to = "/en"
+  status = 301
+  force = true
