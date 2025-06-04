@@ -20,11 +20,12 @@ import {
 } from "lucide-react";
 import ToolLayout from "@/components/layout/tool-layout";
 import ToolSection from "@/components/layout/tool-section";
-import ToolDisplay from "@/components/layout/tool-display";
 import ToolControls from "@/components/layout/tool-controls";
 import ToolInput from "@/components/layout/tool-input";
 import ToolStats from "@/components/layout/tool-stats";
 import { Locale, Translations } from "@/locales";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 interface MarkdownPreviewClientProps {
   locale: Locale;
@@ -99,203 +100,6 @@ export default function MarkdownPreviewClient({
     });
   };
 
-  // Simple Markdown to HTML converter
-  const renderMarkdown = (text: string) => {
-    if (!text) return "";
-
-    let html = text;
-
-    // Escape HTML to prevent XSS
-    html = html
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
-
-    // Convert headings
-    html = html.replace(/^(#{1,6})\s+(.*?)$/gm, (match, hashes, content) => {
-      const level = hashes.length;
-      return `<h${level} class="text-${
-        7 - level
-      }xl font-bold my-4">${content}</h${level}>`;
-    });
-
-    // Convert bold
-    html = html.replace(
-      /\*\*(.*?)\*\*|__(.*?)__/g,
-      '<strong class="font-bold">$1$2</strong>'
-    );
-
-    // Convert italic
-    html = html.replace(/\*(.*?)\*|_(.*?)_/g, '<em class="italic">$1$2</em>');
-
-    // Convert links
-    html = html.replace(
-      /\[(.*?)\]$$(.*?)$$/g,
-      '<a href="$2" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">$1</a>'
-    );
-
-    // Convert images
-    html = html.replace(
-      /!\[(.*?)\]$$(.*?)$$/g,
-      '<img src="$2" alt="$1" class="max-w-full my-4 rounded-lg">'
-    );
-
-    // Convert unordered lists
-    html = html.replace(/^( *)- (.*?)$/gm, (match, space, content) => {
-      const indent = space.length;
-      return `${space}<li class="ml-${
-        indent ? indent / 2 + 4 : 4
-      }">${content}</li>`;
-    });
-
-    // Wrap list items in ul tags
-    let inList = false;
-    let listItems = "";
-    let processedHtml = "";
-
-    html.split("\n").forEach((line) => {
-      if (line.includes("<li class=")) {
-        if (!inList) {
-          inList = true;
-          listItems = line;
-        } else {
-          listItems += line;
-        }
-      } else {
-        if (inList) {
-          inList = false;
-          processedHtml += `<ul class="list-disc my-4">${listItems}</ul>\n${line}`;
-        } else {
-          processedHtml += line + "\n";
-        }
-      }
-    });
-
-    if (inList) {
-      processedHtml += `<ul class="list-disc my-4">${listItems}</ul>`;
-    }
-
-    html = processedHtml;
-
-    // Convert ordered lists
-    html = html.replace(/^( *)\d+\. (.*?)$/gm, (match, space, content) => {
-      const indent = space.length;
-      return `${space}<li class="ml-${
-        indent ? indent / 2 + 4 : 4
-      }">${content}</li>`;
-    });
-
-    // Wrap ordered list items
-    inList = false;
-    listItems = "";
-    processedHtml = "";
-
-    html.split("\n").forEach((line) => {
-      if (line.includes("<li class=") && !line.includes("<ul")) {
-        if (!inList) {
-          inList = true;
-          listItems = line;
-        } else {
-          listItems += line;
-        }
-      } else {
-        if (inList) {
-          inList = false;
-          processedHtml += `<ol class="list-decimal my-4">${listItems}</ol>\n${line}`;
-        } else {
-          processedHtml += line + "\n";
-        }
-      }
-    });
-
-    if (inList) {
-      processedHtml += `<ol class="list-decimal my-4">${listItems}</ol>`;
-    }
-
-    html = processedHtml;
-
-    // Convert code blocks
-    html = html.replace(
-      /```(.*?)\n([\s\S]*?)```/g,
-      '<pre class="bg-gray-100 p-4 rounded-lg my-4 overflow-x-auto"><code>$2</code></pre>'
-    );
-
-    // Convert inline code
-    html = html.replace(
-      /`([^`]+)`/g,
-      '<code class="bg-gray-100 px-1 rounded">$1</code>'
-    );
-
-    // Convert blockquotes
-    html = html.replace(
-      /^>\s+(.*?)$/gm,
-      '<blockquote class="border-l-4 border-gray-300 pl-4 italic my-4">$1</blockquote>'
-    );
-
-    // Convert horizontal rules
-    html = html.replace(
-      /^(---|\*\*\*|___)$/gm,
-      '<hr class="my-4 border-t border-gray-300">'
-    );
-
-    // Convert tables
-    const tableRows = html.match(/\|(.+)\|/g);
-    if (tableRows) {
-      let table = '<table class="border-collapse table-auto w-full my-4">\n';
-      let isHeader = true;
-
-      for (const row of tableRows) {
-        if (row.includes("---")) {
-          isHeader = false;
-          continue;
-        }
-
-        const cells = row
-          .split("|")
-          .filter((cell) => cell.trim() !== "")
-          .map((cell) => cell.trim());
-
-        if (cells.length > 0) {
-          if (isHeader) {
-            table += "<thead><tr>\n";
-            cells.forEach((cell) => {
-              table += `<th class="border px-4 py-2 bg-gray-100">${cell}</th>\n`;
-            });
-            table += "</tr></thead>\n<tbody>\n";
-            isHeader = false;
-          } else {
-            table += "<tr>\n";
-            cells.forEach((cell) => {
-              table += `<td class="border px-4 py-2">${cell}</td>\n`;
-            });
-            table += "</tr>\n";
-          }
-        }
-      }
-
-      table += "</tbody></table>";
-
-      // Replace the original table text with the HTML table
-      const tableRegex = new RegExp(
-        tableRows
-          .map((row) => row.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
-          .join("\\s*"),
-        "g"
-      );
-      html = html.replace(tableRegex, table);
-    }
-
-    // Convert paragraphs (must be last)
-    html = html.replace(/^(?!<[a-z])(.*?)$/gm, (match, content) => {
-      if (content.trim() === "") return "";
-      return `<p class="my-2">${content}</p>`;
-    });
-
-    return html;
-  };
-
   // Statistics for ToolStats component
   const stats = [
     {
@@ -328,63 +132,62 @@ export default function MarkdownPreviewClient({
       <div className="grid lg:grid-cols-2 gap-6">
         {/* Editor Section */}
         <ToolSection title={t.markdownPreview?.writeHere || "Write Here"}>
-          <ToolInput label={t.markdownPreview?.writeHere || "Write Here"}>
-            <textarea
-              value={markdown}
-              onChange={(e) => setMarkdown(e.target.value)}
-              className="w-full h-96 p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none font-mono text-sm resize-none"
-              placeholder={`# ${
-                t.markdownPreview?.title || "Markdown Preview"
-              }\n\n${t.markdownPreview?.writeHere || "Write here"}...`}
-            />
-          </ToolInput>
+          <div className="space-y-2">
+            <ToolInput>
+              <textarea
+                value={markdown}
+                onChange={(e) => setMarkdown(e.target.value)}
+                className="w-full h-96 p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none font-mono text-sm resize-none"
+                placeholder={`# ${
+                  t.markdownPreview?.title || "Markdown Preview"
+                }\n\n${t.markdownPreview?.writeHere || "Write here"}...`}
+              />
+            </ToolInput>
 
-          <ToolControls>
-            <button
-              onClick={copyToClipboard}
-              className="button-secondary flex items-center space-x-2"
-              disabled={!markdown}
-            >
-              {copied ? <Check size={18} /> : <Copy size={18} />}
-              <span>
-                {copied
-                  ? t.markdownPreview?.copied || "Copied"
-                  : t.markdownPreview?.copy || "Copy"}
-              </span>
-            </button>
+            <ToolControls>
+              <button
+                onClick={copyToClipboard}
+                className="button-secondary flex items-center space-x-2"
+                disabled={!markdown}
+              >
+                {copied ? <Check size={18} /> : <Copy size={18} />}
+                <span>
+                  {copied
+                    ? t.markdownPreview?.copied || "Copied"
+                    : t.markdownPreview?.copy || "Copy"}
+                </span>
+              </button>
 
-            <button
-              onClick={clearMarkdown}
-              className="button-secondary flex items-center space-x-2 text-red-600 hover:text-red-700"
-              disabled={!markdown}
-            >
-              <Trash2 size={18} />
-              <span>{t.markdownPreview?.clear || "Clear"}</span>
-            </button>
-          </ToolControls>
+              <button
+                onClick={clearMarkdown}
+                className="button-secondary flex items-center space-x-2 text-red-600 hover:text-red-700"
+                disabled={!markdown}
+              >
+                <Trash2 size={18} />
+                <span>{t.markdownPreview?.clear || "Clear"}</span>
+              </button>
+            </ToolControls>
 
-          <ToolStats stats={stats} />
+            <ToolStats stats={stats} />
+          </div>
         </ToolSection>
 
         {/* Preview Section */}
         <ToolSection title={t.markdownPreview?.preview || "Preview"}>
-          <ToolDisplay centered={false}>
-            <div className="bg-white border border-gray-200 rounded-lg p-6 min-h-96 overflow-auto">
-              {markdown ? (
-                <div
-                  className="prose max-w-none text-left"
-                  dangerouslySetInnerHTML={{ __html: renderMarkdown(markdown) }}
-                />
-              ) : (
-                <div className="text-gray-500 flex flex-col items-start justify-center h-full text-left">
-                  <BookOpen size={48} className="mb-4 opacity-50" />
-                  <p>
-                    {t.markdownPreview?.noPreview || "No preview available"}
-                  </p>
-                </div>
-              )}
-            </div>
-          </ToolDisplay>
+          <div className="bg-white border border-gray-200 rounded-lg p-6 min-h-96 overflow-auto">
+            {markdown ? (
+              <div className="prose max-w-none text-left">
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  {markdown}
+                </ReactMarkdown>
+              </div>
+            ) : (
+              <div className="text-gray-500 flex flex-col items-start justify-center h-full text-left">
+                <BookOpen size={48} className="mb-4 opacity-50" />
+                <p>{t.markdownPreview?.noPreview || "No preview available"}</p>
+              </div>
+            )}
+          </div>
         </ToolSection>
       </div>
 

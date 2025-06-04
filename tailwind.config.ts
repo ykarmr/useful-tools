@@ -1,6 +1,6 @@
-import type { Config } from "tailwindcss"
-const tailwindcssAnimate = require("tailwindcss-animate")
-
+import type { Config } from "tailwindcss";
+const tailwindcssAnimate = require("tailwindcss-animate");
+const tailwindcssTypography = require("@tailwindcss/typography");
 const config: Config = {
   darkMode: ["class"],
   content: [
@@ -82,7 +82,15 @@ const config: Config = {
         "2xl": "1.5rem",
       },
       fontFamily: {
-        sans: ["-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "sans-serif"],
+        sans: [
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "Segoe UI",
+          "Roboto",
+          "Helvetica Neue",
+          "Arial",
+          "sans-serif",
+        ],
       },
       spacing: {
         "18": "4.5rem",
@@ -108,7 +116,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [tailwindcssAnimate],
-}
+  plugins: [tailwindcssAnimate, tailwindcssTypography],
+};
 
-export default config
+export default config;
