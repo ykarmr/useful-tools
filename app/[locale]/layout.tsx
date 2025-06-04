@@ -149,23 +149,13 @@ export default async function LocaleLayout({
               "@type": "WebApplication",
               name: t.common.seo.siteTitle,
               description: t.common.seo.siteDescription,
-              url: "https://useful-tools.vercel.app",
+              url: `${baseUrl}/${locale}`,
               applicationCategory:
                 t.common.seo.structuredData.applicationCategory,
               operatingSystem: t.common.seo.structuredData.operatingSystem,
-              offers: {
-                "@type": "Offer",
-                price: "0",
-                priceCurrency: "USD",
-              },
               author: {
                 "@type": "Organization",
                 name: t.common.seo.structuredData.organizationName,
-              },
-              aggregateRating: {
-                "@type": "AggregateRating",
-                ratingValue: t.common.seo.structuredData.ratingValue,
-                reviewCount: t.common.seo.structuredData.reviewCount,
               },
             }),
           }}
