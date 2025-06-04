@@ -350,127 +350,115 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
     >
       {/* Wheel Section */}
       <ToolSection>
-        <ToolDisplay size="large" centered>
-          <div className="relative">
-            {/* Winner Zone Indicator */}
-            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-6 z-20">
-              <div className="bg-gradient-to-b from-green-400 to-green-600 text-white px-4 py-2 rounded-lg shadow-lg">
-                <div className="text-xs font-bold text-center">
-                  {t.roulette?.winnerZone || "WINNER ZONE"}
-                </div>
-                <div className="text-xs text-center opacity-90">
-                  {t.roulette?.landingArea || "Landing Area"}
-                </div>
+        <div className="relative">
+          {/* Winner Zone Indicator */}
+          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-6 z-20">
+            <div className="bg-gradient-to-b from-green-400 to-green-600 text-white px-4 py-2 rounded-lg shadow-lg">
+              <div className="text-xs font-bold text-center">
+                {t.roulette?.winnerZone || "WINNER ZONE"}
               </div>
-              {/* Arrow pointing down */}
-              <div className="flex justify-center">
-                <div className="w-0 h-0 border-l-4 border-r-4 border-t-6 border-l-transparent border-r-transparent border-t-green-600"></div>
+              <div className="text-xs text-center opacity-90">
+                {t.roulette?.landingArea || "Landing Area"}
               </div>
             </div>
-
-            {/* Wheel Container */}
-            <div className="relative w-80 h-80 mx-auto">
-              {/* Fixed Winner Zone Overlay */}
-              <div className="absolute inset-0 z-10 pointer-events-none">
-                <svg
-                  width="320"
-                  height="320"
-                  viewBox="0 0 300 300"
-                  className="w-full h-full"
-                >
-                  {/* Winner zone background */}
-                  <path
-                    d={createWinnerZonePath()}
-                    fill="rgba(34, 197, 94, 0.15)"
-                    stroke="rgba(34, 197, 94, 0.6)"
-                    strokeWidth="2"
-                    strokeDasharray="5,5"
-                  />
-                  {/* Winner zone border lines */}
-                  <line
-                    x1="150"
-                    y1="150"
-                    x2={150 + 140 * Math.cos(((360 - 15) * Math.PI) / 180)}
-                    y2={150 + 140 * Math.sin(((360 - 15) * Math.PI) / 180)}
-                    stroke="rgba(34, 197, 94, 0.8)"
-                    strokeWidth="2"
-                  />
-                  <line
-                    x1="150"
-                    y1="150"
-                    x2={150 + 140 * Math.cos((15 * Math.PI) / 180)}
-                    y2={150 + 140 * Math.sin((15 * Math.PI) / 180)}
-                    stroke="rgba(34, 197, 94, 0.8)"
-                    strokeWidth="2"
-                  />
-                  {/* Center marker for winner zone */}
-                  <line
-                    x1="150"
-                    y1="150"
-                    x2="150"
-                    y2="10"
-                    stroke="rgba(34, 197, 94, 1)"
-                    strokeWidth="3"
-                  />
-                </svg>
-              </div>
-
-              <div
-                ref={wheelRef}
-                className="w-full h-full transition-transform duration-3000 ease-out"
-                style={{ transform: `rotate(${rotation}deg)` }}
-              >
-                {enabledItems.length === 0 ? (
-                  <div className="w-full h-full bg-gray-100 rounded-full border-4 border-gray-300 flex items-center justify-center">
-                    <p className="text-gray-500 text-center px-4">
-                      {t.roulette?.addItemsToStart ||
-                        "Add items to start spinning"}
-                    </p>
-                  </div>
-                ) : (
-                  <svg
-                    width="320"
-                    height="320"
-                    viewBox="0 0 300 300"
-                    className="drop-shadow-lg"
-                  >
-                    {/* Background circle */}
-                    <circle
-                      cx="150"
-                      cy="150"
-                      r="140"
-                      fill="#f8fafc"
-                      stroke="#e2e8f0"
-                      strokeWidth="2"
-                    />
-
-                    {/* Wheel segments */}
-                    {createWheelSegments()}
-
-                    {/* Center circle */}
-                    <circle
-                      cx="150"
-                      cy="150"
-                      r="20"
-                      fill="#1f2937"
-                      stroke="#ffffff"
-                      strokeWidth="3"
-                    />
-                    <circle cx="150" cy="150" r="8" fill="#ffffff" />
-                  </svg>
-                )}
-              </div>
-            </div>
-
-            {/* Instructions */}
-            <div className="mt-4 text-center">
-              <p className="text-sm text-gray-600">
-                {t.roulette?.segmentsLandInZone ||
-                  "Segments landing in the green zone win"}
-              </p>
+            {/* Arrow pointing down */}
+            <div className="flex justify-center">
+              <div className="w-0 h-0 border-l-4 border-r-4 border-t-6 border-l-transparent border-r-transparent border-t-green-600"></div>
             </div>
           </div>
-        </ToolDisplay>
+
+          {/* Wheel Container */}
+          <div className="relative w-80 h-80 mx-auto">
+            {/* Fixed Winner Zone Overlay */}
+            <div className="absolute inset-0 z-10 pointer-events-none">
+              <svg viewBox="0 0 300 300" className="w-full h-full">
+                {/* Winner zone background */}
+                <path
+                  d={createWinnerZonePath()}
+                  fill="rgba(34, 197, 94, 0.15)"
+                  stroke="rgba(34, 197, 94, 0.6)"
+                  strokeWidth="2"
+                  strokeDasharray="5,5"
+                />
+                {/* Winner zone border lines */}
+                <line
+                  x1="150"
+                  y1="150"
+                  x2={150 + 140 * Math.cos(((360 - 15) * Math.PI) / 180)}
+                  y2={150 + 140 * Math.sin(((360 - 15) * Math.PI) / 180)}
+                  stroke="rgba(34, 197, 94, 0.8)"
+                  strokeWidth="2"
+                />
+                <line
+                  x1="150"
+                  y1="150"
+                  x2={150 + 140 * Math.cos((15 * Math.PI) / 180)}
+                  y2={150 + 140 * Math.sin((15 * Math.PI) / 180)}
+                  stroke="rgba(34, 197, 94, 0.8)"
+                  strokeWidth="2"
+                />
+                {/* Center marker for winner zone */}
+                <line
+                  x1="150"
+                  y1="150"
+                  x2="150"
+                  y2="10"
+                  stroke="rgba(34, 197, 94, 1)"
+                  strokeWidth="3"
+                />
+              </svg>
+            </div>
+
+            <div
+              ref={wheelRef}
+              className="w-full h-full transition-transform duration-3000 ease-out"
+              style={{ transform: `rotate(${rotation}deg)` }}
+            >
+              {enabledItems.length === 0 ? (
+                <div className="w-full h-full bg-gray-100 rounded-full border-4 border-gray-300 flex items-center justify-center">
+                  <p className="text-gray-500 text-center px-4">
+                    {t.roulette?.addItemsToStart ||
+                      "Add items to start spinning"}
+                  </p>
+                </div>
+              ) : (
+                <svg viewBox="0 0 300 300" className="drop-shadow-lg">
+                  {/* Background circle */}
+                  <circle
+                    cx="150"
+                    cy="150"
+                    r="140"
+                    fill="#f8fafc"
+                    stroke="#e2e8f0"
+                    strokeWidth="2"
+                  />
+
+                  {/* Wheel segments */}
+                  {createWheelSegments()}
+
+                  {/* Center circle */}
+                  <circle
+                    cx="150"
+                    cy="150"
+                    r="20"
+                    fill="#1f2937"
+                    stroke="#ffffff"
+                    strokeWidth="3"
+                  />
+                  <circle cx="150" cy="150" r="8" fill="#ffffff" />
+                </svg>
+              )}
+            </div>
+          </div>
+
+          {/* Instructions */}
+          <div className="mt-4 text-center">
+            <p className="text-sm text-gray-600">
+              {t.roulette?.segmentsLandInZone ||
+                "Segments landing in the green zone win"}
+            </p>
+          </div>
+        </div>
       </ToolSection>
 
       {/* Controls */}

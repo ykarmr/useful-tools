@@ -16,7 +16,7 @@ export default function DigitalClockClient({
   locale,
   t,
 }: DigitalClockClientProps) {
-  const [currentTime, setCurrentTime] = useState(new Date());
+  const [currentTime, setCurrentTime] = useState<Date | null>(null);
   const [is24Hour, setIs24Hour] = useState(true);
   const [showSeconds, setShowSeconds] = useState(true);
   const [showDate, setShowDate] = useState(true);
@@ -59,13 +59,17 @@ export default function DigitalClockClient({
     >
       {/* Clock Display */}
       <ToolSection>
-        <ToolDisplay background="dark" size="large">
-          <div className="text-6xl md:text-8xl font-mono font-bold text-green-400 mb-4 tracking-wider">
-            {formatTime(currentTime)}
+        <ToolDisplay
+          background="dark"
+          size="large"
+          className="max-w-sm mx-auto"
+        >
+          <div className="text-3xl sm:text-6xl md:text-8xl font-mono font-bold text-green-400 mb-4 tracking-wider">
+            {currentTime && formatTime(currentTime)}
           </div>
           {showDate && (
-            <div className="text-xl md:text-2xl text-green-300 font-medium">
-              {formatDate(currentTime)}
+            <div className="text-md sm:text-xl md:text-2xl text-green-300 font-medium">
+              {currentTime && formatDate(currentTime)}
             </div>
           )}
         </ToolDisplay>

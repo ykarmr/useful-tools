@@ -159,7 +159,7 @@ export default function URLEncoderClient({ locale, t }: URLEncoderClientProps) {
       {/* Examples */}
       <ToolSection title={t.urlEncoder?.examples || "Examples"}>
         <div className="bg-gray-50 rounded-lg p-4">
-          <div className="space-y-3 text-sm">
+          <div className="space-y-3 text-sm whitespace-pre-wrap break-all">
             <div>
               <div className="font-medium text-gray-700 mb-1">
                 {t.urlEncoder?.encodingExample || "Encoding example:"}
