@@ -259,8 +259,6 @@ export interface JsonFormatterTranslations {
   lines: string;
   characters: string;
   size: string;
-  objects: string;
-  arrays: string;
   examples: string;
   basicObject: string;
   objectWithArray: string;

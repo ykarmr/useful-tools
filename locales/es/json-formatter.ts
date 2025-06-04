@@ -19,8 +19,6 @@ export const jsonFormatter: JsonFormatterTranslations = {
   characters: "Caracteres",
   lines: "Líneas",
   size: "Tamaño",
-  objects: "Objetos",
-  arrays: "Arrays",
   indentSize: "Tamaño de indentación",
   input: "Entrada JSON",
   output: "Salida Formateada",

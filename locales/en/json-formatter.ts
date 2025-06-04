@@ -23,8 +23,6 @@ export const jsonFormatter: JsonFormatterTranslations = {
   lines: "Lines",
   characters: "Characters",
   size: "Size",
-  objects: "Objects",
-  arrays: "Arrays",
   examples: "Examples",
   basicObject: "Basic object:",
   objectWithArray: "Object with array:",

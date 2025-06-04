@@ -20,8 +20,6 @@ export const jsonFormatter: JsonFormatterTranslations = {
   characters: "字符数",
   lines: "行数",
   size: "大小",
-  objects: "对象",
-  arrays: "数组",
   indentSize: "缩进大小",
   input: "输入JSON",
   output: "格式化输出",

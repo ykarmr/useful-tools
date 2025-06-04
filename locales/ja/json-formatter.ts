@@ -21,8 +21,6 @@ export const jsonFormatter: JsonFormatterTranslations = {
   lines: "行数",
   characters: "文字数",
   size: "サイズ",
-  objects: "オブジェクト数",
-  arrays: "配列数",
   examples: "例",
   basicObject: "基本的なオブジェクト:",
   objectWithArray: "配列を含むオブジェクト:",

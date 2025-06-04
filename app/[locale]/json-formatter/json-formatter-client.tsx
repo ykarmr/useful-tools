@@ -117,39 +117,10 @@ export default function JSONFormatterClient({
       const characters = output.length;
       const size = new Blob([output]).size;
 
-      const countObjects = (obj: any): number => {
-        if (Array.isArray(obj)) {
-          return obj.reduce((count, item) => count + countObjects(item), 0);
-        } else if (obj && typeof obj === "object") {
-          return (
-            1 +
-            Object.values(obj).reduce(
-              (count: number, value: any) => count + countObjects(value),
-              0
-            )
-          );
-        }
-        return 0;
-      };
-
-      const countArrays = (obj: any): number => {
-        if (Array.isArray(obj)) {
-          return 1 + obj.reduce((count, item) => count + countArrays(item), 0);
-        } else if (obj && typeof obj === "object") {
-          return Object.values(obj).reduce(
-            (count: number, value: any) => count + countArrays(value),
-            0
-          );
-        }
-        return 0;
-      };
-
       return {
         lines,
         characters,
         size,
-        objects: countObjects(parsed),
-        arrays: countArrays(parsed),
       };
     } catch {
       return null;
@@ -168,48 +139,49 @@ export default function JSONFormatterClient({
     >
       {/* Input Section */}
       <ToolSection>
-        <ToolInput label={t.jsonFormatter.input}>
-          <div className="space-y-4">
-            <div className="flex items-center gap-4">
-              <label className="flex items-center space-x-2 cursor-pointer">
-                <input
-                  type="file"
-                  accept=".json"
-                  onChange={handleFileUpload}
-                  className="sr-only"
-                />
-                <div className="flex items-center space-x-2 px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
-                  <Upload size={16} />
-                  <span className="text-sm">
-                    {t.jsonFormatter?.uploadFile || "Upload File"}
-                  </span>
+        <div className="space-y-2">
+          <div className="flex space-x-2">
+            <ToolInput label={t.jsonFormatter.input}>
+              <div className="space-y-4">
+                <div className="flex items-center gap-4">
+                  <label className="flex items-center  cursor-pointer">
+                    <input
+                      type="file"
+                      accept=".json"
+                      onChange={handleFileUpload}
+                      className="sr-only"
+                    />
+                    <div className="flex items-center space-x-2 px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                      <Upload size={16} />
+                      <span className="text-sm">
+                        {t.jsonFormatter?.uploadFile || "Upload File"}
+                      </span>
+                    </div>
+                  </label>
                 </div>
-              </label>
-
-              <ToolInput label={t.jsonFormatter.indentSize}>
-                <select
-                  value={indentSize}
-                  onChange={(e) =>
-                    setIndentSize(Number.parseInt(e.target.value))
-                  }
-                  className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none"
-                >
-                  <option value={2}>2 spaces</option>
-                  <option value={4}>4 spaces</option>
-                  <option value={8}>8 spaces</option>
-                </select>
-              </ToolInput>
-            </div>
-
-            <textarea
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onBlur={validateJSON}
-              placeholder={t.jsonFormatter.placeholder}
-              className="w-full h-48 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none resize-none font-mono text-sm"
-            />
+              </div>
+            </ToolInput>
+            <ToolInput label={t.jsonFormatter.indentSize}>
+              <select
+                value={indentSize}
+                onChange={(e) => setIndentSize(Number.parseInt(e.target.value))}
+                className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none"
+              >
+                <option value={2}>2 spaces</option>
+                <option value={4}>4 spaces</option>
+                <option value={8}>8 spaces</option>
+              </select>
+            </ToolInput>
           </div>
-        </ToolInput>
+
+          <textarea
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onBlur={validateJSON}
+            placeholder={t.jsonFormatter.placeholder}
+            className="w-full h-48 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none resize-none font-mono text-sm"
+          />
+        </div>
       </ToolSection>
 
       {/* Error Display */}
@@ -290,14 +262,6 @@ export default function JSONFormatterClient({
                 label: t.jsonFormatter?.size || "Size",
                 value: `${stats.size} bytes`,
               },
-              {
-                label: t.jsonFormatter?.objects || "Objects",
-                value: stats.objects.toString(),
-              },
-              {
-                label: t.jsonFormatter?.arrays || "Arrays",
-                value: stats.arrays.toString(),
-              },
             ]}
           />
         </ToolSection>
@@ -311,17 +275,17 @@ export default function JSONFormatterClient({
               <div className="font-medium text-gray-700 mb-2">
                 {t.jsonFormatter?.basicObject || "Basic object:"}
               </div>
-              <pre className="text-gray-600 bg-white p-2 rounded border">
+              <div className="text-gray-600 bg-white p-2 rounded border">
                 {`{"name": "John", "age": 30, "city": "Tokyo"}`}
-              </pre>
+              </div>
             </div>
             <div>
-              <div className="font-medium text-gray-700 mb-2">
+              <div className="font-medium text-gray-700 mb-2 whitespace-pre-wrap break-words">
                 {t.jsonFormatter?.objectWithArray || "Object with array:"}
               </div>
-              <pre className="text-gray-600 bg-white p-2 rounded border">
+              <div className="text-gray-600 bg-white p-2 rounded border whitespace-pre-wrap break-words">
                 {`{"users": [{"id": 1, "name": "Alice"}, {"id": 2, "name": "Bob"}]}`}
-              </pre>
+              </div>
             </div>
           </div>
         </div>
