@@ -1,5 +1,5 @@
 import type React from "react";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import MainLayout from "@/components/layout/main-layout";
 import {
   getTranslations,
@@ -90,6 +90,13 @@ export async function generateMetadata({
 
 const inter = Inter({ subsets: ["latin"] });
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  themeColor: "#3B82F6",
+};
+
 export default async function LocaleLayout({
   children,
   params,
@@ -108,7 +115,6 @@ export default async function LocaleLayout({
       <head>
         <meta name="google-adsense-account" content="ca-pub-7007912278084791" />
 
-        <meta name="theme-color" content="#3B82F6" />
         {/* <meta name="apple-mobile-web-app-capable" content="yes" /> */}
         {/* <meta name="apple-mobile-web-app-status-bar-style" content="default" /> */}
 
