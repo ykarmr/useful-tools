@@ -48,7 +48,6 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
   const [items, setItems] = useState<RouletteItem[]>([]);
   const [newItem, setNewItem] = useState("");
   const [isSpinning, setIsSpinning] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<RouletteItem | null>(null);
   const [rotation, setRotation] = useState(0);
   const wheelRef = useRef<HTMLDivElement>(null);
 
@@ -126,9 +125,6 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
 
   const removeItem = (id: string) => {
     setItems(items.filter((item) => item.id !== id));
-    if (selectedItem && selectedItem.id === id) {
-      setSelectedItem(null);
-    }
   };
 
   const toggleItemEnabled = (id: string) => {
@@ -137,12 +133,6 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
         item.id === id ? { ...item, enabled: !item.enabled } : item
       )
     );
-    if (selectedItem && selectedItem.id === id) {
-      const item = items.find((item) => item.id === id);
-      if (item && item.enabled) {
-        setSelectedItem(null);
-      }
-    }
   };
 
   // Normalize angle to 0-360 range
@@ -189,7 +179,6 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
     if (enabledItems.length < 2 || isSpinning) return;
 
     setIsSpinning(true);
-    setSelectedItem(null);
 
     // Calculate random rotation
     const spins = 5 + Math.random() * 5; // 5-10 full rotations
@@ -213,19 +202,18 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
           const winnerIndex =
             Math.floor(topAngle / segmentAngle) % enabledItems.length;
 
-          setSelectedItem(enabledItems[winnerIndex]);
+          alert(
+            `${t.roulette?.winner || "Winner!"}: ${
+              enabledItems[winnerIndex].text
+            }`
+          );
         }
       } catch (error) {
         console.error("Error selecting roulette item:", error);
       } finally {
         setIsSpinning(false);
       }
-    }, 3000);
-  };
-
-  const resetWheel = () => {
-    setRotation(0);
-    setSelectedItem(null);
+    }, 1000);
   };
 
   // Create winner zone path (fixed at top)
@@ -275,7 +263,6 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
       const textY = centerY + textRadius * Math.sin(midAngle);
       const textRotation = (midAngle * 180) / Math.PI;
 
-      const isWinner = selectedItem && selectedItem.id === item.id;
       const isInWinnerZone = isSegmentInWinnerZone(index);
 
       return (
@@ -287,26 +274,12 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
             stroke="#ffffff"
             strokeWidth="2"
             style={{
-              filter: isWinner
-                ? "brightness(1.3)"
-                : isInWinnerZone
-                ? "brightness(1.1)"
-                : "none",
+              filter: isInWinnerZone ? "brightness(1.1)" : "none",
             }}
           />
 
-          {/* Winner highlight */}
-          {isWinner && (
-            <path
-              d={pathData}
-              fill="rgba(255, 215, 0, 0.4)"
-              stroke="#fbbf24"
-              strokeWidth="4"
-            />
-          )}
-
           {/* Winner zone highlight */}
-          {isInWinnerZone && !isWinner && (
+          {isInWinnerZone && (
             <path d={pathData} fill="rgba(34, 197, 94, 0.2)" />
           )}
 
@@ -348,181 +321,143 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
       }
       icon={Target}
     >
-      {/* Wheel Section */}
-      <ToolSection>
-        <div className="relative">
-          {/* Winner Zone Indicator */}
-          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-6 z-20">
-            <div className="bg-gradient-to-b from-green-400 to-green-600 text-white px-4 py-2 rounded-lg shadow-lg">
-              <div className="text-xs font-bold text-center">
-                {t.roulette?.winnerZone || "WINNER ZONE"}
-              </div>
-              <div className="text-xs text-center opacity-90">
-                {t.roulette?.landingArea || "Landing Area"}
-              </div>
-            </div>
-            {/* Arrow pointing down */}
-            <div className="flex justify-center">
-              <div className="w-0 h-0 border-l-4 border-r-4 border-t-6 border-l-transparent border-r-transparent border-t-green-600"></div>
-            </div>
-          </div>
-
-          {/* Wheel Container */}
-          <div className="relative w-80 h-80 mx-auto">
-            {/* Fixed Winner Zone Overlay */}
-            <div className="absolute inset-0 z-10 pointer-events-none">
-              <svg viewBox="0 0 300 300" className="w-full h-full">
-                {/* Winner zone background */}
-                <path
-                  d={createWinnerZonePath()}
-                  fill="rgba(34, 197, 94, 0.15)"
-                  stroke="rgba(34, 197, 94, 0.6)"
-                  strokeWidth="2"
-                  strokeDasharray="5,5"
-                />
-                {/* Winner zone border lines */}
-                <line
-                  x1="150"
-                  y1="150"
-                  x2={150 + 140 * Math.cos(((360 - 15) * Math.PI) / 180)}
-                  y2={150 + 140 * Math.sin(((360 - 15) * Math.PI) / 180)}
-                  stroke="rgba(34, 197, 94, 0.8)"
-                  strokeWidth="2"
-                />
-                <line
-                  x1="150"
-                  y1="150"
-                  x2={150 + 140 * Math.cos((15 * Math.PI) / 180)}
-                  y2={150 + 140 * Math.sin((15 * Math.PI) / 180)}
-                  stroke="rgba(34, 197, 94, 0.8)"
-                  strokeWidth="2"
-                />
-                {/* Center marker for winner zone */}
-                <line
-                  x1="150"
-                  y1="150"
-                  x2="150"
-                  y2="10"
-                  stroke="rgba(34, 197, 94, 1)"
-                  strokeWidth="3"
-                />
-              </svg>
-            </div>
-
-            <div
-              ref={wheelRef}
-              className="w-full h-full transition-transform duration-3000 ease-out"
-              style={{ transform: `rotate(${rotation}deg)` }}
-            >
-              {enabledItems.length === 0 ? (
-                <div className="w-full h-full bg-gray-100 rounded-full border-4 border-gray-300 flex items-center justify-center">
-                  <p className="text-gray-500 text-center px-4">
-                    {t.roulette?.addItemsToStart ||
-                      "Add items to start spinning"}
-                  </p>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4">
+        {/* Wheel Section */}
+        <ToolSection>
+          <div className="relative">
+            {/* Winner Zone Indicator */}
+            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-6 z-20">
+              <div className="bg-gradient-to-b from-green-400 to-green-600 text-white px-4 py-2 rounded-lg shadow-lg">
+                <div className="text-xs font-bold text-center">
+                  {t.roulette?.winnerZone || "WINNER ZONE"}
                 </div>
-              ) : (
-                <svg viewBox="0 0 300 300" className="drop-shadow-lg">
-                  {/* Background circle */}
-                  <circle
-                    cx="150"
-                    cy="150"
-                    r="140"
-                    fill="#f8fafc"
-                    stroke="#e2e8f0"
+                <div className="text-xs text-center opacity-90">
+                  {t.roulette?.landingArea || "Landing Area"}
+                </div>
+              </div>
+              {/* Arrow pointing down */}
+              <div className="flex justify-center">
+                <div className="w-0 h-0 border-l-4 border-r-4 border-t-6 border-l-transparent border-r-transparent border-t-green-600"></div>
+              </div>
+            </div>
+
+            {/* Wheel Container */}
+            <div className="relative w-80 h-80 mx-auto">
+              {/* Fixed Winner Zone Overlay */}
+              <div className="absolute inset-0 z-10 pointer-events-none">
+                <svg viewBox="0 0 300 300" className="w-full h-full">
+                  {/* Winner zone background */}
+                  <path
+                    d={createWinnerZonePath()}
+                    fill="rgba(34, 197, 94, 0.15)"
+                    stroke="rgba(34, 197, 94, 0.6)"
+                    strokeWidth="2"
+                    strokeDasharray="5,5"
+                  />
+                  {/* Winner zone border lines */}
+                  <line
+                    x1="150"
+                    y1="150"
+                    x2={150 + 140 * Math.cos(((360 - 15) * Math.PI) / 180)}
+                    y2={150 + 140 * Math.sin(((360 - 15) * Math.PI) / 180)}
+                    stroke="rgba(34, 197, 94, 0.8)"
                     strokeWidth="2"
                   />
-
-                  {/* Wheel segments */}
-                  {createWheelSegments()}
-
-                  {/* Center circle */}
-                  <circle
-                    cx="150"
-                    cy="150"
-                    r="20"
-                    fill="#1f2937"
-                    stroke="#ffffff"
+                  <line
+                    x1="150"
+                    y1="150"
+                    x2={150 + 140 * Math.cos((15 * Math.PI) / 180)}
+                    y2={150 + 140 * Math.sin((15 * Math.PI) / 180)}
+                    stroke="rgba(34, 197, 94, 0.8)"
+                    strokeWidth="2"
+                  />
+                  {/* Center marker for winner zone */}
+                  <line
+                    x1="150"
+                    y1="150"
+                    x2="150"
+                    y2="10"
+                    stroke="rgba(34, 197, 94, 1)"
                     strokeWidth="3"
                   />
-                  <circle cx="150" cy="150" r="8" fill="#ffffff" />
                 </svg>
-              )}
-            </div>
-          </div>
-
-          {/* Instructions */}
-          <div className="mt-4 text-center">
-            <p className="text-sm text-gray-600">
-              {t.roulette?.segmentsLandInZone ||
-                "Segments landing in the green zone win"}
-            </p>
-          </div>
-        </div>
-      </ToolSection>
-
-      {/* Controls */}
-      <ToolSection>
-        <ToolControls>
-          <button
-            onClick={spinWheel}
-            disabled={enabledItems.length < 2 || isSpinning}
-            className="button-primary flex items-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            <Play size={20} />
-            <span>
-              {isSpinning
-                ? t.roulette?.spinning || "Spinning..."
-                : t.roulette?.spinWheel || "Spin Wheel"}
-            </span>
-          </button>
-
-          <button
-            onClick={resetWheel}
-            disabled={isSpinning}
-            className="button-secondary flex items-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            <RotateCcw size={20} />
-            <span>{t.roulette?.reset || "Reset"}</span>
-          </button>
-        </ToolControls>
-
-        {enabledItems.length < 2 && items.length > 0 && (
-          <p className="text-amber-600 text-sm mt-4 text-center">
-            {t.roulette?.needMoreItems ||
-              "At least 2 enabled items are required to spin the wheel"}
-          </p>
-        )}
-      </ToolSection>
-
-      {/* Winner Result */}
-      {selectedItem && (
-        <ToolSection>
-          <ToolResult variant="success">
-            <div className="text-center p-6 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl border border-green-200">
-              <h3 className="text-2xl font-bold text-green-800 mb-4">
-                🎯 {t.roulette?.winner || "Winner!"}
-              </h3>
-              <div className="flex items-center justify-center gap-3 mb-2">
-                <div
-                  className="w-6 h-6 rounded-full border-2 border-white shadow-md"
-                  style={{ backgroundColor: selectedItem.color }}
-                ></div>
-                <p className="text-xl font-semibold text-green-700">
-                  {selectedItem.text}
-                </p>
               </div>
-              <p className="text-green-600 text-sm">
-                {t.roulette?.landedInZone || "Landed in the winner zone!"}
+
+              <div
+                ref={wheelRef}
+                className="w-full h-full transition-transform duration-3000 ease-out"
+                style={{ transform: `rotate(${rotation}deg)` }}
+              >
+                {enabledItems.length === 0 ? (
+                  <div className="w-full h-full bg-gray-100 rounded-full border-4 border-gray-300 flex items-center justify-center">
+                    <p className="text-gray-500 text-center px-4">
+                      {t.roulette?.addItemsToStart ||
+                        "Add items to start spinning"}
+                    </p>
+                  </div>
+                ) : (
+                  <svg viewBox="0 0 300 300" className="drop-shadow-lg">
+                    {/* Background circle */}
+                    <circle
+                      cx="150"
+                      cy="150"
+                      r="140"
+                      fill="#f8fafc"
+                      stroke="#e2e8f0"
+                      strokeWidth="2"
+                    />
+
+                    {/* Wheel segments */}
+                    {createWheelSegments()}
+
+                    {/* Center circle */}
+                    <circle
+                      cx="150"
+                      cy="150"
+                      r="20"
+                      fill="#1f2937"
+                      stroke="#ffffff"
+                      strokeWidth="3"
+                    />
+                    <circle cx="150" cy="150" r="8" fill="#ffffff" />
+                  </svg>
+                )}
+              </div>
+            </div>
+
+            {/* Instructions */}
+            <div className="mt-4 text-center">
+              <p className="text-sm text-gray-600">
+                {t.roulette?.segmentsLandInZone ||
+                  "Segments landing in the green zone win"}
               </p>
             </div>
-          </ToolResult>
-        </ToolSection>
-      )}
+            <ToolControls className="mt-2">
+              <button
+                onClick={spinWheel}
+                disabled={enabledItems.length < 2 || isSpinning}
+                className="button-primary flex items-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <Play size={20} />
+                <span>
+                  {isSpinning
+                    ? t.roulette?.spinning || "Spinning..."
+                    : t.roulette?.spinWheel || "Spin Wheel"}
+                </span>
+              </button>
+            </ToolControls>
 
-      {/* Add New Item */}
-      <ToolSection title={t.roulette?.addItems || "Add Items"}>
-        <ToolInput label={t.roulette?.addItemLabel || "Add Item"}>
+            {enabledItems.length < 2 && items.length > 0 && (
+              <p className="text-amber-600 text-sm mt-4 text-center">
+                {t.roulette?.needMoreItems ||
+                  "At least 2 enabled items are required to spin the wheel"}
+              </p>
+            )}
+          </div>
+        </ToolSection>
+
+        {/* Add New Item */}
+        <ToolSection title={t.roulette?.addItems || "Add Items"}>
           <div className="flex gap-3">
             <input
               type="text"
@@ -554,92 +489,97 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
               })}
             </span>
           </div>
-        </ToolInput>
-      </ToolSection>
-
-      {/* Items List */}
-      <ToolSection title={t.roulette?.currentItems || "Current Items"}>
-        {items.length === 0 ? (
-          <div className="text-center py-8">
-            <p className="text-gray-500 mb-2">
-              {t.roulette?.noItemsAdded || "No items added yet"}
-            </p>
-            <p className="text-sm text-gray-400">
-              {t.roulette?.addItemsInstruction ||
-                "Add items using the field above"}
-            </p>
-          </div>
-        ) : (
-          <div className="space-y-2 max-h-64 overflow-y-auto">
-            {items.map((item) => (
-              <div
-                key={item.id}
-                className={`flex items-center justify-between p-4 rounded-xl transition-all ${
-                  item.enabled
-                    ? "bg-white border border-gray-200 shadow-sm"
-                    : "bg-gray-50 border border-gray-100 opacity-60"
-                }`}
-              >
-                <div className="flex items-center space-x-3">
-                  <div
-                    className="w-4 h-4 rounded-full border-2 border-white shadow-sm"
-                    style={{
-                      backgroundColor: item.enabled ? item.color : "#9CA3AF",
-                    }}
-                  ></div>
-                  <span
-                    className={`font-medium ${
-                      item.enabled
-                        ? "text-gray-900"
-                        : "text-gray-500 line-through"
-                    }`}
-                  >
-                    {item.text}
-                  </span>
-                  {!item.enabled && (
-                    <span className="text-xs text-gray-400 bg-gray-200 px-2 py-1 rounded-full">
-                      {t.roulette?.disabled || "Disabled"}
-                    </span>
-                  )}
-                </div>
-                <div className="flex items-center space-x-2">
-                  <button
-                    onClick={() => toggleItemEnabled(item.id)}
-                    className={`p-2 rounded-lg transition-colors ${
-                      item.enabled
-                        ? "text-gray-400 hover:text-orange-500 hover:bg-orange-50"
-                        : "text-gray-400 hover:text-green-500 hover:bg-green-50"
-                    }`}
-                    aria-label={
-                      item.enabled
-                        ? interpolate(
-                            t.roulette?.disableItem || "Disable {item}",
-                            { item: item.text }
-                          )
-                        : interpolate(
-                            t.roulette?.enableItem || "Enable {item}",
-                            { item: item.text }
-                          )
-                    }
-                  >
-                    {item.enabled ? <EyeOff size={16} /> : <Eye size={16} />}
-                  </button>
-                  <button
-                    onClick={() => removeItem(item.id)}
-                    className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
-                    aria-label={interpolate(
-                      t.roulette?.removeItem || "Remove {item}",
-                      { item: item.text }
-                    )}
-                  >
-                    <Trash2 size={16} />
-                  </button>
-                </div>
+          {/* Items List */}
+          <ToolSection title={t.roulette?.currentItems || "Current Items"}>
+            {items.length === 0 ? (
+              <div className="text-center py-8">
+                <p className="text-gray-500 mb-2">
+                  {t.roulette?.noItemsAdded || "No items added yet"}
+                </p>
+                <p className="text-sm text-gray-400">
+                  {t.roulette?.addItemsInstruction ||
+                    "Add items using the field above"}
+                </p>
               </div>
-            ))}
-          </div>
-        )}
-      </ToolSection>
+            ) : (
+              <div className="space-y-2 max-h-64 overflow-y-auto">
+                {items.map((item) => (
+                  <div
+                    key={item.id}
+                    className={`flex items-center justify-between p-4 rounded-xl transition-all ${
+                      item.enabled
+                        ? "bg-white border border-gray-200 shadow-sm"
+                        : "bg-gray-50 border border-gray-100 opacity-60"
+                    }`}
+                  >
+                    <div className="flex items-center space-x-3">
+                      <div
+                        className="w-4 h-4 rounded-full border-2 border-white shadow-sm"
+                        style={{
+                          backgroundColor: item.enabled
+                            ? item.color
+                            : "#9CA3AF",
+                        }}
+                      ></div>
+                      <span
+                        className={`font-medium ${
+                          item.enabled
+                            ? "text-gray-900"
+                            : "text-gray-500 line-through"
+                        }`}
+                      >
+                        {item.text}
+                      </span>
+                      {!item.enabled && (
+                        <span className="text-xs text-gray-400 bg-gray-200 px-2 py-1 rounded-full">
+                          {t.roulette?.disabled || "Disabled"}
+                        </span>
+                      )}
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <button
+                        onClick={() => toggleItemEnabled(item.id)}
+                        className={`p-2 rounded-lg transition-colors ${
+                          item.enabled
+                            ? "text-gray-400 hover:text-orange-500 hover:bg-orange-50"
+                            : "text-gray-400 hover:text-green-500 hover:bg-green-50"
+                        }`}
+                        aria-label={
+                          item.enabled
+                            ? interpolate(
+                                t.roulette?.disableItem || "Disable {item}",
+                                { item: item.text }
+                              )
+                            : interpolate(
+                                t.roulette?.enableItem || "Enable {item}",
+                                { item: item.text }
+                              )
+                        }
+                      >
+                        {item.enabled ? (
+                          <EyeOff size={16} />
+                        ) : (
+                          <Eye size={16} />
+                        )}
+                      </button>
+                      <button
+                        onClick={() => removeItem(item.id)}
+                        className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                        aria-label={interpolate(
+                          t.roulette?.removeItem || "Remove {item}",
+                          { item: item.text }
+                        )}
+                      >
+                        <Trash2 size={16} />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </ToolSection>
+        </ToolSection>
+      </div>
     </ToolLayout>
   );
 }

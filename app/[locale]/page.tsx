@@ -166,52 +166,8 @@ export default async function HomePage({ params }: HomePageProps) {
     },
   ];
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: t.common.seo.siteTitle,
-    description: t.common.seo.siteDescription,
-    url: `https://useful-tools.vercel.app/${locale}`,
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: `${baseUrl}/${locale}`,
-      },
-      "query-input": "required name=search_term_string",
-    },
-    mainEntity: {
-      "@type": "ItemList",
-      itemListElement: [
-        ...featuredTools.map((tool, index) => ({
-          "@type": "ListItem",
-          position: index + 1,
-          item: {
-            "@type": "SoftwareApplication",
-            name: tool.title,
-            description: tool.description,
-            url: `${baseUrl}/${tool.href}`,
-            applicationCategory:
-              t.common.seo.structuredData.applicationCategory,
-            operatingSystem: t.common.seo.structuredData.operatingSystem,
-            offers: {
-              "@type": "Offer",
-              price: "0",
-              priceCurrency: "USD",
-            },
-          },
-        })),
-      ],
-    },
-  };
-
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-
       <main id="main-content" className="animate-fade-in">
         {/* Hero Section */}
         <section
