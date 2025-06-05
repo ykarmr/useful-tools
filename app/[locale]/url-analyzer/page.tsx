@@ -7,7 +7,7 @@ import { getAlternates } from "@/lib/getLocaleMapping";
 import { notFound } from "next/navigation";
 
 interface Props {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
