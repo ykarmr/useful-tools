@@ -49,9 +49,9 @@ export default function ToolLayout({
             </header>
 
             {/* Tool Content */}
-            <main role="main" className="space-y-6 lg:space-y-8">
+            <div role="main" className="space-y-6 lg:space-y-8">
               {children}
-            </main>
+            </div>
           </div>
         </div>
 

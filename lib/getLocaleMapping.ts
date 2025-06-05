@@ -23,6 +23,9 @@ export const getAlternates = (locale: Locale, path: string = "") => {
 
   return {
     canonical: `${baseUrl}/${locale}${path}`,
-    languages,
+    languages: {
+      ...languages,
+      "x-default": `${baseUrl}/en/${path}`,
+    },
   };
 };

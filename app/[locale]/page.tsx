@@ -168,7 +168,7 @@ export default async function HomePage({ params }: HomePageProps) {
 
   return (
     <>
-      <main id="main-content" className="animate-fade-in">
+      <div className="animate-fade-in">
         {/* Hero Section */}
         <section
           className="text-center py-16 lg:py-24"
@@ -386,7 +386,7 @@ export default async function HomePage({ params }: HomePageProps) {
             </a>
           </div>
         </section>
-      </main>
+      </div>
     </>
   );
 }

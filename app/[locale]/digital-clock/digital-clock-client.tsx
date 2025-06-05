@@ -59,11 +59,7 @@ export default function DigitalClockClient({
     >
       {/* Clock Display */}
       <ToolSection>
-        <ToolDisplay
-          background="dark"
-          size="large"
-          className="max-w-sm mx-auto"
-        >
+        <ToolDisplay background="dark" size="large" className="w-[80%] mx-auto">
           <div className="text-3xl sm:text-6xl md:text-8xl font-mono font-bold text-green-400 mb-4 tracking-wider">
             {currentTime && formatTime(currentTime)}
           </div>
