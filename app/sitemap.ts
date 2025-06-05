@@ -31,6 +31,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/url-encoder",
     "/user-agent",
     "/world-clock",
+    "/url-analyzer",
   ];
 
   const sitemap: MetadataRoute.Sitemap = [];
