@@ -70,21 +70,14 @@ export default function DiceRollerClient({ locale, t }: DiceRollerClientProps) {
     >
       {/* Dice Display */}
       <ToolSection>
-        <ToolDisplay size="large">
-          <div className="flex justify-center mb-4 text-primary-600">
-            {getDiceIcon()}
-          </div>
-          {result && !isRolling && (
-            <div className="text-4xl font-bold text-gray-900 animate-slide-up">
-              {t.diceRoller.result}: {result}
-            </div>
-          )}
-        </ToolDisplay>
+        <div className="flex justify-center mb-4 text-primary-600">
+          {getDiceIcon()}
+        </div>
       </ToolSection>
 
       {/* Controls */}
       <ToolSection>
-        <ToolInput label={t.diceRoller.sides}>
+        <div className="space-y-4">
           <div className="flex flex-wrap justify-center gap-2">
             {diceOptions.map((option) => (
               <button
@@ -102,18 +95,18 @@ export default function DiceRollerClient({ locale, t }: DiceRollerClientProps) {
               </button>
             ))}
           </div>
-        </ToolInput>
 
-        <ToolControls>
-          <button
-            onClick={rollDice}
-            disabled={isRolling}
-            className="button-primary disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
-            aria-label={isRolling ? "Rolling dice" : "Roll dice"}
-          >
-            {isRolling ? "Rolling..." : t.diceRoller.roll}
-          </button>
-        </ToolControls>
+          <ToolControls>
+            <button
+              onClick={rollDice}
+              disabled={isRolling}
+              className="button-primary disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+              aria-label={isRolling ? "Rolling dice" : "Roll dice"}
+            >
+              {isRolling ? "Rolling..." : t.diceRoller.roll}
+            </button>
+          </ToolControls>
+        </div>
       </ToolSection>
     </ToolLayout>
   );

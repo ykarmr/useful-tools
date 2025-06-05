@@ -115,5 +115,9 @@ export const services: ServicesTranslations = {
       title: "Markdown Preview",
       description: "Write and preview Markdown in real-time",
     },
+    urlAnalyzer: {
+      title: "URL Analyzer",
+      description: "Analyze and extract information from URLs",
+    },
   },
 };

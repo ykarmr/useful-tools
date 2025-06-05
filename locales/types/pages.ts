@@ -177,6 +177,10 @@ export interface ServicesTranslations {
       title: string;
       description: string;
     };
+    urlAnalyzer: {
+      title: string;
+      description: string;
+    };
     markdownPreview: {
       title: string;
       description: string;

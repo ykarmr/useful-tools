@@ -120,5 +120,10 @@ export const services: ServicesTranslations = {
       title: "Vista Previa de Markdown",
       description: "Escribe y previsualiza Markdown en tiempo real",
     },
+    urlAnalyzer: {
+      title: "Analizador de URL",
+      description:
+        "Analiza y descompone URLs para obtener información detallada",
+    },
   },
 };

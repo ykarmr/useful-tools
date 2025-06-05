@@ -114,5 +114,9 @@ export const services: ServicesTranslations = {
       title: "Markdown预览",
       description: "实时编写和预览Markdown",
     },
+    urlAnalyzer: {
+      title: "URL分析器",
+      description: "分析和获取有关URL的详细信息",
+    },
   },
 };

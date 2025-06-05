@@ -24,6 +24,7 @@ import type { Translations } from "../types";
 import { contact } from "./contact";
 import { privacy } from "./privacy";
 import { terms } from "./terms";
+import { urlAnalyzer } from "./url-analyzer";
 
 const ja: Translations = {
   common,
@@ -54,6 +55,7 @@ const ja: Translations = {
   privacy,
   terms,
   contact,
+  urlAnalyzer,
 };
 
 export default ja;

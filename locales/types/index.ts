@@ -35,6 +35,7 @@ import type {
   JsonFormatterTranslations,
   UrlEncoderTranslations,
   MarkdownPreviewTranslations,
+  UrlAnalyzerTranslations,
 } from "./tools";
 
 export interface Translations {
@@ -66,4 +67,5 @@ export interface Translations {
   privacy: PrivacyTranslations;
   contact: ContactTranslations;
   terms: TermsTranslations;
+  urlAnalyzer: UrlAnalyzerTranslations;
 }
