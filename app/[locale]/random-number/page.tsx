@@ -25,7 +25,7 @@ export async function generateMetadata({
   const baseUrl = "https://useful-tools.vercel.app";
 
   return {
-    title: t.randomNumber.title,
+    title: `${t.randomNumber.title} | ${t.common.siteTitle}`,
     description: t.randomNumber.description,
     keywords: t.randomNumber.keywords || [],
     openGraph: {

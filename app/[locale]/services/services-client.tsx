@@ -70,6 +70,7 @@ const toolCategories = [
       { key: "qrGenerator", icon: QrCode, href: "/qr-generator" },
       { key: "userAgent", icon: Monitor, href: "/user-agent" },
       { key: "ipAddress", icon: MapPin, href: "/ip-address" },
+      { key: "speedTest", icon: Zap, href: "/speed-test" },
     ],
   },
   {

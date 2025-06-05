@@ -25,7 +25,7 @@ export async function generateMetadata({
   const t = getTranslations(locale);
 
   return {
-    title: t.calculator.title,
+    title: `${t.calculator.title} | ${t.common.siteTitle}`,
     description: t.calculator.description,
     keywords: t.calculator.keywords || [],
     openGraph: {

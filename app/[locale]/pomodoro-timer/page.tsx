@@ -25,7 +25,7 @@ export async function generateMetadata({
   const t = getTranslations(locale);
 
   return {
-    title: t.pomodoroTimer.title,
+    title: `${t.pomodoroTimer.title} | ${t.common.siteTitle}`,
     description: t.pomodoroTimer.description,
     keywords: t.pomodoroTimer.keywords || [],
     openGraph: {

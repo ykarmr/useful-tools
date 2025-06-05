@@ -25,7 +25,7 @@ export async function generateMetadata({
   const t = getTranslations(locale);
 
   return {
-    title: t.userAgent.title,
+    title: `${t.userAgent.title} | ${t.common.siteTitle}`,
     description: t.userAgent.description,
     keywords: t.userAgent.keywords || [],
     openGraph: {

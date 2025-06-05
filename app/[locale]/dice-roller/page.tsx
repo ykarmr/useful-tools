@@ -25,7 +25,7 @@ export async function generateMetadata({
   const t = getTranslations(locale);
 
   return {
-    title: t.diceRoller.title,
+    title: `${t.diceRoller.title} | ${t.common.siteTitle}`,
     description: t.diceRoller.description,
     keywords: t.diceRoller.keywords || [],
     openGraph: {

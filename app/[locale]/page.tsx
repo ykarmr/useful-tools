@@ -170,13 +170,13 @@ export default async function HomePage({ params }: HomePageProps) {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: t.common.seo.siteTitle,
-    description: t.home.subtitle,
+    description: t.common.seo.siteDescription,
     url: `https://useful-tools.vercel.app/${locale}`,
     potentialAction: {
       "@type": "SearchAction",
       target: {
         "@type": "EntryPoint",
-        urlTemplate: `https://useful-tools.vercel.app/${locale}/services?q={search_term_string}`,
+        urlTemplate: `${baseUrl}/${locale}`,
       },
       "query-input": "required name=search_term_string",
     },
@@ -190,7 +190,7 @@ export default async function HomePage({ params }: HomePageProps) {
             "@type": "SoftwareApplication",
             name: tool.title,
             description: tool.description,
-            url: `https://useful-tools.vercel.app${tool.href}`,
+            url: `${baseUrl}/${tool.href}`,
             applicationCategory:
               t.common.seo.structuredData.applicationCategory,
             operatingSystem: t.common.seo.structuredData.operatingSystem,
