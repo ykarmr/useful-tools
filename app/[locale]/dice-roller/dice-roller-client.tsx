@@ -30,6 +30,9 @@ export default function DiceRollerClient({ locale, t }: DiceRollerClientProps) {
       const newResult = Math.floor(Math.random() * sides) + 1;
       setResult(newResult);
       setIsRolling(false);
+      setTimeout(() => {
+        alert(`You rolled a ${newResult}!`);
+      }, 1000);
     }, 1000);
   };
 
@@ -38,26 +41,11 @@ export default function DiceRollerClient({ locale, t }: DiceRollerClientProps) {
 
     if (!result) return <Dice1 size={80} />;
 
-    switch (result) {
-      case 1:
-        return <Dice1 size={80} />;
-      case 2:
-        return <Dice2 size={80} />;
-      case 3:
-        return <Dice3 size={80} />;
-      case 4:
-        return <Dice4 size={80} />;
-      case 5:
-        return <Dice5 size={80} />;
-      case 6:
-        return <Dice6 size={80} />;
-      default:
-        return (
-          <div className="w-20 h-20 bg-gray-200 rounded-lg flex items-center justify-center text-2xl font-bold">
-            {result}
-          </div>
-        );
-    }
+    return (
+      <div className="w-20 h-20 bg-gray-200 rounded-lg flex items-center justify-center text-2xl font-bold">
+        {result}
+      </div>
+    );
   };
 
   return (
