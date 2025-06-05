@@ -39,8 +39,8 @@ export default function DiceRollerClient({ locale, t }: DiceRollerClientProps) {
         alert(
           t.diceRoller.resultMessage.replace("{result}", String(newResult))
         );
-      }, 1000);
-    }, 500);
+      }, 500);
+    }, 1000);
   };
 
   const getDiceIcon = () => {
