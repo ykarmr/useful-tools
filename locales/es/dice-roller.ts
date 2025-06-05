@@ -14,6 +14,7 @@ export const diceRoller: DiceRollerTranslations = {
   roll: "Lanzar Dados",
   sides: "Lados",
   result: "Resultado",
+  resultMessage: "¡Has lanzado un {result}!",
 };
 
 export default diceRoller;

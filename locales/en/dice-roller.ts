@@ -14,4 +14,5 @@ export const diceRoller: DiceRollerTranslations = {
   sides: "Sides",
   roll: "Roll Dice",
   result: "Result",
+  resultMessage: "You rolled a {result}!",
 };

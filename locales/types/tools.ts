@@ -71,6 +71,7 @@ export interface DiceRollerTranslations {
   sides: string;
   roll: string;
   result: string;
+  resultMessage: string;
 }
 
 export interface CoinFlipTranslations {

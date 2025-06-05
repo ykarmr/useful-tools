@@ -13,4 +13,5 @@ export const diceRoller: DiceRollerTranslations = {
   sides: "面数",
   roll: "サイコロを振る",
   result: "結果",
+  resultMessage: "あなたは {result} を振りました！",
 };

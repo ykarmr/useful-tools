@@ -31,7 +31,9 @@ export default function DiceRollerClient({ locale, t }: DiceRollerClientProps) {
       setResult(newResult);
       setIsRolling(false);
       setTimeout(() => {
-        alert(`You rolled a ${newResult}!`);
+        alert(
+          t.diceRoller.resultMessage.replace("{result}", String(newResult))
+        );
       }, 1000);
     }, 1000);
   };

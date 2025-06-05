@@ -7,6 +7,7 @@ export const diceRoller: DiceRollerTranslations = {
   roll: "投掷骰子",
   sides: "面数",
   result: "结果",
+  resultMessage: "你投掷了 {result}！",
 };
 
 export default diceRoller;
