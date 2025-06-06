@@ -1,9 +1,10 @@
 import { Locale } from "@/locales";
 import { baseUrl } from "./const";
+import { SupportedLocale } from "./i18n";
 
-export const locales: Locale[] = ["en", "es", "ja", "zh"];
+export const locales: SupportedLocale[] = ["en", "es", "ja", "zh"];
 
-export const getLocaleMapping = (locale: Locale) => {
+export const getLocaleMapping = (locale: SupportedLocale) => {
   const localeMapping: Record<Locale, string> = {
     ja: "ja-JP",
     zh: "zh-CN",
@@ -14,7 +15,7 @@ export const getLocaleMapping = (locale: Locale) => {
   return localeMapping[locale] || "en-US";
 };
 
-export const getAlternates = (locale: Locale, path: string = "") => {
+export const getAlternates = (locale: SupportedLocale, path: string = "") => {
   let languages: Record<string, string> = {};
   locales.forEach((loc) => {
     const langCode = getLocaleMapping(loc);

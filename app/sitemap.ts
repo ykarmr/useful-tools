@@ -1,10 +1,21 @@
 import { baseUrl } from "@/lib/const";
 import { getAlternates, locales } from "@/lib/getLocaleMapping";
+import { Locale } from "@/locales";
 import type { MetadataRoute } from "next";
 
 export const dynamic = "force-static";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export async function generateSitemaps() {
+  return locales.map((locale) => ({
+    id: locale,
+  }));
+}
+
+export default async function sitemap({
+  id,
+}: {
+  id: Locale;
+}): Promise<MetadataRoute.Sitemap> {
   // 共通ルート
   const routes = [
     "",
@@ -37,15 +48,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const sitemap: MetadataRoute.Sitemap = [];
 
   // 各ロケールのルートを追加
-  locales.forEach((locale) => {
-    routes.forEach((route) => {
-      sitemap.push({
-        url: `${baseUrl}/${locale}${route}`,
-        lastModified: new Date(),
-        changeFrequency: route === "" ? "daily" : "weekly",
-        priority: route === "" ? 0.8 : 1,
-        alternates: getAlternates(locale, route),
-      });
+  routes.forEach((route) => {
+    sitemap.push({
+      url: `${baseUrl}/${id}${route}`,
+      lastModified: new Date(),
+      changeFrequency: route === "" ? "daily" : "weekly",
+      priority: route === "" ? 0.8 : 1,
+      alternates: getAlternates(id, route),
     });
   });
 

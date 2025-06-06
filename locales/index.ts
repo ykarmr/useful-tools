@@ -3,8 +3,9 @@ import en from "./en";
 import ja from "./ja";
 import es from "./es";
 import zh from "./zh";
+import { SupportedLocale } from "@/lib/i18n";
 
-export type Locale = "en" | "ja" | "es" | "zh";
+export type Locale = SupportedLocale;
 
 const translations: Record<Locale, Translations> = {
   en,

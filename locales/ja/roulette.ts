@@ -1,9 +1,8 @@
 import type { RouletteTranslations } from "../types";
 
 export const roulette: RouletteTranslations = {
-  title: "決定ルーレット",
-  description:
-    "あなたの選択肢を追加して、ホイールに決定させましょう！レストランやアクティビティ、または任意の決定をするのに最適です。",
+  title: "ルーレット",
+  description: "ランダムな選択肢を決定するためのルーレットを回す",
   keywords: [
     "ルーレット",
     "決定",

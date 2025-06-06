@@ -40,7 +40,7 @@ export const services: ServicesTranslations = {
   },
   tools: {
     roulette: {
-      title: "ルーレットホイール",
+      title: "ルーレット",
       description: "プロフェッショナルな回転ホイールで決定を下す",
     },
     todo: {
