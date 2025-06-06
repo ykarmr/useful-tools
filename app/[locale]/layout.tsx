@@ -160,6 +160,23 @@ export default async function LocaleLayout({
             }),
           }}
         />
+
+        {/* GA */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-MLK1NVZVNG"
+        ></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+
+                gtag('config', 'G-MLK1NVZVNG');
+            `,
+          }}
+        />
       </head>
       <body
         className={`${inter.className} antialiased bg-surface-light text-gray-900`}
