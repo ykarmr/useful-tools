@@ -1,4 +1,9 @@
-import type { CommonTranslations, HeaderTranslations, FooterTranslations, AdTranslations } from "../types"
+import type {
+  CommonTranslations,
+  HeaderTranslations,
+  FooterTranslations,
+  AdTranslations,
+} from "../types";
 
 export const common: CommonTranslations = {
   siteTitle: "USEFUL TOOLS",
@@ -82,9 +87,12 @@ export const common: CommonTranslations = {
       "herramientas web",
       "utilidades en línea",
     ],
-    titleTemplate: "%s | USEFUL TOOLS - Colección de Herramientas en Línea Gratuitas",
-    defaultTitle: "USEFUL TOOLS - Colección de Herramientas en Línea Gratuitas para Productividad",
-    homeTitle: "Colección de Herramientas en Línea Gratuitas - Herramientas Integrales para Productividad",
+    titleTemplate:
+      "%s | USEFUL TOOLS - Colección de Herramientas en Línea Gratuitas",
+    defaultTitle:
+      "USEFUL TOOLS - Colección de Herramientas en Línea Gratuitas para Productividad",
+    homeTitle:
+      "Colección de Herramientas en Línea Gratuitas - Herramientas Integrales para Productividad",
     homeDescription:
       "Aumenta la productividad con más de 20 herramientas en línea gratuitas. Ruleta, gestor de tareas, calculadora, temporizadores, generador QR y más. Colección profesional de herramientas para todos.",
     homeKeywords: [
@@ -128,12 +136,13 @@ export const common: CommonTranslations = {
       host: "https://useful-tools.vercel.app",
     },
   },
-}
+};
 
 export const header: HeaderTranslations = {
   logo: "USEFUL TOOLS",
   toggleMenu: "Alternar menú de navegación",
-}
+  changeLanguage: "Cambiar idioma",
+};
 
 export const footer: FooterTranslations = {
   services: "Servicios",
@@ -146,23 +155,26 @@ export const footer: FooterTranslations = {
   copyright: "USEFUL TOOLS. Todos los derechos reservados.",
   description:
     "Una colección integral de herramientas en línea gratuitas para aumentar tu productividad y simplificar tu flujo de trabajo diario.",
-}
+};
 
 export const ad: AdTranslations = {
   advertisement: "Publicidad",
   premiumTools: {
     title: "Herramientas Premium",
-    description: "Desbloquea funciones avanzadas con nuestra colección de herramientas premium",
+    description:
+      "Desbloquea funciones avanzadas con nuestra colección de herramientas premium",
     cta: "Actualizar ahora",
   },
   boostProductivity: {
     title: "Aumenta tu Productividad",
-    description: "Descubre herramientas poderosas para optimizar tu flujo de trabajo",
+    description:
+      "Descubre herramientas poderosas para optimizar tu flujo de trabajo",
     cta: "Saber más",
   },
   newFeature: {
     title: "Nueva Función Disponible",
-    description: "Echa un vistazo a nuestras últimas adiciones de herramientas y mejoras",
+    description:
+      "Echa un vistazo a nuestras últimas adiciones de herramientas y mejoras",
     cta: "Explorar ahora",
   },
-}
+};

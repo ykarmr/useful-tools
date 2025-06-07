@@ -1,4 +1,9 @@
-import type { CommonTranslations, HeaderTranslations, FooterTranslations, AdTranslations } from "../types"
+import type {
+  CommonTranslations,
+  HeaderTranslations,
+  FooterTranslations,
+  AdTranslations,
+} from "../types";
 
 export const common: CommonTranslations = {
   siteTitle: "USEFUL TOOLS",
@@ -83,8 +88,10 @@ export const common: CommonTranslations = {
       "online utilities",
     ],
     titleTemplate: "%s | USEFUL TOOLS - Free Online Tools Collection",
-    defaultTitle: "USEFUL TOOLS - Free Online Tools Collection for Productivity",
-    homeTitle: "Free Online Tools Collection - Comprehensive Tools for Productivity",
+    defaultTitle:
+      "USEFUL TOOLS - Free Online Tools Collection for Productivity",
+    homeTitle:
+      "Free Online Tools Collection - Comprehensive Tools for Productivity",
     homeDescription:
       "Boost productivity with 20+ free online tools. Roulette wheel, todo manager, calculator, timers, QR generator, and more. Professional tool collection for everyone.",
     homeKeywords: [
@@ -128,12 +135,13 @@ export const common: CommonTranslations = {
       host: "https://useful-tools.vercel.app",
     },
   },
-}
+};
 
 export const header: HeaderTranslations = {
   logo: "USEFUL TOOLS",
   toggleMenu: "Toggle navigation menu",
-}
+  changeLanguage: "Change language",
+};
 
 export const footer: FooterTranslations = {
   services: "Services",
@@ -146,7 +154,7 @@ export const footer: FooterTranslations = {
   copyright: "USEFUL TOOLS. All rights reserved.",
   description:
     "A comprehensive collection of free online tools to boost your productivity and simplify your daily workflow.",
-}
+};
 
 export const ad: AdTranslations = {
   advertisement: "Advertisement",
@@ -165,4 +173,4 @@ export const ad: AdTranslations = {
     description: "Check out our latest tool additions and improvements",
     cta: "Explore Now",
   },
-}
+};

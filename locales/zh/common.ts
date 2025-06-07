@@ -1,4 +1,9 @@
-import type { CommonTranslations, HeaderTranslations, FooterTranslations, AdTranslations } from "../types"
+import type {
+  CommonTranslations,
+  HeaderTranslations,
+  FooterTranslations,
+  AdTranslations,
+} from "../types";
 
 export const common: CommonTranslations = {
   siteTitle: "USEFUL TOOLS",
@@ -118,7 +123,8 @@ export const common: CommonTranslations = {
     manifest: {
       name: "USEFUL TOOLS - 免费在线工具集合",
       shortName: "USEFUL TOOLS",
-      description: "提升生产力的免费在线工具，包括轮盘、待办事项管理器、计算器、计时器和实用工具。",
+      description:
+        "提升生产力的免费在线工具，包括轮盘、待办事项管理器、计算器、计时器和实用工具。",
       categories: ["生产力", "实用程序", "工具"],
     },
     robots: {
@@ -127,12 +133,13 @@ export const common: CommonTranslations = {
       host: "https://useful-tools.vercel.app",
     },
   },
-}
+};
 
 export const header: HeaderTranslations = {
   logo: "USEFUL TOOLS",
   toggleMenu: "切换导航菜单",
-}
+  changeLanguage: "切换语言",
+};
 
 export const footer: FooterTranslations = {
   services: "服务",
@@ -144,7 +151,7 @@ export const footer: FooterTranslations = {
   termsOfService: "服务条款",
   copyright: "USEFUL TOOLS. 保留所有权利。",
   description: "全面的免费在线工具集合，提升您的生产力，简化您的日常工作流程。",
-}
+};
 
 export const ad: AdTranslations = {
   advertisement: "广告",
@@ -163,4 +170,4 @@ export const ad: AdTranslations = {
     description: "查看我们最新的工具添加和改进",
     cta: "立即探索",
   },
-}
+};

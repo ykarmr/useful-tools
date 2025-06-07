@@ -30,3 +30,10 @@ export const getAlternates = (locale: SupportedLocale, path: string = "") => {
     },
   };
 };
+
+export const localeLabels: Record<Locale, string> = {
+  ja: "日本語",
+  en: "English",
+  es: "Español",
+  zh: "中文",
+};

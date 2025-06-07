@@ -1,4 +1,9 @@
-import type { CommonTranslations, HeaderTranslations, FooterTranslations, AdTranslations } from "../types"
+import type {
+  CommonTranslations,
+  HeaderTranslations,
+  FooterTranslations,
+  AdTranslations,
+} from "../types";
 
 export const common: CommonTranslations = {
   siteTitle: "USEFUL TOOLS",
@@ -127,12 +132,13 @@ export const common: CommonTranslations = {
       host: "https://useful-tools.vercel.app",
     },
   },
-}
+};
 
 export const header: HeaderTranslations = {
   logo: "USEFUL TOOLS",
   toggleMenu: "ナビゲーションメニューを切り替え",
-}
+  changeLanguage: "言語を変更",
+};
 
 export const footer: FooterTranslations = {
   services: "サービス",
@@ -143,8 +149,9 @@ export const footer: FooterTranslations = {
   privacyPolicy: "プライバシーポリシー",
   termsOfService: "利用規約",
   copyright: "USEFUL TOOLS. All rights reserved.",
-  description: "生産性を向上させ、日々のワークフローを簡素化する包括的な無料オンラインツールのコレクション。",
-}
+  description:
+    "生産性を向上させ、日々のワークフローを簡素化する包括的な無料オンラインツールのコレクション。",
+};
 
 export const ad: AdTranslations = {
   advertisement: "広告",
@@ -163,4 +170,4 @@ export const ad: AdTranslations = {
     description: "最新のツール追加と改善をチェック",
     cta: "今すぐ探索",
   },
-}
+};

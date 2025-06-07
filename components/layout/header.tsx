@@ -4,6 +4,8 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Menu, X, Home, Grid3X3 } from "lucide-react";
 import { Locale, Translations } from "@/locales";
+import { getSupportedLocales } from "@/locales";
+import { localeLabels } from "@/lib/getLocaleMapping";
 
 interface HeaderProps {
   locale: Locale;
@@ -25,6 +27,9 @@ export default function Header({ locale, t }: HeaderProps) {
     }
     return pathname.startsWith(href);
   };
+
+  // 言語切り替え用
+  const supportedLocales = getSupportedLocales();
 
   return (
     <header
@@ -78,6 +83,36 @@ export default function Header({ locale, t }: HeaderProps) {
             })}
           </div>
 
+          {/* 言語切り替え（デスクトップ） */}
+          <div className="hidden md:flex items-center ml-4">
+            <label
+              htmlFor="desktop-lang-switcher"
+              className="mr-2 text-sm text-gray-600"
+            >
+              {t.header?.changeLanguage || "Language"}
+            </label>
+            <select
+              id="desktop-lang-switcher"
+              className="px-2 py-1 rounded border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 bg-white"
+              value={locale}
+              onChange={(e) => {
+                const newLocale = e.target.value;
+                const path = window.location.pathname.replace(
+                  /^\/[a-z]{2}(\/|$)/,
+                  `/${newLocale}/`
+                );
+                window.location.pathname = path;
+              }}
+              aria-label={t.header?.changeLanguage || "言語を変更"}
+            >
+              {supportedLocales.map((l) => (
+                <option key={l} value={l}>
+                  {localeLabels[l] || l}
+                </option>
+              ))}
+            </select>
+          </div>
+
           {/* Mobile menu button */}
           <button
             type="button"
@@ -123,6 +158,35 @@ export default function Header({ locale, t }: HeaderProps) {
                   </a>
                 );
               })}
+            </div>
+            {/* 言語切り替え（モバイル） */}
+            <div className="mt-4 px-4 flex items-center">
+              <label
+                htmlFor="mobile-lang-switcher"
+                className="mr-2 text-base text-gray-600"
+              >
+                {t.header?.changeLanguage || "Language"}
+              </label>
+              <select
+                id="mobile-lang-switcher"
+                className="flex-1 px-2 py-2 rounded border border-gray-300 text-base focus:outline-none focus:ring-2 focus:ring-primary-500 bg-white"
+                value={locale}
+                onChange={(e) => {
+                  const newLocale = e.target.value;
+                  const path = window.location.pathname.replace(
+                    /^\/[a-z]{2}(\/|$)/,
+                    `/${newLocale}/`
+                  );
+                  window.location.pathname = path;
+                }}
+                aria-label={t.header?.changeLanguage || "言語を変更"}
+              >
+                {supportedLocales.map((l) => (
+                  <option key={l} value={l}>
+                    {localeLabels[l] || l}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
         )}
