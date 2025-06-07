@@ -156,7 +156,7 @@ export default function IPAddressClient({ locale, t }: IPAddressClientProps) {
       {/* IP Address Display */}
       <ToolSection>
         <ToolDisplay size="large" centered>
-          <div className="text-primary-600 mb-4">
+          <div className="flex justify-center text-primary-600 mb-4">
             <Globe size={48} />
           </div>
           <div className="text-3xl font-bold text-gray-900 mb-2">
