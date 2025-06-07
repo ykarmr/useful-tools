@@ -411,15 +411,19 @@ export default function UnitConversionClient({
             <label
               className="text-sm text-gray-600 font-medium mb-1"
               htmlFor="category-select"
+              id="category-select-label"
             >
               {t.unitConversion?.categoryLabel ?? "カテゴリ"}
             </label>
             <select
               id="category-select"
+              aria-labelledby="category-select-label"
+              aria-describedby="category-select-desc"
               value={category}
               onChange={(e) => handleCategoryChange(e.target.value)}
               className="select-field rounded-full px-4 py-2 border border-gray-300 shadow-sm focus:ring-2 focus:ring-primary-200 transition font-semibold w-full sm:w-auto"
               style={{ minWidth: 0 }}
+              aria-live="polite"
             >
               {unitCategories.map((cat) => (
                 <option key={cat.key} value={cat.key}>
@@ -433,12 +437,17 @@ export default function UnitConversionClient({
             <label
               className="text-sm text-gray-600 font-medium mb-1"
               htmlFor="unit-input"
+              id="unit-input-label"
             >
               {t.unitConversion?.inputLabel ?? "変換する数値"}
             </label>
             <input
               id="unit-input"
+              aria-labelledby="unit-input-label"
+              aria-describedby="unit-input-desc"
               type="number"
+              inputMode="decimal"
+              autoComplete="off"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder={t.unitConversion?.placeholder ?? "数値"}
@@ -447,14 +456,20 @@ export default function UnitConversionClient({
           </div>
           <div className="flex flex-col sm:flex-row items-stretch gap-2 w-full">
             <div className="flex flex-col gap-1 w-full sm:w-auto">
-              <label className="text-xs text-gray-500 mb-1" htmlFor="from-unit">
+              <label
+                className="text-xs text-gray-500 mb-1"
+                htmlFor="from-unit"
+                id="from-unit-label"
+              >
                 {t.unitConversion?.fromLabel ?? "変換元単位"}
               </label>
               <select
                 id="from-unit"
+                aria-labelledby="from-unit-label"
                 value={fromUnit}
                 onChange={(e) => setFromUnit(e.target.value)}
                 className="select-field w-full rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-primary-200 transition"
+                aria-live="polite"
               >
                 {currentCategory.units.map((u) => (
                   <option key={u.value} value={u.value}>
@@ -463,18 +478,27 @@ export default function UnitConversionClient({
                 ))}
               </select>
             </div>
-            <span className="mx-2 text-2xl font-bold text-primary-500 flex items-center justify-center h-full sm:mt-[1.7em]">
+            <span
+              className="mx-2 text-2xl font-bold text-primary-500 flex items-center justify-center h-full sm:mt-[1.7em]"
+              aria-hidden="true"
+            >
               →
             </span>
             <div className="flex flex-col gap-1 w-full sm:w-auto">
-              <label className="text-xs text-gray-500 mb-1" htmlFor="to-unit">
+              <label
+                className="text-xs text-gray-500 mb-1"
+                htmlFor="to-unit"
+                id="to-unit-label"
+              >
                 {t.unitConversion?.toLabel ?? "変換先単位"}
               </label>
               <select
                 id="to-unit"
+                aria-labelledby="to-unit-label"
                 value={toUnit}
                 onChange={(e) => setToUnit(e.target.value)}
                 className="select-field w-full sm:max-w-[120px] rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-primary-200 transition"
+                aria-live="polite"
               >
                 {currentCategory.units.map((u) => (
                   <option key={u.value} value={u.value}>
@@ -488,7 +512,11 @@ export default function UnitConversionClient({
       </ToolSection>
       <ToolSection>
         <div className="flex justify-center w-full max-w-xl mx-auto px-2 sm:px-0">
-          <div className="bg-white/90 shadow-xl rounded-2xl px-4 sm:px-8 py-6 border border-gray-100 text-center w-full">
+          <div
+            className="bg-white/90 shadow-xl rounded-2xl px-4 sm:px-8 py-6 border border-gray-100 text-center w-full"
+            role="status"
+            aria-live="polite"
+          >
             {input === "" ? (
               <span className="text-gray-400">
                 {t.unitConversion?.resultPlaceholder}
