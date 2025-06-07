@@ -2,7 +2,7 @@ import RandomNumberClient from "./random-number-client";
 import { getTranslations, isValidLocale } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getAlternates } from "@/lib/getLocaleMapping";
+import { getAlternates } from "@/lib/i18n";
 
 interface RandomNumberPageProps {
   params: Promise<{ locale: string }>;

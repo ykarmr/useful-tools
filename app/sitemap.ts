@@ -1,5 +1,5 @@
 import { baseUrl } from "@/lib/const";
-import { getAlternates, locales } from "@/lib/getLocaleMapping";
+import { getAlternates, locales } from "@/lib/i18n";
 import { Locale } from "@/locales";
 import type { MetadataRoute } from "next";
 

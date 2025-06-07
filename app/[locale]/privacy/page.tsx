@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations, interpolate, isValidLocale } from "@/locales";
 import { baseUrl } from "@/lib/const";
 import { notFound } from "next/navigation";
-import { getAlternates, getLocaleMapping } from "@/lib/getLocaleMapping";
+import { getAlternates, getLocaleMapping } from "@/lib/i18n";
 
 interface Props {
   params: Promise<{ locale: string }>;

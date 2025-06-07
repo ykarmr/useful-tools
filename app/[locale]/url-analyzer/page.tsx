@@ -3,7 +3,7 @@ import { getTranslations, isValidLocale } from "@/lib/i18n";
 import ToolLayout from "@/components/layout/tool-layout";
 import UrlAnalyzerClient from "./url-analyzer-client";
 import { baseUrl } from "@/lib/const";
-import { getAlternates } from "@/lib/getLocaleMapping";
+import { getAlternates } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 
 interface Props {

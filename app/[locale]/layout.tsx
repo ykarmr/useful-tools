@@ -9,7 +9,7 @@ import {
 import { notFound } from "next/navigation";
 import { baseUrl } from "@/lib/const";
 import { Inter } from "next/font/google";
-import { getAlternates, getLocaleMapping } from "@/lib/getLocaleMapping";
+import { getAlternates, getLocaleMapping } from "@/lib/i18n";
 
 interface LocaleLayoutProps {
   children: React.ReactNode;

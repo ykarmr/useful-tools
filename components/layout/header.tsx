@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Menu, X, Home, Grid3X3 } from "lucide-react";
 import { Locale, Translations } from "@/locales";
 import { getSupportedLocales } from "@/locales";
-import { localeLabels } from "@/lib/getLocaleMapping";
+import { localeLabels } from "@/lib/i18n";
 
 interface HeaderProps {
   locale: Locale;

@@ -4,7 +4,7 @@ import { isValidLocale } from "@/locales";
 import { baseUrl } from "@/lib/const";
 import ContactClient from "./contact-client";
 import { notFound } from "next/navigation";
-import { getAlternates } from "@/lib/getLocaleMapping";
+import { getAlternates } from "@/lib/i18n";
 
 interface Props {
   params: Promise<{ locale: string }>;
