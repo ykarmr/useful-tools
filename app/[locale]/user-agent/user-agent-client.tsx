@@ -128,7 +128,9 @@ export default function UserAgentClient({ locale, t }: UserAgentClientProps) {
       {/* Device Overview */}
       <ToolSection>
         <ToolDisplay size="large" centered>
-          <div className="text-primary-600 mb-4">{getDeviceIcon()}</div>
+          <div className="flex justify-center text-primary-600 mb-4">
+            {getDeviceIcon()}
+          </div>
           <div className="text-2xl font-bold text-gray-900 mb-2">
             {userAgentInfo.browser} {userAgentInfo.version}
           </div>
