@@ -77,3 +77,10 @@ export const localeLabels: Record<Locale, string> = {
   es: "Español",
   zh: "中文",
 };
+
+export const localeIcons: Record<Locale, string> = {
+  ja: "🇯🇵",
+  en: "🇺🇸",
+  es: "🇪🇸",
+  zh: "🇨🇳",
+};

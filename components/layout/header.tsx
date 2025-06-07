@@ -1,11 +1,11 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useState } from "react";
-import { Menu, X, Home, Grid3X3 } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { Menu, X, Home, Grid3X3, ChevronDown } from "lucide-react";
 import { Locale, Translations } from "@/locales";
 import { getSupportedLocales } from "@/locales";
-import { localeLabels } from "@/lib/i18n";
+import { localeIcons, localeLabels } from "@/lib/i18n";
 
 interface HeaderProps {
   locale: Locale;
@@ -14,6 +14,7 @@ interface HeaderProps {
 
 export default function Header({ locale, t }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [langMenuOpen, setLangMenuOpen] = useState(false);
   const pathname = usePathname();
 
   const navigation = [
@@ -84,33 +85,70 @@ export default function Header({ locale, t }: HeaderProps) {
           </div>
 
           {/* 言語切り替え（デスクトップ） */}
-          <div className="hidden md:flex items-center ml-4">
-            <label
-              htmlFor="desktop-lang-switcher"
-              className="mr-2 text-sm text-gray-600"
-            >
-              {t.header?.changeLanguage || "Language"}
-            </label>
-            <select
+          <div className="hidden md:flex items-center ml-4 relative">
+            <button
+              type="button"
+              className={`flex items-center px-3 py-1.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-700 shadow-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-400
+                ${
+                  langMenuOpen
+                    ? "ring-2 ring-primary-400 bg-primary-50"
+                    : "hover:bg-gray-50"
+                }
+              `}
+              onClick={() => setLangMenuOpen((v) => !v)}
+              aria-haspopup="listbox"
+              aria-expanded={langMenuOpen}
               id="desktop-lang-switcher"
-              className="px-2 py-1 rounded border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 bg-white"
-              value={locale}
-              onChange={(e) => {
-                const newLocale = e.target.value;
-                const path = window.location.pathname.replace(
-                  /^\/[a-z]{2}(\/|$)/,
-                  `/${newLocale}/`
-                );
-                window.location.pathname = path;
-              }}
-              aria-label={t.header?.changeLanguage || "言語を変更"}
             >
-              {supportedLocales.map((l) => (
-                <option key={l} value={l}>
-                  {localeLabels[l] || l}
-                </option>
-              ))}
-            </select>
+              <span className="mr-2 text-lg">{localeIcons[locale]}</span>
+              <span>{localeLabels[locale] || locale}</span>
+              <ChevronDown
+                size={16}
+                className={`ml-2 transition-transform duration-200 ${
+                  langMenuOpen ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+            <div
+              className={`absolute right-0 mt-2 w-44 z-50 transition-all duration-200 ${
+                langMenuOpen
+                  ? "opacity-100 scale-100 pointer-events-auto"
+                  : "opacity-0 scale-95 pointer-events-none"
+              }`}
+            >
+              <ul
+                className="bg-white border border-gray-200 rounded-2xl shadow-2xl py-1"
+                role="listbox"
+                aria-labelledby="desktop-lang-switcher"
+              >
+                {supportedLocales.map((l) => (
+                  <li
+                    key={l}
+                    className={`flex items-center px-4 py-2 cursor-pointer rounded-lg transition-all duration-150
+                      ${
+                        l === locale
+                          ? "bg-primary-100 text-primary-700 font-bold"
+                          : "text-gray-700 hover:bg-primary-50"
+                      }
+                    `}
+                    role="option"
+                    aria-selected={l === locale}
+                    tabIndex={0}
+                    onClick={() => {
+                      setLangMenuOpen(false);
+                      const path = window.location.pathname.replace(
+                        /^\/[a-z]{2}(\/|$)/,
+                        `/${l}/`
+                      );
+                      window.location.pathname = path;
+                    }}
+                  >
+                    <span className="mr-2 text-lg">{localeIcons[l]}</span>
+                    <span>{localeLabels[l] || l}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           {/* Mobile menu button */}
@@ -160,33 +198,71 @@ export default function Header({ locale, t }: HeaderProps) {
               })}
             </div>
             {/* 言語切り替え（モバイル） */}
-            <div className="mt-4 px-4 flex items-center">
-              <label
-                htmlFor="mobile-lang-switcher"
-                className="mr-2 text-base text-gray-600"
-              >
-                {t.header?.changeLanguage || "Language"}
-              </label>
-              <select
+            <div className="mt-4 px-4 flex items-center relative">
+              <button
+                type="button"
+                className={`flex items-center w-full px-3 py-2 rounded-xl border border-gray-200 bg-white text-base font-medium text-gray-700 shadow-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-400
+                  ${
+                    langMenuOpen
+                      ? "ring-2 ring-primary-400 bg-primary-50"
+                      : "hover:bg-gray-50"
+                  }
+                `}
+                onClick={() => setLangMenuOpen((v) => !v)}
+                aria-haspopup="listbox"
+                aria-expanded={langMenuOpen}
                 id="mobile-lang-switcher"
-                className="flex-1 px-2 py-2 rounded border border-gray-300 text-base focus:outline-none focus:ring-2 focus:ring-primary-500 bg-white"
-                value={locale}
-                onChange={(e) => {
-                  const newLocale = e.target.value;
-                  const path = window.location.pathname.replace(
-                    /^\/[a-z]{2}(\/|$)/,
-                    `/${newLocale}/`
-                  );
-                  window.location.pathname = path;
-                }}
-                aria-label={t.header?.changeLanguage || "言語を変更"}
               >
-                {supportedLocales.map((l) => (
-                  <option key={l} value={l}>
-                    {localeLabels[l] || l}
-                  </option>
-                ))}
-              </select>
+                <span className="mr-2 text-lg">{localeIcons[locale]}</span>
+                <span>{localeLabels[locale] || locale}</span>
+                <ChevronDown
+                  size={18}
+                  className={`ml-2 transition-transform duration-200 ${
+                    langMenuOpen ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+              <div
+                className={`absolute left-0 right-0 top-12 z-50 transition-all duration-200 ${
+                  langMenuOpen
+                    ? "opacity-100 scale-100 pointer-events-auto"
+                    : "opacity-0 scale-95 pointer-events-none"
+                }`}
+              >
+                <ul
+                  className="bg-white border border-gray-200 rounded-2xl shadow-2xl py-1"
+                  role="listbox"
+                  aria-labelledby="mobile-lang-switcher"
+                >
+                  {supportedLocales.map((l) => (
+                    <li
+                      key={l}
+                      className={`flex items-center px-4 py-3 cursor-pointer rounded-lg transition-all duration-150
+                        ${
+                          l === locale
+                            ? "bg-primary-100 text-primary-700 font-bold"
+                            : "text-gray-700 hover:bg-primary-50"
+                        }
+                      `}
+                      role="option"
+                      aria-selected={l === locale}
+                      tabIndex={0}
+                      onClick={() => {
+                        setLangMenuOpen(false);
+                        setIsMenuOpen(false);
+                        const path = window.location.pathname.replace(
+                          /^\/[a-z]{2}(\/|$)/,
+                          `/${l}/`
+                        );
+                        window.location.pathname = path;
+                      }}
+                    >
+                      <span className="mr-2 text-lg">{localeIcons[l]}</span>
+                      <span>{localeLabels[l] || l}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         )}
