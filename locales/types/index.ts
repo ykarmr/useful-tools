@@ -36,6 +36,8 @@ import type {
   UrlEncoderTranslations,
   MarkdownPreviewTranslations,
   UrlAnalyzerTranslations,
+  UnitConversionTranslations,
+  SubnetCalculatorTranslations,
 } from "./tools";
 
 export interface Translations {
@@ -68,4 +70,6 @@ export interface Translations {
   contact: ContactTranslations;
   terms: TermsTranslations;
   urlAnalyzer: UrlAnalyzerTranslations;
+  unitConversion: UnitConversionTranslations;
+  subnetCalculator: SubnetCalculatorTranslations;
 }

@@ -25,6 +25,8 @@ import { contact } from "./contact";
 import { privacy } from "./privacy";
 import { terms } from "./terms";
 import { urlAnalyzer } from "./url-analyzer";
+import { unitConversion } from "./unit-conversion";
+import subnetCalculator from "./subnet-calculator";
 
 const en: Translations = {
   common,
@@ -56,6 +58,8 @@ const en: Translations = {
   terms,
   contact,
   urlAnalyzer,
+  unitConversion,
+  subnetCalculator,
 };
 
 export default en;

@@ -185,5 +185,13 @@ export interface ServicesTranslations {
       title: string;
       description: string;
     };
+    unitConversion: {
+      title: string;
+      description: string;
+    };
+    subnetCalculator: {
+      title: string;
+      description: string;
+    };
   };
 }

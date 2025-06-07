@@ -43,6 +43,7 @@ export default async function sitemap({
     "/user-agent",
     "/world-clock",
     "/url-analyzer",
+    "/unit-conversion",
   ];
 
   const sitemap: MetadataRoute.Sitemap = [];

@@ -125,5 +125,14 @@ export const services: ServicesTranslations = {
       description:
         "Analiza y descompone URLs para obtener información detallada",
     },
+    unitConversion: {
+      title: "Conversión de Unidades",
+      description: "Convierte fácilmente entre diferentes unidades de medida",
+    },
+    subnetCalculator: {
+      title: "Calculadora de Subredes",
+      description:
+        "Calcula información de red a partir de la dirección IP y la longitud de la máscara.",
+    },
   },
 };

@@ -25,7 +25,7 @@ import {
   FileText,
   LinkIcon,
   FileJson,
-  Vote,
+  Network,
 } from "lucide-react";
 import AdBanner from "@/components/layout/ad-banner";
 import { Locale, Translations } from "@/locales";
@@ -71,6 +71,8 @@ const toolCategories = [
       { key: "userAgent", icon: Monitor, href: "/user-agent" },
       { key: "ipAddress", icon: MapPin, href: "/ip-address" },
       { key: "urlAnalyzer", icon: LinkIcon, href: "/url-analyzer" },
+      { key: "unitConversion", icon: Zap, href: "/unit-conversion" },
+      { key: "subnetCalculator", icon: Network, href: "/subnet-calculator" },
     ],
   },
   {

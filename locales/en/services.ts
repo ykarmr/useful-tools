@@ -119,5 +119,14 @@ export const services: ServicesTranslations = {
       title: "URL Analyzer",
       description: "Analyze and extract information from URLs",
     },
+    unitConversion: {
+      title: "Unit Conversion",
+      description: "Convert between different units of measurement",
+    },
+    subnetCalculator: {
+      title: "Subnet Calculator",
+      description:
+        "Calculate network information from IP address and subnet mask length.",
+    },
   },
 };

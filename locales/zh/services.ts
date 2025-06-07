@@ -118,5 +118,13 @@ export const services: ServicesTranslations = {
       title: "URL分析器",
       description: "分析和获取有关URL的详细信息",
     },
+    unitConversion: {
+      title: "单位转换",
+      description: "轻松转换各种测量单位",
+    },
+    subnetCalculator: {
+      title: "子网计算器",
+      description: "根据IP地址和子网掩码长度计算网络信息。",
+    },
   },
 };
