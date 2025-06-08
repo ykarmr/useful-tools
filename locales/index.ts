@@ -4,6 +4,7 @@ import ja from "./ja";
 import es from "./es";
 import zh from "./zh";
 import { SupportedLocale } from "@/lib/i18n";
+import ru from "./ru";
 
 export type Locale = SupportedLocale;
 
@@ -12,6 +13,7 @@ const translations: Record<Locale, Translations> = {
   ja,
   es,
   zh,
+  ru,
 };
 
 export function getTranslations(locale: Locale): Translations {

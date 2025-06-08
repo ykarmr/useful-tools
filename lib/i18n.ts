@@ -2,6 +2,8 @@ import enTranslations from "@/locales/en";
 import jaTranslations from "@/locales/ja";
 import zhTranslations from "@/locales/zh";
 import esTranslations from "@/locales/es";
+import ruTranslations from "@/locales/ru";
+
 import type { Translations } from "@/locales/types";
 import { Locale } from "@/locales";
 import { baseUrl } from "./const";
@@ -11,6 +13,7 @@ const translations = {
   ja: jaTranslations,
   zh: zhTranslations,
   es: esTranslations,
+  ru: ruTranslations,
 } as const;
 
 export type SupportedLocale = keyof typeof translations;
@@ -42,16 +45,17 @@ export function getLocaleFromPath(pathname: string): SupportedLocale {
   return getDefaultLocale();
 }
 
-export const locales: SupportedLocale[] = ["en", "es", "ja", "zh"];
+export const locales = getSupportedLocales();
+
+export const localeMapping: Record<SupportedLocale, string> = {
+  ja: "ja-JP",
+  zh: "zh-CN",
+  en: "en-US",
+  es: "es-ES",
+  ru: "ru-RU",
+};
 
 export const getLocaleMapping = (locale: SupportedLocale) => {
-  const localeMapping: Record<Locale, string> = {
-    ja: "ja-JP",
-    zh: "zh-CN",
-    en: "en-US",
-    es: "es-ES",
-  };
-
   return localeMapping[locale] || "en-US";
 };
 
@@ -76,6 +80,7 @@ export const localeLabels: Record<Locale, string> = {
   en: "English",
   es: "Español",
   zh: "中文",
+  ru: "Русский",
 };
 
 export const localeIcons: Record<Locale, string> = {
@@ -83,4 +88,5 @@ export const localeIcons: Record<Locale, string> = {
   en: "🇺🇸",
   es: "🇪🇸",
   zh: "🇨🇳",
+  ru: "🇷🇺",
 };

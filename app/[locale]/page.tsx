@@ -16,7 +16,6 @@ import {
   FileText,
   LinkIcon,
 } from "lucide-react";
-import AdBanner from "@/components/layout/ad-banner";
 import { getTranslations, isValidLocale } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";

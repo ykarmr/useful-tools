@@ -5,6 +5,7 @@ import {
   getTranslations,
   getSupportedLocales,
   isValidLocale,
+  localeMapping,
 } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import { baseUrl } from "@/lib/const";
@@ -37,12 +38,7 @@ export async function generateMetadata({
 
   const t = getTranslations(locale);
 
-  const openGraphLocale = {
-    "en-US": "en_US",
-    "ja-JP": "ja_JP",
-    "zh-CN": "zh_CN",
-    "es-ES": "es_ES",
-  };
+  const openGraphLocale = localeMapping;
   return {
     title: {
       template: t.common.seo.titleTemplate,
