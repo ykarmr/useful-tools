@@ -27,4 +27,7 @@ export const jsonFormatter: JsonFormatterTranslations = {
   examples: "示例",
   basicObject: "基本对象:",
   objectWithArray: "包含数组的对象:",
+  indent2: "2个空格",
+  indent4: "4个空格",
+  indent8: "8个空格",
 };

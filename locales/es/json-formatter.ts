@@ -26,4 +26,7 @@ export const jsonFormatter: JsonFormatterTranslations = {
   examples: "Ejemplos",
   basicObject: "Objeto básico:",
   objectWithArray: "Objeto con array:",
+  indent2: "2 espacios",
+  indent4: "4 espacios",
+  indent8: "8 espacios",
 };

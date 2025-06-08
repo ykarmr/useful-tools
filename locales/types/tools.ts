@@ -264,6 +264,9 @@ export interface JsonFormatterTranslations {
   basicObject: string;
   objectWithArray: string;
   download: string;
+  indent2: string;
+  indent4: string;
+  indent8: string;
 }
 
 export interface UrlEncoderTranslations {

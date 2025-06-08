@@ -110,14 +110,14 @@ export default function Header({ locale, t }: HeaderProps) {
               />
             </button>
             <div
-              className={`absolute right-0 mt-2 w-44 z-50 transition-all duration-200 ${
+              className={`absolute right-0 top-full mt-2 w-44 z-50 transition-all duration-200 ${
                 langMenuOpen
                   ? "opacity-100 scale-100 pointer-events-auto"
                   : "opacity-0 scale-95 pointer-events-none"
               }`}
             >
               <ul
-                className="bg-white border border-gray-200 rounded-2xl shadow-2xl py-1"
+                className="bg-white border border-gray-200 rounded-2xl shadow-2xl py-1 max-h-72 overflow-y-auto"
                 role="listbox"
                 aria-labelledby="desktop-lang-switcher"
               >
@@ -230,7 +230,7 @@ export default function Header({ locale, t }: HeaderProps) {
                 }`}
               >
                 <ul
-                  className="bg-white border border-gray-200 rounded-2xl shadow-2xl py-1"
+                  className="bg-white border border-gray-200 rounded-2xl shadow-2xl py-1 max-h-72 overflow-y-auto"
                   role="listbox"
                   aria-labelledby="mobile-lang-switcher"
                 >

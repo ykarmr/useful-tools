@@ -26,4 +26,7 @@ export const jsonFormatter: JsonFormatterTranslations = {
   objectWithArray: "配列を含むオブジェクト:",
   download: "ダウンロード",
   placeholder: "ここにJSONを貼り付けるか、ファイルをアップロードしてください",
+  indent2: "インデント: 2",
+  indent4: "インデント: 4",
+  indent8: "インデント: 8",
 };

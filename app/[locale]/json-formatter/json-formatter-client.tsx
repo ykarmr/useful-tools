@@ -167,9 +167,15 @@ export default function JSONFormatterClient({
                 onChange={(e) => setIndentSize(Number.parseInt(e.target.value))}
                 className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none"
               >
-                <option value={2}>2 spaces</option>
-                <option value={4}>4 spaces</option>
-                <option value={8}>8 spaces</option>
+                <option value={2}>
+                  {t.jsonFormatter.indent2 || "2 spaces"}
+                </option>
+                <option value={4}>
+                  {t.jsonFormatter.indent4 || "4 spaces"}
+                </option>
+                <option value={8}>
+                  {t.jsonFormatter.indent8 || "8 spaces"}
+                </option>
               </select>
             </ToolInput>
           </div>

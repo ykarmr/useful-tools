@@ -27,4 +27,7 @@ export const jsonFormatter: JsonFormatterTranslations = {
   objectWithArray: "Объект с массивом:",
   download: "Скачать",
   placeholder: "Вставьте JSON сюда или загрузите файл",
+  indent2: "2 пробела",
+  indent4: "4 пробела",
+  indent8: "8 пробелов",
 };

@@ -28,4 +28,7 @@ export const jsonFormatter: JsonFormatterTranslations = {
   objectWithArray: "Object with array:",
   download: "Download",
   placeholder: "Paste your JSON here or upload a file",
+  indent2: "2 spaces",
+  indent4: "4 spaces",
+  indent8: "8 spaces",
 };
