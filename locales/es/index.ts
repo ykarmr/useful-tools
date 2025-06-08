@@ -27,6 +27,7 @@ import { terms } from "../en/terms";
 import { urlAnalyzer } from "./url-analyzer";
 import { unitConversion } from "./unit-conversion";
 import subnetCalculator from "./subnet-calculator";
+import { petAgeConversion } from "./pet-age-conversion";
 
 const es: Translations = {
   common,
@@ -60,6 +61,7 @@ const es: Translations = {
   urlAnalyzer,
   unitConversion,
   subnetCalculator,
+  petAgeConversion,
 };
 
 export default es;

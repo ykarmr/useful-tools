@@ -131,5 +131,9 @@ export const services: ServicesTranslations = {
       description:
         "Вычисляйте сетевую информацию по IP-адресу и длине маски подсети.",
     },
+    petAgeConversion: {
+      title: "Conversión de Edad de Mascotas",
+      description: "Convierte la edad de un perro o gato a años humanos",
+    },
   },
 };

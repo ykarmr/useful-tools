@@ -126,5 +126,9 @@ export const services: ServicesTranslations = {
       title: "子网计算器",
       description: "根据IP地址和子网掩码长度计算网络信息。",
     },
+    petAgeConversion: {
+      title: "宠物年龄转换",
+      description: "将狗或猫的年龄转换为人类年龄",
+    },
   },
 };

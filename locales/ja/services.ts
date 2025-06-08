@@ -128,5 +128,9 @@ export const services: ServicesTranslations = {
       description:
         "IPアドレスとサブネットマスク長からネットワーク情報を計算します。",
     },
+    petAgeConversion: {
+      title: "ペット年齢換算",
+      description: "犬や猫の年齢を人間の年齢に換算します",
+    },
   },
 };

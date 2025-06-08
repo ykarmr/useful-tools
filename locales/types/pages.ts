@@ -193,5 +193,9 @@ export interface ServicesTranslations {
       title: string;
       description: string;
     };
+    petAgeConversion: {
+      title: string;
+      description: string;
+    };
   };
 }

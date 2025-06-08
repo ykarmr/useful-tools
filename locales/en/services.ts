@@ -128,5 +128,9 @@ export const services: ServicesTranslations = {
       description:
         "Calculate network information from IP address and subnet mask length.",
     },
+    petAgeConversion: {
+      title: "Pet Age Conversion",
+      description: "Convert dog or cat age to human years",
+    },
   },
 };

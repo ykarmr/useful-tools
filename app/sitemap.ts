@@ -45,6 +45,7 @@ export default async function sitemap({
     "/url-analyzer",
     "/unit-conversion",
     "/subnet-calculator",
+    "/pet-age-conversion",
   ];
 
   const sitemap: MetadataRoute.Sitemap = [];

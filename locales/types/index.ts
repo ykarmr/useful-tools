@@ -38,6 +38,7 @@ import type {
   UrlAnalyzerTranslations,
   UnitConversionTranslations,
   SubnetCalculatorTranslations,
+  PetAgeConversionTranslations,
 } from "./tools";
 
 export interface Translations {
@@ -72,4 +73,5 @@ export interface Translations {
   urlAnalyzer: UrlAnalyzerTranslations;
   unitConversion: UnitConversionTranslations;
   subnetCalculator: SubnetCalculatorTranslations;
+  petAgeConversion: PetAgeConversionTranslations;
 }

@@ -26,6 +26,7 @@ import {
   LinkIcon,
   FileJson,
   Network,
+  PawPrint,
 } from "lucide-react";
 import AdBanner from "@/components/layout/ad-banner";
 import { Locale, Translations } from "@/locales";
@@ -73,6 +74,7 @@ const toolCategories = [
       { key: "urlAnalyzer", icon: LinkIcon, href: "/url-analyzer" },
       { key: "unitConversion", icon: Zap, href: "/unit-conversion" },
       { key: "subnetCalculator", icon: Network, href: "/subnet-calculator" },
+      { key: "petAgeConversion", icon: PawPrint, href: "/pet-age-conversion" },
     ],
   },
   {
