@@ -132,5 +132,9 @@ export const services: ServicesTranslations = {
       title: "Pet Age Conversion",
       description: "Convert dog or cat age to human years",
     },
+    imageConverter: {
+      title: "Image Converter",
+      description: "Convert images between different formats",
+    },
   },
 };

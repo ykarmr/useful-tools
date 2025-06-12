@@ -27,6 +27,7 @@ import {
   FileJson,
   Network,
   PawPrint,
+  Image,
 } from "lucide-react";
 import AdBanner from "@/components/layout/ad-banner";
 import { Locale, Translations } from "@/locales";
@@ -83,6 +84,7 @@ const toolCategories = [
       { key: "jsonFormatter", icon: FileJson, href: "/json-formatter" },
       { key: "urlEncoder", icon: LinkIcon, href: "/url-encoder" },
       { key: "markdownPreview", icon: FileText, href: "/markdown-preview" },
+      { key: "imageConverter", icon: Image, href: "/image-converter" },
     ],
   },
 ];

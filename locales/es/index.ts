@@ -28,6 +28,7 @@ import { urlAnalyzer } from "./url-analyzer";
 import { unitConversion } from "./unit-conversion";
 import subnetCalculator from "./subnet-calculator";
 import { petAgeConversion } from "./pet-age-conversion";
+import { imageConverter } from "./image-converter";
 
 const es: Translations = {
   common,
@@ -62,6 +63,7 @@ const es: Translations = {
   unitConversion,
   subnetCalculator,
   petAgeConversion,
+  imageConverter,
 };
 
 export default es;

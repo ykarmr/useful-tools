@@ -1,6 +1,7 @@
 export * from "./common";
 export * from "./pages";
 export * from "./tools";
+export * from "./image-converter";
 
 import type {
   CommonTranslations,
@@ -40,6 +41,7 @@ import type {
   SubnetCalculatorTranslations,
   PetAgeConversionTranslations,
 } from "./tools";
+import type { ImageConverterTranslations } from "./image-converter";
 
 export interface Translations {
   common: CommonTranslations;
@@ -74,4 +76,5 @@ export interface Translations {
   unitConversion: UnitConversionTranslations;
   subnetCalculator: SubnetCalculatorTranslations;
   petAgeConversion: PetAgeConversionTranslations;
+  imageConverter: ImageConverterTranslations;
 }

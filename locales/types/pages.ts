@@ -197,5 +197,9 @@ export interface ServicesTranslations {
       title: string;
       description: string;
     };
+    imageConverter: {
+      title: string;
+      description: string;
+    };
   };
 }

@@ -130,5 +130,9 @@ export const services: ServicesTranslations = {
       title: "宠物年龄转换",
       description: "将狗或猫的年龄转换为人类年龄",
     },
+    imageConverter: {
+      title: "图像转换器",
+      description: "将图像转换为不同格式",
+    },
   },
 };

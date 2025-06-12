@@ -132,5 +132,9 @@ export const services: ServicesTranslations = {
       title: "ペット年齢換算",
       description: "犬や猫の年齢を人間の年齢に換算します",
     },
+    imageConverter: {
+      title: "画像変換ツール",
+      description: "画像をさまざまなフォーマットに変換します",
+    },
   },
 };

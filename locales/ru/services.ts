@@ -135,5 +135,9 @@ export const services: ServicesTranslations = {
       title: "Conversión de Edad de Mascotas",
       description: "Convierte la edad de un perro o gato a años humanos",
     },
+    imageConverter: {
+      title: "Конвертер изображений",
+      description: "Преобразуйте изображения между различными форматами",
+    },
   },
 };
