@@ -480,9 +480,9 @@ export default function ImageConverterClient({
     >
       {/* ファイルドロップエリア */}
       <ToolSection>
-        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8 border border-blue-100">
+        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-3 sm:p-4 lg:p-6 border border-blue-100">
           <div
-            className={`relative border-2 border-dashed rounded-xl p-12 text-center transition-all duration-300 cursor-pointer ${
+            className={`relative border-2 border-dashed rounded-xl p-4 sm:p-6 lg:p-8 text-center transition-all duration-300 cursor-pointer ${
               isDragOver
                 ? "border-blue-500 bg-blue-100 scale-105"
                 : "border-blue-300 hover:border-blue-400 hover:bg-blue-25"
@@ -497,23 +497,23 @@ export default function ImageConverterClient({
                 isDragOver ? "scale-110" : ""
               }`}
             >
-              <div className="bg-blue-500 rounded-full p-4 w-20 h-20 mx-auto mb-6 flex items-center justify-center">
-                <Upload className="h-10 w-10 text-white" />
+              <div className="bg-blue-500 rounded-full p-3 sm:p-4 w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-4 sm:mb-6 flex items-center justify-center">
+                <Upload className="h-8 w-8 sm:h-10 sm:w-10 text-white" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">
+              <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-gray-900 mb-3 sm:mb-4">
                 {isDragOver
                   ? t.imageConverter.dropZoneActive
                   : t.imageConverter.dropZone}
               </h3>
-              <p className="text-gray-600 mb-6">
+              <p className="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">
                 {t.imageConverter.supportedFormats}
               </p>
-              <div className="space-y-3">
-                <button className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors">
-                  <Upload className="mr-2 h-4 w-4" />
+              <div className="space-y-3 sm:space-y-4">
+                <button className="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors text-sm sm:text-base shadow-lg">
+                  <Upload className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                   {t.imageConverter.selectFiles}
                 </button>
-                <p className="text-sm text-gray-500">
+                <p className="text-xs sm:text-sm text-gray-500">
                   最大20ファイル、各ファイル10MBまで
                 </p>
               </div>
@@ -534,10 +534,10 @@ export default function ImageConverterClient({
       {/* 変換設定 */}
       {images.length > 0 && (
         <ToolSection>
-          <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
-            <h3 className="text-xl font-semibold text-gray-900 mb-6 flex items-center">
+          <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-4 sm:p-6 lg:p-8">
+            <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-gray-900 mb-4 sm:mb-6 flex items-center">
               <div className="bg-indigo-100 rounded-lg p-2 mr-3">
-                <Settings className="h-5 w-5 text-indigo-600" />
+                <Settings className="h-5 w-5 sm:h-6 sm:w-6 text-indigo-600" />
               </div>
               {t.imageConverter.convertSettings}
             </h3>
@@ -726,22 +726,22 @@ export default function ImageConverterClient({
       {/* 選択ファイル一覧 */}
       {images.length > 0 && (
         <ToolSection>
-          <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+          <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-4 sm:p-6 lg:p-8">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 sm:mb-6 gap-3 sm:gap-4">
               <div className="flex items-center">
                 <div className="bg-green-100 rounded-lg p-2 mr-3">
-                  <Image className="h-5 w-5 text-green-600" />
+                  <Image className="h-5 w-5 sm:h-6 sm:w-6 text-green-600" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold text-gray-900">
+                  <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-gray-900">
                     {t.imageConverter.selectedFiles}
                   </h3>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-xs sm:text-sm text-gray-500 mt-1">
                     {images.length}ファイル選択中
                   </p>
                 </div>
               </div>
-              <div className="flex gap-3">
+              <div className="flex gap-2 sm:gap-3">
                 {images.some((img) => img.status === "completed") && (
                   <button
                     onClick={downloadAllImages}
@@ -761,18 +761,18 @@ export default function ImageConverterClient({
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
               {images.map((image) => (
                 <div
                   key={image.id}
-                  className="bg-gray-50 rounded-xl border-2 border-gray-100 p-4 hover:border-blue-200 transition-all duration-200 hover:shadow-md"
+                  className="bg-gray-50 rounded-xl border-2 border-gray-100 p-4 sm:p-5 hover:border-blue-200 transition-all duration-200 hover:shadow-md"
                 >
                   {/* 画像プレビュー */}
                   <div className="relative mb-4">
                     <img
                       src={image.preview}
                       alt={image.file.name}
-                      className="w-full h-40 object-cover rounded-lg cursor-pointer shadow-sm hover:shadow-md transition-shadow"
+                      className="w-full h-36 sm:h-40 object-cover rounded-lg cursor-pointer shadow-sm hover:shadow-md transition-shadow"
                       onClick={() => setPreviewImage(image)}
                     />
                     {/* ステータスインジケーター */}
@@ -829,7 +829,7 @@ export default function ImageConverterClient({
                     {image.status === "completed" &&
                       image.convertedSize &&
                       image.convertedDimensions && (
-                        <div className="mt-3 p-2 sm:p-3 bg-green-50 rounded-lg border border-green-200">
+                        <div className="mt-2 p-2 bg-green-50 rounded-lg border border-green-200">
                           <div className="text-xs text-green-800 space-y-1">
                             <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
                               <span className="font-medium">
@@ -902,7 +902,7 @@ export default function ImageConverterClient({
                   </div>
 
                   {/* アクションボタン */}
-                  <div className="flex justify-between items-center mt-4 pt-3 border-t border-gray-200">
+                  <div className="flex justify-between items-center mt-3 pt-3 border-t border-gray-200">
                     <button
                       onClick={() => setPreviewImage(image)}
                       className="flex items-center text-blue-600 hover:text-blue-700 text-sm font-medium transition-colors"
@@ -941,14 +941,14 @@ export default function ImageConverterClient({
       {images.length > 0 && (
         <ToolSection>
           <div className="text-center">
-            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl p-4 sm:p-6 lg:p-8 text-white">
-              <h3 className="text-lg sm:text-xl font-semibold mb-4">
+            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl p-4 sm:p-6 text-white">
+              <h3 className="text-base sm:text-lg lg:text-xl font-semibold mb-3 sm:mb-4">
                 {isProcessing ? "変換中..." : "変換を開始"}
               </h3>
 
               {/* プログレスバー */}
               {isProcessing && (
-                <div className="mb-6">
+                <div className="mb-4 sm:mb-6">
                   <div className="bg-white bg-opacity-20 rounded-full h-3 mb-2">
                     <div
                       className="bg-white rounded-full h-3 transition-all duration-300"
@@ -975,23 +975,23 @@ export default function ImageConverterClient({
               <button
                 onClick={convertImages}
                 disabled={isProcessing}
-                className="inline-flex items-center px-6 sm:px-8 py-3 sm:py-4 bg-white text-blue-600 font-semibold rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 text-base sm:text-lg shadow-lg"
+                className="inline-flex items-center px-4 sm:px-6 lg:px-8 py-2 sm:py-3 bg-white text-blue-600 font-semibold rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 text-sm sm:text-base lg:text-lg shadow-lg"
               >
                 {isProcessing ? (
                   <>
-                    <Settings className="mr-3 h-6 w-6 animate-spin" />
+                    <Settings className="mr-2 sm:mr-3 h-5 w-5 sm:h-6 sm:w-6 animate-spin" />
                     {t.imageConverter.processing}
                   </>
                 ) : (
                   <>
-                    <Image className="mr-3 h-6 w-6" />
+                    <Image className="mr-2 sm:mr-3 h-5 w-5 sm:h-6 sm:w-6" />
                     {t.imageConverter.convert}
                   </>
                 )}
               </button>
 
               {!isProcessing && (
-                <p className="text-blue-100 text-sm mt-4">
+                <p className="text-blue-100 text-xs sm:text-sm mt-3 sm:mt-4">
                   {images.length}ファイルを{settings.format.toUpperCase()}
                   形式に変換します
                 </p>
@@ -1008,16 +1008,16 @@ export default function ImageConverterClient({
         ) &&
         !isProcessing && (
           <ToolSection>
-            <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-xl p-6 border border-green-200">
-              <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                <Check className="mr-2 h-6 w-6 text-green-600" />
+            <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-xl p-4 sm:p-6 border border-green-200">
+              <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3 sm:mb-4 flex items-center">
+                <Check className="mr-2 h-5 w-5 sm:h-6 sm:w-6 text-green-600" />
                 変換結果サマリー
               </h3>
 
-              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
                 {/* 総ファイル数 */}
                 <div className="text-center bg-white rounded-lg p-3 sm:p-4 shadow-sm">
-                  <div className="text-xl sm:text-2xl font-bold text-blue-600">
+                  <div className="text-lg sm:text-xl lg:text-2xl font-bold text-blue-600">
                     {images.filter((img) => img.status === "completed").length}
                   </div>
                   <div className="text-xs sm:text-sm text-gray-600">
@@ -1027,7 +1027,7 @@ export default function ImageConverterClient({
 
                 {/* 総容量削減 */}
                 <div className="text-center bg-white rounded-lg p-3 sm:p-4 shadow-sm">
-                  <div className="text-lg sm:text-2xl font-bold text-green-600 break-all">
+                  <div className="text-sm sm:text-lg lg:text-xl font-bold text-green-600 break-all">
                     {(() => {
                       const totalOriginal = images
                         .filter((img) => img.status === "completed")
@@ -1054,7 +1054,7 @@ export default function ImageConverterClient({
 
                 {/* 平均圧縮率 */}
                 <div className="text-center bg-white rounded-lg p-3 sm:p-4 shadow-sm">
-                  <div className="text-xl sm:text-2xl font-bold text-purple-600">
+                  <div className="text-lg sm:text-xl lg:text-2xl font-bold text-purple-600">
                     {(() => {
                       const completedImages = images.filter(
                         (img) => img.status === "completed" && img.convertedSize
@@ -1078,7 +1078,7 @@ export default function ImageConverterClient({
 
                 {/* エラー数 */}
                 <div className="text-center bg-white rounded-lg p-3 sm:p-4 shadow-sm">
-                  <div className="text-xl sm:text-2xl font-bold text-red-600">
+                  <div className="text-lg sm:text-xl lg:text-2xl font-bold text-red-600">
                     {images.filter((img) => img.status === "error").length}
                   </div>
                   <div className="text-xs sm:text-sm text-gray-600">エラー</div>
@@ -1087,10 +1087,10 @@ export default function ImageConverterClient({
 
               {/* 一括ダウンロードボタン */}
               {images.some((img) => img.status === "completed") && (
-                <div className="mt-6 text-center">
+                <div className="mt-4 sm:mt-6 text-center">
                   <button
                     onClick={downloadAllImages}
-                    className="inline-flex items-center px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors"
+                    className="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors"
                   >
                     <Download className="mr-2 h-5 w-5" />
                     {t.imageConverter.downloadAll} (
@@ -1118,10 +1118,10 @@ export default function ImageConverterClient({
             onClick={(e) => e.stopPropagation()}
           >
             {/* ヘッダー */}
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center px-3 sm:px-6 py-3 sm:py-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white gap-3 sm:gap-0">
-              <div className="flex items-center space-x-3 sm:space-x-6 min-w-0 flex-1">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center px-3 sm:px-6 py-3 sm:py-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white gap-2 sm:gap-3">
+              <div className="flex items-center space-x-2 sm:space-x-4 min-w-0 flex-1">
                 <div className="min-w-0 flex-1">
-                  <h3 className="text-lg sm:text-xl font-semibold">
+                  <h3 className="text-base sm:text-lg lg:text-xl font-semibold">
                     {t.imageConverter.previewTitle}
                   </h3>
                   <p
@@ -1134,7 +1134,7 @@ export default function ImageConverterClient({
 
                 {/* ナビゲーション */}
                 {images.length > 1 && (
-                  <div className="hidden sm:flex items-center space-x-3 bg-white bg-opacity-20 rounded-lg px-3 py-2">
+                  <div className="hidden sm:flex items-center space-x-2 sm:space-x-3 bg-white bg-opacity-20 rounded-lg px-2 sm:px-3 py-2">
                     <button
                       onClick={() => {
                         const currentIndex = images.findIndex(
@@ -1154,7 +1154,7 @@ export default function ImageConverterClient({
                     >
                       <ArrowLeft className="h-4 w-4" />
                     </button>
-                    <span className="text-sm font-medium min-w-[60px] text-center">
+                    <span className="text-sm font-medium min-w-[50px] sm:min-w-[60px] text-center">
                       {images.findIndex((img) => img.id === previewImage.id) +
                         1}{" "}
                       / {images.length}
@@ -1184,7 +1184,7 @@ export default function ImageConverterClient({
               </div>
 
               {/* コントロール */}
-              <div className="flex items-center space-x-2 sm:space-x-3 flex-shrink-0">
+              <div className="flex items-center space-x-1 sm:space-x-2 lg:space-x-3 flex-shrink-0">
                 {/* ズームコントロール */}
                 <div className="flex items-center space-x-1 bg-white bg-opacity-20 rounded-lg px-1 sm:px-2 py-1">
                   <button
@@ -1290,10 +1290,10 @@ export default function ImageConverterClient({
             </div>
 
             {/* メインコンテンツ */}
-            <div className="p-3 sm:p-6 max-h-[85vh] overflow-auto">
+            <div className="p-3 sm:p-4 lg:p-6 max-h-[85vh] overflow-auto">
               {showComparison && previewImage.convertedUrl ? (
                 /* 比較表示 */
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-8">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 lg:gap-8">
                   {/* 元画像 */}
                   <div className="space-y-3 sm:space-y-4">
                     <div className="flex items-center justify-between">
@@ -1301,7 +1301,7 @@ export default function ImageConverterClient({
                         <div className="bg-gray-100 rounded-lg p-1.5 sm:p-2">
                           <Image className="h-4 w-4 sm:h-5 sm:w-5 text-gray-600" />
                         </div>
-                        <h4 className="text-base sm:text-lg font-semibold text-gray-900">
+                        <h4 className="text-sm sm:text-base lg:text-lg font-semibold text-gray-900">
                           {t.imageConverter.original}
                         </h4>
                       </div>
@@ -1310,11 +1310,11 @@ export default function ImageConverterClient({
                       <img
                         src={previewImage.preview}
                         alt={previewImage.file.name}
-                        className="w-full h-auto max-h-[60vh] object-contain"
+                        className="w-full h-auto max-h-[50vh] sm:max-h-[60vh] object-contain"
                         style={{ transform: `scale(${previewZoom})` }}
                       />
                     </div>
-                    <div className="bg-gray-50 rounded-lg p-4 space-y-2">
+                    <div className="bg-gray-50 rounded-lg p-3 sm:p-4 space-y-2">
                       <div className="flex justify-between text-sm">
                         <span className="text-gray-600">サイズ:</span>
                         <span className="font-medium">
@@ -1344,7 +1344,7 @@ export default function ImageConverterClient({
                         <div className="bg-green-100 rounded-lg p-1.5 sm:p-2">
                           <Check className="h-4 w-4 sm:h-5 sm:w-5 text-green-600" />
                         </div>
-                        <h4 className="text-base sm:text-lg font-semibold text-gray-900">
+                        <h4 className="text-sm sm:text-base lg:text-lg font-semibold text-gray-900">
                           {t.imageConverter.converted}
                         </h4>
                       </div>
@@ -1360,11 +1360,11 @@ export default function ImageConverterClient({
                       <img
                         src={previewImage.convertedUrl}
                         alt={`Converted ${previewImage.file.name}`}
-                        className="w-full h-auto max-h-[60vh] object-contain"
+                        className="w-full h-auto max-h-[50vh] sm:max-h-[60vh] object-contain"
                         style={{ transform: `scale(${previewZoom})` }}
                       />
                     </div>
-                    <div className="bg-green-50 rounded-lg p-4 space-y-2">
+                    <div className="bg-green-50 rounded-lg p-3 sm:p-4 space-y-2">
                       <div className="flex justify-between text-sm">
                         <span className="text-gray-600">
                           {t.imageConverter.convertedSize}:
@@ -1428,21 +1428,21 @@ export default function ImageConverterClient({
                 </div>
               ) : (
                 /* 単体表示 */
-                <div className="text-center space-y-4 sm:space-y-6">
+                <div className="text-center space-y-3 sm:space-y-4 lg:space-y-6">
                   <div className="relative inline-block">
                     <div className="border rounded-lg overflow-hidden bg-gray-50 shadow-lg">
                       <img
                         src={previewImage.convertedUrl || previewImage.preview}
                         alt={previewImage.file.name}
-                        className="max-w-full max-h-[60vh] sm:max-h-[70vh] object-contain"
+                        className="max-w-full max-h-[55vh] sm:max-h-[65vh] lg:max-h-[70vh] object-contain"
                         style={{ transform: `scale(${previewZoom})` }}
                       />
                     </div>
                     {previewImage.status === "processing" && (
                       <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-lg">
-                        <div className="bg-white rounded-lg p-4 flex items-center space-x-3">
+                        <div className="bg-white rounded-lg p-3 sm:p-4 flex items-center space-x-3">
                           <Settings className="h-5 w-5 animate-spin text-blue-600" />
-                          <span className="text-gray-900 font-medium">
+                          <span className="text-gray-900 font-medium text-sm sm:text-base">
                             変換中...
                           </span>
                         </div>
@@ -1528,7 +1528,7 @@ export default function ImageConverterClient({
                     {previewImage.convertedUrl && (
                       <button
                         onClick={() => downloadImage(previewImage)}
-                        className="w-full mt-4 inline-flex items-center justify-center px-4 py-2 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors"
+                        className="w-full mt-3 sm:mt-4 inline-flex items-center justify-center px-3 sm:px-4 py-2 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors text-sm sm:text-base"
                       >
                         <Download className="mr-2 h-4 w-4" />
                         ダウンロード
@@ -1540,8 +1540,8 @@ export default function ImageConverterClient({
             </div>
 
             {/* キーボードショートカットヘルプ */}
-            <div className="border-t bg-gray-50 px-3 sm:px-6 py-2 sm:py-3">
-              <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-xs text-gray-600">
+            <div className="border-t bg-gray-50 px-3 sm:px-4 lg:px-6 py-2 sm:py-3">
+              <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 lg:gap-4 text-xs text-gray-600">
                 <span className="flex items-center">
                   <kbd className="px-1 py-0.5 bg-gray-200 rounded text-xs">
                     ESC
