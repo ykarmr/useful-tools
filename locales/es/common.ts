@@ -136,6 +136,7 @@ export const common: CommonTranslations = {
       host: "https://useful-tools.vercel.app",
     },
   },
+  faqTitle: "Preguntas Frecuentes (FAQ)",
 };
 
 export const header: HeaderTranslations = {

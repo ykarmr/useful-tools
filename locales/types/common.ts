@@ -97,6 +97,7 @@ export interface CommonTranslations {
       host: string;
     };
   };
+  faqTitle: string;
 }
 
 export interface HeaderTranslations {

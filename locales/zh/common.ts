@@ -133,6 +133,7 @@ export const common: CommonTranslations = {
       host: "https://useful-tools.vercel.app",
     },
   },
+  faqTitle: "常见问题 (FAQ)",
 };
 
 export const header: HeaderTranslations = {

@@ -1,3 +1,8 @@
+export interface FAQItem {
+  q: string;
+  a: string;
+}
+
 export interface RouletteTranslations {
   title: string;
   description: string;
@@ -72,6 +77,8 @@ export interface DiceRollerTranslations {
   roll: string;
   result: string;
   resultMessage: string;
+  selectCount: string;
+  faqList: FAQItem[];
 }
 
 export interface CoinFlipTranslations {
@@ -82,6 +89,8 @@ export interface CoinFlipTranslations {
   heads: string;
   tails: string;
   flipping: string;
+  selectCount: string;
+  faqList: FAQItem[];
 }
 
 export interface RandomNumberTranslations {
@@ -138,6 +147,7 @@ export interface DigitalClockTranslations {
   format24Hour: string;
   showSeconds: string;
   showDate: string;
+  faqList: FAQItem[];
 }
 
 export interface ScoreboardTranslations {
@@ -202,6 +212,7 @@ export interface CalculatorTranslations {
   title: string;
   description: string;
   keywords: string[];
+  faqList: FAQItem[];
 }
 
 export interface UserAgentTranslations {

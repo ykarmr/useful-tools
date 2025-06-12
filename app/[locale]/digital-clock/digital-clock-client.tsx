@@ -6,6 +6,7 @@ import ToolLayout from "@/components/layout/tool-layout";
 import ToolSection from "@/components/layout/tool-section";
 import ToolDisplay from "@/components/layout/tool-display";
 import { Locale, Translations } from "@/locales";
+import ToolFaq from "@/components/layout/tool-faq";
 
 interface DigitalClockClientProps {
   locale: Locale;
@@ -112,6 +113,11 @@ export default function DigitalClockClient({
             </label>
           </div>
         </div>
+      </ToolSection>
+
+      {/* FAQ Section */}
+      <ToolSection>
+        <ToolFaq faqList={t.digitalClock.faqList} t={t} />
       </ToolSection>
     </ToolLayout>
   );

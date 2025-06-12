@@ -6,6 +6,7 @@ import ToolLayout from "@/components/layout/tool-layout";
 import ToolSection from "@/components/layout/tool-section";
 import ToolDisplay from "@/components/layout/tool-display";
 import { Locale, Translations } from "@/locales";
+import ToolFaq from "@/components/layout/tool-faq";
 
 interface CalculatorClientProps {
   locale: Locale;
@@ -214,6 +215,29 @@ export default function CalculatorClient({ locale, t }: CalculatorClientProps) {
     },
   ];
 
+  const faqList = [
+    {
+      q: "どのように計算できますか？",
+      a: "数字ボタンを押して値を入力し、演算子（＋、−、×、÷）を選択して計算できます。最後に「=」を押すと結果が表示されます。",
+    },
+    {
+      q: "小数点は使えますか？",
+      a: "「.」ボタンを押すことで小数点を入力できます。",
+    },
+    {
+      q: "クリアするには？",
+      a: "「C」ボタンを押すと全ての入力がリセットされます。",
+    },
+    {
+      q: "±ボタンの使い方は？",
+      a: "現在表示されている数値の符号（プラス・マイナス）を切り替えます。",
+    },
+    {
+      q: "%ボタンの使い方は？",
+      a: "現在の数値をパーセント（100で割った値）に変換します。",
+    },
+  ];
+
   return (
     <ToolLayout
       locale={locale}
@@ -262,6 +286,11 @@ export default function CalculatorClient({ locale, t }: CalculatorClientProps) {
             ))}
           </div>
         </div>
+      </ToolSection>
+
+      {/* FAQ Section */}
+      <ToolSection>
+        <ToolFaq faqList={t.calculator.faqList} t={t} />
       </ToolSection>
     </ToolLayout>
   );

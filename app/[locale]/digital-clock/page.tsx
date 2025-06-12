@@ -33,7 +33,7 @@ export async function generateMetadata({
       description: t.digitalClock.description,
       url: `${baseUrl}/${locale}/digital-clock`,
     },
-    alternates: getAlternates(locale, "/digital-clock"),
+    alternates: getAlternates(locale, "digital-clock"),
   };
 }
 

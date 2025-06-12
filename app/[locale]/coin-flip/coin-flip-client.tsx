@@ -7,6 +7,7 @@ import ToolSection from "@/components/layout/tool-section";
 import ToolDisplay from "@/components/layout/tool-display";
 import ToolControls from "@/components/layout/tool-controls";
 import { Locale, Translations } from "@/locales";
+import ToolFaq from "@/components/layout/tool-faq";
 
 interface CoinFlipClientProps {
   locale: Locale;
@@ -14,7 +15,8 @@ interface CoinFlipClientProps {
 }
 
 export default function CoinFlipClient({ locale, t }: CoinFlipClientProps) {
-  const [result, setResult] = useState<"heads" | "tails" | null>(null);
+  const [numCoins, setNumCoins] = useState(1);
+  const [result, setResult] = useState<("heads" | "tails")[] | null>(null);
   const [isFlipping, setIsFlipping] = useState(false);
 
   const flipCoin = () => {
@@ -22,10 +24,18 @@ export default function CoinFlipClient({ locale, t }: CoinFlipClientProps) {
     setResult(null);
 
     setTimeout(() => {
-      const newResult = Math.random() < 0.5 ? "heads" : "tails";
+      const newResult = Array.from({ length: numCoins }, () =>
+        Math.random() < 0.5 ? "heads" : "tails"
+      );
       setResult(newResult);
       setIsFlipping(false);
     }, 1500);
+  };
+
+  const selectCoinCount = (count: number) => {
+    setNumCoins(count);
+    setResult(null);
+    setIsFlipping(false);
   };
 
   return (
@@ -39,37 +49,64 @@ export default function CoinFlipClient({ locale, t }: CoinFlipClientProps) {
       {/* Coin Display */}
       <ToolSection>
         <ToolDisplay size="large">
-          <div className="flex justify-center mb-6">
-            <div
-              className={`w-32 h-32 rounded-full border-4 border-yellow-400 bg-gradient-to-br from-yellow-300 to-yellow-500 flex items-center justify-center text-white font-bold text-lg shadow-lg ${
-                isFlipping ? "animate-spin" : ""
-              }`}
-              role="img"
-              aria-label={
-                isFlipping
-                  ? "Coin flipping"
-                  : result === "heads"
-                  ? "Heads"
-                  : result === "tails"
-                  ? "Tails"
-                  : "Coin ready to flip"
-              }
-            >
-              {isFlipping ? (
-                <Coins size={40} />
-              ) : result === "heads" ? (
-                "H"
-              ) : result === "tails" ? (
-                "T"
-              ) : (
-                <Coins size={40} />
-              )}
+          <div className="flex flex-col items-center mb-6">
+            <div className="flex flex-wrap gap-4 justify-center">
+              {isFlipping || !result
+                ? Array.from({ length: numCoins }).map((_, i) => (
+                    <div
+                      key={i}
+                      className={`w-20 h-20 rounded-full border-4 border-yellow-400 bg-gradient-to-br from-yellow-300 to-yellow-500 flex items-center justify-center text-white font-bold text-lg shadow-lg ${
+                        isFlipping ? "animate-spin" : ""
+                      }`}
+                      role="img"
+                      aria-label={
+                        isFlipping ? "Coin flipping" : "Coin ready to flip"
+                      }
+                    >
+                      <Coins size={32} />
+                    </div>
+                  ))
+                : result.map((r, i) => (
+                    <div
+                      key={i}
+                      className="w-20 h-20 rounded-full border-4 border-yellow-400 bg-gradient-to-br from-yellow-300 to-yellow-500 flex items-center justify-center text-white font-bold text-lg shadow-lg"
+                      role="img"
+                      aria-label={
+                        r === "heads" ? t.coinFlip.heads : t.coinFlip.tails
+                      }
+                    >
+                      {r === "heads" ? t.coinFlip.heads : t.coinFlip.tails}
+                    </div>
+                  ))}
+            </div>
+            {/* コイン枚数選択 */}
+            <div className="mt-4">
+              <label className="mr-2 text-gray-700 font-medium">
+                {t.coinFlip.selectCount}
+              </label>
+              <select
+                value={numCoins}
+                onChange={(e) => selectCoinCount(Number(e.target.value))}
+                disabled={isFlipping}
+                className="border rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-primary-400"
+                aria-label="Number of coins"
+              >
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => (
+                  <option key={n} value={n}>
+                    {n}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
 
           {result && !isFlipping && (
-            <div className="text-4xl font-bold text-gray-900 animate-slide-up">
-              {result === "heads" ? t.coinFlip.heads : t.coinFlip.tails}
+            <div className="text-2xl font-bold text-gray-900 animate-slide-up mt-4 flex flex-wrap gap-2 justify-center">
+              {result.map((r, i) => (
+                <span key={i}>
+                  {r === "heads" ? t.coinFlip.heads : t.coinFlip.tails}
+                </span>
+              ))}
             </div>
           )}
         </ToolDisplay>
@@ -87,6 +124,11 @@ export default function CoinFlipClient({ locale, t }: CoinFlipClientProps) {
             {isFlipping ? t.coinFlip.flipping : t.coinFlip.flip}
           </button>
         </ToolControls>
+      </ToolSection>
+
+      {/* FAQ Section */}
+      <ToolSection>
+        <ToolFaq faqList={t.coinFlip.faqList} t={t} />
       </ToolSection>
     </ToolLayout>
   );
