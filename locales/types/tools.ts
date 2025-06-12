@@ -35,6 +35,7 @@ export interface RouletteTranslations {
   landedInZone: string;
   addItemsInstruction: string;
   addItemLabel: string;
+  faqList: FAQItem[];
 }
 
 export interface TodoTranslations {
@@ -67,6 +68,7 @@ export interface TodoTranslations {
   totalTasks: string;
   progress: string;
   overdue: string;
+  faqList: FAQItem[];
 }
 
 export interface DiceRollerTranslations {
@@ -140,6 +142,7 @@ export interface PomodoroTimerTranslations {
   breakTime: string;
   longBreakTime: string;
   completed: string;
+  faqList: FAQItem[];
 }
 
 export interface DigitalClockTranslations {
@@ -164,6 +167,7 @@ export interface ScoreboardTranslations {
   tied: string;
   defaultTeamA: string;
   defaultTeamB: string;
+  faqList: FAQItem[];
 }
 
 export interface WorldClockTranslations {
@@ -172,6 +176,7 @@ export interface WorldClockTranslations {
   keywords: string[];
   addTimezone: string;
   local: string;
+  faqList: FAQItem[];
 }
 
 export interface TeamGeneratorTranslations {
@@ -197,6 +202,7 @@ export interface TeamGeneratorTranslations {
   remainingPlayersDistributed: string;
   failedToGenerate: string;
   playersUnit: string;
+  faqList: FAQItem[];
 }
 
 export interface QrGeneratorTranslations {
@@ -382,6 +388,7 @@ export interface UrlAnalyzerTranslations {
   clear: string;
   copied: string;
   notAvailable: string;
+  faqList: FAQItem[];
 }
 
 export interface UnitConversionTranslations {
@@ -406,6 +413,7 @@ export interface UnitConversionTranslations {
   fromLabel: string;
   toLabel: string;
   inputLabel: string;
+  faqList: FAQItem[];
 }
 
 export interface SubnetCalculatorTranslations {
@@ -433,6 +441,7 @@ export interface SubnetCalculatorTranslations {
   errorEmptyMask: string;
   errorInvalidMask: string;
   calculate: string;
+  faqList: FAQItem[];
 }
 
 export interface PetAgeConversionTranslations {
@@ -456,4 +465,5 @@ export interface PetAgeConversionTranslations {
   petAgePlaceholder: string;
   resultPlaceholder: string;
   petAgeResult: string;
+  faqList: FAQItem[];
 }

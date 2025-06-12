@@ -6,6 +6,7 @@ import ToolLayout from "@/components/layout/tool-layout";
 import ToolSection from "@/components/layout/tool-section";
 import ToolDisplay from "@/components/layout/tool-display";
 import ToolControls from "@/components/layout/tool-controls";
+import ToolFaq from "@/components/layout/tool-faq";
 import { interpolate, Locale, Translations } from "@/locales";
 
 interface PomodoroTimerClientProps {
@@ -272,6 +273,11 @@ export default function PomodoroTimerClient({
             <span>{t.timer.reset}</span>
           </button>
         </ToolControls>
+      </ToolSection>
+
+      {/* FAQ セクション */}
+      <ToolSection>
+        <ToolFaq faqList={t.pomodoroTimer.faqList} t={t} />
       </ToolSection>
     </ToolLayout>
   );

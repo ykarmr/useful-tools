@@ -44,4 +44,22 @@ export const todo: TodoTranslations = {
   totalTasks: "Total de Tareas",
   progress: "Progreso",
   overdue: "(Vencida)",
+  faqList: [
+    {
+      q: "¿Cómo debo establecer las prioridades de las tareas?",
+      a: "Considera tanto la urgencia como la importancia. Establece 'Alta' para tareas urgentes e importantes, 'Media' para tareas importantes con plazos normales, y 'Baja' para tareas con horarios flexibles.",
+    },
+    {
+      q: "¿Qué pasa con las tareas completadas?",
+      a: "Las tareas completadas se pueden ver usando el filtro 'Completadas'. Puedes mantenerlas como registro de tu progreso o eliminarlas si ya no las necesitas.",
+    },
+    {
+      q: "¿Dónde se almacenan mis datos?",
+      a: "Todos los datos de tareas se almacenan en el almacenamiento local de tu navegador. No se envía nada a servidores externos, asegurando que tu privacidad esté protegida.",
+    },
+    {
+      q: "¿Puedo hacer una copia de seguridad de mis tareas?",
+      a: "Actualmente, no hay una función directa de copia de seguridad. Para tareas importantes, recomendamos mantener notas separadas como respaldo.",
+    },
+  ],
 };

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Plus, Trash2, Globe } from "lucide-react";
 import ToolLayout from "@/components/layout/tool-layout";
 import ToolSection from "@/components/layout/tool-section";
+import ToolFaq from "@/components/layout/tool-faq";
 import { Locale, Translations } from "@/locales";
 
 interface TimeZone {
@@ -193,6 +194,11 @@ export default function WorldClockClient({ locale, t }: WorldClockClientProps) {
               ))}
           </div>
         </div>
+      </ToolSection>
+
+      {/* FAQ セクション */}
+      <ToolSection>
+        <ToolFaq faqList={t.worldClock.faqList} t={t} />
       </ToolSection>
     </ToolLayout>
   );

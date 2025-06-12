@@ -6,6 +6,7 @@ import { Calculator } from "lucide-react";
 import ToolLayout from "@/components/layout/tool-layout";
 import ToolSection from "@/components/layout/tool-section";
 import ToolDisplay from "@/components/layout/tool-display";
+import ToolFaq from "@/components/layout/tool-faq";
 import { Locale, Translations } from "@/locales";
 
 interface UnitConversionProps {
@@ -541,6 +542,11 @@ export default function UnitConversionClient({
             )}
           </div>
         </div>
+      </ToolSection>
+
+      {/* FAQ セクション */}
+      <ToolSection>
+        <ToolFaq faqList={t.unitConversion.faqList} t={t} />
       </ToolSection>
     </ToolLayout>
   );

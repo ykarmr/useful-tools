@@ -39,4 +39,22 @@ export const urlAnalyzer: UrlAnalyzerTranslations = {
   noQueryParams: "No Query Parameters",
   paramName: "Parameter Name",
   paramValue: "Parameter Value",
+  faqList: [
+    {
+      q: "What does the URL Analyzer do?",
+      a: "It breaks down URLs into their components including protocol, hostname, path, query parameters, and more. This is useful for SEO analysis and web development.",
+    },
+    {
+      q: "Where is the analysis data stored?",
+      a: "All analysis is performed locally in your browser and no data is sent to external servers, ensuring complete privacy protection.",
+    },
+    {
+      q: "Can I analyze any type of URL?",
+      a: "You can analyze most URLs with protocols like HTTPS, HTTP, FTP, and others. Invalid URLs will display an error message.",
+    },
+    {
+      q: "What happens with URLs that have many query parameters?",
+      a: "All query parameters are displayed individually as name-value pairs in an organized table. There's no limit to the number of parameters.",
+    },
+  ],
 };

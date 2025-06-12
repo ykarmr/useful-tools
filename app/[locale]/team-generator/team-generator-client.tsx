@@ -9,6 +9,7 @@ import ToolSection from "@/components/layout/tool-section";
 import ToolDisplay from "@/components/layout/tool-display";
 import ToolControls from "@/components/layout/tool-controls";
 import ToolInput from "@/components/layout/tool-input";
+import ToolFaq from "@/components/layout/tool-faq";
 
 interface Player {
   id: string;
@@ -406,6 +407,11 @@ export default function TeamGeneratorClient({
           </div>
         </ToolSection>
       )}
+
+      {/* FAQ セクション */}
+      <ToolSection>
+        <ToolFaq faqList={t.teamGenerator.faqList} t={t} />
+      </ToolSection>
     </ToolLayout>
   );
 }

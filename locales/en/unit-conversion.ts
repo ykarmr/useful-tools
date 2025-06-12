@@ -29,4 +29,22 @@ export const unitConversion: UnitConversionTranslations = {
   fromLabel: "From",
   toLabel: "To",
   inputLabel: "Input Value",
+  faqList: [
+    {
+      q: "What types of unit conversions are supported?",
+      a: "We support 10 categories of unit conversions: length, weight, area, volume, temperature, speed, time, pressure, energy, and data storage.",
+    },
+    {
+      q: "How accurate are the conversions?",
+      a: "Conversions use precise conversion factors and are accurate to multiple decimal places. However, for scientific applications, please verify the precision meets your requirements.",
+    },
+    {
+      q: "Can I convert between different measurement systems?",
+      a: "Yes, you can convert between metric, imperial, and other measurement systems. For example, converting from feet to meters or Fahrenheit to Celsius.",
+    },
+    {
+      q: "Are temperature conversions handled differently?",
+      a: "Yes, temperature conversions use special formulas rather than simple multiplication, as they involve offset calculations (e.g., Celsius to Fahrenheit: °F = °C × 9/5 + 32).",
+    },
+  ],
 };

@@ -15,6 +15,7 @@ import ToolSection from "@/components/layout/tool-section";
 import ToolDisplay from "@/components/layout/tool-display";
 import ToolControls from "@/components/layout/tool-controls";
 import ToolInput from "@/components/layout/tool-input";
+import ToolFaq from "@/components/layout/tool-faq";
 import { Locale, Translations } from "@/locales";
 
 interface Team {
@@ -303,6 +304,11 @@ export default function ScoreboardClient({ locale, t }: ScoreboardClientProps) {
             <span>{t.scoreboard.resetScores}</span>
           </button>
         </ToolControls>
+      </ToolSection>
+
+      {/* FAQ セクション */}
+      <ToolSection>
+        <ToolFaq faqList={t.scoreboard.faqList} t={t} />
       </ToolSection>
     </ToolLayout>
   );

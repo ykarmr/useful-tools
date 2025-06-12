@@ -39,4 +39,22 @@ export const urlAnalyzer: UrlAnalyzerTranslations = {
   noQueryParams: "Sin Parámetros de Consulta",
   paramName: "Nombre del Parámetro",
   paramValue: "Valor del Parámetro",
+  faqList: [
+    {
+      q: "¿Qué tipos de URL puede analizar esta herramienta?",
+      a: "Puede analizar URLs de varios protocolos como HTTP, HTTPS, FTP, extrayendo información detallada como protocolo, nombre del host, puerto, ruta, parámetros de consulta, etc.",
+    },
+    {
+      q: "¿Se almacena la información de las URL analizadas?",
+      a: "No, todo el análisis de URL se realiza localmente en tu navegador. No almacenamos ni enviamos tus datos de URL a nuestros servidores.",
+    },
+    {
+      q: "¿Puedo analizar URLs que contengan información sensible?",
+      a: "Aunque el análisis se realiza localmente, recomendamos no analizar URLs que contengan información sensible como contraseñas o tokens.",
+    },
+    {
+      q: "¿Cómo se analizan los parámetros de consulta?",
+      a: "La herramienta analiza automáticamente la cadena de consulta en la URL, mostrando cada parámetro y su valor por separado para facilitar la visualización y comprensión de la estructura de la URL.",
+    },
+  ],
 };

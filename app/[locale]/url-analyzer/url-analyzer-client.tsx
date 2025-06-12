@@ -21,6 +21,7 @@ import ToolSection from "@/components/layout/tool-section";
 import ToolControls from "@/components/layout/tool-controls";
 import ToolResult from "@/components/layout/tool-result";
 import ToolLayout from "@/components/layout/tool-layout";
+import ToolFaq from "@/components/layout/tool-faq";
 import { Locale, Translations } from "@/locales";
 
 interface UrlInfo {
@@ -333,6 +334,11 @@ export default function UrlAnalyzerClient({
             </ToolResult>
           )}
         </div>
+      </ToolSection>
+
+      {/* FAQ セクション */}
+      <ToolSection>
+        <ToolFaq faqList={t.urlAnalyzer.faqList} t={t} />
       </ToolSection>
 
       {copiedField && (

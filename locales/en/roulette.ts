@@ -45,4 +45,22 @@ export const roulette: RouletteTranslations = {
   landedInZone: "Landed in the winner zone!",
   addItemsInstruction: "Add items using the field above",
   addItemLabel: "Add Item",
+  faqList: [
+    {
+      q: "How many items can I add to the roulette?",
+      a: "You can add up to 20 items to the roulette wheel. If you have more options, consider grouping similar items together.",
+    },
+    {
+      q: "Are the results truly random?",
+      a: "Yes, we use JavaScript's random number generator to ensure completely random results. Each enabled item has an equal probability of being selected.",
+    },
+    {
+      q: "Can I temporarily disable items?",
+      a: "Yes, you can click the button next to each item to temporarily disable it. Disabled items will be excluded from the roulette results without being deleted.",
+    },
+    {
+      q: "Is my roulette data saved?",
+      a: "Your item list is automatically saved to your browser's local storage. When you reload the page, your previously added items will be restored.",
+    },
+  ],
 };

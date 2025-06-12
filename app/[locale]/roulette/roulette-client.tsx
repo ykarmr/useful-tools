@@ -16,6 +16,7 @@ import ToolDisplay from "@/components/layout/tool-display";
 import ToolControls from "@/components/layout/tool-controls";
 import ToolInput from "@/components/layout/tool-input";
 import ToolResult from "@/components/layout/tool-result";
+import ToolFaq from "@/components/layout/tool-faq";
 import { SupportedLocale } from "@/lib/i18n";
 import { interpolate, Translations } from "@/locales";
 
@@ -580,6 +581,10 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
           </ToolSection>
         </ToolSection>
       </div>
+      {/* FAQ セクション */}
+      <ToolSection>
+        <ToolFaq faqList={t.roulette.faqList} t={t} />
+      </ToolSection>
     </ToolLayout>
   );
 }

@@ -28,4 +28,22 @@ export const petAgeConversion: PetAgeConversionTranslations = {
   resultPlaceholder: "La edad convertida aparecerá aquí",
   petAgeResult:
     "{petAge} años de edad {petType} es equivalente a {humanAge} años humanos.",
+  faqList: [
+    {
+      q: "¿Qué tan precisas son las conversiones de edad de mascotas?",
+      a: "Las conversiones se basan en fórmulas comúnmente utilizadas, pero las tasas de envejecimiento reales varían según la raza y el individuo. Úsalas como valores de referencia.",
+    },
+    {
+      q: "¿Qué animales son compatibles?",
+      a: "Admitimos 12 animales incluyendo perros, gatos, conejos, hámsters, caballos, vacas y más. Cada uno usa diferentes fórmulas de conversión.",
+    },
+    {
+      q: "¿Cuál es la edad máxima que puedo calcular?",
+      a: "No hay límite técnico, pero para edades muy avanzadas, las fórmulas de conversión pueden ser menos precisas. Recomendamos usar dentro de rangos típicos de vida útil.",
+    },
+    {
+      q: "¿Puedo ingresar edades decimales?",
+      a: "Sí, puedes ingresar edades decimales como 0.5 años (6 meses). Esto es especialmente útil para calcular edades de animales jóvenes.",
+    },
+  ],
 };

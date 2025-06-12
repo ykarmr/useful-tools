@@ -32,4 +32,22 @@ export const teamGenerator: TeamGeneratorTranslations = {
     "{remaining} jugadores restantes se distribuirán entre los equipos existentes",
   failedToGenerate: "Error al generar equipos",
   playersUnit: "jugadores",
+  faqList: [
+    {
+      q: "¿Cómo se generan los equipos?",
+      a: "Los equipos se generan aleatoriamente desde tu lista de jugadores. El generador distribuye a los jugadores lo más uniformemente posible según el tamaño de equipo especificado, con cualquier jugador restante distribuido aleatoriamente.",
+    },
+    {
+      q: "¿Puedo regenerar equipos con los mismos jugadores?",
+      a: "Sí, puedes hacer clic en 'Generar Equipos' múltiples veces para crear diferentes combinaciones aleatorias de equipos desde la misma lista de jugadores.",
+    },
+    {
+      q: "¿Qué pasa si el número de jugadores no se divide uniformemente en equipos?",
+      a: "Si quedan jugadores después de crear equipos uniformes, se distribuirán aleatoriamente entre los equipos existentes, resultando en algunos equipos con un jugador extra.",
+    },
+    {
+      q: "¿Hay un límite en cuántos jugadores puedo agregar?",
+      a: "No hay un límite estricto, pero por propósitos prácticos, recomendamos mantener un número razonable para tu caso de uso previsto.",
+    },
+  ],
 };

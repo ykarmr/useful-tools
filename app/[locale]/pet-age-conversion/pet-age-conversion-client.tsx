@@ -4,6 +4,7 @@ import { useState } from "react";
 import { PawPrint } from "lucide-react";
 import ToolLayout from "@/components/layout/tool-layout";
 import ToolSection from "@/components/layout/tool-section";
+import ToolFaq from "@/components/layout/tool-faq";
 import { Locale, Translations } from "@/locales";
 
 interface PetAgeConversionProps {
@@ -153,8 +154,7 @@ export default function PetAgeConversionClient({
             >
               {petTypes.map((p) => (
                 <option key={p.key} value={p.key}>
-                  {p.icon}:{" "}
-                  {t.petAgeConversion[p.key as keyof typeof t.petAgeConversion]}
+                  {p.icon}: {p.labelKey}
                 </option>
               ))}
             </select>
@@ -204,6 +204,11 @@ export default function PetAgeConversionClient({
             )}
           </div>
         </div>
+      </ToolSection>
+
+      {/* FAQ セクション */}
+      <ToolSection>
+        <ToolFaq faqList={t.petAgeConversion.faqList} t={t} />
       </ToolSection>
     </ToolLayout>
   );

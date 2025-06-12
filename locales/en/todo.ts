@@ -42,4 +42,22 @@ export const todo: TodoTranslations = {
   totalTasks: "Total Tasks",
   progress: "Progress",
   overdue: "(Overdue)",
+  faqList: [
+    {
+      q: "How should I set task priorities?",
+      a: "Consider both urgency and importance. Set 'High' for urgent and important tasks, 'Medium' for important tasks with normal deadlines, and 'Low' for tasks with flexible timelines.",
+    },
+    {
+      q: "What happens to completed tasks?",
+      a: "Completed tasks can be viewed using the 'Completed' filter. You can keep them as a record of your progress or delete them if no longer needed.",
+    },
+    {
+      q: "Where is my data stored?",
+      a: "All task data is stored in your browser's local storage. Nothing is sent to external servers, ensuring your privacy is protected.",
+    },
+    {
+      q: "Can I backup my tasks?",
+      a: "Currently, there's no direct backup feature. For important tasks, we recommend keeping separate notes as a backup.",
+    },
+  ],
 };

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Plus, Check, Trash2, Edit3, X, Calendar, Flag } from "lucide-react";
 import AdBanner from "@/components/layout/ad-banner";
+import ToolFaq from "@/components/layout/tool-faq";
 import { interpolate, Locale, Translations } from "@/locales";
 
 interface Todo {
@@ -418,6 +419,11 @@ export default function TodoClient({ locale, t }: TodoClientProps) {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* FAQ セクション */}
+      <div className="space-y-6">
+        <ToolFaq faqList={t.todo.faqList} t={t} />
       </div>
     </div>
   );

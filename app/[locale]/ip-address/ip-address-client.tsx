@@ -234,11 +234,6 @@ export default function IPAddressClient({ locale, t }: IPAddressClientProps) {
         </div>
       </ToolSection>
 
-      {/* FAQ Section */}
-      <ToolSection>
-        <ToolFaq faqList={t.ipAddress.faqList} t={t} />
-      </ToolSection>
-
       {/* Refresh Button */}
       <ToolSection>
         <div className="text-center">
@@ -249,6 +244,11 @@ export default function IPAddressClient({ locale, t }: IPAddressClientProps) {
             {t.ipAddress?.refreshInfo || "Refresh Information"}
           </button>
         </div>
+      </ToolSection>
+
+      {/* FAQ Section */}
+      <ToolSection>
+        <ToolFaq faqList={t.ipAddress.faqList} t={t} />
       </ToolSection>
     </ToolLayout>
   );

@@ -6,6 +6,7 @@ import ToolLayout from "@/components/layout/tool-layout";
 import ToolSection from "@/components/layout/tool-section";
 import ToolDisplay from "@/components/layout/tool-display";
 import ToolControls from "@/components/layout/tool-controls";
+import ToolFaq from "@/components/layout/tool-faq";
 import { Locale, Translations } from "@/locales";
 
 interface SubnetCalculatorClientProps {
@@ -275,6 +276,11 @@ export default function SubnetCalculatorClient({
           </div>
         </ToolSection>
       )}
+
+      {/* FAQ セクション */}
+      <ToolSection>
+        <ToolFaq faqList={t.subnetCalculator.faqList} t={t} />
+      </ToolSection>
     </ToolLayout>
   );
 }
