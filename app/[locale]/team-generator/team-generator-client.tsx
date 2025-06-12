@@ -205,117 +205,129 @@ export default function TeamGeneratorClient({
     >
       {/* Add Players Section */}
       <ToolSection title={t.teamGenerator.addPlayer} icon={Plus}>
-        <ToolInput label={t.teamGenerator.playerName}>
-          <div className="flex gap-4 mb-4">
-            <input
-              type="text"
-              value={newPlayerName}
-              onChange={(e) => setNewPlayerName(e.target.value)}
-              onKeyPress={(e) => e.key === "Enter" && addPlayer()}
-              placeholder={t.teamGenerator.playerName}
-              className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none"
-              maxLength={30}
-            />
-            <button
-              onClick={addPlayer}
-              disabled={!newPlayerName.trim()}
-              className="button-primary disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
-            >
-              {t.common.add}
-            </button>
-          </div>
-        </ToolInput>
+        <div className="space-y-6">
+          <ToolInput label={t.teamGenerator.playerName}>
+            <div className="flex gap-3 sm:gap-4">
+              <input
+                type="text"
+                value={newPlayerName}
+                onChange={(e) => setNewPlayerName(e.target.value)}
+                onKeyPress={(e) => e.key === "Enter" && addPlayer()}
+                placeholder={t.teamGenerator.playerName}
+                className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-colors"
+                maxLength={30}
+              />
+              <button
+                onClick={addPlayer}
+                disabled={!newPlayerName.trim()}
+                className="button-primary disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 px-6 py-3"
+              >
+                {t.common.add}
+              </button>
+            </div>
+          </ToolInput>
 
-        {/* Team Size Setting */}
-        <ToolInput label={t.teamGenerator.teamSize}>
-          <select
-            value={teamSize}
-            onChange={(e) => {
-              setTeamSize(Number.parseInt(e.target.value));
-              setTeams([]); // Reset teams when team size changes
-            }}
-            className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none"
-          >
-            {[2, 3, 4, 5, 6, 7, 8].map((size) => (
-              <option key={size} value={size}>
-                {size} {t.teamGenerator.players}
-              </option>
-            ))}
-          </select>
-        </ToolInput>
+          {/* Team Size Setting */}
+          <ToolInput label={t.teamGenerator.teamSize}>
+            <select
+              value={teamSize}
+              onChange={(e) => {
+                setTeamSize(Number.parseInt(e.target.value));
+                setTeams([]); // Reset teams when team size changes
+              }}
+              className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-colors w-full sm:w-auto"
+            >
+              {[2, 3, 4, 5, 6, 7, 8].map((size) => (
+                <option key={size} value={size}>
+                  {size} {t.teamGenerator.players}
+                </option>
+              ))}
+            </select>
+          </ToolInput>
+        </div>
 
         {/* Team Generation Info */}
         {players.length > 0 && (
-          <ToolDisplay background="light" size="small">
-            <div className="text-sm text-blue-800">
-              <div className="font-medium mb-1">
-                {t.teamGenerator?.teamGenerationInfo || "Team Generation Info:"}
-              </div>
-              <div>
-                {interpolate(
-                  t.teamGenerator?.teamsOfPlayers ||
-                    "{teams} teams of {size} players each",
-                  {
-                    teams: Math.floor(players.length / teamSize).toString(),
-                    size: teamSize.toString(),
-                  }
-                )}
-              </div>
-              {remainingPlayers > 0 && (
-                <div className="text-blue-600">
+          <div className="mt-6">
+            <ToolDisplay background="light" size="small">
+              <div className="text-sm text-blue-800">
+                <div className="font-medium mb-2">
+                  {t.teamGenerator?.teamGenerationInfo ||
+                    "Team Generation Info:"}
+                </div>
+                <div className="mb-1">
                   {interpolate(
-                    t.teamGenerator?.remainingPlayersDistributed ||
-                      "{remaining} remaining players will be distributed to existing teams",
+                    t.teamGenerator?.teamsOfPlayers ||
+                      "{teams} teams of {size} players each",
                     {
-                      remaining: remainingPlayers.toString(),
+                      teams: Math.floor(players.length / teamSize).toString(),
+                      size: teamSize.toString(),
                     }
                   )}
                 </div>
-              )}
-            </div>
-          </ToolDisplay>
+                {remainingPlayers > 0 && (
+                  <div className="text-blue-600">
+                    {interpolate(
+                      t.teamGenerator?.remainingPlayersDistributed ||
+                        "{remaining} remaining players will be distributed to existing teams",
+                      {
+                        remaining: remainingPlayers.toString(),
+                      }
+                    )}
+                  </div>
+                )}
+              </div>
+            </ToolDisplay>
+          </div>
         )}
 
         {/* Generate Teams Button */}
-        <ToolControls>
-          <button
-            onClick={generateTeams}
-            disabled={!canGenerateTeams}
-            className="button-primary flex items-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
-          >
-            <Shuffle size={20} />
-            <span>
-              {isGenerating
-                ? t.teamGenerator?.generating || "Generating..."
-                : t.teamGenerator.generateTeams}
-            </span>
-          </button>
-          {teams.length > 0 && (
+        <div className="mt-6">
+          <ToolControls>
             <button
-              onClick={resetTeams}
-              className="button-secondary focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+              onClick={generateTeams}
+              disabled={!canGenerateTeams}
+              className="button-primary flex items-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 px-6 py-3"
             >
-              {t.teamGenerator?.resetTeams || "Reset Teams"}
+              <Shuffle size={20} />
+              <span>
+                {isGenerating
+                  ? t.teamGenerator?.generating || "Generating..."
+                  : t.teamGenerator.generateTeams}
+              </span>
             </button>
-          )}
-          {players.length > 0 && (
-            <button
-              onClick={clearAllPlayers}
-              className="button-secondary text-red-600 hover:text-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
-            >
-              {t.teamGenerator?.clearAll || "Clear All"}
-            </button>
-          )}
-        </ToolControls>
+            {teams.length > 0 && (
+              <button
+                onClick={resetTeams}
+                className="button-secondary focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 px-6 py-3"
+              >
+                {t.teamGenerator?.resetTeams || "Reset Teams"}
+              </button>
+            )}
+            {players.length > 0 && (
+              <button
+                onClick={clearAllPlayers}
+                className="button-secondary text-red-600 hover:text-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 px-6 py-3"
+              >
+                {t.teamGenerator?.clearAll || "Clear All"}
+              </button>
+            )}
+          </ToolControls>
+        </div>
 
         {!canGenerateTeams &&
           players.length > 0 &&
           players.length < teamSize && (
-            <p className="text-amber-600 text-sm mt-2 text-center" role="alert">
-              {interpolate(t.teamGenerator.notEnoughPlayers, {
-                needed: teamSize.toString(),
-              })}
-            </p>
+            <div className="mt-4">
+              <p
+                className="text-amber-600 text-sm text-center bg-amber-50 border border-amber-200 rounded-lg py-3 px-4"
+                role="alert"
+              >
+                {interpolate(t.teamGenerator.notEnoughPlayers, {
+                  needed: teamSize.toString(),
+                })}
+              </p>
+            </div>
           )}
       </ToolSection>
 
@@ -332,11 +344,11 @@ export default function TeamGeneratorClient({
             <p className="text-gray-500 text-lg">{t.teamGenerator.noPlayers}</p>
           </ToolDisplay>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {players.map((player, index) => (
               <div
                 key={player.id}
-                className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors group"
+                className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors group"
               >
                 <div className="flex items-center min-w-0">
                   <div className="w-8 h-8 bg-primary-100 text-primary-600 rounded-full flex items-center justify-center text-sm font-medium mr-3 flex-shrink-0">
@@ -346,7 +358,7 @@ export default function TeamGeneratorClient({
                 </div>
                 <button
                   onClick={() => removePlayer(player.id)}
-                  className="text-gray-400 hover:text-red-500 transition-colors ml-2 opacity-0 group-hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-1 rounded"
+                  className="text-gray-400 hover:text-red-500 transition-colors ml-3 opacity-0 group-hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-1 rounded p-1"
                   title={locale === "ja" ? "削除" : "Remove"}
                   aria-label={`Remove ${player.name}`}
                 >
@@ -371,34 +383,38 @@ export default function TeamGeneratorClient({
                 className="bg-white border-2 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow"
                 style={{ borderColor: team.color }}
               >
-                <div className="flex items-center mb-4">
+                <div className="flex items-center mb-6">
                   <div
-                    className="w-8 h-8 rounded-full flex items-center justify-center mr-3"
+                    className="w-10 h-10 rounded-full flex items-center justify-center mr-3"
                     style={{ backgroundColor: team.color }}
                   >
-                    <Users size={16} className="text-white" />
+                    <Users size={18} className="text-white" />
                   </div>
-                  <h4
-                    className="text-lg font-bold"
-                    style={{ color: team.color }}
-                  >
-                    {team.name}
-                  </h4>
-                  <span className="ml-auto text-sm text-gray-500">
-                    ({team.players.length}{" "}
-                    {t.teamGenerator?.playersUnit || "players"})
-                  </span>
+                  <div className="flex-1 min-w-0">
+                    <h4
+                      className="text-lg font-bold truncate"
+                      style={{ color: team.color }}
+                    >
+                      {team.name}
+                    </h4>
+                    <span className="text-sm text-gray-500">
+                      ({team.players.length}{" "}
+                      {t.teamGenerator?.playersUnit || "players"})
+                    </span>
+                  </div>
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-3">
                   {team.players.map((player, index) => (
                     <div
                       key={player.id}
-                      className="flex items-center p-2 bg-gray-50 rounded-lg"
+                      className="flex items-center p-3 bg-gray-50 rounded-lg"
                     >
-                      <div className="w-6 h-6 bg-gray-200 text-gray-600 rounded-full flex items-center justify-center text-xs font-medium mr-3">
+                      <div className="w-7 h-7 bg-gray-200 text-gray-600 rounded-full flex items-center justify-center text-sm font-medium mr-3 flex-shrink-0">
                         {index + 1}
                       </div>
-                      <span className="text-gray-900">{player.name}</span>
+                      <span className="text-gray-900 truncate">
+                        {player.name}
+                      </span>
                     </div>
                   ))}
                 </div>

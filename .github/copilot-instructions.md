@@ -13,6 +13,17 @@
   - `app/[locale]/calculator/page.tsx`
   - `app/[locale]/coin-flip/coin-flip-client.tsx`
   - `app/[locale]/coin-flip/page.tsx`
+- レスポンシブデザインを意識し、モバイルファーストで実装すること
+- 各ページのメタデータは `generateMetadata` 関数を使用して定義すること
+- 各ページのルーティングは `app/[locale]/[feature]/page.tsx` の形式で定義すること
+- 各ページのクライアントサイドのロジックは `app/[locale]/[feature]/[機能名]-client.tsx` に記述すること
+- SEO に配慮し、各ページのタイトル、説明、キーワードを設定すること
+- アクセシビリティを考慮し、適切な ARIA 属性を使用すること
+- 各ページのアイコンは `lucide-react` を使用すること
+- 各ページのレイアウトは `components/layout` 以下のコンポーネントを使用すること
+- 各機能ページのセクションは `components/layout/tool-section.tsx` を使用すること
+- 各機能ページの表示部分は `components/layout/tool-display.tsx` を使用すること
+- 各機能ページの FAQ セクションは `components/layout/tool-faq.tsx` を使用すること
 
 ## ページとルーティング
 
