@@ -7,6 +7,7 @@ import ToolSection from "@/components/layout/tool-section";
 import ToolDisplay from "@/components/layout/tool-display";
 import ToolControls from "@/components/layout/tool-controls";
 import ToolInput from "@/components/layout/tool-input";
+import ToolFaq from "@/components/layout/tool-faq";
 import { Locale, Translations } from "@/locales";
 
 interface TimerClientProps {
@@ -193,6 +194,11 @@ export default function TimerClient({ locale, t }: TimerClientProps) {
             </button>
           </ToolControls>
         </div>
+      </ToolSection>
+
+      {/* FAQ Section */}
+      <ToolSection>
+        <ToolFaq faqList={t.timer.faqList} t={t} />
       </ToolSection>
     </ToolLayout>
   );

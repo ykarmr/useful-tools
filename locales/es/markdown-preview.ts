@@ -47,4 +47,22 @@ export const markdownPreview: MarkdownPreviewTranslations = {
   copied: "¡Copiado!",
   wordCount: "Palabras",
   clear: "Limpiar",
+  faqList: [
+    {
+      q: "¿Qué es Markdown?",
+      a: "Markdown es un lenguaje de marcado ligero que permite formatear texto usando sintaxis simple y puede convertirse a HTML.",
+    },
+    {
+      q: "¿Qué sintaxis de Markdown se admite?",
+      a: "Se admite sintaxis estándar de Markdown incluyendo encabezados, listas, enlaces, imágenes, bloques de código, tablas, citas y énfasis.",
+    },
+    {
+      q: "¿La vista previa es en tiempo real?",
+      a: "Sí, la vista previa HTML se actualiza en tiempo real mientras escribes.",
+    },
+    {
+      q: "¿Puedo copiar el contenido de la vista previa?",
+      a: "Sí, puedes copiar el HTML de la vista previa al portapapeles para usar en otros lugares.",
+    },
+  ],
 };

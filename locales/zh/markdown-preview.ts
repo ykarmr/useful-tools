@@ -46,4 +46,22 @@ export const markdownPreview: MarkdownPreviewTranslations = {
   copied: "已复制！",
   wordCount: "单词数",
   clear: "清除",
+  faqList: [
+    {
+      q: "什么是Markdown？",
+      a: "Markdown是一种轻量级标记语言，使用简单的语法格式化文本，可以转换为HTML。",
+    },
+    {
+      q: "支持哪些Markdown语法？",
+      a: "支持标题、列表、链接、图片、代码块、表格、引用、强调等标准Markdown语法。",
+    },
+    {
+      q: "预览是实时的吗？",
+      a: "是的，输入时会实时更新HTML预览。",
+    },
+    {
+      q: "可以复制预览内容吗？",
+      a: "是的，可以将预览的HTML复制到剪贴板供其他地方使用。",
+    },
+  ],
 };

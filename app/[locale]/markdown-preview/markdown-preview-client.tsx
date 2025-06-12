@@ -23,6 +23,7 @@ import ToolSection from "@/components/layout/tool-section";
 import ToolControls from "@/components/layout/tool-controls";
 import ToolInput from "@/components/layout/tool-input";
 import ToolStats from "@/components/layout/tool-stats";
+import ToolFaq from "@/components/layout/tool-faq";
 import { Locale, Translations } from "@/locales";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -306,6 +307,11 @@ export default function MarkdownPreviewClient({
             description={t.markdownPreview?.horizontalRuleDesc || "---"}
           />
         </div>
+      </ToolSection>
+
+      {/* FAQ Section */}
+      <ToolSection>
+        <ToolFaq faqList={t.markdownPreview.faqList} t={t} />
       </ToolSection>
     </ToolLayout>
   );

@@ -7,8 +7,8 @@ import ToolSection from "@/components/layout/tool-section";
 import ToolControls from "@/components/layout/tool-controls";
 import ToolInput from "@/components/layout/tool-input";
 import ToolResult from "@/components/layout/tool-result";
+import ToolFaq from "@/components/layout/tool-faq";
 import { Locale, Translations } from "@/locales";
-import { set } from "react-hook-form";
 
 interface URLEncoderClientProps {
   locale: Locale;
@@ -186,6 +186,11 @@ export default function URLEncoderClient({ locale, t }: URLEncoderClientProps) {
             </div>
           </div>
         </div>
+      </ToolSection>
+
+      {/* FAQ Section */}
+      <ToolSection>
+        <ToolFaq faqList={t.urlEncoder.faqList} t={t} />
       </ToolSection>
     </ToolLayout>
   );

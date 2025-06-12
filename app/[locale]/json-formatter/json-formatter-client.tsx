@@ -10,6 +10,7 @@ import ToolControls from "@/components/layout/tool-controls";
 import ToolInput from "@/components/layout/tool-input";
 import ToolResult from "@/components/layout/tool-result";
 import ToolStats from "@/components/layout/tool-stats";
+import ToolFaq from "@/components/layout/tool-faq";
 import { Locale, Translations } from "@/locales";
 
 interface JSONFormatterClientProps {
@@ -295,6 +296,11 @@ export default function JSONFormatterClient({
             </div>
           </div>
         </div>
+      </ToolSection>
+
+      {/* FAQ Section */}
+      <ToolSection>
+        <ToolFaq faqList={t.jsonFormatter.faqList} t={t} />
       </ToolSection>
     </ToolLayout>
   );

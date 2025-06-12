@@ -7,6 +7,7 @@ import ToolSection from "@/components/layout/tool-section";
 import ToolDisplay from "@/components/layout/tool-display";
 import ToolResult from "@/components/layout/tool-result";
 import ToolStats from "@/components/layout/tool-stats";
+import ToolFaq from "@/components/layout/tool-faq";
 import { Locale, Translations } from "@/locales";
 
 interface UserAgentInfo {
@@ -207,6 +208,11 @@ export default function UserAgentClient({ locale, t }: UserAgentClientProps) {
             </div>
           ))}
         </div>
+      </ToolSection>
+
+      {/* FAQ Section */}
+      <ToolSection>
+        <ToolFaq faqList={t.userAgent.faqList} t={t} />
       </ToolSection>
     </ToolLayout>
   );

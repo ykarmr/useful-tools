@@ -100,6 +100,7 @@ export interface RandomNumberTranslations {
   min: string;
   max: string;
   generate: string;
+  faqList: FAQItem[];
 }
 
 export interface RandomStringTranslations {
@@ -111,6 +112,7 @@ export interface RandomStringTranslations {
   includeSymbols: string;
   generate: string;
   result: string;
+  faqList: FAQItem[];
 }
 
 export interface TimerTranslations {
@@ -123,6 +125,7 @@ export interface TimerTranslations {
   pause: string;
   reset: string;
   timeUp: string;
+  faqList: FAQItem[];
 }
 
 export interface PomodoroTimerTranslations {
@@ -206,6 +209,7 @@ export interface QrGeneratorTranslations {
   placeholder: string;
   size: string;
   generate: string;
+  faqList: FAQItem[];
 }
 
 export interface CalculatorTranslations {
@@ -229,6 +233,7 @@ export interface UserAgentTranslations {
   supported: string;
   notSupported: string;
   deviceInfo: string;
+  faqList: FAQItem[];
 }
 
 export interface IpAddressTranslations {
@@ -279,6 +284,7 @@ export interface JsonFormatterTranslations {
   indent2: string;
   indent4: string;
   indent8: string;
+  faqList: FAQItem[];
 }
 
 export interface UrlEncoderTranslations {
@@ -300,6 +306,7 @@ export interface UrlEncoderTranslations {
   spaceToPercent: string;
   decodedUrl: string;
   invalidInput: string;
+  faqList: FAQItem[];
 }
 
 export interface MarkdownPreviewTranslations {
@@ -342,6 +349,7 @@ export interface MarkdownPreviewTranslations {
   horizontalRuleDesc: string;
   characterCount: string;
   confirmClear: string;
+  faqList: FAQItem[];
 }
 
 export interface UrlAnalyzerTranslations {

@@ -49,4 +49,26 @@ export const markdownPreview: MarkdownPreviewTranslations = {
   characterCount: "Characters",
   lineCount: "Lines",
   confirmClear: "Are you sure you want to clear the text?",
+  faqList: [
+    {
+      q: "What is Markdown?",
+      a: "Markdown is a lightweight markup language that allows you to format text using simple syntax.",
+    },
+    {
+      q: "How do I create headings in Markdown?",
+      a: "Use one or more '#' characters followed by a space. For example, '# Heading 1' for H1.",
+    },
+    {
+      q: "Can I include links and images?",
+      a: "Yes, use the syntax `[text](url)` for links and `![alt](url)` for images.",
+    },
+    {
+      q: "How do I format code blocks?",
+      a: "Use triple backticks (```) before and after your code block.",
+    },
+    {
+      q: "Is there a way to preview my Markdown?",
+      a: "Yes, you can see the preview in real-time as you write.",
+    },
+  ],
 };

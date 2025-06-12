@@ -7,6 +7,7 @@ import ToolSection from "@/components/layout/tool-section";
 import ToolDisplay from "@/components/layout/tool-display";
 import ToolControls from "@/components/layout/tool-controls";
 import ToolInput from "@/components/layout/tool-input";
+import ToolFaq from "@/components/layout/tool-faq";
 import { Locale, Translations } from "@/locales";
 
 interface RandomNumberClientProps {
@@ -109,6 +110,11 @@ export default function RandomNumberClient({
             </p>
           )}
         </div>
+      </ToolSection>
+
+      {/* FAQ Section */}
+      <ToolSection>
+        <ToolFaq faqList={t.randomNumber.faqList} t={t} />
       </ToolSection>
     </ToolLayout>
   );

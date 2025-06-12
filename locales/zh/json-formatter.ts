@@ -30,4 +30,22 @@ export const jsonFormatter: JsonFormatterTranslations = {
   indent2: "2个空格",
   indent4: "4个空格",
   indent8: "8个空格",
+  faqList: [
+    {
+      q: "什么是JSON格式化工具？",
+      a: "JSON格式化工具用于美化和验证JSON（JavaScript Object Notation）数据，使其更易读并识别语法错误。",
+    },
+    {
+      q: "如何处理无效的JSON文件？",
+      a: "当输入无效JSON时，会显示错误消息以帮助识别问题区域。",
+    },
+    {
+      q: "能处理大型JSON文件吗？",
+      a: "可以，但由于浏览器限制，非常大的文件可能会导致性能变慢。",
+    },
+    {
+      q: "我的数据安全吗？",
+      a: "所有处理都在您的浏览器内完成，不会将数据发送到任何服务器。",
+    },
+  ],
 };
