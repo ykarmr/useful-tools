@@ -42,6 +42,8 @@ export const todo: TodoTranslations = {
   totalTasks: "Total Tasks",
   progress: "Progress",
   overdue: "(Overdue)",
+  filter: "Filter",
+  taskList: "Task List",
   faqList: [
     {
       q: "How should I set task priorities?",

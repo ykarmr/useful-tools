@@ -44,6 +44,8 @@ export const todo: TodoTranslations = {
   totalTasks: "Total de Tareas",
   progress: "Progreso",
   overdue: "(Vencida)",
+  filter: "Filtro",
+  taskList: "Lista de Tareas",
   faqList: [
     {
       q: "¿Cómo debo establecer las prioridades de las tareas?",

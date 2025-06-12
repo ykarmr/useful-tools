@@ -68,6 +68,8 @@ export interface TodoTranslations {
   totalTasks: string;
   progress: string;
   overdue: string;
+  filter: string;
+  taskList: string;
   faqList: FAQItem[];
 }
 

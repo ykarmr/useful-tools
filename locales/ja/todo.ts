@@ -43,6 +43,8 @@ export const todo: TodoTranslations = {
   totalTasks: "合計タスク数",
   progress: "進捗",
   overdue: "(期限超過)",
+  filter: "フィルター",
+  taskList: "タスク一覧",
   faqList: [
     {
       q: "タスクの優先度はどのように決めるべきですか？",

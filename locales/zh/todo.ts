@@ -43,6 +43,8 @@ export const todo: TodoTranslations = {
   totalTasks: "总任务数",
   progress: "进度",
   overdue: "（逾期）",
+  filter: "筛选",
+  taskList: "任务列表",
   faqList: [
     {
       q: "如何设置任务优先级？",
