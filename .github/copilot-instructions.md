@@ -31,6 +31,21 @@
 - `app/[locale]/[feature]/page.tsx`
   - 特定の機能ページを定義
 
+### 問い合わせページ
+
+- `app/[locale]/contact/page.tsx`
+  - 問い合わせページを定義
+
+### 規約ページ
+
+- `app/[locale]/terms/page.tsx`
+  - 規約ページを定義
+
+### プライバシーポリシーページ
+
+- `app/[locale]/privacy/page.tsx`
+  - プライバシーポリシーページを定義
+
 #### 機能ページの構成
 
 機能ページは以下の構成で実装する：
