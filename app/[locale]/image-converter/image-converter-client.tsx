@@ -140,9 +140,11 @@ export default function ImageConverterClient({
       settings.width > 0
     ) {
       const firstImage = images[0];
-      const aspectRatio = firstImage.originalDimensions.width / firstImage.originalDimensions.height;
+      const aspectRatio =
+        firstImage.originalDimensions.width /
+        firstImage.originalDimensions.height;
       const calculatedHeight = Math.round(settings.width / aspectRatio);
-      
+
       if (calculatedHeight !== settings.height) {
         setSettings((prev) => ({
           ...prev,
@@ -150,7 +152,12 @@ export default function ImageConverterClient({
         }));
       }
     }
-  }, [settings.width, settings.maintainAspectRatio, settings.aspectRatio, images]);
+  }, [
+    settings.width,
+    settings.maintainAspectRatio,
+    settings.aspectRatio,
+    images,
+  ]);
 
   // ファイルドロップハンドラー
   const handleDrop = useCallback((e: React.DragEvent) => {
@@ -535,7 +542,7 @@ export default function ImageConverterClient({
               {t.imageConverter.convertSettings}
             </h3>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {/* 出力形式 */}
               <div className="space-y-2">
                 <label className="block text-sm font-semibold text-gray-700">
@@ -655,8 +662,12 @@ export default function ImageConverterClient({
                           if (prev.maintainAspectRatio && images.length > 0) {
                             // 最初の画像のアスペクト比を基準に高さを自動計算
                             const firstImage = images[0];
-                            const aspectRatio = firstImage.originalDimensions.width / firstImage.originalDimensions.height;
-                            const newHeight = Math.round(newWidth / aspectRatio);
+                            const aspectRatio =
+                              firstImage.originalDimensions.width /
+                              firstImage.originalDimensions.height;
+                            const newHeight = Math.round(
+                              newWidth / aspectRatio
+                            );
                             return {
                               ...prev,
                               width: newWidth,
@@ -818,40 +829,42 @@ export default function ImageConverterClient({
                     {image.status === "completed" &&
                       image.convertedSize &&
                       image.convertedDimensions && (
-                        <div className="mt-3 p-3 bg-green-50 rounded-lg border border-green-200">
+                        <div className="mt-3 p-2 sm:p-3 bg-green-50 rounded-lg border border-green-200">
                           <div className="text-xs text-green-800 space-y-1">
-                            <div className="flex justify-between">
+                            <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
                               <span className="font-medium">
                                 {t.imageConverter.convertedDimensions}:
                               </span>
-                              <span>
+                              <span className="sm:text-right">
                                 {image.convertedDimensions.width} ×{" "}
                                 {image.convertedDimensions.height}
                               </span>
                             </div>
-                            <div className="flex justify-between">
+                            <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
                               <span className="font-medium">
                                 {t.imageConverter.convertedSize}:
                               </span>
-                              <span>{formatFileSize(image.convertedSize)}</span>
+                              <span className="sm:text-right">
+                                {formatFileSize(image.convertedSize)}
+                              </span>
                             </div>
-                            <div className="flex justify-between">
+                            <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
                               <span className="font-medium">
                                 {t.imageConverter.compressionRatio}:
                               </span>
-                              <span className="text-green-700 font-semibold">
+                              <span className="text-green-700 font-semibold sm:text-right">
                                 {calculateCompressionRatio(
                                   image.size,
                                   image.convertedSize
                                 )}
                               </span>
                             </div>
-                            <div className="flex justify-between">
+                            <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
                               <span className="font-medium">
                                 {t.imageConverter.sizeReduction}:
                               </span>
                               <span
-                                className={`font-semibold ${
+                                className={`font-semibold sm:text-right ${
                                   image.convertedSize < image.size
                                     ? "text-green-700"
                                     : "text-orange-600"
@@ -928,8 +941,8 @@ export default function ImageConverterClient({
       {images.length > 0 && (
         <ToolSection>
           <div className="text-center">
-            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl p-8 text-white">
-              <h3 className="text-xl font-semibold mb-4">
+            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl p-4 sm:p-6 lg:p-8 text-white">
+              <h3 className="text-lg sm:text-xl font-semibold mb-4">
                 {isProcessing ? "変換中..." : "変換を開始"}
               </h3>
 
@@ -952,7 +965,7 @@ export default function ImageConverterClient({
                       }}
                     ></div>
                   </div>
-                  <p className="text-sm text-blue-100">
+                  <p className="text-xs sm:text-sm text-blue-100">
                     {images.filter((img) => img.status === "completed").length}{" "}
                     / {images.length} ファイル完了
                   </p>
@@ -962,7 +975,7 @@ export default function ImageConverterClient({
               <button
                 onClick={convertImages}
                 disabled={isProcessing}
-                className="inline-flex items-center px-8 py-4 bg-white text-blue-600 font-semibold rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 text-lg shadow-lg"
+                className="inline-flex items-center px-6 sm:px-8 py-3 sm:py-4 bg-white text-blue-600 font-semibold rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 text-base sm:text-lg shadow-lg"
               >
                 {isProcessing ? (
                   <>
@@ -1001,18 +1014,20 @@ export default function ImageConverterClient({
                 変換結果サマリー
               </h3>
 
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
                 {/* 総ファイル数 */}
-                <div className="text-center bg-white rounded-lg p-4 shadow-sm">
-                  <div className="text-2xl font-bold text-blue-600">
+                <div className="text-center bg-white rounded-lg p-3 sm:p-4 shadow-sm">
+                  <div className="text-xl sm:text-2xl font-bold text-blue-600">
                     {images.filter((img) => img.status === "completed").length}
                   </div>
-                  <div className="text-sm text-gray-600">変換成功</div>
+                  <div className="text-xs sm:text-sm text-gray-600">
+                    変換成功
+                  </div>
                 </div>
 
                 {/* 総容量削減 */}
-                <div className="text-center bg-white rounded-lg p-4 shadow-sm">
-                  <div className="text-2xl font-bold text-green-600">
+                <div className="text-center bg-white rounded-lg p-3 sm:p-4 shadow-sm">
+                  <div className="text-lg sm:text-2xl font-bold text-green-600 break-all">
                     {(() => {
                       const totalOriginal = images
                         .filter((img) => img.status === "completed")
@@ -1032,12 +1047,14 @@ export default function ImageConverterClient({
                       );
                     })()}
                   </div>
-                  <div className="text-sm text-gray-600">総容量変化</div>
+                  <div className="text-xs sm:text-sm text-gray-600">
+                    総容量変化
+                  </div>
                 </div>
 
                 {/* 平均圧縮率 */}
-                <div className="text-center bg-white rounded-lg p-4 shadow-sm">
-                  <div className="text-2xl font-bold text-purple-600">
+                <div className="text-center bg-white rounded-lg p-3 sm:p-4 shadow-sm">
+                  <div className="text-xl sm:text-2xl font-bold text-purple-600">
                     {(() => {
                       const completedImages = images.filter(
                         (img) => img.status === "completed" && img.convertedSize
@@ -1054,15 +1071,17 @@ export default function ImageConverterClient({
                       )}%`;
                     })()}
                   </div>
-                  <div className="text-sm text-gray-600">平均圧縮率</div>
+                  <div className="text-xs sm:text-sm text-gray-600">
+                    平均圧縮率
+                  </div>
                 </div>
 
                 {/* エラー数 */}
-                <div className="text-center bg-white rounded-lg p-4 shadow-sm">
-                  <div className="text-2xl font-bold text-red-600">
+                <div className="text-center bg-white rounded-lg p-3 sm:p-4 shadow-sm">
+                  <div className="text-xl sm:text-2xl font-bold text-red-600">
                     {images.filter((img) => img.status === "error").length}
                   </div>
-                  <div className="text-sm text-gray-600">エラー</div>
+                  <div className="text-xs sm:text-sm text-gray-600">エラー</div>
                 </div>
               </div>
 
@@ -1087,7 +1106,7 @@ export default function ImageConverterClient({
       {/* プレビューモーダル */}
       {previewImage && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-95 flex items-center justify-center z-50 backdrop-blur-sm p-4"
+          className="fixed inset-0 bg-black bg-opacity-95 flex items-center justify-center z-50 backdrop-blur-sm p-2 sm:p-4"
           onClick={() => {
             setPreviewImage(null);
             setPreviewZoom(1);
@@ -1095,18 +1114,18 @@ export default function ImageConverterClient({
           }}
         >
           <div
-            className="bg-white rounded-2xl max-w-7xl max-h-[96vh] w-full overflow-hidden shadow-2xl relative"
+            className="bg-white rounded-lg sm:rounded-2xl max-w-7xl max-h-[98vh] sm:max-h-[96vh] w-full overflow-hidden shadow-2xl relative"
             onClick={(e) => e.stopPropagation()}
           >
             {/* ヘッダー */}
-            <div className="flex justify-between items-center px-6 py-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
-              <div className="flex items-center space-x-6">
-                <div>
-                  <h3 className="text-xl font-semibold">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center px-3 sm:px-6 py-3 sm:py-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white gap-3 sm:gap-0">
+              <div className="flex items-center space-x-3 sm:space-x-6 min-w-0 flex-1">
+                <div className="min-w-0 flex-1">
+                  <h3 className="text-lg sm:text-xl font-semibold">
                     {t.imageConverter.previewTitle}
                   </h3>
                   <p
-                    className="text-blue-100 text-sm truncate max-w-md mt-1"
+                    className="text-blue-100 text-xs sm:text-sm truncate max-w-[200px] sm:max-w-md mt-1"
                     title={previewImage.file.name}
                   >
                     {previewImage.file.name}
@@ -1115,7 +1134,7 @@ export default function ImageConverterClient({
 
                 {/* ナビゲーション */}
                 {images.length > 1 && (
-                  <div className="flex items-center space-x-3 bg-white bg-opacity-20 rounded-lg px-3 py-2">
+                  <div className="hidden sm:flex items-center space-x-3 bg-white bg-opacity-20 rounded-lg px-3 py-2">
                     <button
                       onClick={() => {
                         const currentIndex = images.findIndex(
@@ -1165,19 +1184,19 @@ export default function ImageConverterClient({
               </div>
 
               {/* コントロール */}
-              <div className="flex items-center space-x-3">
+              <div className="flex items-center space-x-2 sm:space-x-3 flex-shrink-0">
                 {/* ズームコントロール */}
-                <div className="flex items-center space-x-1 bg-white bg-opacity-20 rounded-lg px-2 py-1">
+                <div className="flex items-center space-x-1 bg-white bg-opacity-20 rounded-lg px-1 sm:px-2 py-1">
                   <button
                     onClick={() =>
                       setPreviewZoom((prev) => Math.max(prev - 0.25, 0.25))
                     }
                     disabled={previewZoom <= 0.25}
-                    className="p-1.5 hover:bg-white hover:bg-opacity-20 rounded disabled:opacity-50"
+                    className="p-1 sm:p-1.5 hover:bg-white hover:bg-opacity-20 rounded disabled:opacity-50"
                   >
-                    <ZoomOut className="h-4 w-4" />
+                    <ZoomOut className="h-3 w-3 sm:h-4 sm:w-4" />
                   </button>
-                  <span className="text-sm px-3 min-w-[60px] text-center font-medium">
+                  <span className="text-xs sm:text-sm px-1 sm:px-3 min-w-[40px] sm:min-w-[60px] text-center font-medium">
                     {Math.round(previewZoom * 100)}%
                   </span>
                   <button
@@ -1185,15 +1204,15 @@ export default function ImageConverterClient({
                       setPreviewZoom((prev) => Math.min(prev + 0.25, 3))
                     }
                     disabled={previewZoom >= 3}
-                    className="p-1.5 hover:bg-white hover:bg-opacity-20 rounded disabled:opacity-50"
+                    className="p-1 sm:p-1.5 hover:bg-white hover:bg-opacity-20 rounded disabled:opacity-50"
                   >
-                    <ZoomIn className="h-4 w-4" />
+                    <ZoomIn className="h-3 w-3 sm:h-4 sm:w-4" />
                   </button>
                   <button
                     onClick={() => setPreviewZoom(1)}
-                    className="p-1.5 hover:bg-white hover:bg-opacity-20 rounded"
+                    className="p-1 sm:p-1.5 hover:bg-white hover:bg-opacity-20 rounded"
                   >
-                    <RotateCcw className="h-4 w-4" />
+                    <RotateCcw className="h-3 w-3 sm:h-4 sm:w-4" />
                   </button>
                 </div>
 
@@ -1201,13 +1220,13 @@ export default function ImageConverterClient({
                 {previewImage.convertedUrl && (
                   <button
                     onClick={() => setShowComparison(!showComparison)}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    className={`px-2 sm:px-4 py-1 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors ${
                       showComparison
                         ? "bg-white text-blue-600"
                         : "bg-white bg-opacity-20 hover:bg-opacity-30"
                     }`}
                   >
-                    {showComparison ? "単体表示" : "比較表示"}
+                    {showComparison ? "単体" : "比較"}
                   </button>
                 )}
 
@@ -1217,26 +1236,72 @@ export default function ImageConverterClient({
                     setPreviewZoom(1);
                     setShowComparison(false);
                   }}
-                  className="p-2.5 hover:bg-white hover:bg-opacity-20 rounded-lg transition-colors"
+                  className="p-2 sm:p-2.5 hover:bg-white hover:bg-opacity-20 rounded-lg transition-colors"
                 >
-                  <X className="h-5 w-5" />
+                  <X className="h-4 w-4 sm:h-5 sm:w-5" />
                 </button>
               </div>
+
+              {/* モバイル用ナビゲーション */}
+              {images.length > 1 && (
+                <div className="flex sm:hidden items-center justify-center w-full bg-white bg-opacity-20 rounded-lg px-3 py-2">
+                  <button
+                    onClick={() => {
+                      const currentIndex = images.findIndex(
+                        (img) => img.id === previewImage.id
+                      );
+                      if (currentIndex > 0) {
+                        setPreviewImage(images[currentIndex - 1]);
+                        setPreviewZoom(1);
+                      }
+                    }}
+                    disabled={
+                      images.findIndex((img) => img.id === previewImage.id) ===
+                      0
+                    }
+                    className="p-2 bg-white bg-opacity-20 rounded-md hover:bg-opacity-30 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  >
+                    <ArrowLeft className="h-4 w-4" />
+                  </button>
+                  <span className="text-sm font-medium px-4 text-center">
+                    {images.findIndex((img) => img.id === previewImage.id) + 1}{" "}
+                    / {images.length}
+                  </span>
+                  <button
+                    onClick={() => {
+                      const currentIndex = images.findIndex(
+                        (img) => img.id === previewImage.id
+                      );
+                      if (currentIndex < images.length - 1) {
+                        setPreviewImage(images[currentIndex + 1]);
+                        setPreviewZoom(1);
+                      }
+                    }}
+                    disabled={
+                      images.findIndex((img) => img.id === previewImage.id) ===
+                      images.length - 1
+                    }
+                    className="p-2 bg-white bg-opacity-20 rounded-md hover:bg-opacity-30 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  >
+                    <ArrowRight className="h-4 w-4" />
+                  </button>
+                </div>
+              )}
             </div>
 
             {/* メインコンテンツ */}
-            <div className="p-6 max-h-[85vh] overflow-auto">
+            <div className="p-3 sm:p-6 max-h-[85vh] overflow-auto">
               {showComparison && previewImage.convertedUrl ? (
                 /* 比較表示 */
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-8">
                   {/* 元画像 */}
-                  <div className="space-y-4">
+                  <div className="space-y-3 sm:space-y-4">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-2">
-                        <div className="bg-gray-100 rounded-lg p-2">
-                          <Image className="h-5 w-5 text-gray-600" />
+                        <div className="bg-gray-100 rounded-lg p-1.5 sm:p-2">
+                          <Image className="h-4 w-4 sm:h-5 sm:w-5 text-gray-600" />
                         </div>
-                        <h4 className="text-lg font-semibold text-gray-900">
+                        <h4 className="text-base sm:text-lg font-semibold text-gray-900">
                           {t.imageConverter.original}
                         </h4>
                       </div>
@@ -1273,21 +1338,21 @@ export default function ImageConverterClient({
                   </div>
 
                   {/* 変換後画像 */}
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
+                  <div className="space-y-3 sm:space-y-4">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-0">
                       <div className="flex items-center space-x-2">
-                        <div className="bg-green-100 rounded-lg p-2">
-                          <Check className="h-5 w-5 text-green-600" />
+                        <div className="bg-green-100 rounded-lg p-1.5 sm:p-2">
+                          <Check className="h-4 w-4 sm:h-5 sm:w-5 text-green-600" />
                         </div>
-                        <h4 className="text-lg font-semibold text-gray-900">
+                        <h4 className="text-base sm:text-lg font-semibold text-gray-900">
                           {t.imageConverter.converted}
                         </h4>
                       </div>
                       <button
                         onClick={() => downloadImage(previewImage)}
-                        className="inline-flex items-center px-3 py-1 bg-green-600 text-white text-sm font-medium rounded-lg hover:bg-green-700 transition-colors"
+                        className="inline-flex items-center px-2 sm:px-3 py-1 bg-green-600 text-white text-xs sm:text-sm font-medium rounded-lg hover:bg-green-700 transition-colors self-start sm:self-auto"
                       >
-                        <Download className="mr-1 h-4 w-4" />
+                        <Download className="mr-1 h-3 w-3 sm:h-4 sm:w-4" />
                         ダウンロード
                       </button>
                     </div>
@@ -1363,13 +1428,13 @@ export default function ImageConverterClient({
                 </div>
               ) : (
                 /* 単体表示 */
-                <div className="text-center space-y-6">
+                <div className="text-center space-y-4 sm:space-y-6">
                   <div className="relative inline-block">
                     <div className="border rounded-lg overflow-hidden bg-gray-50 shadow-lg">
                       <img
                         src={previewImage.convertedUrl || previewImage.preview}
                         alt={previewImage.file.name}
-                        className="max-w-full max-h-[70vh] object-contain"
+                        className="max-w-full max-h-[60vh] sm:max-h-[70vh] object-contain"
                         style={{ transform: `scale(${previewZoom})` }}
                       />
                     </div>
@@ -1386,8 +1451,8 @@ export default function ImageConverterClient({
                   </div>
 
                   {/* 画像情報 */}
-                  <div className="max-w-md mx-auto bg-gray-50 rounded-lg p-4">
-                    <div className="grid grid-cols-2 gap-4 text-sm">
+                  <div className="max-w-sm sm:max-w-md mx-auto bg-gray-50 rounded-lg p-3 sm:p-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 text-xs sm:text-sm">
                       <div>
                         <span className="text-gray-600">
                           {t.imageConverter.originalSize}:
@@ -1475,31 +1540,39 @@ export default function ImageConverterClient({
             </div>
 
             {/* キーボードショートカットヘルプ */}
-            <div className="border-t bg-gray-50 px-6 py-3">
-              <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-gray-600">
-                <span>
-                  <kbd className="px-1 py-0.5 bg-gray-200 rounded">ESC</kbd>{" "}
-                  閉じる
+            <div className="border-t bg-gray-50 px-3 sm:px-6 py-2 sm:py-3">
+              <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-xs text-gray-600">
+                <span className="flex items-center">
+                  <kbd className="px-1 py-0.5 bg-gray-200 rounded text-xs">
+                    ESC
+                  </kbd>
+                  <span className="ml-1">閉じる</span>
                 </span>
                 {images.length > 1 && (
-                  <>
-                    <span>
-                      <kbd className="px-1 py-0.5 bg-gray-200 rounded">←</kbd>
-                      <kbd className="px-1 py-0.5 bg-gray-200 rounded">
-                        →
-                      </kbd>{" "}
-                      画像切替
-                    </span>
-                  </>
+                  <span className="hidden sm:flex items-center">
+                    <kbd className="px-1 py-0.5 bg-gray-200 rounded text-xs">
+                      ←
+                    </kbd>
+                    <kbd className="px-1 py-0.5 bg-gray-200 rounded text-xs ml-1">
+                      →
+                    </kbd>
+                    <span className="ml-1">画像切替</span>
+                  </span>
                 )}
-                <span>
-                  <kbd className="px-1 py-0.5 bg-gray-200 rounded">+</kbd>
-                  <kbd className="px-1 py-0.5 bg-gray-200 rounded">-</kbd>{" "}
-                  ズーム
+                <span className="flex items-center">
+                  <kbd className="px-1 py-0.5 bg-gray-200 rounded text-xs">
+                    +
+                  </kbd>
+                  <kbd className="px-1 py-0.5 bg-gray-200 rounded text-xs ml-1">
+                    -
+                  </kbd>
+                  <span className="ml-1">ズーム</span>
                 </span>
-                <span>
-                  <kbd className="px-1 py-0.5 bg-gray-200 rounded">0</kbd>{" "}
-                  リセット
+                <span className="flex items-center">
+                  <kbd className="px-1 py-0.5 bg-gray-200 rounded text-xs">
+                    0
+                  </kbd>
+                  <span className="ml-1">リセット</span>
                 </span>
               </div>
             </div>
