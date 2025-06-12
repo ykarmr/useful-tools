@@ -6,6 +6,13 @@
 - 各ページは i18n 対応をすること
   - `/locales`に言語ごとの翻訳ディレクトリを配置する
     - 機能追加や修正時には、全ての言語の翻訳ファイル更新すること
+    - 言語ファイルは型ファイルを先に定義し、型安全にすること
+      - `locales/types/*.ts` に型を定義
+- 各機能ページは以下のコンポーネントを参考に実装すること
+  - `app/[locale]/calculator/calculator-client.tsx`
+  - `app/[locale]/calculator/page.tsx`
+  - `app/[locale]/coin-flip/coin-flip-client.tsx`
+  - `app/[locale]/coin-flip/page.tsx`
 
 ## ページとルーティング
 
@@ -115,10 +122,12 @@ export default function [機能名]Client({ locale, t }: [機能名]ClientProps)
       description={t.[機能名].description}
       icon={[アイコン名]}
     >
-      {/* メインコンテンツ */}
+      {/* メインコンテンツ（必要な数だけセクションは増やしてOK） */}
       <ToolSection>
 
       </ToolSection>
+
+
 
       {/* FAQ セクション */}
       <ToolSection>
@@ -150,3 +159,8 @@ export default function [機能名]Client({ locale, t }: [機能名]ClientProps)
   - 各画面特有の翻訳キーを定義
 - `locales/[言語]/index.ts`
   - 各言語の翻訳ファイルをまとめる
+
+## 注意事項
+
+- 実装する前に方針の確認を行うこと
+- セクション毎に内容の確認を行うこと

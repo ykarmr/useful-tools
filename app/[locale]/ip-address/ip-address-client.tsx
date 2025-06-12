@@ -7,6 +7,7 @@ import ToolSection from "@/components/layout/tool-section";
 import ToolDisplay from "@/components/layout/tool-display";
 import ToolResult from "@/components/layout/tool-result";
 import ToolStats from "@/components/layout/tool-stats";
+import ToolFaq from "@/components/layout/tool-faq";
 import { Locale, Translations } from "@/locales";
 
 interface IPInfo {
@@ -231,6 +232,11 @@ export default function IPAddressClient({ locale, t }: IPAddressClientProps) {
             </div>
           </div>
         </div>
+      </ToolSection>
+
+      {/* FAQ Section */}
+      <ToolSection>
+        <ToolFaq faqList={t.ipAddress.faqList} t={t} />
       </ToolSection>
 
       {/* Refresh Button */}

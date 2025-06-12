@@ -253,6 +253,7 @@ export interface IpAddressTranslations {
   securityNote: string;
   securityDescription: string;
   refreshInfo: string;
+  faqList: FAQItem[];
 }
 
 export interface JsonFormatterTranslations {

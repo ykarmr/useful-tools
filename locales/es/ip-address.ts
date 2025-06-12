@@ -30,4 +30,30 @@ export const ipAddress: IpAddressTranslations = {
   yourIP: "Tu Dirección IP Pública",
   postal: "Código Postal",
   security: "Seguridad",
+  faqList: [
+    {
+      q: "¿Qué es una dirección IP?",
+      a: "Una dirección IP es un identificador numérico único asignado a dispositivos conectados a internet. Permite que los dispositivos se comuniquen entre sí a través de internet.",
+    },
+    {
+      q: "¿Cuál es la diferencia entre direcciones IP públicas y privadas?",
+      a: "Una dirección IP pública es directamente accesible desde internet, mientras que una dirección IP privada se usa dentro de redes locales (como tu Wi-Fi doméstico) y no es directamente accesible desde internet.",
+    },
+    {
+      q: "¿Por qué se puede ver mi ubicación desde mi dirección IP?",
+      a: "Las direcciones IP son asignadas por los Proveedores de Servicios de Internet (ISP) a regiones geográficas específicas, lo que permite una estimación aproximada de la ubicación basada en la dirección IP.",
+    },
+    {
+      q: "¿Qué tan precisa es la información de ubicación?",
+      a: "La precisión de la ubicación varía. Generalmente es precisa a nivel de país y región, pero puede ser menos exacta a nivel de ciudad o calle.",
+    },
+    {
+      q: "¿Cómo puedo ocultar mi dirección IP?",
+      a: "Puedes usar una VPN (Red Privada Virtual) o servidor proxy para enmascarar tu dirección IP real y mejorar tu privacidad en línea.",
+    },
+    {
+      q: "¿Cambia mi dirección IP?",
+      a: "La mayoría de los ISP asignan direcciones IP dinámicas, lo que significa que tu dirección IP puede cambiar cuando te reconectes a internet o después de cierto período de tiempo.",
+    },
+  ],
 };
