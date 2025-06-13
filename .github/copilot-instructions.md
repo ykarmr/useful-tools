@@ -21,9 +21,14 @@
 - アクセシビリティを考慮し、適切な ARIA 属性を使用すること
 - 各ページのアイコンは `lucide-react` を使用すること
 - 各ページのレイアウトは `components/layout` 以下のコンポーネントを使用すること
+- 各機能ページのメインレイアウトは `components/layout/tool-layout.tsx` を使用すること
 - 各機能ページのセクションは `components/layout/tool-section.tsx` を使用すること
 - 各機能ページの表示部分は `components/layout/tool-display.tsx` を使用すること
+- 各機能ページの結果表示は `components/layout/tool-result.tsx` を使用すること
+- 各機能ページの入力コントロールは `components/layout/tool-input.tsx` と `components/layout/tool-controls.tsx` を使用すること
+- 各機能ページの統計情報は `components/layout/tool-stats.tsx` を使用すること
 - 各機能ページの FAQ セクションは `components/layout/tool-faq.tsx` を使用すること
+- 広告表示は `components/layout/ad-banner.tsx` を使用すること
 
 ## ページとルーティング
 
@@ -36,6 +41,35 @@
 
 - `app/[locale]/services/page.tsx`
   - サービス一覧ページを定義
+
+### 機能ページ（ツール）
+
+現在実装されているツール：
+
+- `app/[locale]/calculator/` - 電卓ツール
+- `app/[locale]/coin-flip/` - コイン投げツール
+- `app/[locale]/dice-roller/` - サイコロツール
+- `app/[locale]/digital-clock/` - デジタル時計ツール
+- `app/[locale]/image-converter/` - 画像変換ツール
+- `app/[locale]/ip-address/` - IP アドレス取得ツール
+- `app/[locale]/json-formatter/` - JSON 整形ツール
+- `app/[locale]/markdown-preview/` - Markdown プレビューツール
+- `app/[locale]/pet-age-conversion/` - ペット年齢変換ツール
+- `app/[locale]/pomodoro-timer/` - ポモドーロタイマーツール
+- `app/[locale]/qr-generator/` - QR コード生成ツール
+- `app/[locale]/random-number/` - 乱数生成ツール
+- `app/[locale]/random-string/` - ランダム文字列生成ツール
+- `app/[locale]/roulette/` - ルーレットツール
+- `app/[locale]/scoreboard/` - スコアボードツール
+- `app/[locale]/subnet-calculator/` - サブネット計算ツール
+- `app/[locale]/team-generator/` - チーム生成ツール
+- `app/[locale]/timer/` - タイマーツール
+- `app/[locale]/todo/` - TODO リストツール
+- `app/[locale]/unit-conversion/` - 単位変換ツール
+- `app/[locale]/url-analyzer/` - URL 解析ツール
+- `app/[locale]/url-encoder/` - URL エンコーダーツール
+- `app/[locale]/user-agent/` - User-Agent 取得ツール
+- `app/[locale]/world-clock/` - 世界時計ツール
 
 ### 機能ページ
 
@@ -164,6 +198,61 @@ export default function [機能名]Client({ locale, t }: [機能名]ClientProps)
 }
 ```
 
+## プロジェクト構造とファイル配置
+
+### アプリケーション構造
+
+```
+app/
+├── globals.css - グローバルスタイル
+├── layout.tsx - ルートレイアウト
+├── manifest.ts - PWAマニフェスト
+├── robots.ts - robots.txt生成
+├── sitemap.ts - サイトマップ生成
+└── [locale]/
+    ├── layout.tsx - 多言語対応レイアウト
+    ├── page.tsx - ルートページ
+    ├── services/ - サービス一覧ページ
+    ├── contact/ - 問い合わせページ
+    ├── terms/ - 利用規約ページ
+    ├── privacy/ - プライバシーポリシーページ
+    └── [各ツール]/ - 機能ページ
+```
+
+### コンポーネント構造
+
+```
+components/
+├── theme-provider.tsx - テーマプロバイダー
+├── layout/
+│   ├── ad-banner.tsx - 広告バナー
+│   ├── footer.tsx - フッター
+│   ├── header.tsx - ヘッダー
+│   ├── main-layout.tsx - メインレイアウト
+│   ├── tool-controls.tsx - ツール操作コントロール
+│   ├── tool-display.tsx - ツール表示部分
+│   ├── tool-faq.tsx - FAQ セクション
+│   ├── tool-input.tsx - ツール入力部分
+│   ├── tool-layout.tsx - ツール用メインレイアウト
+│   ├── tool-result.tsx - ツール結果表示
+│   ├── tool-section.tsx - ツールセクション
+│   └── tool-stats.tsx - ツール統計情報
+└── ui/ - shadcn/ui コンポーネント
+```
+
+### ライブラリとユーティリティ
+
+```
+lib/
+├── const.ts - 定数定義
+├── i18n.ts - 国際化関連ユーティリティ
+└── utils.ts - 共通ユーティリティ関数
+
+hooks/
+├── use-mobile.tsx - モバイル検出フック
+└── use-toast.ts - トースト通知フック
+```
+
 ## サイトマップ
 
 - `app/sitemap.ts`
@@ -210,6 +299,74 @@ export default function [機能名]Client({ locale, t }: [機能名]ClientProps)
   - `calculator.ts`, `coin-flip.ts`, `[機能名].ts` など
 - `locales/[言語]/index.ts`
   - 各言語の翻訳ファイルをまとめる
+
+## 開発ワークフロー
+
+### 新機能追加時の手順
+
+1. **型定義の作成**
+
+   - `locales/types/pages/tools/[機能名].ts` に型定義を追加
+   - `locales/types/index.ts` に型をエクスポート
+
+2. **翻訳ファイルの作成**
+
+   - 全ての言語（ja, en, es, ru, zh）に翻訳ファイルを作成
+   - `locales/[言語]/pages/tools/[機能名].ts`
+   - `locales/[言語]/index.ts` に翻訳をエクスポート
+
+3. **ページコンポーネントの作成**
+
+   - `app/[locale]/[機能名]/page.tsx` - サーバーコンポーネント
+   - `app/[locale]/[機能名]/[機能名]-client.tsx` - クライアントコンポーネント
+
+4. **サイトマップの更新**
+   - `app/sitemap.ts` に新しいページを追加
+
+### コンポーネント使用例
+
+```tsx
+// ツールレイアウトの基本構成
+<ToolLayout
+  locale={locale}
+  t={t}
+  title={t.[機能名].title}
+  description={t.[機能名].description}
+  icon={[アイコン名]}
+>
+  {/* メイン機能セクション */}
+  <ToolSection>
+    <ToolDisplay>
+      {/* 結果表示エリア */}
+    </ToolDisplay>
+    <ToolInput>
+      {/* 入力フォーム */}
+    </ToolInput>
+    <ToolControls>
+      {/* 操作ボタン */}
+    </ToolControls>
+  </ToolSection>
+
+  {/* 統計情報セクション（必要に応じて） */}
+  <ToolSection>
+    <ToolStats>
+      {/* 統計データ */}
+    </ToolStats>
+  </ToolSection>
+
+  {/* 結果セクション（必要に応じて） */}
+  <ToolSection>
+    <ToolResult>
+      {/* 処理結果 */}
+    </ToolResult>
+  </ToolSection>
+
+  {/* FAQ セクション */}
+  <ToolSection>
+    <ToolFaq faqList={t.[機能名].faqList} t={t} />
+  </ToolSection>
+</ToolLayout>
+```
 
 ## 注意事項
 
