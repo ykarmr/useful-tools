@@ -1,0 +1,54 @@
+import { RouletteTranslations } from "@/locales/types/pages/tools/roulette";
+
+export const roulette: RouletteTranslations = {
+  title: "Ruleta",
+  description: "Herramienta de selección aleatoria tipo ruleta",
+  keywords: ["ruleta", "selección aleatoria", "juego", "sorteo", "azar"],
+  reset: "Reiniciar",
+  addItems: "Agregar elementos",
+  enterOption: "Ingrese una opción...",
+  currentItems: "Elementos actuales",
+  noItemsAdded: "No se han agregado elementos aún",
+  addItemsToStart: "Agrega elementos para comenzar",
+  spinWheel: "Girar la ruleta",
+  spinning: "Girando...",
+  winner: "¡Ganador!",
+  itemsCount: "{count}/20 elementos",
+  enabledCount: "{count} habilitados",
+  removeItem: "Eliminar {item}",
+  disableItem: "Deshabilitar {item}",
+  enableItem: "Habilitar {item}",
+  disabled: "Deshabilitado",
+  defaultItems: {
+    item1: "Pizza",
+    item2: "Sushi",
+    item3: "Hamburguesa",
+    item4: "Pasta",
+  },
+  winnerZone: "ZONA DE GANADORES",
+  landingArea: "Área de aterrizaje",
+  segmentsLandInZone: "Los segmentos que caen en la zona verde ganan",
+  needMoreItems:
+    "Se requieren al menos 2 elementos habilitados para girar la ruleta",
+  landedInZone: "¡Cayó en la zona ganadora!",
+  addItemsInstruction: "Agrega elementos usando el campo de arriba",
+  addItemLabel: "Agregar elemento",
+  faqList: [
+    {
+      q: "¿Cuántos elementos puedo agregar a la ruleta?",
+      a: "Puedes agregar hasta 20 elementos a la ruleta. Si tienes más opciones, considera agrupar elementos similares juntos.",
+    },
+    {
+      q: "¿Los resultados son verdaderamente aleatorios?",
+      a: "Sí, utilizamos el generador de números aleatorios de JavaScript para asegurar resultados completamente aleatorios. Cada elemento habilitado tiene la misma probabilidad de ser seleccionado.",
+    },
+    {
+      q: "¿Puedo deshabilitar elementos temporalmente?",
+      a: "Sí, puedes hacer clic en el botón junto a cada elemento para deshabilitarlo temporalmente. Los elementos deshabilitados serán excluidos de los resultados de la ruleta sin ser eliminados.",
+    },
+    {
+      q: "¿Se guardan los datos de mi ruleta?",
+      a: "Tu lista de elementos se guarda automáticamente en el almacenamiento local de tu navegador. Cuando recargues la página, tus elementos previamente agregados serán restaurados.",
+    },
+  ],
+};

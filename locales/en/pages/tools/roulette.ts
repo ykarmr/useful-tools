@@ -1,0 +1,66 @@
+import { RouletteTranslations } from "@/locales/types/pages/tools/roulette";
+
+export const roulette: RouletteTranslations = {
+  title: "Decision Roulette",
+  description:
+    "Add your options and let the wheel decide! Perfect for choosing restaurants, activities, or making any decision.",
+  keywords: [
+    "roulette",
+    "decision maker",
+    "random choice",
+    "spin the wheel",
+    "decision wheel",
+    "random decision",
+    "choice maker",
+    "randomizer",
+    "decision helper",
+    "wheel of fortune",
+    "random selection",
+  ],
+  addItems: "Add Items",
+  enterOption: "Enter an option...",
+  currentItems: "Current Items",
+  noItemsAdded: "No items added yet",
+  addItemsToStart: "Add items to start",
+  spinWheel: "Spin Wheel",
+  spinning: "Spinning...",
+  reset: "Reset",
+  winner: "Winner!",
+  itemsCount: "{count}/20 items",
+  enabledCount: "{count} enabled",
+  removeItem: "Remove {item}",
+  disableItem: "Disable {item}",
+  enableItem: "Enable {item}",
+  disabled: "Disabled",
+  defaultItems: {
+    item1: "Pizza",
+    item2: "Sushi",
+    item3: "Burger",
+    item4: "Pasta",
+  },
+  winnerZone: "WINNER ZONE",
+  landingArea: "Landing Area",
+  segmentsLandInZone: "Segments landing in the green zone win",
+  needMoreItems: "At least 2 enabled items are required to spin the wheel",
+  landedInZone: "Landed in the winner zone!",
+  addItemsInstruction: "Add items using the field above",
+  addItemLabel: "Add Item",
+  faqList: [
+    {
+      q: "How many items can I add to the roulette?",
+      a: "You can add up to 20 items to the roulette wheel. If you have more options, consider grouping similar items together.",
+    },
+    {
+      q: "Are the results truly random?",
+      a: "Yes, we use JavaScript's random number generator to ensure completely random results. Each enabled item has an equal probability of being selected.",
+    },
+    {
+      q: "Can I temporarily disable items?",
+      a: "Yes, you can click the button next to each item to temporarily disable it. Disabled items will be excluded from the roulette results without being deleted.",
+    },
+    {
+      q: "Is my roulette data saved?",
+      a: "Your item list is automatically saved to your browser's local storage. When you reload the page, your previously added items will be restored.",
+    },
+  ],
+};
