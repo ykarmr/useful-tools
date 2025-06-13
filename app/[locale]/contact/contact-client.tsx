@@ -76,15 +76,13 @@ export default function ContactClient({ t }: ContactClientProps) {
     try {
       // Simulate API call
 
-      const formDataToSend = new FormData();
-      formDataToSend.append("お名前", formData.name);
-      formDataToSend.append("メールアドレス", formData.email);
-      formDataToSend.append("お問い合わせ内容", formData.message);
+      const body = new FormData();
+      body.append("お名前", formData.name);
+      body.append("メールアドレス", formData.email);
+      body.append("お問い合わせ内容", formData.message);
       const res = await fetch("https://ssgform.com/s/iKgLTdV9LxsB", {
         method: "POST",
-        headers: {
-          "content-type": "multipart/form-data",
-        },
+        body,
       });
 
       if (!res.ok) {
