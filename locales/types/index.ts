@@ -35,6 +35,8 @@ import { TermsTranslations } from "./pages/terms";
 import { AdTranslations } from "./ad";
 import { FooterTranslations } from "./footer";
 import { HeaderTranslations } from "./header";
+import { ColorPaletteTranslations } from "./pages/tools/color-palette";
+import { TextStatisticsTranslations } from "./pages/tools/text-statistics";
 
 export interface Translations {
   common: CommonTranslations;
@@ -70,4 +72,6 @@ export interface Translations {
   subnetCalculator: SubnetCalculatorTranslations;
   petAgeConversion: PetAgeConversionTranslations;
   imageConverter: ImageConverterTranslations;
+  colorPalette: ColorPaletteTranslations;
+  textStatistics: TextStatisticsTranslations;
 }

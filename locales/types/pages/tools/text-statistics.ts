@@ -1,0 +1,40 @@
+import { FAQItem } from "../../faq";
+
+export interface TextStatisticsTranslations {
+  title: string;
+  description: string;
+  keywords: string[];
+  inputPlaceholder: string;
+  analyzeText: string;
+  clear: string;
+  statistics: string;
+  characters: string;
+  charactersNoSpaces: string;
+  words: string;
+  sentences: string;
+  paragraphs: string;
+  lines: string;
+  readingTime: string;
+  minutes: string;
+  readingSpeed: string;
+  wordsPerMinute: string;
+  avgWordsPerSentence: string;
+  avgSentencesPerParagraph: string;
+  mostCommonWords: string;
+  word: string;
+  frequency: string;
+  textComplexity: string;
+  simple: string;
+  moderate: string;
+  complex: string;
+  languageDetection: string;
+  detected: string;
+  unknown: string;
+  copyStats: string;
+  copied: string;
+  exportData: string;
+  downloadTXT: string;
+  downloadJSON: string;
+  noText: string;
+  faqList: FAQItem[];
+}

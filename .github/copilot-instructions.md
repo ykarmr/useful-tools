@@ -14,6 +14,8 @@
   - `app/[locale]/coin-flip/coin-flip-client.tsx`
   - `app/[locale]/coin-flip/page.tsx`
 - レスポンシブデザインを意識し、モバイルファーストで実装すること
+- マージンとパディングを考慮して、適切なスペーシングを確保すること
+- style は tailwindcss を使用すること
 - 各ページのメタデータは `generateMetadata` 関数を使用して定義すること
 - 各ページのルーティングは `app/[locale]/[feature]/page.tsx` の形式で定義すること
 - 各ページのクライアントサイドのロジックは `app/[locale]/[feature]/[機能名]-client.tsx` に記述すること
