@@ -41,6 +41,10 @@
 
 - `app/[locale]/services/page.tsx`
   - サービス一覧ページを定義
+- `app/[locale]/services/services-client.tsx`
+  - サービス一覧のクライアントコンポーネント
+  - `toolCategories` 配列でツールをカテゴリ別に管理
+  - カテゴリ: productivity（生産性）, random（ランダム）, time（時間）, network（ネットワーク・Web）, textContent（テキスト・コンテンツ）, converter（コンバーター）
 
 ### 機能ページ（ツール）
 
@@ -320,7 +324,23 @@ hooks/
    - `app/[locale]/[機能名]/page.tsx` - サーバーコンポーネント
    - `app/[locale]/[機能名]/[機能名]-client.tsx` - クライアントコンポーネント
 
-4. **サイトマップの更新**
+4. **サービス一覧画面への追加**
+
+   - `app/[locale]/services/services-client.tsx` の `toolCategories` 配列に新しいツールを追加
+   - 適切なカテゴリ（productivity, random, time, network, textContent, converter）に配置
+   - ツールのキー、アイコン、href を設定
+   - 例：
+     ```tsx
+     {
+       key: "textContent",
+       tools: [
+         // ...existing tools...
+         { key: "newTool", icon: NewIcon, href: "/new-tool" },
+       ],
+     }
+     ```
+
+5. **サイトマップの更新**
    - `app/sitemap.ts` に新しいページを追加
 
 ### コンポーネント使用例

@@ -45,6 +45,8 @@ const toolCategories = [
       { key: "calculator", icon: Calculator, href: "/calculator" },
       { key: "timer", icon: Timer, href: "/timer" },
       { key: "pomodoroTimer", icon: Clock, href: "/pomodoro-timer" },
+      { key: "qrGenerator", icon: QrCode, href: "/qr-generator" },
+      { key: "scoreboard", icon: Trophy, href: "/scoreboard" },
     ],
   },
   {
@@ -55,6 +57,7 @@ const toolCategories = [
       { key: "coinFlip", icon: Coins, href: "/coin-flip" },
       { key: "randomNumber", icon: Hash, href: "/random-number" },
       { key: "randomString", icon: Key, href: "/random-string" },
+      { key: "teamGenerator", icon: Users, href: "/team-generator" },
     ],
   },
   {
@@ -62,20 +65,15 @@ const toolCategories = [
     tools: [
       { key: "digitalClock", icon: Clock3, href: "/digital-clock" },
       { key: "worldClock", icon: Globe, href: "/world-clock" },
-      { key: "scoreboard", icon: Trophy, href: "/scoreboard" },
     ],
   },
   {
-    key: "utility",
+    key: "network",
     tools: [
-      { key: "teamGenerator", icon: Users, href: "/team-generator" },
-      { key: "qrGenerator", icon: QrCode, href: "/qr-generator" },
       { key: "userAgent", icon: Monitor, href: "/user-agent" },
       { key: "ipAddress", icon: MapPin, href: "/ip-address" },
       { key: "urlAnalyzer", icon: LinkIcon, href: "/url-analyzer" },
-      { key: "unitConversion", icon: Zap, href: "/unit-conversion" },
       { key: "subnetCalculator", icon: Network, href: "/subnet-calculator" },
-      { key: "petAgeConversion", icon: PawPrint, href: "/pet-age-conversion" },
     ],
   },
   {
@@ -84,7 +82,14 @@ const toolCategories = [
       { key: "jsonFormatter", icon: FileJson, href: "/json-formatter" },
       { key: "urlEncoder", icon: LinkIcon, href: "/url-encoder" },
       { key: "markdownPreview", icon: FileText, href: "/markdown-preview" },
+    ],
+  },
+  {
+    key: "converter",
+    tools: [
       { key: "imageConverter", icon: Image, href: "/image-converter" },
+      { key: "unitConversion", icon: Zap, href: "/unit-conversion" },
+      { key: "petAgeConversion", icon: PawPrint, href: "/pet-age-conversion" },
     ],
   },
 ];
@@ -138,12 +143,10 @@ export default function ServicesClient({ locale, t }: ServicesClientProps) {
                       </div>
                     </div>
                     <h3 className="font-semibold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors">
-                      {/* @ts-ignore */}
-                      {services.tools?.[tool.key]?.title || tool.key}
+                      {(t as any)[tool.key]?.title || tool.key}
                     </h3>
                     <p className="text-sm text-gray-600">
-                      {/* @ts-ignore */}
-                      {services.tools?.[tool.key]?.description || ""}
+                      {(t as any)[tool.key]?.description || ""}
                     </p>
                   </a>
                 );
