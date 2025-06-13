@@ -44,8 +44,18 @@ export default function ColorPaletteClient({
   const [palette, setPalette] = useState<ColorInfo[]>([]);
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
 
+  // Hexカラー値のバリデーション
+  const isValidHex = (hex: string): boolean => {
+    return /^#[0-9A-F]{6}$/i.test(hex);
+  };
+
   // 色の変換ユーティリティ関数
   const hexToRgb = (hex: string): { r: number; g: number; b: number } => {
+    // バリデーションを追加
+    if (!isValidHex(hex)) {
+      console.warn(`Invalid hex color: ${hex}, using fallback color`);
+      hex = "#000000"; // フォールバック色
+    }
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result
       ? {
@@ -130,6 +140,10 @@ export default function ColorPaletteClient({
   };
 
   const rgbToHex = (r: number, g: number, b: number): string => {
+    // RGB値を0-255の範囲にクランプ
+    r = Math.max(0, Math.min(255, Math.round(r)));
+    g = Math.max(0, Math.min(255, Math.round(g)));
+    b = Math.max(0, Math.min(255, Math.round(b)));
     return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
   };
 
@@ -234,7 +248,8 @@ export default function ColorPaletteClient({
 
   // ランダム色生成（パレット生成状態をリセット）
   const generateRandomColor = () => {
-    const randomHex = "#" + Math.floor(Math.random() * 16777215).toString(16);
+    const randomColor = Math.floor(Math.random() * 16777215);
+    const randomHex = "#" + randomColor.toString(16).padStart(6, "0");
     setBaseColor(randomHex);
   };
 
@@ -257,22 +272,26 @@ export default function ColorPaletteClient({
     if (colorBlindType === "normal") return color.hex;
 
     let { r, g, b } = color.rgb;
+    // 元の値を保存して循環参照を防ぐ
+    const originalR = r;
+    const originalG = g;
+    const originalB = b;
 
     switch (colorBlindType) {
       case "protanopia": // 赤色盲
-        r = 0.567 * r + 0.433 * g;
-        g = 0.558 * r + 0.442 * g;
-        b = 0.242 * g + 0.758 * b;
+        r = 0.567 * originalR + 0.433 * originalG;
+        g = 0.558 * originalR + 0.442 * originalG;
+        b = 0.242 * originalG + 0.758 * originalB;
         break;
       case "deuteranopia": // 緑色盲
-        r = 0.625 * r + 0.375 * g;
-        g = 0.7 * r + 0.3 * g;
-        b = 0.3 * g + 0.7 * b;
+        r = 0.625 * originalR + 0.375 * originalG;
+        g = 0.7 * originalR + 0.3 * originalG;
+        b = 0.3 * originalG + 0.7 * originalB;
         break;
       case "tritanopia": // 青色盲
-        r = 0.95 * r + 0.05 * g;
-        g = 0.433 * g + 0.567 * b;
-        b = 0.475 * g + 0.525 * b;
+        r = 0.95 * originalR + 0.05 * originalG;
+        g = 0.433 * originalG + 0.567 * originalB;
+        b = 0.475 * originalG + 0.525 * originalB;
         break;
     }
 
@@ -361,10 +380,17 @@ export default function ColorPaletteClient({
                   type="text"
                   value={baseColor}
                   onChange={(e) => {
-                    setBaseColor(e.target.value);
+                    const value = e.target.value;
+                    setBaseColor(value);
+                    // 無効な値の場合のフィードバック（必要に応じて）
+                    if (value && !isValidHex(value)) {
+                      console.warn("Invalid hex color format");
+                    }
                   }}
                   placeholder={t.colorPalette.baseColorPlaceholder}
                   className="flex-1 px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-800 dark:text-white"
+                  pattern="^#[0-9A-Fa-f]{6}$"
+                  title="6桁の16進数カラーコード（例: #FF0000）"
                 />
               </div>
             </div>

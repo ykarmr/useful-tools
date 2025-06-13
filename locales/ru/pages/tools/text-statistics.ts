@@ -15,7 +15,17 @@ export const textStatistics: TextStatisticsTranslations = {
     "инструменты письма",
     "статистика строк",
   ],
+  inputLabel: "Введите текст для анализа",
   inputPlaceholder: "Введите текст для анализа...",
+  inputDescription:
+    "Введите текст в эту область для анализа. Автоматически будет подсчитано количество символов, слов, время чтения и другая статистическая информация.",
+  inputAriaLabel: "Область ввода текста для анализа",
+  inputCharacterCount: "Введено символов: {count}",
+  frequencyCount: "{count} раз",
+  exportOptions: "Опции Экспорта",
+  emptyStateTitle: "Введите текст для анализа",
+  emptyStateDescription:
+    "Будет отображено количество символов, слов, время чтения и другая подробная статистика",
   analyzeText: "Анализировать Текст",
   clear: "Очистить",
   statistics: "Статистика",

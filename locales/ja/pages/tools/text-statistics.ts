@@ -15,7 +15,17 @@ export const textStatistics: TextStatisticsTranslations = {
     "ライティング支援",
     "文字列統計",
   ],
+  inputLabel: "分析するテキストを入力してください",
   inputPlaceholder: "分析したいテキストを入力してください...",
+  inputDescription:
+    "このエリアに分析したいテキストを入力してください。文字数、単語数、読書時間などの統計情報が自動的に計算されます。",
+  inputAriaLabel: "テキスト分析用の入力エリア",
+  inputCharacterCount: "入力済み: {count} 文字",
+  frequencyCount: "{count}回",
+  exportOptions: "エクスポートオプション",
+  emptyStateTitle: "テキストを入力してください",
+  emptyStateDescription:
+    "文字数、単語数、読書時間などの詳細な統計情報を表示します",
   analyzeText: "テキスト分析",
   clear: "クリア",
   statistics: "統計情報",

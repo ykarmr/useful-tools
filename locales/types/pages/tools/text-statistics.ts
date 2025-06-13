@@ -4,7 +4,15 @@ export interface TextStatisticsTranslations {
   title: string;
   description: string;
   keywords: string[];
+  inputLabel: string;
   inputPlaceholder: string;
+  inputDescription: string;
+  inputAriaLabel: string;
+  inputCharacterCount: string;
+  frequencyCount: string;
+  exportOptions: string;
+  emptyStateTitle: string;
+  emptyStateDescription: string;
   analyzeText: string;
   clear: string;
   statistics: string;

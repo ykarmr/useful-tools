@@ -324,38 +324,46 @@ ${statistics.mostCommonWords
     >
       {/* テキスト入力セクション */}
       <ToolSection>
-        <div className="bg-white border border-gray-200 rounded-lg p-6">
-          <div className="mb-4">
-            <label
-              htmlFor="text-input"
-              className="block text-sm font-medium text-gray-700 mb-2"
-            >
-              分析するテキストを入力してください
-            </label>
-            <textarea
-              id="text-input"
-              value={inputText}
-              onChange={(e) => setInputText(e.target.value)}
-              placeholder={t.textStatistics.inputPlaceholder}
-              className="w-full h-48 px-4 py-3 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-            />
+        <div className="mb-4">
+          <label
+            htmlFor="text-input"
+            className="block text-sm font-medium text-gray-700 mb-2"
+          >
+            {t.textStatistics.inputLabel}
+          </label>
+          <textarea
+            id="text-input"
+            value={inputText}
+            onChange={(e) => setInputText(e.target.value)}
+            placeholder={t.textStatistics.inputPlaceholder}
+            className="w-full h-48 px-4 py-3 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+            aria-describedby="text-input-description"
+            aria-label={t.textStatistics.inputAriaLabel}
+          />
+          <div id="text-input-description" className="sr-only">
+            {t.textStatistics.inputDescription}
           </div>
+        </div>
 
-          <div className="flex flex-wrap gap-3 justify-between items-center">
-            <div className="text-sm text-gray-500">
-              {inputText.length > 0 && (
-                <span>入力済み: {inputText.length.toLocaleString()} 文字</span>
-              )}
-            </div>
-            <button
-              onClick={clearText}
-              className="flex items-center px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors duration-200 text-sm font-medium"
-              disabled={!inputText.trim()}
-            >
-              <FileText className="w-4 h-4 mr-2" />
-              {t.textStatistics.clear}
-            </button>
+        <div className="flex flex-wrap gap-3 justify-between items-center">
+          <div className="text-sm text-gray-500">
+            {inputText.length > 0 && (
+              <span>
+                {t.textStatistics.inputCharacterCount.replace(
+                  "{count}",
+                  inputText.length.toLocaleString()
+                )}
+              </span>
+            )}
           </div>
+          <button
+            onClick={clearText}
+            className="flex items-center px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors duration-200 text-sm font-medium"
+            disabled={!inputText.trim()}
+          >
+            <FileText className="w-4 h-4 mr-2" />
+            {t.textStatistics.clear}
+          </button>
         </div>
       </ToolSection>
 
@@ -497,7 +505,10 @@ ${statistics.mostCommonWords
                           {word}
                         </div>
                         <div className="text-sm text-amber-600 mt-1">
-                          {frequency}回
+                          {t.textStatistics.frequencyCount.replace(
+                            "{count}",
+                            frequency.toString()
+                          )}
                         </div>
                       </div>
                     ))}
@@ -508,7 +519,7 @@ ${statistics.mostCommonWords
             {/* アクションボタン */}
             <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
               <h4 className="font-semibold text-gray-900 mb-4 text-center">
-                エクスポートオプション
+                {t.textStatistics.exportOptions}
               </h4>
               <div className="flex flex-wrap gap-3 justify-center">
                 <button
@@ -556,11 +567,11 @@ ${statistics.mostCommonWords
                 <BarChart3 className="w-12 h-12 text-blue-600" />
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                テキストを入力してください
+                {t.textStatistics.emptyStateTitle}
               </h3>
               <p className="text-gray-600 mb-4">{t.textStatistics.noText}</p>
               <div className="text-sm text-gray-500">
-                文字数、単語数、読書時間などの詳細な統計情報を表示します
+                {t.textStatistics.emptyStateDescription}
               </div>
             </div>
           </div>

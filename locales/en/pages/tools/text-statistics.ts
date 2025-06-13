@@ -15,7 +15,17 @@ export const textStatistics: TextStatisticsTranslations = {
     "writing tools",
     "string statistics",
   ],
+  inputLabel: "Enter text to analyze",
   inputPlaceholder: "Enter text to analyze...",
+  inputDescription:
+    "Enter text in this area for analysis. Character count, word count, reading time, and other statistical information will be automatically calculated.",
+  inputAriaLabel: "Text input area for analysis",
+  inputCharacterCount: "Characters entered: {count}",
+  frequencyCount: "{count} times",
+  exportOptions: "Export Options",
+  emptyStateTitle: "Enter text to analyze",
+  emptyStateDescription:
+    "Character count, word count, reading time, and other detailed statistics will be displayed",
   analyzeText: "Analyze Text",
   clear: "Clear",
   statistics: "Statistics",
