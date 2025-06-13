@@ -171,18 +171,43 @@ export default function [機能名]Client({ locale, t }: [機能名]ClientProps)
 
 ## 言語ファイルの構成
 
-- `locales/[types]/common.ts`
-  - 共通の翻訳キーを定義
-- `locales/[types]/index.ts`
-  - 各言語の翻訳ファイルをまとめる
-- `locales/[types]/tools.ts`
-  - 各ツールの翻訳キーを定義
-- `locales/[言語]/pages.ts`
-  - 各ページの翻訳キーを定義
+### 型定義ファイル (`locales/types/`)
+
+- `locales/types/common.ts`
+  - 共通の翻訳キーの型を定義
+- `locales/types/ad.ts`
+  - 広告関連の翻訳キーの型を定義
+- `locales/types/faq.ts`
+  - FAQ 関連の翻訳キーの型を定義
+- `locales/types/footer.ts`
+  - フッターの翻訳キーの型を定義
+- `locales/types/header.ts`
+  - ヘッダーの翻訳キーの型を定義
+- `locales/types/pages/`
+  - 各ページの翻訳キーの型を定義
+  - `contact.ts`, `privacy.ts`, `services.ts`, `terms.ts`
+- `locales/types/pages/tools/`
+  - 各ツールの翻訳キーの型を定義
+  - `calculator.ts`, `coin-flip.ts`, `[機能名].ts` など
+- `locales/types/index.ts`
+  - 全ての型定義をまとめる
+
+### 言語ファイル (`locales/[言語]/`)
+
 - `locales/[言語]/common.ts`
   - 共通の翻訳キーを定義
-- `locales/[言語]/[機能名].ts`
-  - 各画面特有の翻訳キーを定義
+- `locales/[言語]/ad.ts`
+  - 広告関連の翻訳キーを定義
+- `locales/[言語]/footer.ts`
+  - フッターの翻訳キーを定義
+- `locales/[言語]/header.ts`
+  - ヘッダーの翻訳キーを定義
+- `locales/[言語]/pages/`
+  - 各ページの翻訳キーを定義
+  - `contact.ts`, `home.ts`, `privacy.ts`, `services.ts`, `terms.ts`
+- `locales/[言語]/pages/tools/`
+  - 各ツールの翻訳キーを定義
+  - `calculator.ts`, `coin-flip.ts`, `[機能名].ts` など
 - `locales/[言語]/index.ts`
   - 各言語の翻訳ファイルをまとめる
 
