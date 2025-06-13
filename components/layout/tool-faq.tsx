@@ -1,8 +1,6 @@
 import { Translations } from "@/locales";
-import { FAQItem } from "@/locales/types";
+import { FAQItem } from "@/locales/types/faq";
 import React, { useState } from "react";
-
-const faqList = [];
 
 type Props = {
   faqList: FAQItem[];

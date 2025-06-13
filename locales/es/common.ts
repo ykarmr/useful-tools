@@ -1,9 +1,4 @@
-import type {
-  CommonTranslations,
-  HeaderTranslations,
-  FooterTranslations,
-  AdTranslations,
-} from "../types";
+import type { CommonTranslations } from "../types";
 
 export const common: CommonTranslations = {
   siteTitle: "USEFUL TOOLS",
@@ -137,45 +132,4 @@ export const common: CommonTranslations = {
     },
   },
   faqTitle: "Preguntas Frecuentes (FAQ)",
-};
-
-export const header: HeaderTranslations = {
-  logo: "USEFUL TOOLS",
-  toggleMenu: "Alternar menú de navegación",
-  changeLanguage: "Cambiar idioma",
-};
-
-export const footer: FooterTranslations = {
-  services: "Servicios",
-  support: "Soporte",
-  legal: "Legal",
-  helpCenter: "Centro de Ayuda",
-  contact: "Contacto",
-  privacyPolicy: "Política de Privacidad",
-  termsOfService: "Términos de Servicio",
-  copyright: "USEFUL TOOLS. Todos los derechos reservados.",
-  description:
-    "Una colección integral de herramientas en línea gratuitas para aumentar tu productividad y simplificar tu flujo de trabajo diario.",
-};
-
-export const ad: AdTranslations = {
-  advertisement: "Publicidad",
-  premiumTools: {
-    title: "Herramientas Premium",
-    description:
-      "Desbloquea funciones avanzadas con nuestra colección de herramientas premium",
-    cta: "Actualizar ahora",
-  },
-  boostProductivity: {
-    title: "Aumenta tu Productividad",
-    description:
-      "Descubre herramientas poderosas para optimizar tu flujo de trabajo",
-    cta: "Saber más",
-  },
-  newFeature: {
-    title: "Nueva Función Disponible",
-    description:
-      "Echa un vistazo a nuestras últimas adiciones de herramientas y mejoras",
-    cta: "Explorar ahora",
-  },
 };

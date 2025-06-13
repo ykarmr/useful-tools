@@ -1,4 +1,4 @@
-import type { CalculatorTranslations } from "../types";
+import { CalculatorTranslations } from "../types/pages/tools/calculator";
 
 export const calculator: CalculatorTranslations = {
   title: "Calculator",

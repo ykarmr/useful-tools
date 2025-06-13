@@ -1,4 +1,4 @@
-import type { SubnetCalculatorTranslations } from "../types/tools";
+import { SubnetCalculatorTranslations } from "../types/pages/tools/subnet-calculator";
 
 export const subnetCalculator: SubnetCalculatorTranslations = {
   title: "Калькулятор подсетей",

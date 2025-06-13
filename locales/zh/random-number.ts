@@ -1,4 +1,4 @@
-import type { RandomNumberTranslations } from "../types";
+import { RandomNumberTranslations } from "../types/pages/tools/random-number";
 
 export const randomNumber: RandomNumberTranslations = {
   title: "随机数生成器",

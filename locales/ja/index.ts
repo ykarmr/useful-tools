@@ -1,4 +1,3 @@
-import { common, header, footer, ad } from "./common";
 import { home } from "./home";
 import { services } from "./services";
 import { roulette } from "./roulette";
@@ -29,6 +28,10 @@ import { unitConversion } from "./unit-conversion";
 import subnetCalculator from "./subnet-calculator";
 import { petAgeConversion } from "./pet-age-conversion";
 import { imageConverter } from "./image-converter";
+import { header } from "./header";
+import { common } from "./common";
+import { footer } from "./footer";
+import { ad } from "./ad";
 
 const ja: Translations = {
   common,

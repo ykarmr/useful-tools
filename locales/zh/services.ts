@@ -1,4 +1,4 @@
-import type { ServicesTranslations } from "../types";
+import { ServicesTranslations } from "../types/pages/services";
 
 export const services: ServicesTranslations = {
   title: "所有工具",

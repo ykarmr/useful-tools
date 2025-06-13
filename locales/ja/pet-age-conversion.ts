@@ -1,4 +1,4 @@
-import { PetAgeConversionTranslations } from "../types";
+import { PetAgeConversionTranslations } from "../types/pages/tools/pet-age-conversion";
 
 export const petAgeConversion: PetAgeConversionTranslations = {
   title: "ペット年齢換算",

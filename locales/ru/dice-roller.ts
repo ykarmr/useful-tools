@@ -1,4 +1,4 @@
-import type { DiceRollerTranslations } from "../types";
+import { DiceRollerTranslations } from "../types/pages/tools/dice-roller";
 
 export const diceRoller: DiceRollerTranslations = {
   title: "Кубик",

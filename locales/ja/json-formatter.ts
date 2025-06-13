@@ -1,4 +1,4 @@
-import type { JsonFormatterTranslations } from "../types";
+import { JsonFormatterTranslations } from "../types/pages/tools/json-formatter";
 
 export const jsonFormatter: JsonFormatterTranslations = {
   title: "JSONフォーマッター",

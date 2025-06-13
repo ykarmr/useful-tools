@@ -1,4 +1,4 @@
-import type { WorldClockTranslations } from "../types";
+import { WorldClockTranslations } from "../types/pages/tools/world-clock";
 
 export const worldClock: WorldClockTranslations = {
   title: "世界時計",

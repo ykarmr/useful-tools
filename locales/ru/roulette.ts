@@ -1,4 +1,4 @@
-import type { RouletteTranslations } from "../types";
+import { RouletteTranslations } from "../types/pages/tools/roulette";
 
 export const roulette: RouletteTranslations = {
   title: "Рулетка",

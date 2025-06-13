@@ -1,4 +1,4 @@
-import { UrlAnalyzerTranslations } from "../types";
+import { UrlAnalyzerTranslations } from "../types/pages/tools/url-analyzer";
 
 export const urlAnalyzer: UrlAnalyzerTranslations = {
   title: "Анализатор URL",

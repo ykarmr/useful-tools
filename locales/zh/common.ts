@@ -1,9 +1,4 @@
-import type {
-  CommonTranslations,
-  HeaderTranslations,
-  FooterTranslations,
-  AdTranslations,
-} from "../types";
+import type { CommonTranslations } from "../types";
 
 export const common: CommonTranslations = {
   siteTitle: "USEFUL TOOLS",
@@ -134,41 +129,4 @@ export const common: CommonTranslations = {
     },
   },
   faqTitle: "常见问题 (FAQ)",
-};
-
-export const header: HeaderTranslations = {
-  logo: "USEFUL TOOLS",
-  toggleMenu: "切换导航菜单",
-  changeLanguage: "切换语言",
-};
-
-export const footer: FooterTranslations = {
-  services: "服务",
-  support: "支持",
-  legal: "法律",
-  helpCenter: "帮助中心",
-  contact: "联系我们",
-  privacyPolicy: "隐私政策",
-  termsOfService: "服务条款",
-  copyright: "USEFUL TOOLS. 保留所有权利。",
-  description: "全面的免费在线工具集合，提升您的生产力，简化您的日常工作流程。",
-};
-
-export const ad: AdTranslations = {
-  advertisement: "广告",
-  premiumTools: {
-    title: "高级工具",
-    description: "通过我们的高级工具集合解锁高级功能",
-    cta: "立即升级",
-  },
-  boostProductivity: {
-    title: "提升您的生产力",
-    description: "发现强大的工具来简化您的工作流程",
-    cta: "了解更多",
-  },
-  newFeature: {
-    title: "新功能可用",
-    description: "查看我们最新的工具添加和改进",
-    cta: "立即探索",
-  },
 };

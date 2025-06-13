@@ -1,9 +1,4 @@
-import type {
-  CommonTranslations,
-  HeaderTranslations,
-  FooterTranslations,
-  AdTranslations,
-} from "../types";
+import type { CommonTranslations } from "../types";
 
 export const common: CommonTranslations = {
   siteTitle: "USEFUL TOOLS",
@@ -135,44 +130,4 @@ export const common: CommonTranslations = {
     },
   },
   faqTitle: "Часто задаваемые вопросы (FAQ)",
-};
-
-export const header: HeaderTranslations = {
-  logo: "USEFUL TOOLS",
-  toggleMenu: "Переключить меню навигации",
-  changeLanguage: "Изменить язык",
-};
-
-export const footer: FooterTranslations = {
-  services: "Сервисы",
-  support: "Поддержка",
-  legal: "Правовая информация",
-  helpCenter: "Центр помощи",
-  contact: "Контакты",
-  privacyPolicy: "Политика конфиденциальности",
-  termsOfService: "Условия использования",
-  copyright: "USEFUL TOOLS. Все права защищены.",
-  description:
-    "Комплексная коллекция бесплатных онлайн-инструментов для повышения продуктивности и упрощения ежедневных рабочих процессов.",
-};
-
-export const ad: AdTranslations = {
-  advertisement: "Реклама",
-  premiumTools: {
-    title: "Премиум-инструменты",
-    description:
-      "Откройте расширенные функции с коллекцией премиум-инструментов",
-    cta: "Обновить сейчас",
-  },
-  boostProductivity: {
-    title: "Повышайте продуктивность",
-    description:
-      "Откройте для себя мощные инструменты для оптимизации рабочего процесса",
-    cta: "Подробнее",
-  },
-  newFeature: {
-    title: "Новая функция доступна",
-    description: "Проверьте последние добавления и улучшения инструментов",
-    cta: "Исследовать сейчас",
-  },
 };

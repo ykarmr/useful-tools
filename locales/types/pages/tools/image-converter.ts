@@ -1,3 +1,5 @@
+import { FAQItem } from "../../faq";
+
 // 画像変換機能の翻訳型定義
 export interface ImageConverterTranslations {
   title: string;
@@ -69,8 +71,5 @@ export interface ImageConverterTranslations {
   maxFiles: string;
 
   // FAQ
-  faqList: Array<{
-    q: string;
-    a: string;
-  }>;
+  faqList: FAQItem[];
 }

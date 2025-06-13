@@ -1,4 +1,4 @@
-import type { CoinFlipTranslations } from "../types";
+import { CoinFlipTranslations } from "../types/pages/tools/coin-flip";
 
 export const coinFlip: CoinFlipTranslations = {
   title: "硬币翻转",

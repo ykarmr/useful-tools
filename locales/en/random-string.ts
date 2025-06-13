@@ -1,4 +1,4 @@
-import type { RandomStringTranslations } from "../types";
+import { RandomStringTranslations } from "../types/pages/tools/random-string";
 
 export const randomString: RandomStringTranslations = {
   title: "Random String Generator",

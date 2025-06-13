@@ -1,4 +1,4 @@
-import type { QrGeneratorTranslations } from "../types/tools";
+import { QrGeneratorTranslations } from "../types/pages/tools/qr-generator";
 
 export const qrGenerator: QrGeneratorTranslations = {
   title: "Generador de Códigos QR",

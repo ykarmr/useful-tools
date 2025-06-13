@@ -1,4 +1,4 @@
-import type { TimerTranslations } from "../types";
+import { TimerTranslations } from "../types/pages/tools/timer";
 
 export const timer: TimerTranslations = {
   title: "Temporizador",

@@ -1,4 +1,4 @@
-import type { HomeTranslations } from "../types";
+import { HomeTranslations } from "../types/pages/tools/home";
 
 export const home: HomeTranslations = {
   title:

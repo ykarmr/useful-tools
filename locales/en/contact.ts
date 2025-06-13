@@ -1,4 +1,4 @@
-import { ContactTranslations, PrivacyTranslations } from "../types";
+import { ContactTranslations } from "../types/pages/contact";
 
 export const contact: ContactTranslations = {
   title: "Contact Us",

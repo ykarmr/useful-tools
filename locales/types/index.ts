@@ -1,47 +1,40 @@
 export * from "./common";
-export * from "./pages";
-export * from "./tools";
-export * from "./image-converter";
+export * from "./pages/tools/image-converter";
 
-import type {
-  CommonTranslations,
-  HeaderTranslations,
-  FooterTranslations,
-  AdTranslations,
-} from "./common";
-import type {
-  ContactTranslations,
-  HomeTranslations,
-  PrivacyTranslations,
-  ServicesTranslations,
-  TermsTranslations,
-} from "./pages";
-import type {
-  RouletteTranslations,
-  TodoTranslations,
-  DiceRollerTranslations,
-  CoinFlipTranslations,
-  RandomNumberTranslations,
-  RandomStringTranslations,
-  TimerTranslations,
-  PomodoroTimerTranslations,
-  DigitalClockTranslations,
-  ScoreboardTranslations,
-  WorldClockTranslations,
-  TeamGeneratorTranslations,
-  QrGeneratorTranslations,
-  CalculatorTranslations,
-  UserAgentTranslations,
-  IpAddressTranslations,
-  JsonFormatterTranslations,
-  UrlEncoderTranslations,
-  MarkdownPreviewTranslations,
-  UrlAnalyzerTranslations,
-  UnitConversionTranslations,
-  SubnetCalculatorTranslations,
-  PetAgeConversionTranslations,
-} from "./tools";
-import type { ImageConverterTranslations } from "./image-converter";
+import type { CommonTranslations } from "./common";
+
+import type { ImageConverterTranslations } from "./pages/tools/image-converter";
+import { RouletteTranslations } from "./pages/tools/roulette";
+import { HomeTranslations } from "./pages/tools/home";
+import { TodoTranslations } from "./pages/tools/todo";
+import { DiceRollerTranslations } from "./pages/tools/dice-roller";
+import { CoinFlipTranslations } from "./pages/tools/coin-flip";
+import { RandomNumberTranslations } from "./pages/tools/random-number";
+import { RandomStringTranslations } from "./pages/tools/random-string";
+import { DigitalClockTranslations } from "./pages/tools/digital-clock";
+import { PomodoroTimerTranslations } from "./pages/tools/pomodoro-timer";
+import { ScoreboardTranslations } from "./pages/tools/scoreboard";
+import { TimerTranslations } from "./pages/tools/timer";
+import { WorldClockTranslations } from "./pages/tools/world-clock";
+import { QrGeneratorTranslations } from "./pages/tools/qr-generator";
+import { PrivacyTranslations } from "./pages/privacy";
+import { CalculatorTranslations } from "./pages/tools/calculator";
+import { TeamGeneratorTranslations } from "./pages/tools/team-generator";
+import { IpAddressTranslations } from "./pages/tools/ip-address";
+import { JsonFormatterTranslations } from "./pages/tools/json-formatter";
+import { MarkdownPreviewTranslations } from "./pages/tools/markdown-preview";
+import { PetAgeConversionTranslations } from "./pages/tools/pet-age-conversion";
+import { SubnetCalculatorTranslations } from "./pages/tools/subnet-calculator";
+import { UnitConversionTranslations } from "./pages/tools/unit-conversion";
+import { UrlAnalyzerTranslations } from "./pages/tools/url-analyzer";
+import { UrlEncoderTranslations } from "./pages/tools/url-encoder";
+import { UserAgentTranslations } from "./pages/tools/user-agent";
+import { ServicesTranslations } from "./pages/services";
+import { ContactTranslations } from "./pages/contact";
+import { TermsTranslations } from "./pages/terms";
+import { AdTranslations } from "./ad";
+import { FooterTranslations } from "./footer";
+import { HeaderTranslations } from "./header";
 
 export interface Translations {
   common: CommonTranslations;

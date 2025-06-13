@@ -1,4 +1,4 @@
-import type { MarkdownPreviewTranslations } from "../types/tools";
+import { MarkdownPreviewTranslations } from "../types/pages/tools/markdown-preview";
 
 export const markdownPreview: MarkdownPreviewTranslations = {
   title: "Markdown预览器",

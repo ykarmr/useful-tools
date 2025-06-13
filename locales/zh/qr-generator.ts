@@ -1,4 +1,4 @@
-import type { QrGeneratorTranslations } from "../types/tools";
+import { QrGeneratorTranslations } from "../types/pages/tools/qr-generator";
 
 export const qrGenerator: QrGeneratorTranslations = {
   title: "二维码生成器",
@@ -29,5 +29,3 @@ export const qrGenerator: QrGeneratorTranslations = {
     },
   ],
 };
-
-export default qrGenerator;

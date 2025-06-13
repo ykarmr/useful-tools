@@ -1,4 +1,4 @@
-import type { UrlEncoderTranslations } from "../types";
+import { UrlEncoderTranslations } from "../types/pages/tools/url-encoder";
 
 export const urlEncoder: UrlEncoderTranslations = {
   title: "URL Encoder/Decoder",

@@ -1,4 +1,4 @@
-import type { ImageConverterTranslations } from "../types/image-converter";
+import type { ImageConverterTranslations } from "../types/pages/tools/image-converter";
 
 export const imageConverter: ImageConverterTranslations = {
   title: "图像转换器",

@@ -1,4 +1,4 @@
-import type { PomodoroTimerTranslations } from "../types";
+import { PomodoroTimerTranslations } from "../types/pages/tools/pomodoro-timer";
 
 export const pomodoroTimer: PomodoroTimerTranslations = {
   title: "Pomodoro Timer",

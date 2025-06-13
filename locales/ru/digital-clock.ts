@@ -1,4 +1,4 @@
-import type { DigitalClockTranslations } from "../types";
+import { DigitalClockTranslations } from "../types/pages/tools/digital-clock";
 
 export const digitalClock: DigitalClockTranslations = {
   title: "Цифровые часы",

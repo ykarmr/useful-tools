@@ -1,4 +1,4 @@
-import type { HomeTranslations } from "../types";
+import { HomeTranslations } from "../types/pages/tools/home";
 
 export const home: HomeTranslations = {
   title: "提升生产力的综合免费在线工具",

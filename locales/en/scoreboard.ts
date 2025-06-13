@@ -1,4 +1,4 @@
-import type { ScoreboardTranslations } from "../types";
+import { ScoreboardTranslations } from "../types/pages/tools/scoreboard";
 
 export const scoreboard: ScoreboardTranslations = {
   title: "Scoreboard",

@@ -1,4 +1,4 @@
-import type { UserAgentTranslations } from "../types";
+import { UserAgentTranslations } from "../types/pages/tools/user-agent";
 
 export const userAgent: UserAgentTranslations = {
   title: "ユーザーエージェント情報",

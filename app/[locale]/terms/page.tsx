@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations, interpolate, isValidLocale } from "@/locales";
 import { baseUrl } from "@/lib/const";
 import { notFound } from "next/navigation";
-import { getAlternates } from "@/lib/i18n";
+import { getAlternates, localeMapping } from "@/lib/i18n";
 
 interface Props {
   params: Promise<{ locale: string }>;
@@ -41,15 +41,7 @@ export default async function TermsPage({ params }: Props) {
 
   const t = getTranslations(locale);
 
-  const currentDate = new Date().toLocaleDateString(
-    locale === "ja"
-      ? "ja-JP"
-      : locale === "zh"
-      ? "zh-CN"
-      : locale === "es"
-      ? "es-ES"
-      : "en-US"
-  );
+  const currentDate = new Date().toLocaleDateString(localeMapping[locale]);
 
   return (
     <div className="min-h-screen bg-gray-50">

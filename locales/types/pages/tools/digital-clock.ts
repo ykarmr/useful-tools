@@ -1,3 +1,5 @@
+import { FAQItem } from "../../faq";
+
 export interface DigitalClockTranslations {
   title: string;
   description: string;
@@ -6,8 +8,5 @@ export interface DigitalClockTranslations {
   format24Hour: string;
   showSeconds: string;
   showDate: string;
-  faqList: Array<{
-    q: string;
-    a: string;
-  }>;
+  faqList: FAQItem[];
 }

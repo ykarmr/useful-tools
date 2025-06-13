@@ -1,4 +1,4 @@
-import type { IpAddressTranslations } from "../types/tools";
+import { IpAddressTranslations } from "../types/pages/tools/ip-address";
 
 export const ipAddress: IpAddressTranslations = {
   title: "Consulta de Dirección IP",

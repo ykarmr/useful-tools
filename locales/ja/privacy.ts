@@ -1,4 +1,4 @@
-import { PrivacyTranslations } from "../types";
+import { PrivacyTranslations } from "../types/pages/privacy";
 
 export const privacy: PrivacyTranslations = {
   title: "プライバシーポリシー",

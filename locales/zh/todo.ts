@@ -1,4 +1,4 @@
-import type { TodoTranslations } from "../types";
+import { TodoTranslations } from "../types/pages/tools/todo";
 
 export const todo: TodoTranslations = {
   title: "待办事项管理器",

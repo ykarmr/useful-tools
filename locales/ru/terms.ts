@@ -1,4 +1,4 @@
-import { PrivacyTranslations, TermsTranslations } from "../types";
+import { TermsTranslations } from "../types/pages/terms";
 
 export const terms: TermsTranslations = {
   title: "Условия использования",

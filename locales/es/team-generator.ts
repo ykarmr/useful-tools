@@ -1,4 +1,4 @@
-import type { TeamGeneratorTranslations } from "../types/tools";
+import { TeamGeneratorTranslations } from "../types/pages/tools/team-generator";
 
 export const teamGenerator: TeamGeneratorTranslations = {
   title: "Generador de Equipos",

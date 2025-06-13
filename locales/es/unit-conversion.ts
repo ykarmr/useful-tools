@@ -1,4 +1,4 @@
-import { UnitConversionTranslations } from "../types";
+import { UnitConversionTranslations } from "../types/pages/tools/unit-conversion";
 
 export const unitConversion: UnitConversionTranslations = {
   title: "Conversión de Unidades",
