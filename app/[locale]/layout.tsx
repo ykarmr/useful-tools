@@ -40,9 +40,6 @@ export async function generateMetadata({
 
   const openGraphLocale = localeMapping;
   return {
-    title: {
-      default: t.common.seo.defaultTitle,
-    },
     description: t.common.seo.siteDescription,
     keywords: t.common.seo.keywords,
     authors: [{ name: t.common.seo.structuredData.organizationName }],
