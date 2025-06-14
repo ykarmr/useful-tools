@@ -31,5 +31,9 @@ export interface ServicesTranslations {
       title: string;
       description: string;
     };
+    code: {
+      title: string;
+      description: string;
+    };
   };
 }

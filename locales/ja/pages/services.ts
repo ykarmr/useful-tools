@@ -45,5 +45,9 @@ export const services: ServicesTranslations = {
       title: "健康・ウェルネス",
       description: "健康管理と体調チェックツール",
     },
+    code: {
+      title: "開発者ツール",
+      description: "プログラミングとWeb開発に役立つツール",
+    },
   },
 };

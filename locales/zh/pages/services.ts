@@ -44,5 +44,9 @@ export const services: ServicesTranslations = {
       title: "健康与养生",
       description: "健康管理和身体检查工具",
     },
+    code: {
+      title: "开发者工具",
+      description: "编程和Web开发工具",
+    },
   },
 };

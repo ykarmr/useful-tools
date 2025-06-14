@@ -50,6 +50,7 @@ export default async function sitemap({
     "/color-palette",
     "/text-statistics",
     "/bmi-calculator",
+    "/html-escape",
   ];
 
   const sitemap: MetadataRoute.Sitemap = [];

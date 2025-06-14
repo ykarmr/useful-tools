@@ -47,5 +47,9 @@ export const services: ServicesTranslations = {
       title: "Salud y Bienestar",
       description: "Herramientas de gestión de salud y control corporal",
     },
+    code: {
+      title: "Herramientas de Desarrollo",
+      description: "Herramientas para programación y desarrollo web",
+    },
   },
 };

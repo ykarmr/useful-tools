@@ -45,5 +45,9 @@ export const services: ServicesTranslations = {
       title: "Здоровье и Велнес",
       description: "Инструменты управления здоровьем и проверки тела",
     },
+    code: {
+      title: "Инструменты Разработчика",
+      description: "Инструменты для программирования и веб-разработки",
+    },
   },
 };

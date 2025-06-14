@@ -31,6 +31,7 @@ import {
   Palette,
   BarChart3,
   Activity,
+  Code,
 } from "lucide-react";
 import AdBanner from "@/components/layout/ad-banner";
 import { Locale, Translations } from "@/locales";
@@ -100,6 +101,10 @@ const toolCategories = [
   {
     key: "health",
     tools: [{ key: "bmiCalculator", icon: Activity, href: "/bmi-calculator" }],
+  },
+  {
+    key: "code",
+    tools: [{ key: "htmlEscape", icon: Code, href: "/html-escape" }],
   },
 ];
 

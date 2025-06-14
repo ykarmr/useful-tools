@@ -31,6 +31,7 @@ import { imageConverter } from "./pages/tools/image-converter";
 import { colorPalette } from "./pages/tools/color-palette";
 import { textStatistics } from "./pages/tools/text-statistics";
 import { bmiCalculator } from "./pages/tools/bmi-calculator";
+import { htmlEscape } from "./pages/tools/html-escape";
 import { ad } from "./ad";
 import { common } from "./common";
 import { footer } from "./footer";
@@ -73,6 +74,7 @@ const en: Translations = {
   colorPalette,
   textStatistics,
   bmiCalculator,
+  htmlEscape,
 };
 
 export default en;
