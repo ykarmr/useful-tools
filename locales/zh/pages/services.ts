@@ -40,5 +40,9 @@ export const services: ServicesTranslations = {
       title: "转换器",
       description: "各种格式转换工具",
     },
+    health: {
+      title: "健康与养生",
+      description: "健康管理和身体检查工具",
+    },
   },
 };

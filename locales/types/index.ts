@@ -37,6 +37,7 @@ import { FooterTranslations } from "./footer";
 import { HeaderTranslations } from "./header";
 import { ColorPaletteTranslations } from "./pages/tools/color-palette";
 import { TextStatisticsTranslations } from "./pages/tools/text-statistics";
+import { BmiCalculatorTranslations } from "./pages/tools/bmi-calculator";
 
 export interface Translations {
   common: CommonTranslations;
@@ -74,4 +75,5 @@ export interface Translations {
   imageConverter: ImageConverterTranslations;
   colorPalette: ColorPaletteTranslations;
   textStatistics: TextStatisticsTranslations;
+  bmiCalculator: BmiCalculatorTranslations;
 }

@@ -43,5 +43,9 @@ export const services: ServicesTranslations = {
       title: "Convertidores",
       description: "Herramientas de conversión de varios formatos",
     },
+    health: {
+      title: "Salud y Bienestar",
+      description: "Herramientas de gestión de salud y control corporal",
+    },
   },
 };

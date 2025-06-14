@@ -41,5 +41,9 @@ export const services: ServicesTranslations = {
       title: "Converters",
       description: "Various format conversion tools",
     },
+    health: {
+      title: "Health & Wellness",
+      description: "Health management and body check tools",
+    },
   },
 };

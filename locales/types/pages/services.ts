@@ -27,5 +27,9 @@ export interface ServicesTranslations {
       title: string;
       description: string;
     };
+    health: {
+      title: string;
+      description: string;
+    };
   };
 }

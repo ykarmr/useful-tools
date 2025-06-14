@@ -39,7 +39,11 @@ export const services: ServicesTranslations = {
     },
     converter: {
       title: "Конвертеры",
-      description: "Инструменты конвертации различных форматов",
+      description: "Инструменты преобразования различных форматов",
+    },
+    health: {
+      title: "Здоровье и Велнес",
+      description: "Инструменты управления здоровьем и проверки тела",
     },
   },
 };

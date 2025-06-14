@@ -30,6 +30,7 @@ import { petAgeConversion } from "./pages/tools/pet-age-conversion";
 import { imageConverter } from "./pages/tools/image-converter";
 import { colorPalette } from "./pages/tools/color-palette";
 import { textStatistics } from "./pages/tools/text-statistics";
+import { bmiCalculator } from "./pages/tools/bmi-calculator";
 import { header } from "./header";
 import { common } from "./common";
 import { footer } from "./footer";
@@ -71,6 +72,7 @@ const ja: Translations = {
   imageConverter,
   colorPalette,
   textStatistics,
+  bmiCalculator,
 };
 
 export default ja;

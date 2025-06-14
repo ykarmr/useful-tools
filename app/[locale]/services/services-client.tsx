@@ -30,6 +30,7 @@ import {
   Image,
   Palette,
   BarChart3,
+  Activity,
 } from "lucide-react";
 import AdBanner from "@/components/layout/ad-banner";
 import { Locale, Translations } from "@/locales";
@@ -95,6 +96,10 @@ const toolCategories = [
       { key: "petAgeConversion", icon: PawPrint, href: "/pet-age-conversion" },
       { key: "colorPalette", icon: Palette, href: "/color-palette" },
     ],
+  },
+  {
+    key: "health",
+    tools: [{ key: "bmiCalculator", icon: Activity, href: "/bmi-calculator" }],
   },
 ];
 

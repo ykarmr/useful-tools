@@ -41,5 +41,9 @@ export const services: ServicesTranslations = {
       title: "コンバーター",
       description: "様々な形式の変換ツール",
     },
+    health: {
+      title: "健康・ウェルネス",
+      description: "健康管理と体調チェックツール",
+    },
   },
 };
