@@ -41,7 +41,6 @@ export async function generateMetadata({
   const openGraphLocale = localeMapping;
   return {
     title: {
-      template: t.common.seo.titleTemplate,
       default: t.common.seo.defaultTitle,
     },
     description: t.common.seo.siteDescription,
