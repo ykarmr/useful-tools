@@ -150,25 +150,32 @@ export default function UrlAnalyzerClient({
     >
       <ToolSection>
         <div className="space-y-4">
-          <ToolControls>
-            <div className="flex gap-2">
-              <Input
-                type="url"
-                placeholder={t.urlAnalyzer.urlPlaceholder}
-                value={url}
-                onChange={(e) => setUrl(e.target.value)}
-                className="flex-1"
-              />
-              <Button onClick={analyzeUrl} variant="outline">
+          {/* 入力フォームと操作ボタン（レスポンシブ対応） */}
+          <div className="flex flex-col gap-2 sm:flex-row">
+            <Input
+              type="url"
+              placeholder={t.urlAnalyzer.urlPlaceholder}
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+              className="flex-1"
+            />
+            <div className="flex gap-2 sm:gap-2">
+              <Button
+                onClick={analyzeUrl}
+                variant="outline"
+                className="w-full sm:w-auto"
+              >
                 {t.urlAnalyzer.analyze}
               </Button>
-            </div>
-            <div className="flex gap-2">
-              <Button variant="outline" onClick={loadSample}>
+              <Button
+                variant="outline"
+                onClick={loadSample}
+                className="w-full sm:w-auto"
+              >
                 {t.urlAnalyzer.sample}
               </Button>
             </div>
-          </ToolControls>
+          </div>
 
           {error && (
             <ToolResult>
