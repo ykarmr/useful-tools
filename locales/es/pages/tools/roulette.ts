@@ -33,6 +33,11 @@ export const roulette: RouletteTranslations = {
   landedInZone: "¡Cayó en la zona ganadora!",
   addItemsInstruction: "Agrega elementos usando el campo de arriba",
   addItemLabel: "Agregar elemento",
+  editItem: "Editar {item}",
+  saveChanges: "Guardar cambios",
+  cancel: "Cancelar",
+  editMode: "Modo de edición",
+  clickToEdit: "Haz clic para editar",
   faqList: [
     {
       q: "¿Cuántos elementos puedo agregar a la ruleta?",
@@ -49,6 +54,10 @@ export const roulette: RouletteTranslations = {
     {
       q: "¿Se guardan los datos de mi ruleta?",
       a: "Tu lista de elementos se guarda automáticamente en el almacenamiento local de tu navegador. Cuando recargues la página, tus elementos previamente agregados serán restaurados.",
+    },
+    {
+      q: "¿Puedo editar elementos después de agregarlos?",
+      a: "Sí, puedes hacer clic en el texto de cualquier elemento o en el botón de editar para modificar su contenido. Mientras editas, presiona Enter para guardar o Escape para cancelar los cambios.",
     },
   ],
 };

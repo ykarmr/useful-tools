@@ -45,6 +45,11 @@ export const roulette: RouletteTranslations = {
   landedInZone: "Landed in the winner zone!",
   addItemsInstruction: "Add items using the field above",
   addItemLabel: "Add Item",
+  editItem: "Edit {item}",
+  saveChanges: "Save Changes",
+  cancel: "Cancel",
+  editMode: "Edit Mode",
+  clickToEdit: "Click to edit",
   faqList: [
     {
       q: "How many items can I add to the roulette?",
@@ -61,6 +66,10 @@ export const roulette: RouletteTranslations = {
     {
       q: "Is my roulette data saved?",
       a: "Your item list is automatically saved to your browser's local storage. When you reload the page, your previously added items will be restored.",
+    },
+    {
+      q: "Can I edit items after adding them?",
+      a: "Yes, you can click on any item text or the edit button to modify its content. While editing, press Enter to save or Escape to cancel your changes.",
     },
   ],
 };

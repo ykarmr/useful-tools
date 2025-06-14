@@ -32,6 +32,11 @@ export const roulette: RouletteTranslations = {
   landedInZone: "落在获胜区！",
   addItemsInstruction: "使用上面的字段添加项目",
   addItemLabel: "添加项目",
+  editItem: "编辑 {item}",
+  saveChanges: "保存更改",
+  cancel: "取消",
+  editMode: "编辑模式",
+  clickToEdit: "点击编辑",
   faqList: [
     {
       q: "我可以在轮盘中添加多少个项目？",
@@ -48,6 +53,10 @@ export const roulette: RouletteTranslations = {
     {
       q: "我的轮盘数据会被保存吗？",
       a: "您的项目列表会自动保存到浏览器的本地存储中。当您重新加载页面时，之前添加的项目将被恢复。",
+    },
+    {
+      q: "我可以在添加项目后编辑它们吗？",
+      a: "是的，您可以点击任何项目文本或编辑按钮来修改其内容。编辑时，按Enter键保存或按Escape键取消更改。",
     },
   ],
 };

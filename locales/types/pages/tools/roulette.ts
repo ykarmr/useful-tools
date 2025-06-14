@@ -32,5 +32,10 @@ export interface RouletteTranslations {
   landedInZone: string;
   addItemsInstruction: string;
   addItemLabel: string;
+  editItem: string;
+  saveChanges: string;
+  cancel: string;
+  editMode: string;
+  clickToEdit: string;
   faqList: FAQItem[];
 }

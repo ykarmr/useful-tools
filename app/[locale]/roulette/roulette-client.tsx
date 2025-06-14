@@ -9,6 +9,9 @@ import {
   Eye,
   EyeOff,
   Target,
+  Edit2,
+  Check,
+  X,
 } from "lucide-react";
 import ToolLayout from "@/components/layout/tool-layout";
 import ToolSection from "@/components/layout/tool-section";
@@ -50,6 +53,8 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
   const [newItem, setNewItem] = useState("");
   const [isSpinning, setIsSpinning] = useState(false);
   const [rotation, setRotation] = useState(0);
+  const [editingItem, setEditingItem] = useState<string | null>(null);
+  const [editText, setEditText] = useState("");
   const wheelRef = useRef<HTMLDivElement>(null);
 
   // Winner zone configuration (30 degrees centered at top)
@@ -134,6 +139,40 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
         item.id === id ? { ...item, enabled: !item.enabled } : item
       )
     );
+  };
+
+  // 編集モードを開始
+  const startEditing = (id: string, currentText: string) => {
+    setEditingItem(id);
+    setEditText(currentText);
+  };
+
+  // 編集をキャンセル
+  const cancelEditing = () => {
+    setEditingItem(null);
+    setEditText("");
+  };
+
+  // 編集を保存
+  const saveEdit = () => {
+    if (editingItem && editText.trim()) {
+      setItems(
+        items.map((item) =>
+          item.id === editingItem ? { ...item, text: editText.trim() } : item
+        )
+      );
+      setEditingItem(null);
+      setEditText("");
+    }
+  };
+
+  // Enterキーで保存、Escapeキーでキャンセル
+  const handleEditKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      saveEdit();
+    } else if (e.key === "Escape") {
+      cancelEditing();
+    }
   };
 
   // Normalize angle to 0-360 range
@@ -513,7 +552,7 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
                         : "bg-gray-50 border border-gray-100 opacity-60"
                     }`}
                   >
-                    <div className="flex items-center space-x-3">
+                    <div className="flex items-center space-x-3 flex-1">
                       <div
                         className="w-4 h-4 rounded-full border-2 border-white shadow-sm"
                         style={{
@@ -522,22 +561,73 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
                             : "#9CA3AF",
                         }}
                       ></div>
-                      <span
-                        className={`font-medium ${
-                          item.enabled
-                            ? "text-gray-900"
-                            : "text-gray-500 line-through"
-                        }`}
-                      >
-                        {item.text}
-                      </span>
-                      {!item.enabled && (
-                        <span className="text-xs text-gray-400 bg-gray-200 px-2 py-1 rounded-full">
-                          {t.roulette?.disabled || "Disabled"}
-                        </span>
+
+                      {editingItem === item.id ? (
+                        // 編集モード
+                        <div className="flex items-center space-x-2 flex-1">
+                          <input
+                            type="text"
+                            value={editText}
+                            onChange={(e) => setEditText(e.target.value)}
+                            onKeyDown={handleEditKeyDown}
+                            onBlur={saveEdit}
+                            className="flex-1 px-3 py-1 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            maxLength={20}
+                            autoFocus
+                          />
+                          <button
+                            onClick={saveEdit}
+                            className="p-1 text-green-600 hover:text-green-700 hover:bg-green-50 rounded transition-colors"
+                            aria-label={
+                              t.roulette?.saveChanges || "Save changes"
+                            }
+                          >
+                            <Check size={16} />
+                          </button>
+                          <button
+                            onClick={cancelEditing}
+                            className="p-1 text-gray-600 hover:text-gray-700 hover:bg-gray-50 rounded transition-colors"
+                            aria-label={t.roulette?.cancel || "Cancel"}
+                          >
+                            <X size={16} />
+                          </button>
+                        </div>
+                      ) : (
+                        // 表示モード
+                        <div className="flex items-center space-x-2 flex-1">
+                          <span
+                            className={`font-medium cursor-pointer hover:text-blue-600 transition-colors ${
+                              item.enabled
+                                ? "text-gray-900"
+                                : "text-gray-500 line-through"
+                            }`}
+                            onClick={() => startEditing(item.id, item.text)}
+                            title={t.roulette?.clickToEdit || "Click to edit"}
+                          >
+                            {item.text}
+                          </span>
+                          {!item.enabled && (
+                            <span className="text-xs text-gray-400 bg-gray-200 px-2 py-1 rounded-full">
+                              {t.roulette?.disabled || "Disabled"}
+                            </span>
+                          )}
+                        </div>
                       )}
                     </div>
+
                     <div className="flex items-center space-x-2">
+                      {editingItem !== item.id && (
+                        <button
+                          onClick={() => startEditing(item.id, item.text)}
+                          className="p-2 text-gray-400 hover:text-blue-500 hover:bg-blue-50 rounded-lg transition-colors"
+                          aria-label={interpolate(
+                            t.roulette?.editItem || "Edit {item}",
+                            { item: item.text }
+                          )}
+                        >
+                          <Edit2 size={16} />
+                        </button>
+                      )}
                       <button
                         onClick={() => toggleItemEnabled(item.id)}
                         className={`p-2 rounded-lg transition-colors ${

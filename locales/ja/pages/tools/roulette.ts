@@ -44,6 +44,11 @@ export const roulette: RouletteTranslations = {
   landedInZone: "当選範囲に入りました！",
   addItemsInstruction: "上記のフィールドからアイテムを追加してください",
   addItemLabel: "アイテムを追加",
+  editItem: "{item} を編集",
+  saveChanges: "変更を保存",
+  cancel: "キャンセル",
+  editMode: "編集モード",
+  clickToEdit: "クリックして編集",
   faqList: [
     {
       q: "最大何個のアイテムまで追加できますか？",
@@ -60,6 +65,10 @@ export const roulette: RouletteTranslations = {
     {
       q: "ルーレットのデータは保存されますか？",
       a: "アイテムリストはブラウザのローカルストレージに自動保存されます。ページを再読み込みしても、以前に追加したアイテムが復元されます。",
+    },
+    {
+      q: "アイテムを編集することはできますか？",
+      a: "はい、追加したアイテムをクリックするか、編集ボタンをクリックして内容を変更できます。編集中はEnterキーで保存、Escapeキーでキャンセルできます。",
     },
   ],
 };
