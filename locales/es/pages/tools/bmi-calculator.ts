@@ -19,9 +19,9 @@ export const bmiCalculator: BmiCalculatorTranslations = {
 
   inputSection: "Información Corporal",
   heightLabel: "Altura",
-  heightPlaceholder: "Ingresa altura",
+  heightPlaceholder: "ej. 170",
   weightLabel: "Peso",
-  weightPlaceholder: "Ingresa peso",
+  weightPlaceholder: "ej. 65",
   unitSystem: "Sistema de Unidades",
   metric: "Métrico (cm・kg)",
   imperial: "Imperial (ft・lbs)",

@@ -20,9 +20,9 @@ export const bmiCalculator: BmiCalculatorTranslations = {
   // 入力セクション
   inputSection: "身体情報入力",
   heightLabel: "身長",
-  heightPlaceholder: "身長を入力",
+  heightPlaceholder: "例: 170",
   weightLabel: "体重",
-  weightPlaceholder: "体重を入力",
+  weightPlaceholder: "例: 65",
   unitSystem: "単位系",
   metric: "メートル法（cm・kg）",
   imperial: "ヤード・ポンド法（ft・lbs）",

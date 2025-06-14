@@ -19,9 +19,9 @@ export const bmiCalculator: BmiCalculatorTranslations = {
 
   inputSection: "Информация о теле",
   heightLabel: "Рост",
-  heightPlaceholder: "Введите рост",
+  heightPlaceholder: "напр. 170",
   weightLabel: "Вес",
-  weightPlaceholder: "Введите вес",
+  weightPlaceholder: "напр. 65",
   unitSystem: "Система единиц",
   metric: "Метрическая (см・кг)",
   imperial: "Имперская (фт・фунты)",

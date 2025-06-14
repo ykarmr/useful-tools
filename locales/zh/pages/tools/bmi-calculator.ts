@@ -19,9 +19,9 @@ export const bmiCalculator: BmiCalculatorTranslations = {
 
   inputSection: "身体信息",
   heightLabel: "身高",
-  heightPlaceholder: "输入身高",
+  heightPlaceholder: "例如 170",
   weightLabel: "体重",
-  weightPlaceholder: "输入体重",
+  weightPlaceholder: "例如 65",
   unitSystem: "单位制",
   metric: "公制（厘米・公斤）",
   imperial: "英制（英尺・磅）",
