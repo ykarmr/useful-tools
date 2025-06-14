@@ -1,64 +1,13 @@
 export interface CommonTranslations {
   siteTitle: string;
   home: string;
-  roulette: string;
-  todo: string;
   services: string;
-  learnMore: string;
-  explore: string;
-  tryNow: string;
   add: string;
-  delete: string;
-  edit: string;
-  save: string;
-  cancel: string;
   close: string;
-  loading: string;
-  getStarted: string;
   viewAll: string;
-  copy: string;
-  copied: string;
   clear: string;
-  reset: string;
-  generate: string;
-  download: string;
-  upload: string;
-  import: string;
-  export: string;
-  settings: string;
-  help: string;
-  about: string;
-  contact: string;
-  privacy: string;
-  terms: string;
-  error: string;
-  success: string;
-  warning: string;
-  info: string;
-  confirm: string;
   yes: string;
   no: string;
-  ok: string;
-  retry: string;
-  refresh: string;
-  search: string;
-  filter: string;
-  sort: string;
-  previous: string;
-  next: string;
-  first: string;
-  last: string;
-  page: string;
-  of: string;
-  total: string;
-  selected: string;
-  all: string;
-  none: string;
-  new: string;
-  recent: string;
-  popular: string;
-  featured: string;
-  recommended: string;
   openTool: string;
   viewAllTools: string;
   seo: {
@@ -72,17 +21,10 @@ export interface CommonTranslations {
     homeKeywords: string[];
     ogImageAlt: string;
     twitterCreator: string;
-    verification: {
-      google: string;
-      yandex: string;
-      yahoo: string;
-    };
     structuredData: {
       organizationName: string;
       applicationCategory: string;
       operatingSystem: string;
-      ratingValue: string;
-      reviewCount: string;
       searchActionDescription: string;
     };
     manifest: {
@@ -90,11 +32,6 @@ export interface CommonTranslations {
       shortName: string;
       description: string;
       categories: string[];
-    };
-    robots: {
-      disallow: string[];
-      sitemap: string;
-      host: string;
     };
   };
   faqTitle: string;

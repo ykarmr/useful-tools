@@ -76,11 +76,11 @@ export async function generateMetadata({
       description: t.footer.description,
       creator: t.common.seo.twitterCreator,
     },
-    verification: {
-      google: t.common.seo.verification.google,
-      yandex: t.common.seo.verification.yandex,
-      yahoo: t.common.seo.verification.yahoo,
-    },
+    // verification: {
+    //   google: t.common.seo.verification.google,
+    //   yandex: t.common.seo.verification.yandex,
+    //   yahoo: t.common.seo.verification.yahoo,
+    // },
   };
 }
 
@@ -152,6 +152,11 @@ export default async function LocaleLayout({
               author: {
                 "@type": "Organization",
                 name: t.common.seo.structuredData.organizationName,
+              },
+              potentialAction: {
+                "@type": "SearchAction",
+                target: `${baseUrl}/${locale}/services`,
+                "query-input": "required name=search_term_string",
               },
             }),
           }}
