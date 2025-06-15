@@ -31,6 +31,13 @@
 - 各機能ページの統計情報は `components/layout/tool-stats.tsx` を使用すること
 - 各機能ページの FAQ セクションは `components/layout/tool-faq.tsx` を使用すること
 - 広告表示は `components/layout/ad-banner.tsx` を使用すること
+- 静的資材は `public` ディレクトリに配置すること
+- グローバルスタイルは `app/globals.css` に記述すること
+- PWA 対応のため、`app/manifest.ts` を作成し、必要なメタデータを定義すること
+- `app/robots.ts` を作成し、robots.txt を生成すること
+- `app/sitemap.ts` を作成し、サイトマップを生成すること
+- `next.config.js` の output: "export" を設定すること
+- 永続保持するデータは、クライアントサイドでのローカルストレージやセッションストレージを使用すること
 
 ## ページとルーティング
 
