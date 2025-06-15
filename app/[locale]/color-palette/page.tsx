@@ -1,8 +1,9 @@
-import { getTranslations, isValidLocale } from "@/lib/i18n";
+import { getTranslations, isValidLocale, getAlternates } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { baseUrl } from "@/lib/const";
-import { getAlternates } from "@/lib/i18n";
+import { generateToolMetadata } from "@/lib/metadata";
+import { generateToolStructuredData } from "@/lib/structured-data";
 import ColorPaletteClient from "./color-palette-client";
 
 interface ColorPalettePageProps {
@@ -25,15 +26,17 @@ export async function generateMetadata({
   const t = getTranslations(locale);
 
   return {
-    title: `${t.colorPalette.title} | ${t.common.siteTitle}`,
-    description: t.colorPalette.description,
-    keywords: t.colorPalette.keywords || [],
-    openGraph: {
-      title: t.colorPalette.title,
-      description: t.colorPalette.description,
-      url: `${baseUrl}/${locale}/color-palette`,
+    ...generateToolMetadata(locale, "color-palette", t.colorPalette, t.common),
+    other: {
+      "structured-data": JSON.stringify([
+        generateToolStructuredData(
+          locale,
+          "color-palette",
+          t.colorPalette,
+          t.common
+        ),
+      ]),
     },
-    alternates: getAlternates(locale, "/color-palette"),
   };
 }
 

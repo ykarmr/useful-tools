@@ -1,11 +1,12 @@
-import { getTranslations, isValidLocale } from "@/lib/i18n";
+import { getTranslations, isValidLocale, getAlternates } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { baseUrl } from "@/lib/const";
-import { getAlternates } from "@/lib/i18n";
+import { generateToolMetadata } from "@/lib/metadata";
+import { generateToolStructuredData } from "@/lib/structured-data";
 import UnitConversionClient from "./unit-conversion-client";
 
-interface TodoPageProps {
+interface UnitConversionPageProps {
   params: Promise<{ locale: string }>;
 }
 
@@ -25,19 +26,28 @@ export async function generateMetadata({
   const t = getTranslations(locale);
 
   return {
-    title: `${t.unitConversion.title} | ${t.common.siteTitle}`,
-    description: t.unitConversion.description,
-    keywords: t.unitConversion.keywords || [],
-    openGraph: {
-      title: t.unitConversion.title,
-      description: t.unitConversion.description,
-      url: `${baseUrl}/${locale}/unit-conversion`,
+    ...generateToolMetadata(
+      locale,
+      "unit-conversion",
+      t.unitConversion,
+      t.common
+    ),
+    other: {
+      "structured-data": JSON.stringify([
+        generateToolStructuredData(
+          locale,
+          "unit-conversion",
+          t.unitConversion,
+          t.common
+        ),
+      ]),
     },
-    alternates: getAlternates(locale, "/unit-conversion"),
   };
 }
 
-export default async function UnitConversionPage({ params }: TodoPageProps) {
+export default async function UnitConversionPage({
+  params,
+}: UnitConversionPageProps) {
   const { locale } = await params;
 
   if (!isValidLocale(locale)) {

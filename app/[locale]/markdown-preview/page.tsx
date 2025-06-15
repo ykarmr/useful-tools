@@ -1,9 +1,10 @@
 import MarkdownPreviewClient from "./markdown-preview-client";
-import { getTranslations, isValidLocale } from "@/lib/i18n";
+import { getTranslations, isValidLocale, getAlternates } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { baseUrl } from "@/lib/const";
-import { getAlternates } from "@/lib/i18n";
+import { generateToolMetadata } from "@/lib/metadata";
+import { generateToolStructuredData } from "@/lib/structured-data";
 
 interface MarkdownPreviewPageProps {
   params: Promise<{ locale: string }>;
@@ -25,15 +26,22 @@ export async function generateMetadata({
   const t = getTranslations(locale);
 
   return {
-    title: `${t.markdownPreview.title} | ${t.common.siteTitle}`,
-    description: t.markdownPreview.description,
-    keywords: t.markdownPreview.keywords || [],
-    openGraph: {
-      title: t.markdownPreview.title,
-      description: t.markdownPreview.description,
-      url: `${baseUrl}/${locale}/markdown-preview`,
+    ...generateToolMetadata(
+      locale,
+      "markdown-preview",
+      t.markdownPreview,
+      t.common
+    ),
+    other: {
+      "structured-data": JSON.stringify([
+        generateToolStructuredData(
+          locale,
+          "markdown-preview",
+          t.markdownPreview,
+          t.common
+        ),
+      ]),
     },
-    alternates: getAlternates(locale, "/markdown-preview"),
   };
 }
 

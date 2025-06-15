@@ -1,9 +1,10 @@
 import DiceRollerClient from "./dice-roller-client";
-import { getTranslations, isValidLocale } from "@/lib/i18n";
+import { getTranslations, isValidLocale, getAlternates } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { baseUrl } from "@/lib/const";
-import { getAlternates } from "@/lib/i18n";
+import { generateToolMetadata } from "@/lib/metadata";
+import { generateToolStructuredData } from "@/lib/structured-data";
 
 interface DiceRollerPageProps {
   params: Promise<{ locale: string }>;
@@ -25,15 +26,17 @@ export async function generateMetadata({
   const t = getTranslations(locale);
 
   return {
-    title: `${t.diceRoller.title} | ${t.common.siteTitle}`,
-    description: t.diceRoller.description,
-    keywords: t.diceRoller.keywords || [],
-    openGraph: {
-      title: t.diceRoller.title,
-      description: t.diceRoller.description,
-      url: `${baseUrl}/${locale}/dice-roller`,
+    ...generateToolMetadata(locale, "dice-roller", t.diceRoller, t.common),
+    other: {
+      "structured-data": JSON.stringify([
+        generateToolStructuredData(
+          locale,
+          "dice-roller",
+          t.diceRoller,
+          t.common
+        ),
+      ]),
     },
-    alternates: getAlternates(locale, "/dice-roller"),
   };
 }
 

@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
-import { getTranslations } from "@/lib/i18n";
-import { isValidLocale } from "@/locales";
-import { baseUrl } from "@/lib/const";
+import { getTranslations, isValidLocale } from "@/lib/i18n";
+import { generatePageMetadata } from "@/lib/metadata";
 import ContactClient from "./contact-client";
 import { notFound } from "next/navigation";
-import { getAlternates } from "@/lib/i18n";
 
 interface Props {
   params: Promise<{ locale: string }>;
@@ -21,17 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const t = getTranslations(locale);
 
-  return {
-    title: `${t.contact.title} | ${t.common.siteTitle}`,
-    description: t.contact.description,
-    keywords: t.contact.keywords || [],
-    openGraph: {
-      title: t.contact.title,
-      description: t.contact.description,
-      url: `${baseUrl}/${locale}/contact`,
-    },
-    alternates: getAlternates(locale, "/contact"),
-  };
+  return generatePageMetadata(locale, "contact", t.contact, t.common);
 }
 
 export default async function ContactPage({ params }: Props) {

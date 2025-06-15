@@ -1,9 +1,10 @@
 import RouletteClient from "./roulette-client";
-import { getTranslations, isValidLocale } from "@/lib/i18n";
+import { getTranslations, isValidLocale, getAlternates } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getAlternates } from "@/lib/i18n";
 import { baseUrl } from "@/lib/const";
+import { generateToolMetadata } from "@/lib/metadata";
+import { generateToolStructuredData } from "@/lib/structured-data";
 
 interface RoulettePageProps {
   params: Promise<{ locale: string }>;
@@ -25,15 +26,12 @@ export async function generateMetadata({
   const t = getTranslations(locale);
 
   return {
-    title: `${t.roulette.title} | ${t.common.siteTitle}`,
-    description: t.roulette.description,
-    keywords: t.roulette.keywords || [],
-    openGraph: {
-      title: t.roulette.title,
-      description: t.roulette.description,
-      url: `${baseUrl}/${locale}/roulette`,
+    ...generateToolMetadata(locale, "roulette", t.roulette, t.common),
+    other: {
+      "structured-data": JSON.stringify([
+        generateToolStructuredData(locale, "roulette", t.roulette, t.common),
+      ]),
     },
-    alternates: getAlternates(locale, "/roulette"),
   };
 }
 

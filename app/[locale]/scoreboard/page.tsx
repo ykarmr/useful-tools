@@ -1,9 +1,10 @@
 import ScoreboardClient from "./scoreboard-client";
-import { getTranslations, isValidLocale } from "@/lib/i18n";
+import { getTranslations, isValidLocale, getAlternates } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { baseUrl } from "@/lib/const";
-import { getAlternates } from "@/lib/i18n";
+import { generateToolMetadata } from "@/lib/metadata";
+import { generateToolStructuredData } from "@/lib/structured-data";
 
 interface ScoreboardPageProps {
   params: Promise<{ locale: string }>;
@@ -25,15 +26,17 @@ export async function generateMetadata({
   const t = getTranslations(locale);
 
   return {
-    title: `${t.scoreboard.title} | ${t.common.siteTitle}`,
-    description: t.scoreboard.description,
-    keywords: t.scoreboard.keywords || [],
-    openGraph: {
-      title: t.scoreboard.title,
-      description: t.scoreboard.description,
-      url: `${baseUrl}/${locale}/scoreboard`,
+    ...generateToolMetadata(locale, "scoreboard", t.scoreboard, t.common),
+    other: {
+      "structured-data": JSON.stringify([
+        generateToolStructuredData(
+          locale,
+          "scoreboard",
+          t.scoreboard,
+          t.common
+        ),
+      ]),
     },
-    alternates: getAlternates(locale, "/scoreboard"),
   };
 }
 

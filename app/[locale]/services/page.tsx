@@ -1,9 +1,10 @@
 import ServicesClient from "./services-client";
-import { getTranslations, isValidLocale } from "@/lib/i18n";
+import { getTranslations, isValidLocale, getAlternates } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { baseUrl } from "@/lib/const";
-import { getAlternates } from "@/lib/i18n";
+import { generatePageMetadata } from "@/lib/metadata";
+import { generateOrganizationStructuredData } from "@/lib/structured-data";
 
 interface ServicesPageProps {
   params: Promise<{ locale: string }>;
@@ -25,15 +26,12 @@ export async function generateMetadata({
   const t = getTranslations(locale);
 
   return {
-    title: `${t.services.title} | ${t.common.siteTitle}`,
-    description: t.services.subtitle,
-    keywords: t.services.keywords || [],
-    openGraph: {
-      title: t.services.title,
-      description: t.services.subtitle,
-      url: `${baseUrl}${locale}/services`,
+    ...generatePageMetadata(locale, "services", t.services, t.common),
+    other: {
+      "structured-data": JSON.stringify([
+        generateOrganizationStructuredData(t.common),
+      ]),
     },
-    alternates: getAlternates(locale, "/services"),
   };
 }
 

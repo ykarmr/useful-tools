@@ -19,8 +19,8 @@ import {
 import { getTranslations, isValidLocale } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { baseUrl } from "@/lib/const";
-import { getAlternates } from "@/lib/i18n";
+import { generateHomePageMetadata } from "@/lib/metadata";
+import { generateHomePageStructuredData } from "@/lib/structured-data";
 
 interface HomePageProps {
   params: Promise<{ locale: string }>;
@@ -42,15 +42,12 @@ export async function generateMetadata({
   const t = getTranslations(locale);
 
   return {
-    title: t.common.seo.homeTitle,
-    description: t.common.seo.homeDescription,
-    keywords: t.common.seo.homeKeywords,
-    openGraph: {
-      title: t.home.title,
-      description: t.home.subtitle,
-      url: `${baseUrl}/${locale}`,
+    ...generateHomePageMetadata(locale, t.home, t.common),
+    other: {
+      "structured-data": JSON.stringify(
+        generateHomePageStructuredData(locale, t.home, t.common)
+      ),
     },
-    alternates: getAlternates(locale),
   };
 }
 

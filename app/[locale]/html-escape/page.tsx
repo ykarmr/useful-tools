@@ -1,8 +1,9 @@
-import { getTranslations, isValidLocale } from "@/lib/i18n";
+import { getTranslations, isValidLocale, getAlternates } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { baseUrl } from "@/lib/const";
-import { getAlternates } from "@/lib/i18n";
+import { generateToolMetadata } from "@/lib/metadata";
+import { generateToolStructuredData } from "@/lib/structured-data";
 import HtmlEscapeClient from "./html-escape-client";
 
 interface HtmlEscapePageProps {
@@ -25,15 +26,17 @@ export async function generateMetadata({
   const t = getTranslations(locale);
 
   return {
-    title: `${t.htmlEscape.title} | ${t.common.siteTitle}`,
-    description: t.htmlEscape.description,
-    keywords: t.htmlEscape.keywords || [],
-    openGraph: {
-      title: t.htmlEscape.title,
-      description: t.htmlEscape.description,
-      url: `${baseUrl}/${locale}/html-escape`,
+    ...generateToolMetadata(locale, "html-escape", t.htmlEscape, t.common),
+    other: {
+      "structured-data": JSON.stringify([
+        generateToolStructuredData(
+          locale,
+          "html-escape",
+          t.htmlEscape,
+          t.common
+        ),
+      ]),
     },
-    alternates: getAlternates(locale, "html-escape"),
   };
 }
 

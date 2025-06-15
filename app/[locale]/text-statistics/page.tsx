@@ -1,8 +1,9 @@
-import { getTranslations, isValidLocale } from "@/lib/i18n";
+import { getTranslations, isValidLocale, getAlternates } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { baseUrl } from "@/lib/const";
-import { getAlternates } from "@/lib/i18n";
+import { generateToolMetadata } from "@/lib/metadata";
+import { generateToolStructuredData } from "@/lib/structured-data";
 import TextStatisticsClient from "./text-statistics-client";
 
 interface TextStatisticsPageProps {
@@ -25,15 +26,22 @@ export async function generateMetadata({
   const t = getTranslations(locale);
 
   return {
-    title: `${t.textStatistics.title} | ${t.common.siteTitle}`,
-    description: t.textStatistics.description,
-    keywords: t.textStatistics.keywords || [],
-    openGraph: {
-      title: t.textStatistics.title,
-      description: t.textStatistics.description,
-      url: `${baseUrl}/${locale}/text-statistics`,
+    ...generateToolMetadata(
+      locale,
+      "text-statistics",
+      t.textStatistics,
+      t.common
+    ),
+    other: {
+      "structured-data": JSON.stringify([
+        generateToolStructuredData(
+          locale,
+          "text-statistics",
+          t.textStatistics,
+          t.common
+        ),
+      ]),
     },
-    alternates: getAlternates(locale, "/text-statistics"),
   };
 }
 

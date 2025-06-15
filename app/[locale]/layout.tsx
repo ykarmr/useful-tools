@@ -17,69 +17,6 @@ interface LocaleLayoutProps {
   params: Promise<{ locale: string }>;
 }
 
-export async function generateStaticParams() {
-  return getSupportedLocales().map((locale) => ({
-    locale,
-  }));
-}
-
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
-  const { locale } = await params;
-
-  if (!isValidLocale(locale)) {
-    return {
-      title: "Page Not Found",
-    };
-  }
-
-  const t = getTranslations(locale);
-
-  const openGraphLocale = localeMapping;
-  return {
-    description: t.common.seo.siteDescription,
-    keywords: t.common.seo.keywords,
-    authors: [{ name: t.common.seo.structuredData.organizationName }],
-    creator: t.common.seo.structuredData.organizationName,
-    publisher: t.common.seo.structuredData.organizationName,
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        "max-video-preview": -1,
-        "max-image-preview": "large",
-        "max-snippet": -1,
-      },
-    },
-    alternates: getAlternates(locale),
-    openGraph: {
-      title: t.common.seo.siteTitle,
-      description: t.footer.description,
-      type: "website",
-      locale:
-        openGraphLocale[locale as keyof typeof openGraphLocale] || "en_US",
-      url: `${baseUrl}/${locale}`,
-      siteName: t.common.seo.siteTitle,
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: t.common.seo.siteTitle,
-      description: t.footer.description,
-      creator: t.common.seo.twitterCreator,
-    },
-    // verification: {
-    //   google: t.common.seo.verification.google,
-    //   yandex: t.common.seo.verification.yandex,
-    //   yahoo: t.common.seo.verification.yahoo,
-    // },
-  };
-}
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const viewport: Viewport = {

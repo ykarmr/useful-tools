@@ -1,9 +1,10 @@
 import QrGeneratorClient from "./qr-generator-client";
-import { getTranslations, isValidLocale } from "@/lib/i18n";
+import { getTranslations, isValidLocale, getAlternates } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { baseUrl } from "@/lib/const";
-import { getAlternates } from "@/lib/i18n";
+import { generateToolMetadata } from "@/lib/metadata";
+import { generateToolStructuredData } from "@/lib/structured-data";
 
 interface QrGeneratorPageProps {
   params: Promise<{ locale: string }>;
@@ -25,15 +26,17 @@ export async function generateMetadata({
   const t = getTranslations(locale);
 
   return {
-    title: `${t.qrGenerator.title} | ${t.common.siteTitle}`,
-    description: t.qrGenerator.description,
-    keywords: t.qrGenerator.keywords || [],
-    openGraph: {
-      title: t.qrGenerator.title,
-      description: t.qrGenerator.description,
-      url: `${baseUrl}/${locale}/qr-generator`,
+    ...generateToolMetadata(locale, "qr-generator", t.qrGenerator, t.common),
+    other: {
+      "structured-data": JSON.stringify([
+        generateToolStructuredData(
+          locale,
+          "qr-generator",
+          t.qrGenerator,
+          t.common
+        ),
+      ]),
     },
-    alternates: getAlternates(locale, "/qr-generator"),
   };
 }
 

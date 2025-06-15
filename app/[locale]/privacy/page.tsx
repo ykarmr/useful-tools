@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { getTranslations, interpolate, isValidLocale } from "@/locales";
-import { baseUrl } from "@/lib/const";
-import { notFound } from "next/navigation";
 import { getAlternates, getLocaleMapping } from "@/lib/i18n";
+import { generatePageMetadata } from "@/lib/metadata";
+import { notFound } from "next/navigation";
 
 interface Props {
   params: Promise<{ locale: string }>;
@@ -19,17 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const t = getTranslations(locale);
 
-  return {
-    title: `${t.privacy.title} | ${t.common.siteTitle}`,
-    description: t.privacy.introduction,
-    keywords: t.privacy.keywords || [],
-    openGraph: {
-      title: t.privacy.title,
-      description: t.privacy.description,
-      url: `${baseUrl}/${locale}/privacy`,
-    },
-    alternates: getAlternates(locale, "/privacy"),
-  };
+  return generatePageMetadata(locale, "privacy", t.privacy, t.common);
 }
 
 export default async function PrivacyPage({ params }: Props) {

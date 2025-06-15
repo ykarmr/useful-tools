@@ -1,9 +1,13 @@
 import JsonFormatterClient from "./json-formatter-client";
-import { getTranslations, isValidLocale } from "@/lib/i18n";
+import { getTranslations, isValidLocale, getAlternates } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { baseUrl } from "@/lib/const";
-import { getAlternates } from "@/lib/i18n";
+import { generateToolMetadata } from "@/lib/metadata";
+import {
+  generateToolStructuredData,
+  generateFAQStructuredData,
+} from "@/lib/structured-data";
 
 interface JsonFormatterPageProps {
   params: Promise<{ locale: string }>;
@@ -25,15 +29,23 @@ export async function generateMetadata({
   const t = getTranslations(locale);
 
   return {
-    title: `${t.jsonFormatter.title} | ${t.common.siteTitle}`,
-    description: t.jsonFormatter.description,
-    keywords: t.jsonFormatter.keywords || [],
-    openGraph: {
-      title: t.jsonFormatter.title,
-      description: t.jsonFormatter.description,
-      url: `${baseUrl}/${locale}/json-formatter`,
+    ...generateToolMetadata(
+      locale,
+      "json-formatter",
+      t.jsonFormatter,
+      t.common
+    ),
+    other: {
+      "structured-data": JSON.stringify([
+        generateToolStructuredData(
+          locale,
+          "json-formatter",
+          t.jsonFormatter,
+          t.common
+        ),
+        generateFAQStructuredData(t.jsonFormatter.faqList || []),
+      ]),
     },
-    alternates: getAlternates(locale, "/json-formatter"),
   };
 }
 

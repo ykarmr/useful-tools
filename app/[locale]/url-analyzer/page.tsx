@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { getTranslations, isValidLocale } from "@/lib/i18n";
-import ToolLayout from "@/components/layout/tool-layout";
+import { getTranslations, isValidLocale, getAlternates } from "@/lib/i18n";
 import UrlAnalyzerClient from "./url-analyzer-client";
 import { baseUrl } from "@/lib/const";
-import { getAlternates } from "@/lib/i18n";
+import { generateToolMetadata } from "@/lib/metadata";
+import { generateToolStructuredData } from "@/lib/structured-data";
 import { notFound } from "next/navigation";
 
 interface Props {
@@ -22,15 +22,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const t = getTranslations(locale);
 
   return {
-    title: `${t.urlAnalyzer.title} | ${t.common.siteTitle}`,
-    description: t.urlAnalyzer.description,
-    keywords: t.urlAnalyzer.keywords || [],
-    openGraph: {
-      title: t.urlAnalyzer.title,
-      description: t.urlAnalyzer.description,
-      url: `${baseUrl}/${locale}/url-analyzer`,
+    ...generateToolMetadata(locale, "url-analyzer", t.urlAnalyzer, t.common),
+    other: {
+      "structured-data": JSON.stringify([
+        generateToolStructuredData(
+          locale,
+          "url-analyzer",
+          t.urlAnalyzer,
+          t.common
+        ),
+      ]),
     },
-    alternates: getAlternates(locale, "/url-analyzer"),
   };
 }
 

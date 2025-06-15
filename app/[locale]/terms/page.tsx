@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { getTranslations, interpolate, isValidLocale } from "@/locales";
-import { baseUrl } from "@/lib/const";
-import { notFound } from "next/navigation";
 import { getAlternates, localeMapping } from "@/lib/i18n";
+import { generatePageMetadata } from "@/lib/metadata";
+import { notFound } from "next/navigation";
 
 interface Props {
   params: Promise<{ locale: string }>;
@@ -19,17 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const t = getTranslations(locale);
 
-  return {
-    title: `${t.terms.title} | ${t.common.siteTitle}`,
-    description: t.terms.introduction,
-    keywords: t.terms.keywords || [],
-    openGraph: {
-      title: t.qrGenerator.title,
-      description: t.qrGenerator.description,
-      url: `${baseUrl}/${locale}/terms`,
-    },
-    alternates: getAlternates(locale, "/terms"),
-  };
+  return generatePageMetadata(locale, "terms", t.terms, t.common);
 }
 
 export default async function TermsPage({ params }: Props) {

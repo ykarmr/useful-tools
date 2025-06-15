@@ -1,8 +1,9 @@
 import RandomNumberClient from "./random-number-client";
-import { getTranslations, isValidLocale } from "@/lib/i18n";
+import { getTranslations, isValidLocale, getAlternates } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getAlternates } from "@/lib/i18n";
+import { generateToolMetadata } from "@/lib/metadata";
+import { generateToolStructuredData } from "@/lib/structured-data";
 
 interface RandomNumberPageProps {
   params: Promise<{ locale: string }>;
@@ -22,18 +23,19 @@ export async function generateMetadata({
   }
 
   const t = getTranslations(locale);
-  const baseUrl = "https://useful-tools.vercel.app";
 
   return {
-    title: `${t.randomNumber.title} | ${t.common.siteTitle}`,
-    description: t.randomNumber.description,
-    keywords: t.randomNumber.keywords || [],
-    openGraph: {
-      title: t.randomNumber.title,
-      description: t.randomNumber.description,
-      url: `${baseUrl}/${locale}/random-number`,
+    ...generateToolMetadata(locale, "random-number", t.randomNumber, t.common),
+    other: {
+      "structured-data": JSON.stringify([
+        generateToolStructuredData(
+          locale,
+          "random-number",
+          t.randomNumber,
+          t.common
+        ),
+      ]),
     },
-    alternates: getAlternates(locale, "/random-number"),
   };
 }
 

@@ -1,8 +1,9 @@
-import { getTranslations, isValidLocale } from "@/lib/i18n";
+import { getTranslations, isValidLocale, getAlternates } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { baseUrl } from "@/lib/const";
-import { getAlternates } from "@/lib/i18n";
+import { generateToolMetadata } from "@/lib/metadata";
+import { generateToolStructuredData } from "@/lib/structured-data";
 import SubnetCalculatorClient from "./subnet-calculator-client";
 
 interface SubnetCalculatorPageProps {
@@ -25,15 +26,22 @@ export async function generateMetadata({
   const t = getTranslations(locale);
 
   return {
-    title: `${t.subnetCalculator.title} | ${t.common.siteTitle}`,
-    description: t.subnetCalculator.description,
-    keywords: t.subnetCalculator.keywords || [],
-    openGraph: {
-      title: t.subnetCalculator.title,
-      description: t.subnetCalculator.description,
-      url: `${baseUrl}/${locale}/subnet-calculator`,
+    ...generateToolMetadata(
+      locale,
+      "subnet-calculator",
+      t.subnetCalculator,
+      t.common
+    ),
+    other: {
+      "structured-data": JSON.stringify([
+        generateToolStructuredData(
+          locale,
+          "subnet-calculator",
+          t.subnetCalculator,
+          t.common
+        ),
+      ]),
     },
-    alternates: getAlternates(locale, "/subnet-calculator"),
   };
 }
 

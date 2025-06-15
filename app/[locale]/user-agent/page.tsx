@@ -1,9 +1,9 @@
 import UserAgentClient from "./user-agent-client";
-import { getTranslations, isValidLocale } from "@/lib/i18n";
+import { getTranslations, isValidLocale, getAlternates } from "@/lib/i18n";
+import { generateToolMetadata } from "@/lib/metadata";
+import { generateToolStructuredData } from "@/lib/structured-data";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { baseUrl } from "@/lib/const";
-import { getAlternates } from "@/lib/i18n";
 
 interface UserAgentPageProps {
   params: Promise<{ locale: string }>;
@@ -25,15 +25,12 @@ export async function generateMetadata({
   const t = getTranslations(locale);
 
   return {
-    title: `${t.userAgent.title} | ${t.common.siteTitle}`,
-    description: t.userAgent.description,
-    keywords: t.userAgent.keywords || [],
-    openGraph: {
-      title: t.userAgent.title,
-      description: t.userAgent.description,
-      url: `${baseUrl}/${locale}/user-agent`,
+    ...generateToolMetadata(locale, "user-agent", t.userAgent, t.common),
+    other: {
+      "structured-data": JSON.stringify([
+        generateToolStructuredData(locale, "user-agent", t.userAgent, t.common),
+      ]),
     },
-    alternates: getAlternates(locale, "/user-agent"),
   };
 }
 

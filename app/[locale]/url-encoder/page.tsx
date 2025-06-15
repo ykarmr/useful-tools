@@ -1,9 +1,10 @@
 import UrlEncoderClient from "./url-encoder-client";
-import { getTranslations, isValidLocale } from "@/lib/i18n";
+import { getTranslations, isValidLocale, getAlternates } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { baseUrl } from "@/lib/const";
-import { getAlternates } from "@/lib/i18n";
+import { generateToolMetadata } from "@/lib/metadata";
+import { generateToolStructuredData } from "@/lib/structured-data";
 
 interface UrlEncoderPageProps {
   params: Promise<{ locale: string }>;
@@ -25,15 +26,17 @@ export async function generateMetadata({
   const t = getTranslations(locale);
 
   return {
-    title: `${t.urlEncoder.title} | ${t.common.siteTitle}`,
-    description: t.urlEncoder.description,
-    keywords: t.urlEncoder.keywords || [],
-    openGraph: {
-      title: t.urlEncoder.title,
-      description: t.urlEncoder.description,
-      url: `${baseUrl}/${locale}/url-encoder`,
+    ...generateToolMetadata(locale, "url-encoder", t.urlEncoder, t.common),
+    other: {
+      "structured-data": JSON.stringify([
+        generateToolStructuredData(
+          locale,
+          "url-encoder",
+          t.urlEncoder,
+          t.common
+        ),
+      ]),
     },
-    alternates: getAlternates(locale, "/url-encoder"),
   };
 }
 

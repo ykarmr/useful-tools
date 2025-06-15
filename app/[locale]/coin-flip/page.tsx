@@ -1,9 +1,10 @@
 import CoinFlipClient from "./coin-flip-client";
-import { getTranslations, isValidLocale } from "@/lib/i18n";
+import { getTranslations, isValidLocale, getAlternates } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { baseUrl } from "@/lib/const";
-import { getAlternates } from "@/lib/i18n";
+import { generateToolMetadata } from "@/lib/metadata";
+import { generateToolStructuredData } from "@/lib/structured-data";
 
 interface CoinFlipPageProps {
   params: Promise<{ locale: string }>;
@@ -25,15 +26,12 @@ export async function generateMetadata({
   const t = getTranslations(locale);
 
   return {
-    title: `${t.coinFlip.title} | ${t.common.siteTitle}`,
-    description: t.coinFlip.description,
-    keywords: t.coinFlip.keywords || [],
-    openGraph: {
-      title: t.coinFlip.title,
-      description: t.coinFlip.description,
-      url: `${baseUrl}/${locale}/coin-flip`,
+    ...generateToolMetadata(locale, "coin-flip", t.coinFlip, t.common),
+    other: {
+      "structured-data": JSON.stringify([
+        generateToolStructuredData(locale, "coin-flip", t.coinFlip, t.common),
+      ]),
     },
-    alternates: getAlternates(locale, "/coin-flip"),
   };
 }
 

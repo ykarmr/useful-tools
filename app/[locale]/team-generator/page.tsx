@@ -1,9 +1,10 @@
 import TeamGeneratorClient from "./team-generator-client";
-import { getTranslations, isValidLocale } from "@/lib/i18n";
+import { getTranslations, isValidLocale, getAlternates } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { baseUrl } from "@/lib/const";
-import { getAlternates } from "@/lib/i18n";
+import { generateToolMetadata } from "@/lib/metadata";
+import { generateToolStructuredData } from "@/lib/structured-data";
 
 interface TeamGeneratorPageProps {
   params: Promise<{ locale: string }>;
@@ -25,15 +26,22 @@ export async function generateMetadata({
   const t = getTranslations(locale);
 
   return {
-    title: `${t.teamGenerator.title} | ${t.common.siteTitle}`,
-    description: t.teamGenerator.description,
-    keywords: t.teamGenerator.keywords || [],
-    openGraph: {
-      title: t.teamGenerator.title,
-      description: t.teamGenerator.description,
-      url: `${baseUrl}/${locale}/team-generator`,
+    ...generateToolMetadata(
+      locale,
+      "team-generator",
+      t.teamGenerator,
+      t.common
+    ),
+    other: {
+      "structured-data": JSON.stringify([
+        generateToolStructuredData(
+          locale,
+          "team-generator",
+          t.teamGenerator,
+          t.common
+        ),
+      ]),
     },
-    alternates: getAlternates(locale, "/team-generator"),
   };
 }
 

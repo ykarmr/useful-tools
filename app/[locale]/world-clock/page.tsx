@@ -1,9 +1,10 @@
 import WorldClockClient from "./world-clock-client";
-import { getTranslations, isValidLocale } from "@/lib/i18n";
+import { getTranslations, isValidLocale, getAlternates } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { baseUrl } from "@/lib/const";
-import { getAlternates } from "@/lib/i18n";
+import { generateToolMetadata } from "@/lib/metadata";
+import { generateToolStructuredData } from "@/lib/structured-data";
 
 interface WorldClockPageProps {
   params: Promise<{ locale: string }>;
@@ -25,15 +26,17 @@ export async function generateMetadata({
   const t = getTranslations(locale);
 
   return {
-    title: `${t.worldClock.title} | ${t.common.siteTitle}`,
-    description: t.worldClock.description,
-    keywords: t.worldClock.keywords || [],
-    openGraph: {
-      title: t.worldClock.title,
-      description: t.worldClock.description,
-      url: `${baseUrl}/${locale}/world-clock`,
+    ...generateToolMetadata(locale, "world-clock", t.worldClock, t.common),
+    other: {
+      "structured-data": JSON.stringify([
+        generateToolStructuredData(
+          locale,
+          "world-clock",
+          t.worldClock,
+          t.common
+        ),
+      ]),
     },
-    alternates: getAlternates(locale, "/world-clock"),
   };
 }
 

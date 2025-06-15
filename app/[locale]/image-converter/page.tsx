@@ -1,8 +1,9 @@
-import { getTranslations, isValidLocale } from "@/lib/i18n";
+import { getTranslations, isValidLocale, getAlternates } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { baseUrl } from "@/lib/const";
-import { getAlternates } from "@/lib/i18n";
+import { generateToolMetadata } from "@/lib/metadata";
+import { generateToolStructuredData } from "@/lib/structured-data";
 import ImageConverterClient from "./image-converter-client";
 
 interface ImageConverterPageProps {
@@ -25,15 +26,22 @@ export async function generateMetadata({
   const t = getTranslations(locale);
 
   return {
-    title: `${t.imageConverter.title} | ${t.common.siteTitle}`,
-    description: t.imageConverter.description,
-    keywords: t.imageConverter.keywords || [],
-    openGraph: {
-      title: t.imageConverter.title,
-      description: t.imageConverter.description,
-      url: `${baseUrl}/${locale}/image-converter`,
+    ...generateToolMetadata(
+      locale,
+      "image-converter",
+      t.imageConverter,
+      t.common
+    ),
+    other: {
+      "structured-data": JSON.stringify([
+        generateToolStructuredData(
+          locale,
+          "image-converter",
+          t.imageConverter,
+          t.common
+        ),
+      ]),
     },
-    alternates: getAlternates(locale, "/image-converter"),
   };
 }
 

@@ -1,9 +1,10 @@
 import RandomStringClient from "./random-string-client";
-import { getTranslations, isValidLocale } from "@/lib/i18n";
+import { getTranslations, isValidLocale, getAlternates } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { baseUrl } from "@/lib/const";
-import { getAlternates } from "@/lib/i18n";
+import { generateToolMetadata } from "@/lib/metadata";
+import { generateToolStructuredData } from "@/lib/structured-data";
 
 interface RandomStringPageProps {
   params: Promise<{ locale: string }>;
@@ -25,15 +26,17 @@ export async function generateMetadata({
   const t = getTranslations(locale);
 
   return {
-    title: `${t.randomString.title} | ${t.common.siteTitle}`,
-    description: t.randomString.description,
-    keywords: t.randomString.keywords || [],
-    openGraph: {
-      title: t.randomString.title,
-      description: t.randomString.description,
-      url: `${baseUrl}/${locale}/random-string`,
+    ...generateToolMetadata(locale, "random-string", t.randomString, t.common),
+    other: {
+      "structured-data": JSON.stringify([
+        generateToolStructuredData(
+          locale,
+          "random-string",
+          t.randomString,
+          t.common
+        ),
+      ]),
     },
-    alternates: getAlternates(locale, "/random-string"),
   };
 }
 

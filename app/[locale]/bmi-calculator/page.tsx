@@ -1,8 +1,9 @@
-import { getTranslations, isValidLocale } from "@/lib/i18n";
+import { getTranslations, isValidLocale, getAlternates } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { baseUrl } from "@/lib/const";
-import { getAlternates } from "@/lib/i18n";
+import { generateToolMetadata } from "@/lib/metadata";
+import { generateToolStructuredData } from "@/lib/structured-data";
 import BmiCalculatorClient from "./bmi-calculator-client";
 
 interface BmiCalculatorPageProps {
@@ -25,15 +26,22 @@ export async function generateMetadata({
   const t = getTranslations(locale);
 
   return {
-    title: `${t.bmiCalculator.title} | ${t.common.siteTitle}`,
-    description: t.bmiCalculator.description,
-    keywords: t.bmiCalculator.keywords || [],
-    openGraph: {
-      title: t.bmiCalculator.title,
-      description: t.bmiCalculator.description,
-      url: `${baseUrl}/${locale}/bmi-calculator`,
+    ...generateToolMetadata(
+      locale,
+      "bmi-calculator",
+      t.bmiCalculator,
+      t.common
+    ),
+    other: {
+      "structured-data": JSON.stringify([
+        generateToolStructuredData(
+          locale,
+          "bmi-calculator",
+          t.bmiCalculator,
+          t.common
+        ),
+      ]),
     },
-    alternates: getAlternates(locale, "bmi-calculator"),
   };
 }
 
