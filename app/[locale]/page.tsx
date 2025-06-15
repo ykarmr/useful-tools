@@ -16,7 +16,11 @@ import {
   FileText,
   LinkIcon,
 } from "lucide-react";
-import { getTranslations, isValidLocale } from "@/lib/i18n";
+import {
+  getTranslations,
+  isValidLocale,
+  getSupportedLocales,
+} from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { generateHomePageMetadata } from "@/lib/metadata";
@@ -24,6 +28,12 @@ import { generateHomePageStructuredData } from "@/lib/structured-data";
 
 interface HomePageProps {
   params: Promise<{ locale: string }>;
+}
+
+export async function generateStaticParams() {
+  return getSupportedLocales().map((locale) => ({
+    locale,
+  }));
 }
 
 export async function generateMetadata({

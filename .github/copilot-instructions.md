@@ -110,7 +110,7 @@
 
 ```tsx
 import [機能名]Client from "./[機能名]-client";
-import { getTranslations, isValidLocale } from "@/lib/i18n";
+import { getTranslations, isValidLocale, getSupportedLocales } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { baseUrl } from "@/lib/const";
@@ -118,6 +118,12 @@ import { getAlternates } from "@/lib/i18n";
 
 interface [機能名]PageProps {
   params: Promise<{ locale: string }>;
+}
+
+export async function generateStaticParams() {
+  return getSupportedLocales().map((locale) => ({
+    locale,
+  }));
 }
 
 export async function generateMetadata({

@@ -1,10 +1,15 @@
 import UserAgentClient from "./user-agent-client";
-import { getTranslations, isValidLocale, getAlternates } from "@/lib/i18n";
+import { getTranslations, isValidLocale, getAlternates, getSupportedLocales } from "@/lib/i18n";
 import { generateToolMetadata } from "@/lib/metadata";
 import { generateToolStructuredData } from "@/lib/structured-data";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
+export async function generateStaticParams() {
+  return getSupportedLocales().map((locale) => ({
+    locale,
+  }));
+}
 interface UserAgentPageProps {
   params: Promise<{ locale: string }>;
 }

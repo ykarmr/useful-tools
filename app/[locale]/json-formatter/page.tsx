@@ -1,5 +1,5 @@
 import JsonFormatterClient from "./json-formatter-client";
-import { getTranslations, isValidLocale, getAlternates } from "@/lib/i18n";
+import { getTranslations, isValidLocale, getAlternates, getSupportedLocales } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { baseUrl } from "@/lib/const";
@@ -9,6 +9,11 @@ import {
   generateFAQStructuredData,
 } from "@/lib/structured-data";
 
+export async function generateStaticParams() {
+  return getSupportedLocales().map((locale) => ({
+    locale,
+  }));
+}
 interface JsonFormatterPageProps {
   params: Promise<{ locale: string }>;
 }

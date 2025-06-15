@@ -1,5 +1,10 @@
 import ServicesClient from "./services-client";
-import { getTranslations, isValidLocale, getAlternates } from "@/lib/i18n";
+import {
+  getTranslations,
+  isValidLocale,
+  getAlternates,
+  getSupportedLocales,
+} from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { baseUrl } from "@/lib/const";
@@ -8,6 +13,12 @@ import { generateOrganizationStructuredData } from "@/lib/structured-data";
 
 interface ServicesPageProps {
   params: Promise<{ locale: string }>;
+}
+
+export async function generateStaticParams() {
+  return getSupportedLocales().map((locale) => ({
+    locale,
+  }));
 }
 
 export async function generateMetadata({

@@ -1,11 +1,21 @@
 import type { Metadata } from "next";
-import { getTranslations, isValidLocale } from "@/lib/i18n";
+import {
+  getTranslations,
+  isValidLocale,
+  getSupportedLocales,
+} from "@/lib/i18n";
 import { generatePageMetadata } from "@/lib/metadata";
 import ContactClient from "./contact-client";
 import { notFound } from "next/navigation";
 
 interface Props {
   params: Promise<{ locale: string }>;
+}
+
+export async function generateStaticParams() {
+  return getSupportedLocales().map((locale) => ({
+    locale,
+  }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

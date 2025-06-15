@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
-import { getTranslations, isValidLocale, getAlternates } from "@/lib/i18n";
+import {
+  getTranslations,
+  isValidLocale,
+  getAlternates,
+  getSupportedLocales,
+} from "@/lib/i18n";
 import UrlAnalyzerClient from "./url-analyzer-client";
 import { baseUrl } from "@/lib/const";
 import { generateToolMetadata } from "@/lib/metadata";
@@ -10,6 +15,11 @@ interface Props {
   params: Promise<{ locale: string }>;
 }
 
+export async function generateStaticParams() {
+  return getSupportedLocales().map((locale) => ({
+    locale,
+  }));
+}
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
 

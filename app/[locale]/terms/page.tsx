@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
 import { getTranslations, interpolate, isValidLocale } from "@/locales";
-import { getAlternates, localeMapping } from "@/lib/i18n";
+import { getAlternates, localeMapping, getSupportedLocales } from "@/lib/i18n";
 import { generatePageMetadata } from "@/lib/metadata";
 import { notFound } from "next/navigation";
 
 interface Props {
   params: Promise<{ locale: string }>;
+}
+
+export async function generateStaticParams() {
+  return getSupportedLocales().map((locale) => ({
+    locale,
+  }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

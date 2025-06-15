@@ -1,11 +1,16 @@
 import UrlEncoderClient from "./url-encoder-client";
-import { getTranslations, isValidLocale, getAlternates } from "@/lib/i18n";
+import { getTranslations, isValidLocale, getAlternates, getSupportedLocales } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { baseUrl } from "@/lib/const";
 import { generateToolMetadata } from "@/lib/metadata";
 import { generateToolStructuredData } from "@/lib/structured-data";
 
+export async function generateStaticParams() {
+  return getSupportedLocales().map((locale) => ({
+    locale,
+  }));
+}
 interface UrlEncoderPageProps {
   params: Promise<{ locale: string }>;
 }
