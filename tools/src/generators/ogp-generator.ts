@@ -4,7 +4,7 @@ import {
   CanvasTextAlign,
 } from "canvas";
 import * as path from "path";
-import { LOCALES, COLORS, SIZES, OUTPUT_DIRS } from "../config";
+import { LOCALES, COLORS, SIZES, OUTPUT_DIRS, TOOL_NAMES } from "../config";
 import {
   saveFile,
   logProgress,
@@ -414,9 +414,9 @@ export class OgpGenerator {
       // フォントファミリーを取得
       const fontFamily = getFontFamily(localeCode);
 
-      // メインタイトルを描画（固定）
+      // メインタイトルを描画（多言語対応）
       this.drawMultilineText(
-        "USEFUL TOOLS",
+        locale.title,
         280,
         140,
         56,
@@ -426,9 +426,11 @@ export class OgpGenerator {
         70
       );
 
-      // ページタイトルを描画（サブタイトル位置）
+      // ページタイトルを描画（多言語対応のツール名を使用）
+      const localizedPageTitle =
+        TOOL_NAMES[pageName]?.[localeCode] || pageTitle;
       this.drawMultilineText(
-        pageTitle,
+        localizedPageTitle,
         280,
         240,
         42,
