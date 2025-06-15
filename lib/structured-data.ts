@@ -91,7 +91,7 @@ export function generateToolStructuredData(
         },
         primaryImageOfPage: {
           "@type": "ImageObject",
-          url: `${baseUrl}/images/tools/${toolKey}-og.jpg`,
+          url: `${baseUrl}/images/ogp/pages/ogp-${toolKey}-${locale}.png`,
           width: 1200,
           height: 630,
         },
@@ -118,7 +118,7 @@ export function generateHowToStructuredData(
     "@type": "HowTo",
     name: `How to use ${toolTranslations.title}`,
     description: `Step-by-step guide on how to use ${toolTranslations.title}`,
-    image: `${baseUrl}/images/tools/${toolKey}-guide.jpg`,
+    image: `${baseUrl}/images/ogp/pages/ogp-${toolKey}-${locale}.png`,
     supply: [
       {
         "@type": "HowToSupply",
@@ -162,7 +162,7 @@ export function generateOrganizationStructuredData(
     "@id": `${baseUrl}#organization`,
     name: siteTranslations.seo.structuredData.organizationName,
     url: baseUrl,
-    logo: `${baseUrl}/logo.png`,
+    logo: `${baseUrl}/images/logo/logo.png`,
     description: siteTranslations.seo.siteDescription,
     foundingDate: "2024",
     contactPoint: {
@@ -170,6 +170,65 @@ export function generateOrganizationStructuredData(
       contactType: "Customer Service",
       url: `${baseUrl}/contact`,
     },
+  };
+}
+
+// ページレベルの構造化データ生成
+export function generatePageStructuredData(
+  locale: Locale,
+  pageKey: string,
+  pageTranslations: any,
+  siteTranslations: Translations["common"]
+) {
+  const pageUrl = `${baseUrl}/${locale}/${pageKey}`;
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      // WebPageエンティティ
+      {
+        "@type": "WebPage",
+        "@id": `${pageUrl}#webpage`,
+        url: pageUrl,
+        name: pageTranslations.title,
+        description:
+          pageTranslations.description || pageTranslations.introduction,
+        isPartOf: {
+          "@type": "WebSite",
+          "@id": `${baseUrl}#website`,
+          name: siteTranslations.seo.siteTitle,
+          url: baseUrl,
+        },
+        primaryImageOfPage: {
+          "@type": "ImageObject",
+          url: `${baseUrl}/images/ogp/pages/ogp-${pageKey}-${locale}.png`,
+          width: 1200,
+          height: 630,
+        },
+        breadcrumb: {
+          "@id": `${pageUrl}#breadcrumb`,
+        },
+      },
+      // パンくずリスト
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${pageUrl}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: siteTranslations.seo.siteTitle,
+            item: `${baseUrl}/${locale}`,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: pageTranslations.title,
+            item: pageUrl,
+          },
+        ],
+      },
+    ],
   };
 }
 
@@ -233,7 +292,7 @@ export function generateHomePageStructuredData(
       primaryImageOfPage: {
         "@type": "ImageObject",
         "@id": `${siteUrl}#primaryimage`,
-        url: `${baseUrl}/og-image.png`,
+        url: `${baseUrl}/images/ogp/ogp-${locale}.png`,
         width: 1200,
         height: 630,
         caption: homeTranslations.title,

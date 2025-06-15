@@ -70,30 +70,6 @@ export default async function LocaleLayout({
           href="/favicon-16x16.png"
         /> */}
         <link rel="manifest" href="/manifest.webmanifest" />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebApplication",
-              name: t.common.seo.siteTitle,
-              description: t.common.seo.siteDescription,
-              url: `${baseUrl}/${locale}`,
-              applicationCategory:
-                t.common.seo.structuredData.applicationCategory,
-              operatingSystem: t.common.seo.structuredData.operatingSystem,
-              author: {
-                "@type": "Organization",
-                name: t.common.seo.structuredData.organizationName,
-              },
-              potentialAction: {
-                "@type": "SearchAction",
-                target: `${baseUrl}/${locale}/services`,
-                "query-input": "required name=search_term_string",
-              },
-            }),
-          }}
-        />
 
         {/* GA */}
         <script

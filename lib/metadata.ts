@@ -14,7 +14,7 @@ export function generateToolMetadata(
   const description = toolTranslations.description;
   const keywords = toolTranslations.keywords || [];
   const toolUrl = `${baseUrl}/${locale}/${toolKey}`;
-  //   const ogImageUrl = `${baseUrl}/images/og/${toolKey}.jpg`;
+  const ogImageUrl = `${baseUrl}/images/ogp/pages/ogp-${toolKey}-${locale}.png`;
 
   return {
     title,
@@ -41,21 +41,21 @@ export function generateToolMetadata(
       type: "website",
       locale: localeMapping[locale],
       siteName: siteTranslations.siteTitle,
-      //   images: [
-      //     {
-      //       url: ogImageUrl,
-      //       width: 1200,
-      //       height: 630,
-      //       alt: toolTranslations.title,
-      //     },
-      //   ],
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: toolTranslations.title,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: toolTranslations.title,
       description,
       creator: siteTranslations.seo.twitterCreator,
-      //   images: [ogImageUrl],
+      images: [ogImageUrl],
     },
     alternates: getAlternates(locale, `/${toolKey}`),
     // カノニカルURL
@@ -81,6 +81,7 @@ export function generatePageMetadata(
     pageTranslations.description || pageTranslations.introduction;
   const keywords = pageTranslations.keywords || [];
   const pageUrl = `${baseUrl}/${locale}/${pageKey}`;
+  const ogImageUrl = `${baseUrl}/images/ogp/pages/ogp-${pageKey}-${locale}.png`;
 
   return {
     title,
@@ -107,12 +108,21 @@ export function generatePageMetadata(
       type: "website",
       locale: localeMapping[locale],
       siteName: siteTranslations.siteTitle,
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: pageTranslations.title,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: pageTranslations.title,
       description,
       creator: siteTranslations.seo.twitterCreator,
+      images: [ogImageUrl],
     },
     alternates: getAlternates(locale, `/${pageKey}`),
     metadataBase: new URL(baseUrl),
@@ -156,20 +166,20 @@ export function generateHomePageMetadata(
       title,
       description,
       siteName: siteTranslations.siteTitle,
-      //   images: [
-      //     {
-      //       url: `${baseUrl}/og-image.png`,
-      //       width: 1200,
-      //       height: 630,
-      //       alt: title,
-      //     },
-      //   ],
+      images: [
+        {
+          url: `${baseUrl}/images/ogp/ogp-${locale}.png`,
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      //   images: [`${baseUrl}/og-image.png`],
+      images: [`${baseUrl}/images/ogp/ogp-${locale}.png`],
       creator: siteTranslations.seo.twitterCreator,
     },
     alternates: getAlternates(locale),
