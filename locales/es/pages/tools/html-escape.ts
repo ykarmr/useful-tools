@@ -1,4 +1,4 @@
-import type { HtmlEscapeTranslations } from "../../types/pages/tools/html-escape";
+import { HtmlEscapeTranslations } from "@/locales/types/pages/tools/html-escape";
 
 export const htmlEscape: HtmlEscapeTranslations = {
   title: "Herramienta de Escape HTML",
@@ -46,6 +46,18 @@ export const htmlEscape: HtmlEscapeTranslations = {
       title: "Comillas y ampersand",
       input: 'Say "Hello" & goodbye',
       output: "Say &quot;Hello&quot; &amp; goodbye",
+    },
+    scriptTag: {
+      title: "Etiqueta script (prevención XSS)",
+      input: '<script>alert("peligroso")</script>',
+      output: "&lt;script&gt;alert(&quot;peligroso&quot;)&lt;/script&gt;",
+    },
+    mixedContent: {
+      title: "Contenido mixto",
+      input:
+        '<div class="test" onclick="alert(\'click\')">Content & More</div>',
+      output:
+        "&lt;div class=&quot;test&quot; onclick=&quot;alert(&#x27;click&#x27;)&quot;&gt;Content &amp; More&lt;/div&gt;",
     },
   },
   faqList: [

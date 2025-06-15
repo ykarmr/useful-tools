@@ -35,6 +35,16 @@ export interface HtmlEscapeTranslations {
       input: string;
       output: string;
     };
+    scriptTag: {
+      title: string;
+      input: string;
+      output: string;
+    };
+    mixedContent: {
+      title: string;
+      input: string;
+      output: string;
+    };
   };
   faqList: Array<{
     q: string;

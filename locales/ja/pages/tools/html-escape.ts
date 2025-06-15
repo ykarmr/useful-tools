@@ -1,4 +1,4 @@
-import type { HtmlEscapeTranslations } from "../../types/pages/tools/html-escape";
+import { HtmlEscapeTranslations } from "@/locales/types/pages/tools/html-escape";
 
 export const htmlEscape: HtmlEscapeTranslations = {
   title: "HTMLエスケープツール",
@@ -46,6 +46,18 @@ export const htmlEscape: HtmlEscapeTranslations = {
       title: "引用符とアンパサンド",
       input: 'Say "Hello" & goodbye',
       output: "Say &quot;Hello&quot; &amp; goodbye",
+    },
+    scriptTag: {
+      title: "スクリプトタグ（XSS対策）",
+      input: '<script>alert("危険")</script>',
+      output: "&lt;script&gt;alert(&quot;危険&quot;)&lt;/script&gt;",
+    },
+    mixedContent: {
+      title: "複合的な内容",
+      input:
+        '<div class="test" onclick="alert(\'click\')">Content & More</div>',
+      output:
+        "&lt;div class=&quot;test&quot; onclick=&quot;alert(&#x27;click&#x27;)&quot;&gt;Content &amp; More&lt;/div&gt;",
     },
   },
   faqList: [

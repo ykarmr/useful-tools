@@ -30,20 +30,39 @@ export default function HtmlEscapeClient({ locale, t }: HtmlEscapeClientProps) {
 
   // HTMLエスケープ関数
   const escapeHtml = (text: string): string => {
-    const escapeMap: { [key: string]: string } = {
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#x27;",
-      "/": "&#x2F;",
-    };
-
     let escapedCount = 0;
-    const escaped = text.replace(/[&<>"'\/]/g, (match) => {
-      escapedCount++;
-      return escapeMap[match];
-    });
+
+    // &は最初に処理する必要がある（既にエスケープされた文字列を再度エスケープしないため）
+    const escaped = text
+      .replace(/&/g, () => {
+        escapedCount++;
+        return "&amp;";
+      })
+      .replace(/</g, () => {
+        escapedCount++;
+        return "&lt;";
+      })
+      .replace(/>/g, () => {
+        escapedCount++;
+        return "&gt;";
+      })
+      .replace(/"/g, () => {
+        escapedCount++;
+        return "&quot;";
+      })
+      .replace(/'/g, () => {
+        escapedCount++;
+        return "&#x27;";
+      })
+      .replace(/\//g, () => {
+        escapedCount++;
+        return "&#x2F;";
+      })
+      // 制御文字と非ASCII文字の処理
+      .replace(/[\u0000-\u001F\u007F-\u009F]/g, (match) => {
+        escapedCount++;
+        return `&#${match.charCodeAt(0)};`;
+      });
 
     setCharactersEscaped(escapedCount);
     return escaped;
@@ -51,24 +70,102 @@ export default function HtmlEscapeClient({ locale, t }: HtmlEscapeClientProps) {
 
   // HTMLアンエスケープ関数
   const unescapeHtml = (text: string): string => {
-    const unescapeMap: { [key: string]: string } = {
-      "&amp;": "&",
-      "&lt;": "<",
-      "&gt;": ">",
-      "&quot;": '"',
-      "&#x27;": "'",
-      "&#x2F;": "/",
-      "&#39;": "'",
-    };
-
     let unescapedCount = 0;
-    const unescaped = text.replace(
-      /&(amp|lt|gt|quot|#x27|#x2F|#39);/g,
-      (match) => {
+
+    const unescaped = text
+      // 名前付きエンティティの変換（順序重要：ampは最後に処理）
+      .replace(/&lt;/g, () => {
         unescapedCount++;
-        return unescapeMap[match];
-      }
-    );
+        return "<";
+      })
+      .replace(/&gt;/g, () => {
+        unescapedCount++;
+        return ">";
+      })
+      .replace(/&quot;/g, () => {
+        unescapedCount++;
+        return '"';
+      })
+      .replace(/&#x27;/g, () => {
+        unescapedCount++;
+        return "'";
+      })
+      .replace(/&#39;/g, () => {
+        unescapedCount++;
+        return "'";
+      })
+      .replace(/&#x2F;/g, () => {
+        unescapedCount++;
+        return "/";
+      })
+      .replace(/&#x2f;/g, () => {
+        unescapedCount++;
+        return "/";
+      })
+      .replace(/&apos;/g, () => {
+        unescapedCount++;
+        return "'";
+      })
+      .replace(/&nbsp;/g, () => {
+        unescapedCount++;
+        return "\u00A0";
+      })
+      // その他の一般的なHTML実体
+      .replace(/&copy;/g, () => {
+        unescapedCount++;
+        return "©";
+      })
+      .replace(/&reg;/g, () => {
+        unescapedCount++;
+        return "®";
+      })
+      .replace(/&trade;/g, () => {
+        unescapedCount++;
+        return "™";
+      })
+      .replace(/&euro;/g, () => {
+        unescapedCount++;
+        return "€";
+      })
+      .replace(/&pound;/g, () => {
+        unescapedCount++;
+        return "£";
+      })
+      .replace(/&yen;/g, () => {
+        unescapedCount++;
+        return "¥";
+      })
+      // 数値文字参照（10進数）の変換
+      .replace(/&#(\d+);/g, (match, num) => {
+        const code = parseInt(num, 10);
+        if (code >= 0 && code <= 0x10ffff) {
+          unescapedCount++;
+          try {
+            return String.fromCodePoint(code);
+          } catch {
+            return String.fromCharCode(code);
+          }
+        }
+        return match; // 無効な場合はそのまま
+      })
+      // 数値文字参照（16進数）の変換
+      .replace(/&#x([0-9a-fA-F]+);/g, (match, hex) => {
+        const code = parseInt(hex, 16);
+        if (code >= 0 && code <= 0x10ffff) {
+          unescapedCount++;
+          try {
+            return String.fromCodePoint(code);
+          } catch {
+            return String.fromCharCode(code);
+          }
+        }
+        return match; // 無効な場合はそのまま
+      })
+      // &amp;は最後に処理（他のエンティティを壊さないため）
+      .replace(/&amp;/g, () => {
+        unescapedCount++;
+        return "&";
+      });
 
     setCharactersEscaped(unescapedCount);
     return unescaped;
@@ -78,7 +175,7 @@ export default function HtmlEscapeClient({ locale, t }: HtmlEscapeClientProps) {
   const handleEscape = () => {
     if (!inputText.trim()) {
       toast({
-        description: "エスケープする文字列を入力してください",
+        description: t.htmlEscape.inputLabel + "を入力してください",
         variant: "destructive",
       });
       return;
@@ -86,13 +183,19 @@ export default function HtmlEscapeClient({ locale, t }: HtmlEscapeClientProps) {
 
     const escaped = escapeHtml(inputText);
     setOutputText(escaped);
+
+    if (charactersEscaped > 0) {
+      toast({
+        description: `${charactersEscaped}個の文字をエスケープしました`,
+      });
+    }
   };
 
   // アンエスケープ処理
   const handleUnescape = () => {
     if (!inputText.trim()) {
       toast({
-        description: "アンエスケープする文字列を入力してください",
+        description: t.htmlEscape.inputLabel + "を入力してください",
         variant: "destructive",
       });
       return;
@@ -100,6 +203,12 @@ export default function HtmlEscapeClient({ locale, t }: HtmlEscapeClientProps) {
 
     const unescaped = unescapeHtml(inputText);
     setOutputText(unescaped);
+
+    if (charactersEscaped > 0) {
+      toast({
+        description: `${charactersEscaped}個の文字をアンエスケープしました`,
+      });
+    }
   };
 
   // クリア処理
@@ -125,10 +234,23 @@ export default function HtmlEscapeClient({ locale, t }: HtmlEscapeClientProps) {
         description: t.htmlEscape.copiedMessage,
       });
     } catch (err) {
-      toast({
-        description: "コピーに失敗しました",
-        variant: "destructive",
-      });
+      // フォールバック: テキストエリアを使った古い方法
+      try {
+        const textArea = document.createElement("textarea");
+        textArea.value = outputText;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textArea);
+        toast({
+          description: t.htmlEscape.copiedMessage,
+        });
+      } catch (fallbackErr) {
+        toast({
+          description: "コピーに失敗しました",
+          variant: "destructive",
+        });
+      }
     }
   };
 

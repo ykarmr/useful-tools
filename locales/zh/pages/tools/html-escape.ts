@@ -1,4 +1,4 @@
-import type { HtmlEscapeTranslations } from "../../types/pages/tools/html-escape";
+import { HtmlEscapeTranslations } from "@/locales/types/pages/tools/html-escape";
 
 export const htmlEscape: HtmlEscapeTranslations = {
   title: "HTML转义工具",
@@ -45,6 +45,18 @@ export const htmlEscape: HtmlEscapeTranslations = {
       title: "引号和&符号",
       input: 'Say "Hello" & goodbye',
       output: "Say &quot;Hello&quot; &amp; goodbye",
+    },
+    scriptTag: {
+      title: "Script标签（XSS防护）",
+      input: '<script>alert("危险")</script>',
+      output: "&lt;script&gt;alert(&quot;危险&quot;)&lt;/script&gt;",
+    },
+    mixedContent: {
+      title: "混合内容",
+      input:
+        '<div class="test" onclick="alert(\'click\')">Content & More</div>',
+      output:
+        "&lt;div class=&quot;test&quot; onclick=&quot;alert(&#x27;click&#x27;)&quot;&gt;Content &amp; More&lt;/div&gt;",
     },
   },
   faqList: [
