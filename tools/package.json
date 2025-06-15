@@ -1,0 +1,40 @@
+{
+  "name": "useful-tools-assets-generator",
+  "version": "1.0.0",
+  "description": "多言語対応のロゴ、ファビコン、OGP画像生成ツール",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/cli.js",
+    "dev": "tsx src/cli.ts all",
+    "cli": "tsx src/cli.ts",
+    "generate:all": "tsx src/cli.ts all",
+    "generate:logo": "tsx src/cli.ts logo",
+    "generate:favicon": "tsx src/cli.ts favicon",
+    "generate:ogp": "tsx src/cli.ts ogp",
+    "config": "tsx src/cli.ts config",
+    "clean": "tsx src/cli.ts clean"
+  },
+  "bin": {
+    "image-generator": "./dist/cli.js"
+  },
+  "keywords": [
+    "logo",
+    "favicon",
+    "ogp",
+    "multilingual",
+    "image-generation"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "canvas": "^2.11.2",
+    "commander": "^11.1.0",
+    "sharp": "^0.33.0"
+  }
+}
