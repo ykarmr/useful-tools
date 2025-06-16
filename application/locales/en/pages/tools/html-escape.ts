@@ -23,6 +23,21 @@ export const htmlEscape: HtmlEscapeTranslations = {
   clearButton: "Clear",
   copyButton: "Copy",
   copiedMessage: "Copied!",
+  // Error messages
+  messages: {
+    inputRequired: "Please enter a string",
+    noContentToCopy: "No content to copy",
+    copyFailed: "Failed to copy",
+    charactersEscaped: " characters escaped",
+    charactersUnescaped: " characters unescaped",
+  },
+  // UI text
+  ui: {
+    characters: "characters",
+    lines: "lines",
+    inputExample: "Input:",
+    outputExample: "Output:",
+  },
   stats: {
     title: "Statistics",
     originalLength: "Original length",

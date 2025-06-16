@@ -24,6 +24,21 @@ export const htmlEscape: HtmlEscapeTranslations = {
   clearButton: "Очистить",
   copyButton: "Копировать",
   copiedMessage: "Скопировано!",
+  // Сообщения об ошибках
+  messages: {
+    inputRequired: "Пожалуйста, введите строку",
+    noContentToCopy: "Нет содержимого для копирования",
+    copyFailed: "Не удалось скопировать",
+    charactersEscaped: " символов экранировано",
+    charactersUnescaped: " символов отменено экранирование",
+  },
+  // Текст интерфейса
+  ui: {
+    characters: "символов",
+    lines: "строк",
+    inputExample: "Ввод:",
+    outputExample: "Вывод:",
+  },
   stats: {
     title: "Статистика",
     originalLength: "Исходная длина",

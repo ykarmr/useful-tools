@@ -24,6 +24,21 @@ export const htmlEscape: HtmlEscapeTranslations = {
   clearButton: "クリア",
   copyButton: "コピー",
   copiedMessage: "コピーしました！",
+  // エラーメッセージ
+  messages: {
+    inputRequired: "文字列を入力してください",
+    noContentToCopy: "コピーする内容がありません",
+    copyFailed: "コピーに失敗しました",
+    charactersEscaped: "個の文字をエスケープしました",
+    charactersUnescaped: "個の文字をアンエスケープしました",
+  },
+  // UI テキスト
+  ui: {
+    characters: "文字",
+    lines: "行",
+    inputExample: "入力:",
+    outputExample: "出力:",
+  },
   stats: {
     title: "統計情報",
     originalLength: "元の文字数",

@@ -24,6 +24,21 @@ export const htmlEscape: HtmlEscapeTranslations = {
   clearButton: "Limpiar",
   copyButton: "Copiar",
   copiedMessage: "¡Copiado!",
+  // Mensajes de error
+  messages: {
+    inputRequired: "Por favor ingrese una cadena",
+    noContentToCopy: "No hay contenido para copiar",
+    copyFailed: "Error al copiar",
+    charactersEscaped: " caracteres escapados",
+    charactersUnescaped: " caracteres desescapados",
+  },
+  // Texto de la interfaz
+  ui: {
+    characters: "caracteres",
+    lines: "líneas",
+    inputExample: "Entrada:",
+    outputExample: "Salida:",
+  },
   stats: {
     title: "Estadísticas",
     originalLength: "Longitud original",

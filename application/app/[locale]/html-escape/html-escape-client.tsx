@@ -175,7 +175,7 @@ export default function HtmlEscapeClient({ locale, t }: HtmlEscapeClientProps) {
   const handleEscape = () => {
     if (!inputText.trim()) {
       toast({
-        description: t.htmlEscape.inputLabel + "を入力してください",
+        description: t.htmlEscape.messages.inputRequired,
         variant: "destructive",
       });
       return;
@@ -186,7 +186,7 @@ export default function HtmlEscapeClient({ locale, t }: HtmlEscapeClientProps) {
 
     if (charactersEscaped > 0) {
       toast({
-        description: `${charactersEscaped}個の文字をエスケープしました`,
+        description: `${charactersEscaped}${t.htmlEscape.messages.charactersEscaped}`,
       });
     }
   };
@@ -195,7 +195,7 @@ export default function HtmlEscapeClient({ locale, t }: HtmlEscapeClientProps) {
   const handleUnescape = () => {
     if (!inputText.trim()) {
       toast({
-        description: t.htmlEscape.inputLabel + "を入力してください",
+        description: t.htmlEscape.messages.inputRequired,
         variant: "destructive",
       });
       return;
@@ -206,7 +206,7 @@ export default function HtmlEscapeClient({ locale, t }: HtmlEscapeClientProps) {
 
     if (charactersEscaped > 0) {
       toast({
-        description: `${charactersEscaped}個の文字をアンエスケープしました`,
+        description: `${charactersEscaped}${t.htmlEscape.messages.charactersUnescaped}`,
       });
     }
   };
@@ -222,7 +222,7 @@ export default function HtmlEscapeClient({ locale, t }: HtmlEscapeClientProps) {
   const handleCopy = async () => {
     if (!outputText) {
       toast({
-        description: "コピーする内容がありません",
+        description: t.htmlEscape.messages.noContentToCopy,
         variant: "destructive",
       });
       return;
@@ -247,7 +247,7 @@ export default function HtmlEscapeClient({ locale, t }: HtmlEscapeClientProps) {
         });
       } catch (fallbackErr) {
         toast({
-          description: "コピーに失敗しました",
+          description: t.htmlEscape.messages.copyFailed,
           variant: "destructive",
         });
       }
@@ -281,8 +281,12 @@ export default function HtmlEscapeClient({ locale, t }: HtmlEscapeClientProps) {
               className="h-[200px] sm:h-[240px] lg:h-[280px] font-mono text-sm resize-none border-2 border-gray-200 dark:border-gray-700 focus:border-blue-500 dark:focus:border-blue-400 transition-colors"
             />
             <div className="text-xs text-gray-500 flex justify-between">
-              <span>{inputText.length} 文字</span>
-              <span>{inputText.split("\n").length} 行</span>
+              <span>
+                {inputText.length} {t.htmlEscape.ui.characters}
+              </span>
+              <span>
+                {inputText.split("\n").length} {t.htmlEscape.ui.lines}
+              </span>
             </div>
           </div>
 
@@ -302,8 +306,12 @@ export default function HtmlEscapeClient({ locale, t }: HtmlEscapeClientProps) {
               className="h-[200px] sm:h-[240px] lg:h-[280px] font-mono text-sm resize-none bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 cursor-default"
             />
             <div className="text-xs text-gray-500 flex justify-between">
-              <span>{outputText.length} 文字</span>
-              <span>{outputText.split("\n").length} 行</span>
+              <span>
+                {outputText.length} {t.htmlEscape.ui.characters}
+              </span>
+              <span>
+                {outputText.split("\n").length} {t.htmlEscape.ui.lines}
+              </span>
             </div>
           </div>
         </div>
@@ -407,7 +415,7 @@ export default function HtmlEscapeClient({ locale, t }: HtmlEscapeClientProps) {
                     <div className="space-y-3 sm:space-y-4">
                       <div>
                         <Label className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-2 block">
-                          入力:
+                          {t.htmlEscape.ui.inputExample}
                         </Label>
                         <div className="bg-gray-100 dark:bg-gray-800 p-2 sm:p-3 rounded-lg font-mono text-xs sm:text-sm break-all border border-gray-200 dark:border-gray-700">
                           {exampleData.input}
@@ -415,7 +423,7 @@ export default function HtmlEscapeClient({ locale, t }: HtmlEscapeClientProps) {
                       </div>
                       <div>
                         <Label className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-2 block">
-                          出力:
+                          {t.htmlEscape.ui.outputExample}
                         </Label>
                         <div className="bg-blue-50 dark:bg-blue-900/20 p-2 sm:p-3 rounded-lg font-mono text-xs sm:text-sm break-all border border-blue-200 dark:border-blue-700">
                           {exampleData.output}

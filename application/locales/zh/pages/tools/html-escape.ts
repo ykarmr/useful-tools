@@ -23,6 +23,21 @@ export const htmlEscape: HtmlEscapeTranslations = {
   clearButton: "清除",
   copyButton: "复制",
   copiedMessage: "已复制！",
+  // 错误消息
+  messages: {
+    inputRequired: "请输入字符串",
+    noContentToCopy: "没有要复制的内容",
+    copyFailed: "复制失败",
+    charactersEscaped: "个字符已转义",
+    charactersUnescaped: "个字符已反转义",
+  },
+  // UI 文本
+  ui: {
+    characters: "字符",
+    lines: "行",
+    inputExample: "输入:",
+    outputExample: "输出:",
+  },
   stats: {
     title: "统计信息",
     originalLength: "原始长度",

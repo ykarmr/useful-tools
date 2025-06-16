@@ -12,6 +12,21 @@ export interface HtmlEscapeTranslations {
   clearButton: string;
   copyButton: string;
   copiedMessage: string;
+  // エラーメッセージ
+  messages: {
+    inputRequired: string;
+    noContentToCopy: string;
+    copyFailed: string;
+    charactersEscaped: string;
+    charactersUnescaped: string;
+  };
+  // UI テキスト
+  ui: {
+    characters: string;
+    lines: string;
+    inputExample: string;
+    outputExample: string;
+  };
   stats: {
     title: string;
     originalLength: string;
