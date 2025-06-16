@@ -1,122 +1,155 @@
-# copilot-instruction
+# Copilot Instructions
+
+## プロジェクト概要
+
+このプロジェクトは、さまざまな便利ツールを提供する Next.js ベースの Web アプリケーションです。
 
 ## 全体のディレクトリ構成
 
-- `application/` - Next.js アプリケーションのルートディレクトリ
-- tools/ - 各種ツールの機能ページを格納するディレクトリ
-  - 現在は画像生成ツールのみ
+```
+useful-tools/
+├── application/         # Next.jsアプリケーションのルートディレクトリ
+│   ├── app/             # Next.js App Routerのページとレイアウト
+│   ├── components/      # Reactコンポーネント
+│   ├── hooks/           # カスタムReactフック
+│   ├── lib/             # ユーティリティとライブラリ
+│   ├── locales/         # 国際化（i18n）の翻訳ファイル
+│   └── public/          # 静的ファイル
+└── tools/               # 開発用CLIツール
+```
 
-## コーディング規約
+## 開発規約とガイドライン
 
-- コードは日本語でコメントを記述すること
-- 各ページは i18n 対応をすること
-  - `/locales`に言語ごとの翻訳ディレクトリを配置する
-    - 機能追加や修正時には、全ての言語の翻訳ファイル更新すること
-    - 言語ファイルは型ファイルを先に定義し、型安全にすること
-      - `locales/types/*.ts` に型を定義
-- 各機能ページは以下のコンポーネントを参考に実装すること
-  - `app/[locale]/calculator/calculator-client.tsx`
-  - `app/[locale]/calculator/page.tsx`
-  - `app/[locale]/coin-flip/coin-flip-client.tsx`
-  - `app/[locale]/coin-flip/page.tsx`
-- レスポンシブデザインを意識し、モバイルファーストで実装すること
-- マージンとパディングを考慮して、適切なスペーシングを確保すること
-- style は tailwindcss を使用すること
-- 各ページのメタデータは `generateMetadata` 関数を使用して定義すること
-- 各ページのルーティングは `app/[locale]/[feature]/page.tsx` の形式で定義すること
-- 各ページのクライアントサイドのロジックは `app/[locale]/[feature]/[機能名]-client.tsx` に記述すること
-- SEO に配慮し、各ページのタイトル、説明、キーワードを設定すること
-- アクセシビリティを考慮し、適切な ARIA 属性を使用すること
-- 各ページのアイコンは `lucide-react` を使用すること
-- 各ページのレイアウトは `components/layout` 以下のコンポーネントを使用すること
-- 各機能ページのメインレイアウトは `components/layout/tool-layout.tsx` を使用すること
-- 各機能ページのセクションは `components/layout/tool-section.tsx` を使用すること
-- 各機能ページの表示部分は `components/layout/tool-display.tsx` を使用すること
-- 各機能ページの結果表示は `components/layout/tool-result.tsx` を使用すること
-- 各機能ページの入力コントロールは `components/layout/tool-input.tsx` と `components/layout/tool-controls.tsx` を使用すること
-- 各機能ページの統計情報は `components/layout/tool-stats.tsx` を使用すること
-- 各機能ページの FAQ セクションは `components/layout/tool-faq.tsx` を使用すること
-- 広告表示は `components/layout/ad-banner.tsx` を使用すること
-- 静的資材は `public` ディレクトリに配置すること
-- グローバルスタイルは `app/globals.css` に記述すること
-- PWA 対応のため、`app/manifest.ts` を作成し、必要なメタデータを定義すること
-- `app/robots.ts` を作成し、robots.txt を生成すること
-- `app/sitemap.ts` を作成し、サイトマップを生成すること
-- `next.config.js` の output: "export" を設定すること
-- 永続保持するデータは、クライアントサイドでのローカルストレージやセッションストレージを使用すること
+### コメントとドキュメント
 
-## ページとルーティング
+- **コードコメントは日本語で記述する**
+- 各機能の目的と動作を明確にドキュメント化する
+
+### 国際化（i18n）対応
+
+- **全てのページで多言語対応を実装する**
+- サポート言語：日本語（ja）、英語（en）、スペイン語（es）、ロシア語（ru）、中国語（zh）
+- 翻訳ファイルの場所：`application/locales/`
+- **機能追加・修正時は全言語の翻訳ファイルを更新すること**
+- **型安全性を確保するため、翻訳キーの型定義を先に作成する**
+  - 型定義：`application/locales/types/`
+
+### 参考実装
+
+以下のコンポーネントを参考に新機能を実装する：
+
+- `app/[locale]/calculator/calculator-client.tsx`
+- `app/[locale]/calculator/page.tsx`
+- `app/[locale]/coin-flip/coin-flip-client.tsx`
+- `app/[locale]/coin-flip/page.tsx`
+
+### UI/UX ガイドライン
+
+- **レスポンシブデザイン**：モバイルファーストで実装
+- **スタイリング**：Tailwind CSS を使用
+- **スペーシング**：適切なマージンとパディングを設定
+- **アイコン**：lucide-react を使用
+- **アクセシビリティ**：適切な ARIA 属性を設定
+
+### SEO と最適化
+
+- `generateMetadata`関数でページメタデータを定義
+- タイトル、説明、キーワードを適切に設定
+- OGP 画像は`public/`ディレクトリに配置
+
+### データ永続化
+
+- **ローカルストレージまたはセッションストレージを使用**
+- サーバーサイドでのデータ保存は行わない
+
+## ページ構成とルーティング
 
 ### ルートページ
 
-- `app/[locale]/page.tsx`
-  - アプリケーションのルートページを定義
+- `app/[locale]/page.tsx` - アプリケーションのホームページ
 
 ### サービス一覧ページ
 
-- `app/[locale]/services/page.tsx`
-  - サービス一覧ページを定義
-- `app/[locale]/services/services-client.tsx`
-  - サービス一覧のクライアントコンポーネント
-  - `toolCategories` 配列でツールをカテゴリ別に管理
-  - カテゴリ: productivity（生産性）, random（ランダム）, time（時間）, network（ネットワーク・Web）, textContent（テキスト・コンテンツ）, converter（コンバーター）, health（健康）, code（コード）
+- `app/[locale]/services/page.tsx` - サービス一覧ページ
+- `app/[locale]/services/services-client.tsx` - サービス一覧のクライアントコンポーネント
 
-### 機能ページ（ツール）
+**ツールカテゴリ管理**
+`toolCategories`配列でツールをカテゴリ別に管理：
 
-現在実装されているツール：
+- **productivity**（生産性ツール）
+- **random**（ランダム生成ツール）
+- **time**（時間関連ツール）
+- **network**（ネットワーク・Web 関連ツール）
+- **textContent**（テキスト・コンテンツ処理ツール）
+- **converter**（変換ツール）
+- **health**（健康関連ツール）
+- **code**（コード関連ツール）
 
-- `app/[locale]/bmi-calculator/` - BMI 計算ツール
+### 実装済みツール一覧
+
+#### 生産性ツール（Productivity）
+
 - `app/[locale]/calculator/` - 電卓ツール
+- `app/[locale]/todo/` - TODO リストツール
+- `app/[locale]/scoreboard/` - スコアボードツール
+
+#### ランダム生成ツール（Random）
+
 - `app/[locale]/coin-flip/` - コイン投げツール
-- `app/[locale]/color-palette/` - カラーパレットツール
 - `app/[locale]/dice-roller/` - サイコロツール
-- `app/[locale]/digital-clock/` - デジタル時計ツール
-- `app/[locale]/html-escape/` - HTML エスケープツール
-- `app/[locale]/image-converter/` - 画像変換ツール
-- `app/[locale]/ip-address/` - IP アドレス取得ツール
-- `app/[locale]/json-formatter/` - JSON 整形ツール
-- `app/[locale]/markdown-preview/` - Markdown プレビューツール
-- `app/[locale]/pet-age-conversion/` - ペット年齢変換ツール
-- `app/[locale]/pomodoro-timer/` - ポモドーロタイマーツール
-- `app/[locale]/qr-generator/` - QR コード生成ツール
 - `app/[locale]/random-number/` - 乱数生成ツール
 - `app/[locale]/random-string/` - ランダム文字列生成ツール
 - `app/[locale]/roulette/` - ルーレットツール
-- `app/[locale]/scoreboard/` - スコアボードツール
-- `app/[locale]/subnet-calculator/` - サブネット計算ツール
 - `app/[locale]/team-generator/` - チーム生成ツール
-- `app/[locale]/text-statistics/` - テキスト統計ツール
+
+#### 時間関連ツール（Time）
+
+- `app/[locale]/digital-clock/` - デジタル時計ツール
+- `app/[locale]/pomodoro-timer/` - ポモドーロタイマーツール
 - `app/[locale]/timer/` - タイマーツール
-- `app/[locale]/todo/` - TODO リストツール
-- `app/[locale]/unit-conversion/` - 単位変換ツール
+- `app/[locale]/world-clock/` - 世界時計ツール
+
+#### ネットワーク・Web 関連ツール（Network）
+
+- `app/[locale]/ip-address/` - IP アドレス取得ツール
+- `app/[locale]/subnet-calculator/` - サブネット計算ツール
 - `app/[locale]/url-analyzer/` - URL 解析ツール
 - `app/[locale]/url-encoder/` - URL エンコーダーツール
 - `app/[locale]/user-agent/` - User-Agent 取得ツール
-- `app/[locale]/world-clock/` - 世界時計ツール
 
-### 機能ページ
+#### テキスト・コンテンツ処理ツール（Text Content）
 
-- `app/[locale]/[feature]/page.tsx`
-  - 特定の機能ページを定義
+- `app/[locale]/html-escape/` - HTML エスケープツール
+- `app/[locale]/json-formatter/` - JSON 整形ツール
+- `app/[locale]/markdown-preview/` - Markdown プレビューツール
+- `app/[locale]/text-statistics/` - テキスト統計ツール
 
-### 問い合わせページ
+#### 変換ツール（Converter）
 
-- `app/[locale]/contact/page.tsx`
-  - 問い合わせページを定義
+- `app/[locale]/image-converter/` - 画像変換ツール
+- `app/[locale]/qr-generator/` - QR コード生成ツール
+- `app/[locale]/unit-conversion/` - 単位変換ツール
 
-### 規約ページ
+#### 健康関連ツール（Health）
 
-- `app/[locale]/terms/page.tsx`
-  - 規約ページを定義
+- `app/[locale]/bmi-calculator/` - BMI 計算ツール
+- `app/[locale]/pet-age-conversion/` - ペット年齢変換ツール
 
-### プライバシーポリシーページ
+#### デザイン・UI 関連ツール（Design）
 
-- `app/[locale]/privacy/page.tsx`
-  - プライバシーポリシーページを定義
+- `app/[locale]/color-palette/` - カラーパレットツール
 
-#### 機能ページの構成
+### 静的ページ
 
-機能ページは以下の構成で実装する：
+- `app/[locale]/contact/` - お問い合わせページ
+- `app/[locale]/terms/` - 利用規約ページ
+- `app/[locale]/privacy/` - プライバシーポリシーページ
+
+## 機能ページの実装パターン
+
+### サーバーコンポーネント（page.tsx）
+
+各機能ページのサーバーコンポーネントは以下のパターンで実装する：
 
 ```tsx
 import [機能名]Client from "./[機能名]-client";
@@ -179,9 +212,9 @@ export default async function [機能名]Page({
 }
 ```
 
-#### クライアントコンポーネントの構成
+### クライアントコンポーネント（\*-client.tsx）
 
-クライアントサイドのロジックは `app/[locale]/[feature]/[機能名]-client.tsx` に記述：
+クライアントサイドのロジックは以下のパターンで実装する：
 
 ```tsx
 "use client";
@@ -200,8 +233,8 @@ interface [機能名]ClientProps {
 }
 
 export default function [機能名]Client({ locale, t }: [機能名]ClientProps) {
-
-
+  // ステート管理
+  // 機能ロジック
 
   return (
     <ToolLayout
@@ -211,12 +244,10 @@ export default function [機能名]Client({ locale, t }: [機能名]ClientProps)
       description={t.[機能名].description}
       icon={[アイコン名]}
     >
-      {/* メインコンテンツ（必要な数だけセクションは増やしてOK） */}
+      {/* メインコンテンツセクション */}
       <ToolSection>
-
+        {/* ツールの入力・表示・操作要素 */}
       </ToolSection>
-
-
 
       {/* FAQ セクション */}
       <ToolSection>
@@ -289,45 +320,31 @@ hooks/
 
 ## 言語ファイルの構成
 
-### 型定義ファイル (`locales/types/`)
+### 型定義ファイル（`locales/types/`）
 
-- `locales/types/common.ts`
-  - 共通の翻訳キーの型を定義
-- `locales/types/ad.ts`
-  - 広告関連の翻訳キーの型を定義
-- `locales/types/faq.ts`
-  - FAQ 関連の翻訳キーの型を定義
-- `locales/types/footer.ts`
-  - フッターの翻訳キーの型を定義
-- `locales/types/header.ts`
-  - ヘッダーの翻訳キーの型を定義
-- `locales/types/pages/`
-  - 各ページの翻訳キーの型を定義
+- `locales/types/common.ts` - 共通の翻訳キーの型を定義
+- `locales/types/ad.ts` - 広告関連の翻訳キーの型を定義
+- `locales/types/faq.ts` - FAQ 関連の翻訳キーの型を定義
+- `locales/types/footer.ts` - フッターの翻訳キーの型を定義
+- `locales/types/header.ts` - ヘッダーの翻訳キーの型を定義
+- `locales/types/pages/` - 各ページの翻訳キーの型を定義
   - `contact.ts`, `privacy.ts`, `services.ts`, `terms.ts`
-- `locales/types/pages/tools/`
-  - 各ツールの翻訳キーの型を定義
-  - `calculator.ts`, `coin-flip.ts`, `[機能名].ts` など
-- `locales/types/index.ts`
-  - 全ての型定義をまとめる
+- `locales/types/pages/tools/` - 各ツールの翻訳キーの型を定義
+  - 29 個のツール用型定義ファイル（`calculator.ts`, `coin-flip.ts`など）
+  - `home.ts`（ホームページ用）
+- `locales/types/index.ts` - 全ての型定義をまとめる
 
-### 言語ファイル (`locales/[言語]/`)
+### 言語ファイル（`locales/[言語]/`）
 
-- `locales/[言語]/common.ts`
-  - 共通の翻訳キーを定義
-- `locales/[言語]/ad.ts`
-  - 広告関連の翻訳キーを定義
-- `locales/[言語]/footer.ts`
-  - フッターの翻訳キーを定義
-- `locales/[言語]/header.ts`
-  - ヘッダーの翻訳キーを定義
-- `locales/[言語]/pages/`
-  - 各ページの翻訳キーを定義
+- `locales/[言語]/common.ts` - 共通の翻訳キーを定義
+- `locales/[言語]/ad.ts` - 広告関連の翻訳キーを定義
+- `locales/[言語]/footer.ts` - フッターの翻訳キーを定義
+- `locales/[言語]/header.ts` - ヘッダーの翻訳キーを定義
+- `locales/[言語]/pages/` - 各ページの翻訳キーを定義
   - `contact.ts`, `home.ts`, `privacy.ts`, `services.ts`, `terms.ts`
-- `locales/[言語]/pages/tools/`
-  - 各ツールの翻訳キーを定義
-  - `calculator.ts`, `coin-flip.ts`, `[機能名].ts` など
-- `locales/[言語]/index.ts`
-  - 各言語の翻訳ファイルをまとめる
+- `locales/[言語]/pages/tools/` - 各ツールの翻訳キーを定義
+  - `calculator.ts`, `coin-flip.ts` など（全 29 ツール分）
+- `locales/[言語]/index.ts` - 各言語の翻訳ファイルをまとめる
 
 ## 開発ワークフロー
 
@@ -370,7 +387,7 @@ hooks/
    - `app/sitemap.ts` に新しいページを追加
 
 6. **OGP 画像の作成**
-   - `public/ogp/[機能名].png` を作成
+   - `public/images/ogp/pages/ogp-[機能名]-[言語名].png` を作成
    - OGP 画像はツールのタイトルと説明を含むデザインにする
    - tools ディレクトリの USAGE.md を参考にする
 
