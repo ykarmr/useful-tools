@@ -66,4 +66,8 @@ export const common: CommonTranslations = {
     },
   },
   faqTitle: "常见问题 (FAQ)",
+  breadcrumb: {
+    home: "首页",
+    services: "工具",
+  },
 };

@@ -65,4 +65,8 @@ export const common: CommonTranslations = {
     },
   },
   faqTitle: "よくある質問 (FAQ)",
+  breadcrumb: {
+    home: "ホーム",
+    services: "ツール",
+  },
 };

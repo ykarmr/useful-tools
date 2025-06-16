@@ -2,6 +2,7 @@ import type React from "react";
 import Header from "./header";
 import Footer from "./footer";
 import AdBanner from "./ad-banner";
+import BreadcrumbNavigation from "./breadcrumb";
 import { Locale, Translations } from "@/locales";
 
 interface MainLayoutProps {
@@ -32,6 +33,9 @@ export default function MainLayout({ children, locale, t }: MainLayoutProps) {
 
             {/* Main Content */}
             <main className="flex-1 min-w-0" role="main">
+              {/* Breadcrumb Navigation */}
+              <BreadcrumbNavigation locale={locale} t={t} className="mb-4" />
+
               <div className="max-w-none">{children}</div>
             </main>
           </div>

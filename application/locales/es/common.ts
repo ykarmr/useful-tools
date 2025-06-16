@@ -3,6 +3,7 @@ import type { CommonTranslations } from "../types";
 export const common: CommonTranslations = {
   siteTitle: "USEFUL TOOLS",
   home: "Inicio",
+  services: "Herramientas",
   add: "Añadir",
   close: "Cerrar",
   viewAll: "Ver todo",
@@ -68,5 +69,8 @@ export const common: CommonTranslations = {
     },
   },
   faqTitle: "Preguntas Frecuentes (FAQ)",
-  services: "Servicios",
+  breadcrumb: {
+    home: "Inicio",
+    services: "Herramientas",
+  },
 };

@@ -68,4 +68,8 @@ export const common: CommonTranslations = {
     },
   },
   faqTitle: "Часто задаваемые вопросы (FAQ)",
+  breadcrumb: {
+    home: "Главная",
+    services: "Инструменты",
+  },
 };

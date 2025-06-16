@@ -35,4 +35,8 @@ export interface CommonTranslations {
     };
   };
   faqTitle: string;
+  breadcrumb: {
+    home: string;
+    services: string;
+  };
 }

@@ -68,4 +68,8 @@ export const common: CommonTranslations = {
     },
   },
   faqTitle: "Frequently Asked Questions (FAQ)",
+  breadcrumb: {
+    home: "Home",
+    services: "Tools",
+  },
 };
