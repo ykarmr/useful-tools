@@ -1,13 +1,7 @@
 import { createCanvas, CanvasRenderingContext2D } from "canvas";
 import * as path from "path";
 import { LOCALES, COLORS, SIZES, OUTPUT_DIRS } from "../config";
-import {
-  saveFile,
-  logProgress,
-  logSuccess,
-  logError,
-  sanitizeFilename,
-} from "../utils";
+import { saveFile, logProgress, logSuccess, logError } from "../utils";
 
 /**
  * ロゴ生成クラス
@@ -116,25 +110,6 @@ export class LogoGenerator {
       let count = 0;
       const total = Object.keys(LOCALES).length;
 
-      for (const [localeCode, locale] of Object.entries(LOCALES)) {
-        try {
-          const logoBuffer = await this.generateLogo(localeCode);
-          const filename = `logo-${localeCode}.png`;
-          const outputPath = path.join(
-            __dirname,
-            "../../",
-            OUTPUT_DIRS.logo,
-            filename
-          );
-
-          saveFile(outputPath, logoBuffer);
-          count++;
-          logProgress(count, total, `${locale.name}のロゴを生成しました`);
-        } catch (error) {
-          logError(`${locale.name}のロゴ生成に失敗しました`, error as Error);
-        }
-      }
-
       // デフォルトロゴ（英語版）も生成
       const defaultLogoBuffer = await this.generateLogo("en");
       const defaultPath = path.join(
@@ -150,22 +125,6 @@ export class LogoGenerator {
       logError("ロゴ生成処理でエラーが発生しました", error as Error);
       throw error;
     }
-  }
-}
-
-/**
- * 言語に応じたフォントファミリーを取得
- */
-function getFontFamily(localeCode: string): string {
-  switch (localeCode) {
-    case "ja":
-      return '"Noto Sans JP", "Hiragino Kaku Gothic ProN", sans-serif';
-    case "zh":
-      return '"Noto Sans SC", "PingFang SC", sans-serif';
-    case "ko":
-      return '"Noto Sans KR", "Apple SD Gothic Neo", sans-serif';
-    default:
-      return '"Inter", -apple-system, BlinkMacSystemFont, sans-serif';
   }
 }
 
