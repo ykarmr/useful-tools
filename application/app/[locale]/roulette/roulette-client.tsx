@@ -56,6 +56,7 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
   const [editingItem, setEditingItem] = useState<string | null>(null);
   const [editText, setEditText] = useState("");
   const wheelRef = useRef<HTMLDivElement>(null);
+  const spinDuration = 3500 + Math.random() * 1500; // 3500ms + 0-1500ms = 3.5-5.0秒
 
   // Winner zone configuration (30 degrees centered at top)
   const WINNER_ZONE_ANGLE = 30; // degrees
@@ -221,7 +222,6 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
     setIsSpinning(true);
 
     // ランダムな回転時間を生成（3.5〜5.0秒）
-    const spinDuration = 3500 + Math.random() * 1500; // 3500ms + 0-1500ms = 3.5-5.0秒
 
     // Calculate random rotation
     const spins = 5 + Math.random() * 5; // 5-10 full rotations
