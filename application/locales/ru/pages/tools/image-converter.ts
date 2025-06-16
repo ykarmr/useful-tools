@@ -117,7 +117,7 @@ export const imageConverter: ImageConverterTranslations = {
   lowQuality: "Низкое Качество",
   highQuality: "Высокое Качество",
   processingNow: "Обработка",
-  formatConversionNote: "конвертация формата",
+  formatConversionNote: "формат",
 
   faqList: [
     {

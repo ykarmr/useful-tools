@@ -123,7 +123,7 @@ export const imageConverter: ImageConverterTranslations = {
   lowQuality: "低品質",
   highQuality: "高品質",
   processingNow: "変換中",
-  formatConversionNote: "形式に変換します",
+  formatConversionNote: "形式に変換",
 
   // FAQ
   faqList: [

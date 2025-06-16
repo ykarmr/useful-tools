@@ -1000,7 +1000,7 @@ export default function ImageConverterClient({
               {!isProcessing && (
                 <p className="text-blue-100 text-xs sm:text-sm mt-3 sm:mt-4">
                   {images.length}
-                  {t.imageConverter.filesProcessed}を
+                  {t.imageConverter.filesProcessed}
                   {settings.format.toUpperCase()}
                   {t.imageConverter.formatConversionNote}
                 </p>
