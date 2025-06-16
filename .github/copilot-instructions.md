@@ -1,5 +1,11 @@
 # copilot-instruction
 
+## 全体のディレクトリ構成
+
+- `application/` - Next.js アプリケーションのルートディレクトリ
+- tools/ - 各種ツールの機能ページを格納するディレクトリ
+  - 現在は画像生成ツールのみ
+
 ## コーディング規約
 
 - コードは日本語でコメントを記述すること
@@ -53,16 +59,19 @@
 - `app/[locale]/services/services-client.tsx`
   - サービス一覧のクライアントコンポーネント
   - `toolCategories` 配列でツールをカテゴリ別に管理
-  - カテゴリ: productivity（生産性）, random（ランダム）, time（時間）, network（ネットワーク・Web）, textContent（テキスト・コンテンツ）, converter（コンバーター）
+  - カテゴリ: productivity（生産性）, random（ランダム）, time（時間）, network（ネットワーク・Web）, textContent（テキスト・コンテンツ）, converter（コンバーター）, health（健康）, code（コード）
 
 ### 機能ページ（ツール）
 
 現在実装されているツール：
 
+- `app/[locale]/bmi-calculator/` - BMI 計算ツール
 - `app/[locale]/calculator/` - 電卓ツール
 - `app/[locale]/coin-flip/` - コイン投げツール
+- `app/[locale]/color-palette/` - カラーパレットツール
 - `app/[locale]/dice-roller/` - サイコロツール
 - `app/[locale]/digital-clock/` - デジタル時計ツール
+- `app/[locale]/html-escape/` - HTML エスケープツール
 - `app/[locale]/image-converter/` - 画像変換ツール
 - `app/[locale]/ip-address/` - IP アドレス取得ツール
 - `app/[locale]/json-formatter/` - JSON 整形ツール
@@ -76,6 +85,7 @@
 - `app/[locale]/scoreboard/` - スコアボードツール
 - `app/[locale]/subnet-calculator/` - サブネット計算ツール
 - `app/[locale]/team-generator/` - チーム生成ツール
+- `app/[locale]/text-statistics/` - テキスト統計ツール
 - `app/[locale]/timer/` - タイマーツール
 - `app/[locale]/todo/` - TODO リストツール
 - `app/[locale]/unit-conversion/` - 単位変換ツール
@@ -342,7 +352,7 @@ hooks/
 4. **サービス一覧画面への追加**
 
    - `app/[locale]/services/services-client.tsx` の `toolCategories` 配列に新しいツールを追加
-   - 適切なカテゴリ（productivity, random, time, network, textContent, converter）に配置
+   - 適切なカテゴリ（productivity, random, time, network, textContent, converter, health, code）に配置
    - ツールのキー、アイコン、href を設定
    - 例：
      ```tsx
@@ -356,7 +366,13 @@ hooks/
      ```
 
 5. **サイトマップの更新**
+
    - `app/sitemap.ts` に新しいページを追加
+
+6. **OGP 画像の作成**
+   - `public/ogp/[機能名].png` を作成
+   - OGP 画像はツールのタイトルと説明を含むデザインにする
+   - tools ディレクトリの USAGE.md を参考にする
 
 ### コンポーネント使用例
 

@@ -39,13 +39,13 @@ export default function Footer({ locale, t }: FooterProps) {
                 locale === "ja" ? "ホームページに戻る" : "Go to homepage"
               }`}
             >
-              <div
-                className="w-8 h-8 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg flex items-center justify-center"
-                role="img"
-                aria-hidden="true"
-              >
-                <span className="text-white font-bold text-sm">UT</span>
-              </div>
+              <img
+                src={`/images/logo/logo.png`}
+                alt={t.header.logo}
+                className="w-8 h-8 rounded-lg"
+                width={32}
+                height={32}
+              />
               <span>{t.header.logo}</span>
             </a>
             <p className="mt-4 text-gray-600 text-sm">{t.footer.description}</p>
