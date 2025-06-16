@@ -4,6 +4,7 @@ import { Command } from "commander";
 import { LogoGenerator } from "./generators/logo-generator";
 import { FaviconGenerator } from "./generators/favicon-generator";
 import { OgpGenerator } from "./generators/ogp-generator";
+import { OUTPUT_DIRS } from "./config";
 import { logSuccess, logError, logInfo } from "./utils";
 import * as path from "path";
 
@@ -30,7 +31,8 @@ program
         const logoBuffer = await generator.generateLogo(options.locale);
         const outputPath = path.join(
           __dirname,
-          "../output/logo",
+          "../",
+          OUTPUT_DIRS.logo,
           `logo-${options.locale}.png`
         );
         require("./utils").saveFile(outputPath, logoBuffer);
@@ -89,7 +91,8 @@ program
         const ogpBuffer = await generator.generateOgpImage(options.locale);
         const outputPath = path.join(
           __dirname,
-          "../output/ogp",
+          "../",
+          OUTPUT_DIRS.ogp,
           `ogp-${options.locale}.png`
         );
         require("./utils").saveFile(outputPath, ogpBuffer);
@@ -130,9 +133,9 @@ program
 
       logSuccess("すべての画像生成が完了しました！");
       logInfo("生成された画像は以下のディレクトリで確認できます:");
-      logInfo("- ロゴ: tools/output/logo/");
-      logInfo("- ファビコン: tools/output/favicon/");
-      logInfo("- OGP画像: tools/output/ogp/");
+      logInfo("- ロゴ: application/public/images/logo/");
+      logInfo("- ファビコン: application/public/images/favicon/");
+      logInfo("- OGP画像: application/public/images/ogp/");
     } catch (error) {
       logError("画像生成に失敗しました", error as Error);
       process.exit(1);

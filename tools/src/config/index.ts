@@ -330,7 +330,7 @@ export const SIZES = {
 
 // 出力ディレクトリ設定
 export const OUTPUT_DIRS = {
-  logo: "../public/images/logo",
-  favicon: "../public/images/favicon",
-  ogp: "../public/images/ogp",
+  logo: "../application/public/images/logo",
+  favicon: "../application/public/images/favicon",
+  ogp: "../application/public/images/ogp",
 };

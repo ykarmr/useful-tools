@@ -139,7 +139,7 @@ export class LogoGenerator {
       const defaultLogoBuffer = await this.generateLogo("en");
       const defaultPath = path.join(
         __dirname,
-        "../../app/",
+        "../../",
         OUTPUT_DIRS.logo,
         "logo.png"
       );
