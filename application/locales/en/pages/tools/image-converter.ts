@@ -79,6 +79,46 @@ export const imageConverter: ImageConverterTranslations = {
   fileTooLarge: "File too large (max 10MB)",
   maxFiles: "Maximum 20 files allowed",
 
+  // ステータス
+  waiting: "Waiting",
+  processingStatus: "Processing...",
+  completed: "✓ Completed",
+  error: "Error",
+
+  // プレースホルダー
+  widthPlaceholder: "Width (px)",
+  heightPlaceholder: "Height (px)",
+  autoCalculated: "Auto calculated",
+  autoCalculationNote:
+    "Automatically calculated based on width to maintain aspect ratio",
+
+  // 統計
+  resultsSummary: "Conversion Results Summary",
+  conversionSuccess: "Successful",
+  totalSizeChange: "Total Size Change",
+  averageCompressionRate: "Avg Compression",
+  errorCount: "Errors",
+
+  // ファイル管理
+  filesSelected: "files selected",
+  startConversion: "Start Conversion",
+  convertingInProgress: "Converting...",
+  progressText: "files completed",
+  filesProcessed: "items",
+
+  // プレビューモード
+  singleView: "Single",
+  comparison: "Compare",
+  sizeLabel: "Size",
+  fileSizeLabel: "File Size",
+  formatLabel: "Format",
+
+  // キーボードショートカット
+  closeShortcut: "Close",
+  navigationShortcut: "Navigate",
+  zoomShortcut: "Zoom",
+  resetShortcut: "Reset",
+
   // FAQ
   faqList: [
     {

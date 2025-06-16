@@ -66,11 +66,52 @@ export const imageConverter: ImageConverterTranslations = {
   portrait: "Retrato (9:16)",
   custom: "Personalizado",
 
+  // Mensajes
   conversionComplete: "Conversión completada",
   conversionError: "Error durante la conversión",
   unsupportedFormat: "Formato no soportado",
   fileTooLarge: "Archivo demasiado grande (máx 10MB)",
   maxFiles: "Máximo 20 archivos permitidos",
+
+  // Estado
+  waiting: "Esperando",
+  processingStatus: "Procesando...",
+  completed: "✓ Completado",
+  error: "Error",
+
+  // Marcadores de posición
+  widthPlaceholder: "Ancho (px)",
+  heightPlaceholder: "Alto (px)",
+  autoCalculated: "Calculado automáticamente",
+  autoCalculationNote:
+    "Calculado automáticamente basado en el ancho para mantener la relación de aspecto",
+
+  // Estadísticas
+  resultsSummary: "Resumen de Resultados de Conversión",
+  conversionSuccess: "Exitosos",
+  totalSizeChange: "Cambio de Tamaño Total",
+  averageCompressionRate: "Compresión Promedio",
+  errorCount: "Errores",
+
+  // Gestión de archivos
+  filesSelected: "archivos seleccionados",
+  startConversion: "Iniciar Conversión",
+  convertingInProgress: "Convirtiendo...",
+  progressText: "archivos completados",
+  filesProcessed: "elementos",
+
+  // Modo de vista previa
+  singleView: "Individual",
+  comparison: "Comparar",
+  sizeLabel: "Tamaño",
+  fileSizeLabel: "Tamaño del Archivo",
+  formatLabel: "Formato",
+
+  // Atajos de teclado
+  closeShortcut: "Cerrar",
+  navigationShortcut: "Navegar",
+  zoomShortcut: "Zoom",
+  resetShortcut: "Reiniciar",
 
   faqList: [
     {

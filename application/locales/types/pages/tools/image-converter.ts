@@ -70,6 +70,45 @@ export interface ImageConverterTranslations {
   fileTooLarge: string;
   maxFiles: string;
 
+  // ステータス
+  waiting: string;
+  processingStatus: string;
+  completed: string;
+  error: string;
+
+  // プレースホルダー
+  widthPlaceholder: string;
+  heightPlaceholder: string;
+  autoCalculated: string;
+  autoCalculationNote: string;
+
+  // 統計
+  resultsSummary: string;
+  conversionSuccess: string;
+  totalSizeChange: string;
+  averageCompressionRate: string;
+  errorCount: string;
+
+  // ファイル管理
+  filesSelected: string;
+  startConversion: string;
+  convertingInProgress: string;
+  progressText: string;
+  filesProcessed: string;
+
+  // プレビューモード
+  singleView: string;
+  comparison: string;
+  sizeLabel: string;
+  fileSizeLabel: string;
+  formatLabel: string;
+
+  // キーボードショートカット
+  closeShortcut: string;
+  navigationShortcut: string;
+  zoomShortcut: string;
+  resetShortcut: string;
+
   // FAQ
   faqList: FAQItem[];
 }

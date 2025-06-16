@@ -64,11 +64,51 @@ export const imageConverter: ImageConverterTranslations = {
   portrait: "纵向 (9:16)",
   custom: "自定义",
 
+  // 消息
   conversionComplete: "转换完成",
-  conversionError: "转换过程中出现错误",
+  conversionError: "转换过程中发生错误",
   unsupportedFormat: "不支持的格式",
   fileTooLarge: "文件过大（最大10MB）",
   maxFiles: "最多允许20个文件",
+
+  // 状态
+  waiting: "等待中",
+  processingStatus: "处理中...",
+  completed: "✓ 完成",
+  error: "错误",
+
+  // 占位符
+  widthPlaceholder: "宽度（px）",
+  heightPlaceholder: "高度（px）",
+  autoCalculated: "自动计算",
+  autoCalculationNote: "根据宽度自动计算以保持纵横比",
+
+  // 统计
+  resultsSummary: "转换结果摘要",
+  conversionSuccess: "成功",
+  totalSizeChange: "总大小变化",
+  averageCompressionRate: "平均压缩率",
+  errorCount: "错误",
+
+  // 文件管理
+  filesSelected: "个文件已选择",
+  startConversion: "开始转换",
+  convertingInProgress: "转换中...",
+  progressText: "个文件完成",
+  filesProcessed: "项",
+
+  // 预览模式
+  singleView: "单独",
+  comparison: "对比",
+  sizeLabel: "大小",
+  fileSizeLabel: "文件大小",
+  formatLabel: "格式",
+
+  // 键盘快捷键
+  closeShortcut: "关闭",
+  navigationShortcut: "导航",
+  zoomShortcut: "缩放",
+  resetShortcut: "重置",
 
   faqList: [
     {

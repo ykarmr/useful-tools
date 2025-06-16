@@ -681,7 +681,7 @@ export default function ImageConverterClient({
                         });
                       }}
                       className="w-full border-2 border-gray-200 rounded-lg px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-colors"
-                      placeholder="幅（px）"
+                      placeholder={t.imageConverter.widthPlaceholder}
                     />
                   </div>
 
@@ -706,13 +706,13 @@ export default function ImageConverterClient({
                       }`}
                       placeholder={
                         settings.maintainAspectRatio
-                          ? "自動計算されます"
-                          : "高さ（px）"
+                          ? t.imageConverter.autoCalculated
+                          : t.imageConverter.heightPlaceholder
                       }
                     />
                     {settings.maintainAspectRatio && (
                       <p className="text-xs text-gray-500">
-                        縦横比を維持するため、横幅に基づいて自動計算されます
+                        {t.imageConverter.autoCalculationNote}
                       </p>
                     )}
                   </div>
@@ -737,7 +737,8 @@ export default function ImageConverterClient({
                     {t.imageConverter.selectedFiles}
                   </h3>
                   <p className="text-xs sm:text-sm text-gray-500 mt-1">
-                    {images.length}ファイル選択中
+                    {images.length}
+                    {t.imageConverter.filesSelected}
                   </p>
                 </div>
               </div>
@@ -802,7 +803,9 @@ export default function ImageConverterClient({
                     {/* プログレスバー（処理中） */}
                     {image.status === "processing" && (
                       <div className="absolute bottom-0 left-0 right-0 bg-blue-600 bg-opacity-90 text-white text-center py-2 rounded-b-lg">
-                        <div className="text-xs font-medium">処理中...</div>
+                        <div className="text-xs font-medium">
+                          {t.imageConverter.processingStatus}
+                        </div>
                       </div>
                     )}
                   </div>
@@ -883,20 +886,24 @@ export default function ImageConverterClient({
                     {/* ステータステキスト */}
                     <div className="text-xs">
                       {image.status === "waiting" && (
-                        <span className="text-gray-500">変換待ち</span>
+                        <span className="text-gray-500">
+                          {t.imageConverter.waiting}
+                        </span>
                       )}
                       {image.status === "processing" && (
                         <span className="text-blue-600 font-medium">
-                          変換中...
+                          {t.imageConverter.processingStatus}
                         </span>
                       )}
                       {image.status === "completed" && (
                         <span className="text-green-600 font-medium">
-                          ✓ 変換完了
+                          {t.imageConverter.completed}
                         </span>
                       )}
                       {image.status === "error" && (
-                        <span className="text-red-600 font-medium">エラー</span>
+                        <span className="text-red-600 font-medium">
+                          {t.imageConverter.error}
+                        </span>
                       )}
                     </div>
                   </div>
@@ -916,7 +923,7 @@ export default function ImageConverterClient({
                         <button
                           onClick={() => downloadImage(image)}
                           className="p-2 text-green-600 hover:text-green-700 hover:bg-green-50 rounded-lg transition-colors"
-                          title="ダウンロード"
+                          title={t.imageConverter.download}
                         >
                           <Download className="h-4 w-4" />
                         </button>
@@ -924,7 +931,7 @@ export default function ImageConverterClient({
                       <button
                         onClick={() => removeImage(image.id)}
                         className="p-2 text-red-600 hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors"
-                        title="削除"
+                        title={t.imageConverter.remove}
                       >
                         <X className="h-4 w-4" />
                       </button>
@@ -943,7 +950,9 @@ export default function ImageConverterClient({
           <div className="text-center">
             <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl p-4 sm:p-6 text-white">
               <h3 className="text-base sm:text-lg lg:text-xl font-semibold mb-3 sm:mb-4">
-                {isProcessing ? "変換中..." : "変換を開始"}
+                {isProcessing
+                  ? t.imageConverter.convertingInProgress
+                  : t.imageConverter.startConversion}
               </h3>
 
               {/* プログレスバー */}
@@ -967,7 +976,7 @@ export default function ImageConverterClient({
                   </div>
                   <p className="text-xs sm:text-sm text-blue-100">
                     {images.filter((img) => img.status === "completed").length}{" "}
-                    / {images.length} ファイル完了
+                    / {images.length} {t.imageConverter.progressText}
                   </p>
                 </div>
               )}
@@ -992,7 +1001,9 @@ export default function ImageConverterClient({
 
               {!isProcessing && (
                 <p className="text-blue-100 text-xs sm:text-sm mt-3 sm:mt-4">
-                  {images.length}ファイルを{settings.format.toUpperCase()}
+                  {images.length}
+                  {t.imageConverter.filesProcessed}を
+                  {settings.format.toUpperCase()}
                   形式に変換します
                 </p>
               )}
@@ -1011,7 +1022,7 @@ export default function ImageConverterClient({
             <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-xl p-4 sm:p-6 border border-green-200">
               <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3 sm:mb-4 flex items-center">
                 <Check className="mr-2 h-5 w-5 sm:h-6 sm:w-6 text-green-600" />
-                変換結果サマリー
+                {t.imageConverter.resultsSummary}
               </h3>
 
               <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
@@ -1021,7 +1032,7 @@ export default function ImageConverterClient({
                     {images.filter((img) => img.status === "completed").length}
                   </div>
                   <div className="text-xs sm:text-sm text-gray-600">
-                    変換成功
+                    {t.imageConverter.conversionSuccess}
                   </div>
                 </div>
 
@@ -1048,7 +1059,7 @@ export default function ImageConverterClient({
                     })()}
                   </div>
                   <div className="text-xs sm:text-sm text-gray-600">
-                    総容量変化
+                    {t.imageConverter.totalSizeChange}
                   </div>
                 </div>
 
@@ -1072,7 +1083,7 @@ export default function ImageConverterClient({
                     })()}
                   </div>
                   <div className="text-xs sm:text-sm text-gray-600">
-                    平均圧縮率
+                    {t.imageConverter.averageCompressionRate}
                   </div>
                 </div>
 
@@ -1081,7 +1092,9 @@ export default function ImageConverterClient({
                   <div className="text-lg sm:text-xl lg:text-2xl font-bold text-red-600">
                     {images.filter((img) => img.status === "error").length}
                   </div>
-                  <div className="text-xs sm:text-sm text-gray-600">エラー</div>
+                  <div className="text-xs sm:text-sm text-gray-600">
+                    {t.imageConverter.errorCount}
+                  </div>
                 </div>
               </div>
 
@@ -1095,7 +1108,7 @@ export default function ImageConverterClient({
                     <Download className="mr-2 h-5 w-5" />
                     {t.imageConverter.downloadAll} (
                     {images.filter((img) => img.status === "completed").length}
-                    件)
+                    {t.imageConverter.filesProcessed})
                   </button>
                 </div>
               )}
@@ -1226,7 +1239,9 @@ export default function ImageConverterClient({
                         : "bg-white bg-opacity-20 hover:bg-opacity-30"
                     }`}
                   >
-                    {showComparison ? "単体" : "比較"}
+                    {showComparison
+                      ? t.imageConverter.singleView
+                      : t.imageConverter.comparison}
                   </button>
                 )}
 
@@ -1316,20 +1331,26 @@ export default function ImageConverterClient({
                     </div>
                     <div className="bg-gray-50 rounded-lg p-3 sm:p-4 space-y-2">
                       <div className="flex justify-between text-sm">
-                        <span className="text-gray-600">サイズ:</span>
+                        <span className="text-gray-600">
+                          {t.imageConverter.sizeLabel}:
+                        </span>
                         <span className="font-medium">
                           {previewImage.originalDimensions.width} ×{" "}
                           {previewImage.originalDimensions.height}
                         </span>
                       </div>
                       <div className="flex justify-between text-sm">
-                        <span className="text-gray-600">ファイルサイズ:</span>
+                        <span className="text-gray-600">
+                          {t.imageConverter.fileSizeLabel}:
+                        </span>
                         <span className="font-medium">
                           {formatFileSize(previewImage.size)}
                         </span>
                       </div>
                       <div className="flex justify-between text-sm">
-                        <span className="text-gray-600">形式:</span>
+                        <span className="text-gray-600">
+                          {t.imageConverter.formatLabel}:
+                        </span>
                         <span className="font-medium uppercase">
                           {previewImage.file.type.split("/")[1]}
                         </span>
@@ -1353,7 +1374,7 @@ export default function ImageConverterClient({
                         className="inline-flex items-center px-2 sm:px-3 py-1 bg-green-600 text-white text-xs sm:text-sm font-medium rounded-lg hover:bg-green-700 transition-colors self-start sm:self-auto"
                       >
                         <Download className="mr-1 h-3 w-3 sm:h-4 sm:w-4" />
-                        ダウンロード
+                        {t.imageConverter.download}
                       </button>
                     </div>
                     <div className="relative border rounded-lg overflow-hidden bg-gray-50">
@@ -1443,7 +1464,7 @@ export default function ImageConverterClient({
                         <div className="bg-white rounded-lg p-3 sm:p-4 flex items-center space-x-3">
                           <Settings className="h-5 w-5 animate-spin text-blue-600" />
                           <span className="text-gray-900 font-medium text-sm sm:text-base">
-                            変換中...
+                            {t.imageConverter.processingStatus}
                           </span>
                         </div>
                       </div>
@@ -1531,7 +1552,7 @@ export default function ImageConverterClient({
                         className="w-full mt-3 sm:mt-4 inline-flex items-center justify-center px-3 sm:px-4 py-2 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors text-sm sm:text-base"
                       >
                         <Download className="mr-2 h-4 w-4" />
-                        ダウンロード
+                        {t.imageConverter.download}
                       </button>
                     )}
                   </div>
@@ -1546,7 +1567,7 @@ export default function ImageConverterClient({
                   <kbd className="px-1 py-0.5 bg-gray-200 rounded text-xs">
                     ESC
                   </kbd>
-                  <span className="ml-1">閉じる</span>
+                  <span className="ml-1">{t.imageConverter.closeShortcut}</span>
                 </span>
                 {images.length > 1 && (
                   <span className="hidden sm:flex items-center">
@@ -1556,7 +1577,9 @@ export default function ImageConverterClient({
                     <kbd className="px-1 py-0.5 bg-gray-200 rounded text-xs ml-1">
                       →
                     </kbd>
-                    <span className="ml-1">画像切替</span>
+                    <span className="ml-1">
+                      {t.imageConverter.navigationShortcut}
+                    </span>
                   </span>
                 )}
                 <span className="flex items-center">
@@ -1566,13 +1589,13 @@ export default function ImageConverterClient({
                   <kbd className="px-1 py-0.5 bg-gray-200 rounded text-xs ml-1">
                     -
                   </kbd>
-                  <span className="ml-1">ズーム</span>
+                  <span className="ml-1">{t.imageConverter.zoomShortcut}</span>
                 </span>
                 <span className="flex items-center">
                   <kbd className="px-1 py-0.5 bg-gray-200 rounded text-xs">
                     0
                   </kbd>
-                  <span className="ml-1">リセット</span>
+                  <span className="ml-1">{t.imageConverter.resetShortcut}</span>
                 </span>
               </div>
             </div>

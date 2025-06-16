@@ -65,11 +65,52 @@ export const imageConverter: ImageConverterTranslations = {
   portrait: "Портретная (9:16)",
   custom: "Пользовательская",
 
+  // Сообщения
   conversionComplete: "Конвертация завершена",
   conversionError: "Ошибка при конвертации",
   unsupportedFormat: "Неподдерживаемый формат",
   fileTooLarge: "Файл слишком большой (макс 10МБ)",
   maxFiles: "Максимум 20 файлов разрешено",
+
+  // Статус
+  waiting: "Ожидание",
+  processingStatus: "Обработка...",
+  completed: "✓ Завершено",
+  error: "Ошибка",
+
+  // Заполнители
+  widthPlaceholder: "Ширина (px)",
+  heightPlaceholder: "Высота (px)",
+  autoCalculated: "Автоматически рассчитано",
+  autoCalculationNote:
+    "Автоматически рассчитывается на основе ширины для сохранения соотношения сторон",
+
+  // Статистика
+  resultsSummary: "Сводка результатов конвертации",
+  conversionSuccess: "Успешно",
+  totalSizeChange: "Общее изменение размера",
+  averageCompressionRate: "Средняя компрессия",
+  errorCount: "Ошибки",
+
+  // Управление файлами
+  filesSelected: "файлов выбрано",
+  startConversion: "Начать конвертацию",
+  convertingInProgress: "Конвертация...",
+  progressText: "файлов завершено",
+  filesProcessed: "элементов",
+
+  // Режим предварительного просмотра
+  singleView: "Один",
+  comparison: "Сравнить",
+  sizeLabel: "Размер",
+  fileSizeLabel: "Размер файла",
+  formatLabel: "Формат",
+
+  // Горячие клавиши
+  closeShortcut: "Закрыть",
+  navigationShortcut: "Навигация",
+  zoomShortcut: "Масштаб",
+  resetShortcut: "Сброс",
 
   faqList: [
     {
