@@ -3,7 +3,7 @@ import type { PixelArtEditorTranslations } from "../../../types/pages/tools/pixe
 export const pixelArtEditor: PixelArtEditorTranslations = {
   title: "Pixel Art Editor",
   description:
-    "Create pixel art in your browser. Features multiple brush tools, color palettes, and layer support for digital art creation.",
+    "Create pixel art in your browser. Features brush, eraser, and eyedropper tools with a color palette for digital art creation.",
   keywords: [
     "pixel art",
     "digital art",
@@ -74,24 +74,24 @@ export const pixelArtEditor: PixelArtEditorTranslations = {
       a: "Pixel art is a form of digital art where images are created by deliberately placing individual pixels. It's commonly seen in retro video game 2D graphics and is characterized by its blocky, pixelated appearance.",
     },
     {
-      q: "Can I save my artwork?",
-      a: "Yes, you can download your artwork as a PNG image. You can also save your work data to the browser's local storage and resume editing later.",
+      q: "Can I download my artwork?",
+      a: "Yes, you can download your artwork as a high-resolution PNG image by clicking the 'Download' button.",
     },
     {
       q: "What tools are available?",
-      a: "The editor includes brush, eraser, fill bucket, line drawing, rectangle and circle tools, and an eyedropper. Undo and redo functions are also available.",
+      a: "The editor includes three tools: brush (for drawing), eraser (for deleting), and eyedropper (for color picking). Brush and eraser support continuous drawing by dragging.",
     },
     {
       q: "Can I change the grid size?",
-      a: "Yes, you can select various canvas sizes from 8x8 to 32x32. You can also adjust the display size of pixels.",
+      a: "Yes, you can change the canvas size from 8×8 to 32×32 in increments of 2. When you change the size, existing artwork is preserved and adjusted to the new dimensions.",
     },
     {
-      q: "Can I customize the color palette?",
-      a: "Yes, you can add custom colors or use preset palettes (retro game style, monochrome, etc.). You can register up to 32 colors.",
+      q: "How do I use the color palette?",
+      a: "You can select from 24 default colors in the palette. You can also use the color picker to choose any custom color. The selected color is displayed with its color code.",
     },
     {
-      q: "What is symmetry drawing mode?",
-      a: "When symmetry drawing mode is enabled, drawing is automatically mirrored horizontally or vertically from the center line of the canvas. This allows for efficient creation of symmetrical designs.",
+      q: "How does the eyedropper tool work?",
+      a: "Select the eyedropper tool and click on any pixel in the canvas to automatically set that pixel's color as your selected color. This is useful for reusing existing colors in your artwork.",
     },
   ],
 };
