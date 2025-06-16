@@ -18,47 +18,25 @@ export const pixelArtEditor: PixelArtEditorTranslations = {
     gridSize: "网格大小",
     pixelSize: "像素大小",
     showGrid: "显示网格",
-  },
-
-  palette: {
-    title: "调色板",
-    primaryColor: "主色",
-    secondaryColor: "副色",
-    addColor: "添加颜色",
-    removeColor: "删除颜色",
-    clearPalette: "清空调色板",
-    presetPalettes: "预设调色板",
+    size: "大小",
+    pixels: "像素",
+    instruction: "说明",
   },
 
   tools: {
-    title: "工具",
     brush: "画笔",
     eraser: "橡皮擦",
     eyedropper: "吸管",
     bucket: "油漆桶",
-    line: "直线",
-    rectangle: "矩形",
-    circle: "圆形",
   },
 
   actions: {
-    title: "操作",
     clear: "清除",
     undo: "撤销",
     redo: "重做",
     download: "下载",
     save: "保存",
     load: "加载",
-    newCanvas: "新建画布",
-  },
-
-  settings: {
-    title: "设置",
-    canvasSize: "画布大小",
-    backgroundColor: "背景色",
-    zoom: "缩放",
-    symmetryMode: "对称模式",
-    onionSkinning: "洋葱皮",
   },
 
   messages: {
@@ -96,4 +74,22 @@ export const pixelArtEditor: PixelArtEditorTranslations = {
       a: "选择吸管工具并点击画布上的任意像素，会自动将该像素的颜色设置为您的选中颜色。这对于重复使用现有颜色很有用。",
     },
   ],
+  howToUse: {
+    title: "如何使用",
+    basic: "基本操作",
+    step1: "选择工具（画笔、橡皮擦、吸管）",
+    step2: "从调色板中选择颜色",
+    step3: "在画布上点击并拖动以绘制",
+    advanced: "有用的功能",
+    tip1: "网格大小可调，从8×8到32×32",
+    tip2: "拖动进行连续绘制，吸管用于选择颜色",
+    tip3: "以PNG格式下载高分辨率图像",
+  },
+  toolPanel: {
+    tools: "工具",
+    colors: "调色板",
+    canvasSettings: "画布设置",
+    gridSize: "网格大小",
+    actions: "操作",
+  },
 };
