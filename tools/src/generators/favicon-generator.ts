@@ -12,7 +12,8 @@ export class FaviconGenerator {
   constructor(logoPath?: string) {
     // デフォルトロゴパスを設定
     this.logoPath =
-      logoPath || path.join(__dirname, "../../", OUTPUT_DIRS.logo, "logo.png");
+      logoPath ||
+      path.join(__dirname, "../../app/", OUTPUT_DIRS.logo, "logo.png");
   }
 
   /**
@@ -106,7 +107,7 @@ export class FaviconGenerator {
   public async generatePwaIcons(): Promise<void> {
     const pwaBasePath = path.join(
       __dirname,
-      "../../",
+      "../../app/",
       OUTPUT_DIRS.favicon,
       "pwa"
     );
