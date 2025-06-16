@@ -32,6 +32,7 @@ import { colorPalette } from "./pages/tools/color-palette";
 import { textStatistics } from "./pages/tools/text-statistics";
 import { bmiCalculator } from "./pages/tools/bmi-calculator";
 import { htmlEscape } from "./pages/tools/html-escape";
+import { pixelArtEditor } from "./pages/tools/pixel-art-editor";
 import { header } from "./header";
 import { common } from "./common";
 import { footer } from "./footer";
@@ -75,6 +76,7 @@ const ja: Translations = {
   textStatistics,
   bmiCalculator,
   htmlEscape,
+  pixelArtEditor,
 };
 
 export default ja;

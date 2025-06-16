@@ -39,6 +39,7 @@ import { ColorPaletteTranslations } from "./pages/tools/color-palette";
 import { TextStatisticsTranslations } from "./pages/tools/text-statistics";
 import { BmiCalculatorTranslations } from "./pages/tools/bmi-calculator";
 import { HtmlEscapeTranslations } from "./pages/tools/html-escape";
+import { PixelArtEditorTranslations } from "./pages/tools/pixel-art-editor";
 
 export interface Translations {
   common: CommonTranslations;
@@ -78,4 +79,5 @@ export interface Translations {
   textStatistics: TextStatisticsTranslations;
   bmiCalculator: BmiCalculatorTranslations;
   htmlEscape: HtmlEscapeTranslations;
+  pixelArtEditor: PixelArtEditorTranslations;
 }

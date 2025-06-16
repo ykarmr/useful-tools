@@ -96,6 +96,7 @@ const toolCategories = [
       { key: "unitConversion", icon: Zap, href: "/unit-conversion" },
       { key: "petAgeConversion", icon: PawPrint, href: "/pet-age-conversion" },
       { key: "colorPalette", icon: Palette, href: "/color-palette" },
+      { key: "pixelArtEditor", icon: Palette, href: "/pixel-art-editor" },
     ],
   },
   {

@@ -32,6 +32,7 @@ import { colorPalette } from "./pages/tools/color-palette";
 import { textStatistics } from "./pages/tools/text-statistics";
 import { bmiCalculator } from "./pages/tools/bmi-calculator";
 import { htmlEscape } from "./pages/tools/html-escape";
+import { pixelArtEditor } from "./pages/tools/pixel-art-editor";
 import { ad } from "./ad";
 import { common } from "./common";
 import { footer } from "./footer";
@@ -75,6 +76,7 @@ const es: Translations = {
   textStatistics,
   bmiCalculator,
   htmlEscape,
+  pixelArtEditor,
 };
 
 export default es;
