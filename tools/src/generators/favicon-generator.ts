@@ -140,7 +140,7 @@ export class FaviconGenerator {
 
       const baseOutputPath = path.join(
         __dirname,
-        "../../",
+        "../../app/",
         OUTPUT_DIRS.favicon
       );
       let generatedCount = 0;

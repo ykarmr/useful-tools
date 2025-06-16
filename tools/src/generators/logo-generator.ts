@@ -90,32 +90,6 @@ export class LogoGenerator {
   }
 
   /**
-   * テキストロゴを描画
-   */
-  private drawTextLogo(text: string, fontSize: number = 48): void {
-    const { width, height } = SIZES.logo;
-
-    this.ctx.fillStyle = COLORS.text;
-    this.ctx.font = `bold ${fontSize}px ${getFontFamily("ja")}`;
-    this.ctx.textAlign = "center";
-    this.ctx.textBaseline = "middle";
-
-    // テキストに影を追加
-    this.ctx.shadowColor = "rgba(0, 0, 0, 0.2)";
-    this.ctx.shadowBlur = 4;
-    this.ctx.shadowOffsetX = 2;
-    this.ctx.shadowOffsetY = 2;
-
-    this.ctx.fillText(text, width / 2, height * 0.75);
-
-    // 影をリセット
-    this.ctx.shadowColor = "transparent";
-    this.ctx.shadowBlur = 0;
-    this.ctx.shadowOffsetX = 0;
-    this.ctx.shadowOffsetY = 0;
-  }
-
-  /**
    * 指定した言語のロゴを生成
    */
   public async generateLogo(localeCode: string): Promise<Buffer> {
@@ -128,7 +102,6 @@ export class LogoGenerator {
     this.drawBaseLogo();
 
     // テキストを追加
-    this.drawTextLogo(locale.title);
 
     return this.canvas.toBuffer("image/png");
   }
@@ -166,7 +139,7 @@ export class LogoGenerator {
       const defaultLogoBuffer = await this.generateLogo("en");
       const defaultPath = path.join(
         __dirname,
-        "../../",
+        "../../app/",
         OUTPUT_DIRS.logo,
         "logo.png"
       );

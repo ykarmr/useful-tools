@@ -356,7 +356,7 @@ export class OgpGenerator {
           const filename = `ogp-${localeCode}.png`;
           const outputPath = path.join(
             __dirname,
-            "../../",
+            "../../app/",
             OUTPUT_DIRS.ogp,
             filename
           );

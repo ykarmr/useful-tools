@@ -182,13 +182,13 @@ export default async function HomePage({ params }: HomePageProps) {
         >
           <div className="max-w-6xl mx-auto">
             <div className="flex justify-center mb-6">
-              <div
-                className="p-4 bg-gradient-to-br from-primary-500 to-primary-700 rounded-2xl"
-                role="img"
-                aria-label="USEFUL TOOLS logo"
-              >
-                <Sparkles className="w-12 h-12 text-white" aria-hidden="true" />
-              </div>
+              <img
+                src={`/images/logo/logo.png`}
+                alt={t.header.logo}
+                className="w-28 h-28 rounded-lg"
+                width={32}
+                height={32}
+              />
             </div>
 
             <h1
