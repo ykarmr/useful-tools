@@ -220,6 +220,9 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
 
     setIsSpinning(true);
 
+    // ランダムな回転時間を生成（3.5〜5.0秒）
+    const spinDuration = 3500 + Math.random() * 1500; // 3500ms + 0-1500ms = 3.5-5.0秒
+
     // Calculate random rotation
     const spins = 5 + Math.random() * 5; // 5-10 full rotations
     const randomAngle = Math.random() * 360;
@@ -253,7 +256,7 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
       } finally {
         setIsSpinning(false);
       }
-    }, 1000);
+    }, spinDuration);
   };
 
   // Create winner zone path (fixed at top)
@@ -425,8 +428,13 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
 
               <div
                 ref={wheelRef}
-                className="w-full h-full transition-transform duration-3000 ease-out"
-                style={{ transform: `rotate(${rotation}deg)` }}
+                className="w-full h-full transition-transform ease-out"
+                style={{
+                  transform: `rotate(${rotation}deg)`,
+                  transitionDuration: isSpinning
+                    ? `${3.5 + Math.random() * 1.5}s`
+                    : "0s",
+                }}
               >
                 {enabledItems.length === 0 ? (
                   <div className="w-full h-full bg-gray-100 rounded-full border-4 border-gray-300 flex items-center justify-center">
