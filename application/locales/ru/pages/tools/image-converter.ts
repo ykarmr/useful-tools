@@ -112,6 +112,13 @@ export const imageConverter: ImageConverterTranslations = {
   zoomShortcut: "Масштаб",
   resetShortcut: "Сброс",
 
+  // Дополнительные сообщения
+  maxFilesSizeLimit: "Макс. 20 файлов, по 10МБ каждый",
+  lowQuality: "Низкое Качество",
+  highQuality: "Высокое Качество",
+  processingNow: "Обработка",
+  formatConversionNote: "конвертация формата",
+
   faqList: [
     {
       q: "Какие форматы изображений поддерживаются?",

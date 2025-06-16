@@ -61,6 +61,48 @@ export default async function LocaleLayout({
         <link
           rel="icon"
           type="image/png"
+          sizes="512x512"
+          href="/images/favicon/favicon-512x512.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="256x256"
+          href="/images/favicon/favicon-256x256.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="192x192"
+          href="/images/favicon/favicon-192x192.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="128x128"
+          href="/images/favicon/favicon-128x128.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="96x96"
+          href="/images/favicon/favicon-96x96.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="64x64"
+          href="/images/favicon/favicon-64x64.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="48x48"
+          href="/images/favicon/favicon-48x48.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
           sizes="32x32"
           href="/images/favicon/favicon-32x32.png"
         />

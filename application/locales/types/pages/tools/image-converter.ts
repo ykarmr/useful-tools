@@ -109,6 +109,13 @@ export interface ImageConverterTranslations {
   zoomShortcut: string;
   resetShortcut: string;
 
+  // 追加のメッセージ
+  maxFilesSizeLimit: string;
+  lowQuality: string;
+  highQuality: string;
+  processingNow: string;
+  formatConversionNote: string;
+
   // FAQ
   faqList: FAQItem[];
 }

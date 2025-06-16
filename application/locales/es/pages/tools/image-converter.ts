@@ -113,6 +113,13 @@ export const imageConverter: ImageConverterTranslations = {
   zoomShortcut: "Zoom",
   resetShortcut: "Reiniciar",
 
+  // Mensajes adicionales
+  maxFilesSizeLimit: "Máx. 20 archivos, 10MB cada uno",
+  lowQuality: "Baja Calidad",
+  highQuality: "Alta Calidad",
+  processingNow: "Procesando",
+  formatConversionNote: "conversión de formato",
+
   faqList: [
     {
       q: "¿Qué formatos de imagen están soportados?",

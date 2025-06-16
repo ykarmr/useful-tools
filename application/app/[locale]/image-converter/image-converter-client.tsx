@@ -19,10 +19,8 @@ import {
 } from "lucide-react";
 import ToolLayout from "@/components/layout/tool-layout";
 import ToolSection from "@/components/layout/tool-section";
-import ToolDisplay from "@/components/layout/tool-display";
-import ToolControls from "@/components/layout/tool-controls";
-import { Locale, Translations } from "@/locales";
 import ToolFaq from "@/components/layout/tool-faq";
+import { Locale, Translations } from "@/locales";
 
 interface ImageFile {
   id: string;
@@ -512,9 +510,9 @@ export default function ImageConverterClient({
                 <button className="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors text-sm sm:text-base shadow-lg">
                   <Upload className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                   {t.imageConverter.selectFiles}
-                </button>
+                </button>{" "}
                 <p className="text-xs sm:text-sm text-gray-500">
-                  最大20ファイル、各ファイル10MBまで
+                  {t.imageConverter.maxFilesSizeLimit}
                 </p>
               </div>
             </div>
@@ -589,8 +587,8 @@ export default function ImageConverterClient({
                       className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
                     />
                     <div className="flex justify-between text-xs text-gray-500 mt-1">
-                      <span>低品質</span>
-                      <span>高品質</span>
+                      <span>{t.imageConverter.lowQuality}</span>
+                      <span>{t.imageConverter.highQuality}</span>
                     </div>
                   </div>
                 </div>
@@ -1004,7 +1002,7 @@ export default function ImageConverterClient({
                   {images.length}
                   {t.imageConverter.filesProcessed}を
                   {settings.format.toUpperCase()}
-                  形式に変換します
+                  {t.imageConverter.formatConversionNote}
                 </p>
               )}
             </div>

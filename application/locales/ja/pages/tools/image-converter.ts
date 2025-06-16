@@ -118,6 +118,13 @@ export const imageConverter: ImageConverterTranslations = {
   zoomShortcut: "ズーム",
   resetShortcut: "リセット",
 
+  // 追加のメッセージ
+  maxFilesSizeLimit: "最大20ファイル、各ファイル10MBまで",
+  lowQuality: "低品質",
+  highQuality: "高品質",
+  processingNow: "変換中",
+  formatConversionNote: "形式に変換します",
+
   // FAQ
   faqList: [
     {

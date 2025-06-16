@@ -110,6 +110,13 @@ export const imageConverter: ImageConverterTranslations = {
   zoomShortcut: "缩放",
   resetShortcut: "重置",
 
+  // 附加消息
+  maxFilesSizeLimit: "最多20个文件，每个10MB",
+  lowQuality: "低质量",
+  highQuality: "高质量",
+  processingNow: "处理中",
+  formatConversionNote: "格式转换",
+
   faqList: [
     {
       q: "支持哪些图像格式？",
