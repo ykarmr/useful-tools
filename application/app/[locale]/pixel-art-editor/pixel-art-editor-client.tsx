@@ -22,6 +22,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface PixelArtEditorClientProps {
   locale: Locale;
@@ -62,6 +63,7 @@ export default function PixelArtEditorClient({
   locale,
   t,
 }: PixelArtEditorClientProps) {
+  const isMobile = useIsMobile();
   const [gridSize, setGridSize] = useState(16);
   const [pixels, setPixels] = useState<string[][]>(() =>
     Array(16)
@@ -76,7 +78,9 @@ export default function PixelArtEditorClient({
   // グリッドサイズの変更
   const handleGridSizeChange = useCallback(
     (newSize: number) => {
-      const size = Math.max(8, Math.min(32, newSize));
+      // スマホの場合は最大16、デスクトップの場合は最大32
+      const maxSize = isMobile ? 16 : 32;
+      const size = Math.max(8, Math.min(maxSize, newSize));
       setGridSize(size);
 
       // 既存のピクセルデータを新しいサイズに合わせて調整
@@ -94,7 +98,7 @@ export default function PixelArtEditorClient({
         );
       setPixels(newPixels);
     },
-    [pixels]
+    [pixels, isMobile]
   );
 
   // ピクセルの描画
@@ -262,17 +266,22 @@ export default function PixelArtEditorClient({
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <div className="grid grid-cols-1 gap-2">
                   {tools.map((tool) => (
                     <Button
                       key={tool.id}
                       variant={selectedTool === tool.id ? "default" : "outline"}
-                      size="sm"
+                      size="lg"
                       onClick={() => setSelectedTool(tool.id)}
-                      className="flex items-center gap-2 justify-center"
+                      className={cn(
+                        "flex items-center gap-3 justify-start text-left h-12 transition-all duration-200",
+                        selectedTool === tool.id 
+                          ? "bg-primary text-primary-foreground shadow-lg transform scale-[1.02]" 
+                          : "hover:bg-accent hover:scale-[1.01]"
+                      )}
                     >
-                      <tool.icon className="h-4 w-4" />
-                      <span className="hidden sm:inline">{tool.label}</span>
+                      <tool.icon className="h-5 w-5 flex-shrink-0" />
+                      <span className="font-medium">{tool.label}</span>
                     </Button>
                   ))}
                 </div>
@@ -307,19 +316,23 @@ export default function PixelArtEditorClient({
                   </div>
 
                   {/* デフォルトカラー */}
-                  <div className="grid grid-cols-6 sm:grid-cols-8 gap-1">
+                  <div className="grid grid-cols-6 sm:grid-cols-8 gap-2">
                     {DEFAULT_COLORS.map((color) => (
                       <button
                         key={color}
                         className={cn(
-                          "w-5 h-5 sm:w-6 sm:h-6 border border-border rounded transition-transform hover:scale-110 active:scale-95",
+                          "w-8 h-8 sm:w-10 sm:h-10 border-2 border-border rounded-lg transition-all duration-200 hover:scale-110 active:scale-95 relative",
                           selectedColor === color &&
-                            "ring-2 ring-primary ring-offset-1"
+                            "ring-2 ring-primary ring-offset-2 border-primary shadow-lg transform scale-105"
                         )}
                         style={{ backgroundColor: color }}
                         onClick={() => setSelectedColor(color)}
                         title={color}
-                      />
+                      >
+                        {selectedColor === color && (
+                          <div className="absolute inset-0 border-2 border-white rounded-md" />
+                        )}
+                      </button>
                     ))}
                   </div>
                 </div>
@@ -344,25 +357,27 @@ export default function PixelArtEditorClient({
                       {gridSize}×{gridSize}
                     </Badge>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-3">
                     <Button
-                      size="sm"
+                      size="lg"
                       variant="outline"
                       onClick={() => handleGridSizeChange(gridSize - 2)}
                       disabled={gridSize <= 8}
+                      className="h-12 px-4 hover:scale-105 transition-transform"
                     >
-                      <Minus className="h-4 w-4" />
+                      <Minus className="h-5 w-5" />
                     </Button>
-                    <div className="flex-1 text-center text-sm font-mono bg-muted py-1 rounded">
+                    <div className="flex-1 text-center text-lg font-bold bg-muted py-3 rounded-lg border-2">
                       {gridSize}
                     </div>
                     <Button
-                      size="sm"
+                      size="lg"
                       variant="outline"
                       onClick={() => handleGridSizeChange(gridSize + 2)}
-                      disabled={gridSize >= 32}
+                      disabled={gridSize >= (isMobile ? 16 : 32)}
+                      className="h-12 px-4 hover:scale-105 transition-transform"
                     >
-                      <Plus className="h-4 w-4" />
+                      <Plus className="h-5 w-5" />
                     </Button>
                   </div>
                 </div>
@@ -378,22 +393,23 @@ export default function PixelArtEditorClient({
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-2">
+                <div className="space-y-3">
                   <Button
                     variant="outline"
-                    size="sm"
+                    size="lg"
                     onClick={clearCanvas}
-                    className="w-full flex items-center gap-2"
+                    className="w-full flex items-center gap-3 h-12 hover:bg-destructive hover:text-destructive-foreground transition-colors"
                   >
-                    <Trash2 className="h-4 w-4" />
-                    {t.pixelArtEditor.actions.clear}
+                    <Trash2 className="h-5 w-5" />
+                    <span className="font-medium">{t.pixelArtEditor.actions.clear}</span>
                   </Button>
                   <Button
                     onClick={downloadAsPNG}
-                    className="w-full flex items-center gap-2"
+                    size="lg"
+                    className="w-full flex items-center gap-3 h-12 bg-green-600 hover:bg-green-700 text-white transition-colors"
                   >
-                    <Download className="h-4 w-4" />
-                    {t.pixelArtEditor.actions.download}
+                    <Download className="h-5 w-5" />
+                    <span className="font-medium">{t.pixelArtEditor.actions.download}</span>
                   </Button>
                 </div>
               </CardContent>
@@ -430,7 +446,7 @@ export default function PixelArtEditorClient({
                         row.map((color, colIndex) => (
                           <button
                             key={`${rowIndex}-${colIndex}`}
-                            className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 border border-gray-200 hover:opacity-80 transition-opacity"
+                            className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 border border-gray-300 hover:opacity-80 transition-all duration-150 active:scale-95 rounded-sm"
                             style={{ backgroundColor: color }}
                             onMouseDown={() =>
                               handleMouseDown(rowIndex, colIndex)
