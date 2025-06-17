@@ -35,9 +35,11 @@ export const dataConverter: DataConverterTranslations = {
   },
   messages: {
     conversionSuccess: "変換が完了しました",
+    formatSuccess: "整形が完了しました",
     invalidFormat: "入力データの形式が正しくありません",
     emptyInput: "変換するデータを入力してください",
     copied: "クリップボードにコピーしました",
+    copyError: "コピーに失敗しました",
   },
   features: {
     title: "機能と特徴",

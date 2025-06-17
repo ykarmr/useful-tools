@@ -25,9 +25,11 @@ export interface DataConverterTranslations {
   };
   messages: {
     conversionSuccess: string;
+    formatSuccess: string;
     invalidFormat: string;
     emptyInput: string;
     copied: string;
+    copyError: string;
   };
   features: {
     title: string;

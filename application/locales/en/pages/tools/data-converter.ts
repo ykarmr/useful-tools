@@ -35,9 +35,11 @@ export const dataConverter: DataConverterTranslations = {
   },
   messages: {
     conversionSuccess: "Conversion completed successfully",
+    formatSuccess: "Formatting completed successfully",
     invalidFormat: "Invalid input data format",
     emptyInput: "Please enter data to convert",
     copied: "Copied to clipboard",
+    copyError: "Failed to copy",
   },
   features: {
     title: "Features & Benefits",

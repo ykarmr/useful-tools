@@ -13,8 +13,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Locale, Translations } from "@/locales";
-import { useToast } from "@/hooks/use-toast";
 import * as yaml from "js-yaml";
 import * as toml from "@iarna/toml";
 
@@ -35,19 +35,20 @@ export default function DataConverterClient({
   const [inputFormat, setInputFormat] = useState<DataFormat>("json");
   const [isConverting, setIsConverting] = useState(false);
   const [isFormatting, setIsFormatting] = useState(false);
-  const { toast } = useToast();
+  const [error, setError] = useState<string>("");
+  const [success, setSuccess] = useState<string>("");
 
   // 入力データの整形処理
   const formatInputData = async () => {
     if (!inputData.trim()) {
-      toast({
-        title: t.dataConverter.messages.emptyInput,
-        variant: "destructive",
-      });
+      setError(t.dataConverter.messages.emptyInput);
+      setSuccess("");
       return;
     }
 
     setIsFormatting(true);
+    setError("");
+    setSuccess("");
     try {
       let formattedData: string;
 
@@ -73,15 +74,10 @@ export default function DataConverterClient({
       }
 
       setInputData(formattedData);
-      toast({
-        title: t.dataConverter.messages.conversionSuccess,
-      });
+      setSuccess(t.dataConverter.messages.formatSuccess);
     } catch (error) {
       console.error("Format error:", error);
-      toast({
-        title: t.dataConverter.messages.invalidFormat,
-        variant: "destructive",
-      });
+      setError(t.dataConverter.messages.invalidFormat);
     } finally {
       setIsFormatting(false);
     }
@@ -90,14 +86,14 @@ export default function DataConverterClient({
   // データ変換処理
   const convertData = async () => {
     if (!inputData.trim()) {
-      toast({
-        title: t.dataConverter.messages.emptyInput,
-        variant: "destructive",
-      });
+      setError(t.dataConverter.messages.emptyInput);
+      setSuccess("");
       return;
     }
 
     setIsConverting(true);
+    setError("");
+    setSuccess("");
     try {
       // 入力データをJavaScriptオブジェクトに変換
       let parsedData: any;
@@ -138,15 +134,10 @@ export default function DataConverterClient({
       }
 
       setOutputData(convertedData);
-      toast({
-        title: t.dataConverter.messages.conversionSuccess,
-      });
+      setSuccess(t.dataConverter.messages.conversionSuccess);
     } catch (error) {
       console.error("Conversion error:", error);
-      toast({
-        title: t.dataConverter.messages.invalidFormat,
-        variant: "destructive",
-      });
+      setError(t.dataConverter.messages.invalidFormat);
     } finally {
       setIsConverting(false);
     }
@@ -158,11 +149,11 @@ export default function DataConverterClient({
 
     try {
       await navigator.clipboard.writeText(outputData);
-      toast({
-        title: t.dataConverter.messages.copied,
-      });
+      setSuccess(t.dataConverter.messages.copied);
+      setError("");
     } catch (error) {
       console.error("Copy error:", error);
+      setError(t.dataConverter.messages.copyError);
     }
   };
 
@@ -172,11 +163,15 @@ export default function DataConverterClient({
     setOutputData("");
     setInputFormat("json");
     setOutputFormat("json");
+    setError("");
+    setSuccess("");
   };
 
   // プレースホルダーサンプルデータの設定
   const setSampleData = (format: DataFormat) => {
     setInputData(t.dataConverter.placeholders[format]);
+    setError("");
+    setSuccess("");
   };
 
   return (
@@ -350,10 +345,32 @@ export default function DataConverterClient({
           </div>
         </div>
 
+        {/* エラー・成功メッセージの表示 */}
+        {(error || success) && (
+          <div className="mt-6">
+            {error && (
+              <Alert
+                variant="destructive"
+                className="mb-3 border-red-200 bg-red-50 text-red-800"
+              >
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
+            {success && (
+              <Alert
+                variant="default"
+                className="border-green-200 bg-green-50 text-green-800"
+              >
+                <AlertDescription>{success}</AlertDescription>
+              </Alert>
+            )}
+          </div>
+        )}
         {/* コントロールボタン */}
         <ToolControls className="mt-8">
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button
+              variant="outline"
               onClick={convertData}
               disabled={isConverting || !inputData.trim()}
               className="w-full sm:w-auto min-w-48 h-12 text-base font-semibold"

@@ -35,9 +35,11 @@ export const dataConverter: DataConverterTranslations = {
   },
   messages: {
     conversionSuccess: "转换成功完成",
+    formatSuccess: "格式化成功完成",
     invalidFormat: "输入数据格式无效",
     emptyInput: "请输入要转换的数据",
     copied: "已复制到剪贴板",
+    copyError: "复制失败",
   },
   features: {
     title: "功能特色",
