@@ -255,6 +255,13 @@ export const TOOL_NAMES: Record<string, Record<string, string>> = {
     ru: "Статистика Текста",
     zh: "文本统计",
   },
+  "pixel-art-editor": {
+    ja: "ピクセルアート作成ツール",
+    en: "Pixel Art Editor",
+    es: "Editor de Arte Pixel",
+    ru: "Редактор Пиксель Арт",
+    zh: "像素艺术编辑器",
+  },
   services: {
     ja: "サービス一覧",
     en: "Services",
