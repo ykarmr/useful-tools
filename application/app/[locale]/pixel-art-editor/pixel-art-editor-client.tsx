@@ -275,8 +275,8 @@ export default function PixelArtEditorClient({
                       onClick={() => setSelectedTool(tool.id)}
                       className={cn(
                         "flex items-center gap-3 justify-start text-left h-12 transition-all duration-200",
-                        selectedTool === tool.id 
-                          ? "bg-primary text-primary-foreground shadow-lg transform scale-[1.02]" 
+                        selectedTool === tool.id
+                          ? "bg-primary text-primary-foreground shadow-lg transform scale-[1.02]"
                           : "hover:bg-accent hover:scale-[1.01]"
                       )}
                     >
@@ -401,7 +401,9 @@ export default function PixelArtEditorClient({
                     className="w-full flex items-center gap-3 h-12 hover:bg-destructive hover:text-destructive-foreground transition-colors"
                   >
                     <Trash2 className="h-5 w-5" />
-                    <span className="font-medium">{t.pixelArtEditor.actions.clear}</span>
+                    <span className="font-medium">
+                      {t.pixelArtEditor.actions.clear}
+                    </span>
                   </Button>
                   <Button
                     onClick={downloadAsPNG}
@@ -409,7 +411,9 @@ export default function PixelArtEditorClient({
                     className="w-full flex items-center gap-3 h-12 bg-green-600 hover:bg-green-700 text-white transition-colors"
                   >
                     <Download className="h-5 w-5" />
-                    <span className="font-medium">{t.pixelArtEditor.actions.download}</span>
+                    <span className="font-medium">
+                      {t.pixelArtEditor.actions.download}
+                    </span>
                   </Button>
                 </div>
               </CardContent>
