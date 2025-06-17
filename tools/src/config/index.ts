@@ -248,6 +248,13 @@ export const TOOL_NAMES: Record<string, Record<string, string>> = {
     ru: "HTML Экранирование",
     zh: "HTML转义",
   },
+  "data-converter": {
+    ja: "データフォーマット変換",
+    en: "Data Format Converter",
+    es: "Conversor de Formato de Datos",
+    ru: "Конвертер Форматов Данных",
+    zh: "数据格式转换器",
+  },
   "text-statistics": {
     ja: "テキスト統計",
     en: "Text Statistics",

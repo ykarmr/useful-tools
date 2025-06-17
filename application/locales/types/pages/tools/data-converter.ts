@@ -10,19 +10,18 @@ export interface DataConverterTranslations {
   sampleDataLabel: string;
   outputPlaceholder: string;
   convertButton: string;
+  formatButton: string;
   copyButton: string;
   clearButton: string;
   formatOptions: {
     json: string;
     yaml: string;
     toml: string;
-    xml: string;
   };
   placeholders: {
     json: string;
     yaml: string;
     toml: string;
-    xml: string;
   };
   messages: {
     conversionSuccess: string;
