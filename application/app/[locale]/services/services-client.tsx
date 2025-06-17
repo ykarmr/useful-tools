@@ -113,22 +113,9 @@ const toolCategories = [
 export default function ServicesClient({ locale, t }: ServicesClientProps) {
   // 安全なプロパティアクセス
   const services = t?.services || {};
-  const common = t?.common || {};
-  const home = t?.home || {};
 
   return (
     <div className="animate-fade-in">
-      {/* Header */}
-      <div className="text-center mb-12">
-        <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-4">
-          {services.title || "All Tools"}
-        </h1>
-        <p className="text-lg lg:text-xl text-gray-600 max-w-4xl mx-auto">
-          {services.subtitle ||
-            "Discover our complete collection of productivity tools"}
-        </p>
-      </div>
-
       {/* Tool Categories */}
       <div className="space-y-12">
         {toolCategories.map((category) => (
