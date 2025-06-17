@@ -52,6 +52,7 @@ export default async function sitemap({
     "/bmi-calculator",
     "/html-escape",
     "/pixel-art-editor",
+    "/data-converter",
   ];
 
   const sitemap: MetadataRoute.Sitemap = [];

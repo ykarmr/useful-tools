@@ -113,6 +113,8 @@ function getToolTranslation(
     "colorPalette",
     "todo",
     "scoreboard",
+    "dataConverter",
+    "pixelArtEditor",
   ];
 
   // ケバブケースをキャメルケースに変換
