@@ -399,7 +399,7 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
                     transitionDuration: isSpinning ? "4s" : "0s",
                   }}
                 >
-                  {enabledItems.length === 0 ? (
+                  {enabledItems.length === 0 || enabledItems.length === 1 ? (
                     <div className="w-full h-full bg-gray-100 rounded-full border-4 border-gray-300 flex items-center justify-center">
                       <p className="text-gray-500 text-center px-4 text-sm">
                         {t.roulette?.addItemsToStart ||
