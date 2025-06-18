@@ -8,6 +8,8 @@ import type { Metadata } from "next";
 import { baseUrl } from "@/lib/const";
 import { getAlternates } from "@/lib/i18n";
 import BaseConverterClient from "./base-converter-client";
+import { generateToolMetadata } from "@/lib/metadata";
+import { generateToolStructuredData } from "@/lib/structured-data";
 
 interface BaseConverterPageProps {
   params: Promise<{ locale: string }>;
@@ -35,15 +37,22 @@ export async function generateMetadata({
   const t = getTranslations(locale);
 
   return {
-    title: `${t.baseConverter.title} | ${t.common.siteTitle}`,
-    description: t.baseConverter.description,
-    keywords: t.baseConverter.keywords || [],
-    openGraph: {
-      title: t.baseConverter.title,
-      description: t.baseConverter.description,
-      url: `${baseUrl}/${locale}/base-converter`,
+    ...generateToolMetadata(
+      locale,
+      "base-converter",
+      t.baseConverter,
+      t.common
+    ),
+    other: {
+      "structured-data": JSON.stringify([
+        generateToolStructuredData(
+          locale,
+          "base-converter",
+          t.baseConverter,
+          t.common
+        ),
+      ]),
     },
-    alternates: getAlternates(locale, "base-converter"),
   };
 }
 

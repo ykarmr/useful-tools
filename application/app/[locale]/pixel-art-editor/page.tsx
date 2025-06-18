@@ -8,6 +8,8 @@ import type { Metadata } from "next";
 import { baseUrl } from "@/lib/const";
 import { getAlternates } from "@/lib/i18n";
 import PixelArtEditorClient from "./pixel-art-editor-client";
+import { generateToolMetadata } from "@/lib/metadata";
+import { generateToolStructuredData } from "@/lib/structured-data";
 
 interface PixelArtEditorPageProps {
   params: Promise<{ locale: string }>;
@@ -35,23 +37,22 @@ export async function generateMetadata({
   const t = getTranslations(locale);
 
   return {
-    title: `${t.pixelArtEditor.title} | ${t.common.siteTitle}`,
-    description: t.pixelArtEditor.description,
-    keywords: t.pixelArtEditor.keywords || [],
-    openGraph: {
-      title: t.pixelArtEditor.title,
-      description: t.pixelArtEditor.description,
-      url: `${baseUrl}/${locale}/pixel-art-editor`,
-      images: [
-        {
-          url: `${baseUrl}/images/ogp/pages/ogp-pixel-art-editor-${locale}.png`,
-          width: 1200,
-          height: 630,
-          alt: t.pixelArtEditor.title,
-        },
-      ],
+    ...generateToolMetadata(
+      locale,
+      "pixel-art-editor",
+      t.pixelArtEditor,
+      t.common
+    ),
+    other: {
+      "structured-data": JSON.stringify([
+        generateToolStructuredData(
+          locale,
+          "pixel-art-editor",
+          t.pixelArtEditor,
+          t.common
+        ),
+      ]),
     },
-    alternates: getAlternates(locale, "pixel-art-editor"),
   };
 }
 
