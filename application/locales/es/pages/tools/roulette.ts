@@ -5,6 +5,7 @@ export const roulette: RouletteTranslations = {
   description: "Herramienta de selección aleatoria tipo ruleta",
   keywords: ["ruleta", "selección aleatoria", "juego", "sorteo", "azar"],
   reset: "Reiniciar",
+  resetGame: "Reiniciar",
   addItems: "Agregar elementos",
   enterOption: "Ingrese una opción...",
   currentItems: "Elementos actuales",
@@ -26,8 +27,10 @@ export const roulette: RouletteTranslations = {
     item4: "Pasta",
   },
   winnerZone: "ZONA DE GANADORES",
+  winnerPointer: "INDICADOR GANADOR",
   landingArea: "Área de aterrizaje",
-  segmentsLandInZone: "Los segmentos que caen en la zona verde ganan",
+  arrowPoints: "La flecha apunta aquí",
+  segmentsLandInZone: "El segmento señalado por la flecha gana",
   needMoreItems:
     "Se requieren al menos 2 elementos habilitados para girar la ruleta",
   landedInZone: "¡Cayó en la zona ganadora!",
@@ -38,6 +41,8 @@ export const roulette: RouletteTranslations = {
   cancel: "Cancelar",
   editMode: "Modo de edición",
   clickToEdit: "Haz clic para editar",
+  autoHideEnabled: "Auto-ocultar ON",
+  autoHideDisabled: "Auto-ocultar OFF",
   faqList: [
     {
       q: "¿Cuántos elementos puedo agregar a la ruleta?",

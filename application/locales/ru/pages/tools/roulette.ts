@@ -24,6 +24,7 @@ export const roulette: RouletteTranslations = {
   spinWheel: "Крутить колесо",
   spinning: "Крутится...",
   reset: "Сбросить",
+  resetGame: "Сбросить",
   winner: "Победитель!",
   itemsCount: "{count}/20 элементов",
   enabledCount: "{count} активно",
@@ -38,8 +39,10 @@ export const roulette: RouletteTranslations = {
     item4: "Паста",
   },
   winnerZone: "Зона выигрыша",
+  winnerPointer: "Указатель победителя",
   landingArea: "Зона выигрыша",
-  segmentsLandInZone: "Сегмент, попавший в зеленую зону, выигрывает",
+  arrowPoints: "Стрелка указывает сюда",
+  segmentsLandInZone: "Сегмент, на который указывает стрелка, выигрывает",
   needMoreItems: "Для вращения рулетки нужно минимум 2 активных элемента",
   landedInZone: "Попал в зону выигрыша!",
   addItemsInstruction: "Добавьте элементы через поле выше",
@@ -49,6 +52,8 @@ export const roulette: RouletteTranslations = {
   cancel: "Отмена",
   editMode: "Режим редактирования",
   clickToEdit: "Нажмите для редактирования",
+  autoHideEnabled: "Авто-скрытие ВКЛ",
+  autoHideDisabled: "Авто-скрытие ВЫКЛ",
   faqList: [
     {
       q: "Сколько элементов я могу добавить в рулетку?",

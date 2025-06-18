@@ -24,6 +24,7 @@ export const roulette: RouletteTranslations = {
   spinWheel: "ホイールを回す",
   spinning: "回転中...",
   reset: "リセット",
+  resetGame: "リセット",
   winner: "当選者！",
   itemsCount: "{count}/20 アイテム",
   enabledCount: "{count} 有効",
@@ -38,8 +39,10 @@ export const roulette: RouletteTranslations = {
     item4: "パスタ",
   },
   winnerZone: "当選範囲",
+  winnerPointer: "当選ポインター",
   landingArea: "当選範囲",
-  segmentsLandInZone: "緑の範囲に入ったセグメントが当選します",
+  arrowPoints: "矢印がここを指します",
+  segmentsLandInZone: "矢印が指したセグメントが当選します",
   needMoreItems: "ルーレットを回すには有効なアイテムが2つ以上必要です",
   landedInZone: "当選範囲に入りました！",
   addItemsInstruction: "上記のフィールドからアイテムを追加してください",
@@ -49,6 +52,8 @@ export const roulette: RouletteTranslations = {
   cancel: "キャンセル",
   editMode: "編集モード",
   clickToEdit: "クリックして編集",
+  autoHideEnabled: "自動非表示 ON",
+  autoHideDisabled: "自動非表示 OFF",
   faqList: [
     {
       q: "最大何個のアイテムまで追加できますか？",

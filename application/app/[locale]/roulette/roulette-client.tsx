@@ -350,334 +350,342 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
       }
       icon={Target}
     >
-      {/* モバイル対応：縦積みレイアウト */}
-      <div className="space-y-6">
-        {/* Wheel Section */}
-        <ToolSection>
-          <div className="relative">
-            {/* Arrow Pointer Indicator - モバイル対応 */}
-            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-6 md:-translate-y-8 z-20">
-              <div className="bg-gradient-to-b from-green-400 to-green-600 text-white px-2 py-1 md:px-4 md:py-2 rounded-lg shadow-lg">
-                <div className="text-xs font-bold text-center">
-                  {t.roulette?.winnerPointer || "WINNER POINTER"}
-                </div>
-                <div className="text-xs text-center opacity-90 hidden md:block">
-                  {t.roulette?.arrowPoints || "Arrow Points Here"}
-                </div>
-              </div>
-            </div>
-
-            {/* Wheel Container - レスポンシブサイズ */}
-            <div className="relative w-72 h-72 sm:w-80 sm:h-80 mx-auto">
-              {/* Fixed Arrow Pointer Overlay */}
-              <div className="absolute inset-0 z-10 pointer-events-none">
-                <svg viewBox="0 0 300 300" className="w-full h-full">
-                  {/* Arrow pointer */}
-                  <path
-                    d={createArrowPointerPath()}
-                    fill="rgba(34, 197, 94, 0.9)"
-                    stroke="rgba(34, 197, 94, 1)"
-                    strokeWidth="2"
-                  />
-                  {/* Arrow shadow for better visibility */}
-                  <path
-                    d={createArrowPointerPath()}
-                    fill="none"
-                    stroke="rgba(0, 0, 0, 0.3)"
-                    strokeWidth="1"
-                    transform="translate(1, 1)"
-                  />
-                </svg>
-              </div>
-
-              <div
-                ref={wheelRef}
-                className="w-full h-full transition-transform ease-out"
-                style={{
-                  transform: `rotate(${rotation}deg)`,
-                  transitionDuration: isSpinning ? "4s" : "0s",
-                }}
-              >
-                {enabledItems.length === 0 ? (
-                  <div className="w-full h-full bg-gray-100 rounded-full border-4 border-gray-300 flex items-center justify-center">
-                    <p className="text-gray-500 text-center px-4 text-sm">
-                      {t.roulette?.addItemsToStart ||
-                        "Add items to start spinning"}
-                    </p>
+      {/* レスポンシブレイアウト：モバイルは縦積み、PCは2カラム */}
+      <div className="lg:grid lg:grid-cols-2 lg:gap-8 space-y-6 lg:space-y-0">
+        {/* Left Column: Wheel Section */}
+        <div className="lg:order-1">
+          <ToolSection>
+            <div className="relative">
+              {/* Arrow Pointer Indicator - モバイル対応 */}
+              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-6 md:-translate-y-8 z-20">
+                <div className="bg-gradient-to-b from-green-400 to-green-600 text-white px-2 py-1 md:px-4 md:py-2 rounded-lg shadow-lg">
+                  <div className="text-xs font-bold text-center">
+                    {t.roulette?.winnerPointer || "WINNER POINTER"}
                   </div>
-                ) : (
-                  <svg viewBox="0 0 300 300" className="drop-shadow-lg">
-                    {/* Background circle */}
-                    <circle
-                      cx="150"
-                      cy="150"
-                      r="140"
-                      fill="#f8fafc"
-                      stroke="#e2e8f0"
+                  <div className="text-xs text-center opacity-90 hidden md:block">
+                    {t.roulette?.arrowPoints || "Arrow Points Here"}
+                  </div>
+                </div>
+              </div>
+
+              {/* Wheel Container - レスポンシブサイズ */}
+              <div className="relative w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96 mx-auto">
+                {/* Fixed Arrow Pointer Overlay */}
+                <div className="absolute inset-0 z-10 pointer-events-none">
+                  <svg viewBox="0 0 300 300" className="w-full h-full">
+                    {/* Arrow pointer */}
+                    <path
+                      d={createArrowPointerPath()}
+                      fill="rgba(34, 197, 94, 0.9)"
+                      stroke="rgba(34, 197, 94, 1)"
                       strokeWidth="2"
                     />
-
-                    {/* Wheel segments */}
-                    {createWheelSegments()}
-
-                    {/* Center circle */}
-                    <circle
-                      cx="150"
-                      cy="150"
-                      r="20"
-                      fill="#1f2937"
-                      stroke="#ffffff"
-                      strokeWidth="3"
+                    {/* Arrow shadow for better visibility */}
+                    <path
+                      d={createArrowPointerPath()}
+                      fill="none"
+                      stroke="rgba(0, 0, 0, 0.3)"
+                      strokeWidth="1"
+                      transform="translate(1, 1)"
                     />
-                    <circle cx="150" cy="150" r="8" fill="#ffffff" />
                   </svg>
-                )}
-              </div>
-            </div>
+                </div>
 
-            {/* Instructions - モバイル対応 */}
-            <div className="mt-4 text-center px-2">
-              <p className="text-xs sm:text-sm text-gray-600">
-                {t.roulette?.segmentsLandInZone ||
-                  "The segment at the top (arrow position) wins"}
-              </p>
-            </div>
+                <div
+                  ref={wheelRef}
+                  className="w-full h-full transition-transform ease-out"
+                  style={{
+                    transform: `rotate(${rotation}deg)`,
+                    transitionDuration: isSpinning ? "4s" : "0s",
+                  }}
+                >
+                  {enabledItems.length === 0 ? (
+                    <div className="w-full h-full bg-gray-100 rounded-full border-4 border-gray-300 flex items-center justify-center">
+                      <p className="text-gray-500 text-center px-4 text-sm">
+                        {t.roulette?.addItemsToStart ||
+                          "Add items to start spinning"}
+                      </p>
+                    </div>
+                  ) : (
+                    <svg viewBox="0 0 300 300" className="drop-shadow-lg">
+                      {/* Background circle */}
+                      <circle
+                        cx="150"
+                        cy="150"
+                        r="140"
+                        fill="#f8fafc"
+                        stroke="#e2e8f0"
+                        strokeWidth="2"
+                      />
 
-            {/* Winner Display - モバイル対応 */}
-            {winner && (
-              <div className="mt-4 px-2">
-                <div className="bg-gradient-to-r from-green-400 to-green-600 text-white p-4 md:p-6 rounded-xl shadow-lg text-center animate-pulse">
-                  <div className="text-base md:text-lg font-bold mb-2">
-                    🎉 {t.roulette?.winner || "Winner!"} 🎉
-                  </div>
-                  <div
-                    className="text-xl md:text-2xl font-bold px-3 py-2 md:px-4 md:py-2 bg-white bg-opacity-20 rounded-lg inline-block break-words max-w-full"
-                    style={{ textShadow: "1px 1px 2px rgba(0,0,0,0.3)" }}
-                  >
-                    {winner.text}
-                  </div>
+                      {/* Wheel segments */}
+                      {createWheelSegments()}
+
+                      {/* Center circle */}
+                      <circle
+                        cx="150"
+                        cy="150"
+                        r="20"
+                        fill="#1f2937"
+                        stroke="#ffffff"
+                        strokeWidth="3"
+                      />
+                      <circle cx="150" cy="150" r="8" fill="#ffffff" />
+                    </svg>
+                  )}
                 </div>
               </div>
-            )}
 
-            {/* Control Buttons - 新規追加 */}
-            <ToolControls className="mt-4">
-              <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <button
-                  onClick={spinWheel}
-                  disabled={enabledItems.length < 2 || isSpinning}
-                  className="button-primary flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto"
-                >
-                  <Play size={20} />
-                  <span>
-                    {isSpinning
-                      ? t.roulette?.spinning || "Spinning..."
-                      : t.roulette?.spinWheel || "Spin Wheel"}
-                  </span>
-                </button>
+              {/* Instructions - モバイル対応 */}
+              <div className="mt-4 text-center px-2">
+                <p className="text-xs sm:text-sm text-gray-600">
+                  {t.roulette?.segmentsLandInZone ||
+                    "The segment at the top (arrow position) wins"}
+                </p>
+              </div>
 
-                {(winner || rotation > 0) && (
+              {/* Control Buttons - 新規追加 */}
+              <ToolControls className="mt-4">
+                <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <button
-                    onClick={resetGame}
-                    disabled={isSpinning}
-                    className="button-secondary flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto"
+                    onClick={spinWheel}
+                    disabled={enabledItems.length < 2 || isSpinning}
+                    className="button-primary flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto"
                   >
-                    <RotateCcw size={20} />
-                    <span>{t.roulette?.resetGame || "Reset"}</span>
+                    <Play size={20} />
+                    <span>
+                      {isSpinning
+                        ? t.roulette?.spinning || "Spinning..."
+                        : t.roulette?.spinWheel || "Spin Wheel"}
+                    </span>
                   </button>
-                )}
-              </div>
-            </ToolControls>
 
-            {enabledItems.length < 2 && items.length > 0 && (
-              <p className="text-amber-600 text-sm mt-4 text-center px-2">
-                {t.roulette?.needMoreItems ||
-                  "At least 2 enabled items are required to spin the wheel"}
-              </p>
-            )}
-          </div>
-        </ToolSection>
+                  {(winner || rotation > 0) && (
+                    <button
+                      onClick={resetGame}
+                      disabled={isSpinning}
+                      className="button-secondary flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto"
+                    >
+                      <RotateCcw size={20} />
+                      <span>{t.roulette?.resetGame || "Reset"}</span>
+                    </button>
+                  )}
+                </div>
+              </ToolControls>
 
-        {/* Add New Item - モバイル対応 */}
-        <ToolSection title={t.roulette?.addItems || "Add Items"}>
-          <div className="flex flex-col sm:flex-row gap-3">
-            <input
-              type="text"
-              value={newItem}
-              onChange={(e) => setNewItem(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && addItem()}
-              placeholder={t.roulette?.enterOption || "Enter an option..."}
-              className="flex-1 input-field"
-              maxLength={20}
-            />
-            <button
-              onClick={addItem}
-              disabled={!newItem.trim() || items.length >= 20}
-              className="px-4 py-3 bg-primary-600 text-white rounded-xl hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors w-full sm:w-auto flex items-center justify-center"
-              aria-label={t.common?.add || "Add item"}
-            >
-              <Plus size={20} className="sm:mr-0 mr-2" />
-              <span className="sm:hidden">
-                {t.roulette?.addItems || "Add Item"}
-              </span>
-            </button>
-          </div>
-          <div className="flex flex-col sm:flex-row sm:justify-between gap-1 text-sm text-gray-500 mt-3">
-            <span>
-              {interpolate(t.roulette?.itemsCount || "{count}/20 items", {
-                count: items.length.toString(),
-              })}
-            </span>
-            <span>
-              {interpolate(t.roulette?.enabledCount || "{count} enabled", {
-                count: enabledItems.length.toString(),
-              })}
-            </span>
-          </div>
-
-          {/* Items List - モバイル対応 */}
-          <ToolSection title={t.roulette?.currentItems || "Current Items"}>
-            {items.length === 0 ? (
-              <div className="text-center py-8">
-                <p className="text-gray-500 mb-2">
-                  {t.roulette?.noItemsAdded || "No items added yet"}
+              {enabledItems.length < 2 && items.length > 0 && (
+                <p className="text-amber-600 text-sm mt-4 text-center px-2">
+                  {t.roulette?.needMoreItems ||
+                    "At least 2 enabled items are required to spin the wheel"}
                 </p>
-                <p className="text-sm text-gray-400">
-                  {t.roulette?.addItemsInstruction ||
-                    "Add items using the field above"}
-                </p>
-              </div>
-            ) : (
-              <div className="space-y-2 max-h-64 sm:max-h-80 overflow-y-auto">
-                {items.map((item) => (
-                  <div
-                    key={item.id}
-                    className={`flex items-center justify-between p-3 sm:p-4 rounded-xl transition-all ${
-                      item.enabled
-                        ? "bg-white border border-gray-200 shadow-sm"
-                        : "bg-gray-50 border border-gray-100 opacity-60"
-                    }`}
-                  >
-                    <div className="flex items-center space-x-2 sm:space-x-3 flex-1 min-w-0">
-                      <div
-                        className="w-3 h-3 sm:w-4 sm:h-4 rounded-full border-2 border-white shadow-sm flex-shrink-0"
-                        style={{
-                          backgroundColor: item.enabled
-                            ? item.color
-                            : "#9CA3AF",
-                        }}
-                      ></div>
+              )}
 
-                      {editingItem === item.id ? (
-                        // 編集モード - モバイル対応
-                        <div className="flex items-center space-x-1 sm:space-x-2 flex-1 min-w-0">
-                          <input
-                            type="text"
-                            value={editText}
-                            onChange={(e) => setEditText(e.target.value)}
-                            onKeyDown={handleEditKeyDown}
-                            onBlur={saveEdit}
-                            className="flex-1 px-2 py-1 sm:px-3 sm:py-1 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm min-w-0"
-                            maxLength={20}
-                            autoFocus
-                          />
-                          <button
-                            onClick={saveEdit}
-                            className="p-1 text-green-600 hover:text-green-700 hover:bg-green-50 rounded transition-colors flex-shrink-0"
-                            aria-label={
-                              t.roulette?.saveChanges || "Save changes"
-                            }
-                          >
-                            <Check size={14} />
-                          </button>
-                          <button
-                            onClick={cancelEditing}
-                            className="p-1 text-gray-600 hover:text-gray-700 hover:bg-gray-50 rounded transition-colors flex-shrink-0"
-                            aria-label={t.roulette?.cancel || "Cancel"}
-                          >
-                            <X size={14} />
-                          </button>
-                        </div>
-                      ) : (
-                        // 表示モード - モバイル対応
-                        <div className="flex items-center space-x-2 flex-1 min-w-0">
-                          <span
-                            className={`font-medium cursor-pointer hover:text-blue-600 transition-colors text-sm sm:text-base truncate ${
-                              item.enabled
-                                ? "text-gray-900"
-                                : "text-gray-500 line-through"
-                            }`}
-                            onClick={() => startEditing(item.id, item.text)}
-                            title={`${item.text} - ${
-                              t.roulette?.clickToEdit || "Click to edit"
-                            }`}
-                          >
-                            {item.text}
-                          </span>
-                          {!item.enabled && (
-                            <span className="text-xs text-gray-400 bg-gray-200 px-1 sm:px-2 py-1 rounded-full flex-shrink-0">
-                              {t.roulette?.disabled || "Disabled"}
-                            </span>
-                          )}
-                        </div>
-                      )}
+              {/* Winner Display - モバイル対応 */}
+              {winner && (
+                <div className="mt-4 px-2">
+                  <div className="bg-gradient-to-r from-green-400 to-green-600 text-white p-4 md:p-6 rounded-xl shadow-lg text-center animate-pulse">
+                    <div className="text-base md:text-lg font-bold mb-2">
+                      🎉 {t.roulette?.winner || "Winner!"} 🎉
                     </div>
+                    <div
+                      className="text-xl md:text-2xl font-bold px-3 py-2 md:px-4 md:py-2 bg-white bg-opacity-20 rounded-lg inline-block break-words max-w-full"
+                      style={{ textShadow: "1px 1px 2px rgba(0,0,0,0.3)" }}
+                    >
+                      {winner.text}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </ToolSection>
+        </div>
 
-                    <div className="flex items-center space-x-1 flex-shrink-0">
-                      {editingItem !== item.id && (
+        {/* Right Column: Add New Item & Items List */}
+        <div className="lg:order-2 space-y-6">
+          {/* Add New Item - モバイル対応 */}
+          <ToolSection title={t.roulette?.addItems || "Add Items"}>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <input
+                type="text"
+                value={newItem}
+                onChange={(e) => setNewItem(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && addItem()}
+                placeholder={t.roulette?.enterOption || "Enter an option..."}
+                className="flex-1 input-field"
+                maxLength={20}
+              />
+              <button
+                onClick={addItem}
+                disabled={!newItem.trim() || items.length >= 20}
+                className="px-4 py-3 bg-primary-600 text-white rounded-xl hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors w-full sm:w-auto flex items-center justify-center"
+                aria-label={t.common?.add || "Add item"}
+              >
+                <Plus size={20} className="sm:mr-0 mr-2" />
+                <span className="sm:hidden">
+                  {t.roulette?.addItems || "Add Item"}
+                </span>
+              </button>
+            </div>
+            <div className="flex flex-col sm:flex-row sm:justify-between gap-1 text-sm text-gray-500 mt-3">
+              <span>
+                {interpolate(t.roulette?.itemsCount || "{count}/20 items", {
+                  count: items.length.toString(),
+                })}
+              </span>
+              <span>
+                {interpolate(t.roulette?.enabledCount || "{count} enabled", {
+                  count: enabledItems.length.toString(),
+                })}
+              </span>
+            </div>
+
+            {/* Items List - モバイル対応 */}
+            <div className="mt-6">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                {t.roulette?.currentItems || "Current Items"}
+              </h3>
+              {items.length === 0 ? (
+                <div className="text-center py-8">
+                  <p className="text-gray-500 mb-2">
+                    {t.roulette?.noItemsAdded || "No items added yet"}
+                  </p>
+                  <p className="text-sm text-gray-400">
+                    {t.roulette?.addItemsInstruction ||
+                      "Add items using the field above"}
+                  </p>
+                </div>
+              ) : (
+                <div className="space-y-2 max-h-64 sm:max-h-80 overflow-y-auto">
+                  {items.map((item) => (
+                    <div
+                      key={item.id}
+                      className={`flex items-center justify-between p-3 sm:p-4 rounded-xl transition-all ${
+                        item.enabled
+                          ? "bg-white border border-gray-200 shadow-sm"
+                          : "bg-gray-50 border border-gray-100 opacity-60"
+                      }`}
+                    >
+                      <div className="flex items-center space-x-2 sm:space-x-3 flex-1 min-w-0">
+                        <div
+                          className="w-3 h-3 sm:w-4 sm:h-4 rounded-full border-2 border-white shadow-sm flex-shrink-0"
+                          style={{
+                            backgroundColor: item.enabled
+                              ? item.color
+                              : "#9CA3AF",
+                          }}
+                        ></div>
+
+                        {editingItem === item.id ? (
+                          // 編集モード - モバイル対応
+                          <div className="flex items-center space-x-1 sm:space-x-2 flex-1 min-w-0">
+                            <input
+                              type="text"
+                              value={editText}
+                              onChange={(e) => setEditText(e.target.value)}
+                              onKeyDown={handleEditKeyDown}
+                              onBlur={saveEdit}
+                              className="flex-1 px-2 py-1 sm:px-3 sm:py-1 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm min-w-0"
+                              maxLength={20}
+                              autoFocus
+                            />
+                            <button
+                              onClick={saveEdit}
+                              className="p-1 text-green-600 hover:text-green-700 hover:bg-green-50 rounded transition-colors flex-shrink-0"
+                              aria-label={
+                                t.roulette?.saveChanges || "Save changes"
+                              }
+                            >
+                              <Check size={14} />
+                            </button>
+                            <button
+                              onClick={cancelEditing}
+                              className="p-1 text-gray-600 hover:text-gray-700 hover:bg-gray-50 rounded transition-colors flex-shrink-0"
+                              aria-label={t.roulette?.cancel || "Cancel"}
+                            >
+                              <X size={14} />
+                            </button>
+                          </div>
+                        ) : (
+                          // 表示モード - モバイル対応
+                          <div className="flex items-center space-x-2 flex-1 min-w-0">
+                            <span
+                              className={`font-medium cursor-pointer hover:text-blue-600 transition-colors text-sm sm:text-base truncate ${
+                                item.enabled
+                                  ? "text-gray-900"
+                                  : "text-gray-500 line-through"
+                              }`}
+                              onClick={() => startEditing(item.id, item.text)}
+                              title={`${item.text} - ${
+                                t.roulette?.clickToEdit || "Click to edit"
+                              }`}
+                            >
+                              {item.text}
+                            </span>
+                            {!item.enabled && (
+                              <span className="text-xs text-gray-400 bg-gray-200 px-1 sm:px-2 py-1 rounded-full flex-shrink-0">
+                                {t.roulette?.disabled || "Disabled"}
+                              </span>
+                            )}
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="flex items-center space-x-1 flex-shrink-0">
+                        {editingItem !== item.id && (
+                          <button
+                            onClick={() => startEditing(item.id, item.text)}
+                            className="p-1.5 sm:p-2 text-gray-400 hover:text-blue-500 hover:bg-blue-50 rounded-lg transition-colors"
+                            aria-label={interpolate(
+                              t.roulette?.editItem || "Edit {item}",
+                              { item: item.text }
+                            )}
+                          >
+                            <Edit2 size={14} />
+                          </button>
+                        )}
                         <button
-                          onClick={() => startEditing(item.id, item.text)}
-                          className="p-1.5 sm:p-2 text-gray-400 hover:text-blue-500 hover:bg-blue-50 rounded-lg transition-colors"
+                          onClick={() => toggleItemEnabled(item.id)}
+                          className={`p-1.5 sm:p-2 rounded-lg transition-colors ${
+                            item.enabled
+                              ? "text-gray-400 hover:text-orange-500 hover:bg-orange-50"
+                              : "text-gray-400 hover:text-green-500 hover:bg-green-50"
+                          }`}
+                          aria-label={
+                            item.enabled
+                              ? interpolate(
+                                  t.roulette?.disableItem || "Disable {item}",
+                                  { item: item.text }
+                                )
+                              : interpolate(
+                                  t.roulette?.enableItem || "Enable {item}",
+                                  { item: item.text }
+                                )
+                          }
+                        >
+                          {item.enabled ? (
+                            <EyeOff size={14} />
+                          ) : (
+                            <Eye size={14} />
+                          )}
+                        </button>
+                        <button
+                          onClick={() => removeItem(item.id)}
+                          className="p-1.5 sm:p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
                           aria-label={interpolate(
-                            t.roulette?.editItem || "Edit {item}",
+                            t.roulette?.removeItem || "Remove {item}",
                             { item: item.text }
                           )}
                         >
-                          <Edit2 size={14} />
+                          <Trash2 size={14} />
                         </button>
-                      )}
-                      <button
-                        onClick={() => toggleItemEnabled(item.id)}
-                        className={`p-1.5 sm:p-2 rounded-lg transition-colors ${
-                          item.enabled
-                            ? "text-gray-400 hover:text-orange-500 hover:bg-orange-50"
-                            : "text-gray-400 hover:text-green-500 hover:bg-green-50"
-                        }`}
-                        aria-label={
-                          item.enabled
-                            ? interpolate(
-                                t.roulette?.disableItem || "Disable {item}",
-                                { item: item.text }
-                              )
-                            : interpolate(
-                                t.roulette?.enableItem || "Enable {item}",
-                                { item: item.text }
-                              )
-                        }
-                      >
-                        {item.enabled ? (
-                          <EyeOff size={14} />
-                        ) : (
-                          <Eye size={14} />
-                        )}
-                      </button>
-                      <button
-                        onClick={() => removeItem(item.id)}
-                        className="p-1.5 sm:p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
-                        aria-label={interpolate(
-                          t.roulette?.removeItem || "Remove {item}",
-                          { item: item.text }
-                        )}
-                      >
-                        <Trash2 size={14} />
-                      </button>
+                      </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-            )}
+                  ))}
+                </div>
+              )}
+            </div>
           </ToolSection>
-        </ToolSection>
+        </div>
       </div>
 
       {/* FAQ セクション */}

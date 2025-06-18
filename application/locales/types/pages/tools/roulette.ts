@@ -12,6 +12,7 @@ export interface RouletteTranslations {
   spinWheel: string;
   spinning: string;
   reset: string;
+  resetGame: string;
   winner: string;
   itemsCount: string;
   enabledCount: string;
@@ -27,7 +28,9 @@ export interface RouletteTranslations {
     item4: string;
   };
   winnerZone: string;
+  winnerPointer: string;
   landingArea: string;
+  arrowPoints: string;
   segmentsLandInZone: string;
   landedInZone: string;
   addItemsInstruction: string;
@@ -37,5 +40,7 @@ export interface RouletteTranslations {
   cancel: string;
   editMode: string;
   clickToEdit: string;
+  autoHideEnabled: string;
+  autoHideDisabled: string;
   faqList: FAQItem[];
 }

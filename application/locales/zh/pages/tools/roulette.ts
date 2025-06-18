@@ -5,6 +5,7 @@ export const roulette: RouletteTranslations = {
   description: "随机选择工具轮盘",
   keywords: ["轮盘", "随机选择", "工具", "决策", "娱乐"],
   reset: "重置",
+  resetGame: "重置",
   removeItem: "移除项目",
   addItems: "添加项目",
   enterOption: "请输入选项...",
@@ -27,8 +28,10 @@ export const roulette: RouletteTranslations = {
     item4: "意大利面",
   },
   winnerZone: "获胜区",
+  winnerPointer: "获胜指针",
   landingArea: "着陆区",
-  segmentsLandInZone: "落在绿色区域的段落获胜",
+  arrowPoints: "箭头指向这里",
+  segmentsLandInZone: "箭头指向的段落获胜",
   landedInZone: "落在获胜区！",
   addItemsInstruction: "使用上面的字段添加项目",
   addItemLabel: "添加项目",
@@ -37,6 +40,8 @@ export const roulette: RouletteTranslations = {
   cancel: "取消",
   editMode: "编辑模式",
   clickToEdit: "点击编辑",
+  autoHideEnabled: "自动隐藏 开",
+  autoHideDisabled: "自动隐藏 关",
   faqList: [
     {
       q: "我可以在轮盘中添加多少个项目？",

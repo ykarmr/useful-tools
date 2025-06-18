@@ -25,6 +25,7 @@ export const roulette: RouletteTranslations = {
   spinWheel: "Spin Wheel",
   spinning: "Spinning...",
   reset: "Reset",
+  resetGame: "Reset",
   winner: "Winner!",
   itemsCount: "{count}/20 items",
   enabledCount: "{count} enabled",
@@ -39,8 +40,10 @@ export const roulette: RouletteTranslations = {
     item4: "Pasta",
   },
   winnerZone: "WINNER ZONE",
+  winnerPointer: "WINNER POINTER",
   landingArea: "Landing Area",
-  segmentsLandInZone: "Segments landing in the green zone win",
+  arrowPoints: "Arrow Points Here",
+  segmentsLandInZone: "The segment pointed by the arrow wins",
   needMoreItems: "At least 2 enabled items are required to spin the wheel",
   landedInZone: "Landed in the winner zone!",
   addItemsInstruction: "Add items using the field above",
@@ -50,6 +53,8 @@ export const roulette: RouletteTranslations = {
   cancel: "Cancel",
   editMode: "Edit Mode",
   clickToEdit: "Click to edit",
+  autoHideEnabled: "Auto-hide ON",
+  autoHideDisabled: "Auto-hide OFF",
   faqList: [
     {
       q: "How many items can I add to the roulette?",
