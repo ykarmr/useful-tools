@@ -213,11 +213,13 @@ export default function BaseConverterClient({
         parseInt(operandBase)
       );
 
-      if (isNaN(num1)) {
+      if (isNaN(num1) || num1 < 0) {
         setOperationError(t.baseConverter.invalidInput);
         setOperationResult("");
         return;
       }
+
+      let num2 = 0;
 
       // NOT演算以外は第二オペランドが必要
       if (operation !== "not") {
@@ -227,32 +229,25 @@ export default function BaseConverterClient({
           return;
         }
 
-        const num2 = parseInt(
-          operand2.trim().toLowerCase(),
-          parseInt(operandBase)
-        );
+        num2 = parseInt(operand2.trim().toLowerCase(), parseInt(operandBase));
 
-        if (isNaN(num2)) {
+        if (isNaN(num2) || num2 < 0) {
           setOperationError(t.baseConverter.invalidInput);
           setOperationResult("");
           return;
         }
 
-        // シフト演算の場合、シフト量が負でないことを確認
-        if (
-          (operation === "leftShift" || operation === "rightShift") &&
-          num2 < 0
-        ) {
-          setOperationError(t.baseConverter.invalidInput);
-          setOperationResult("");
-          return;
+        // シフト演算の場合、シフト量の妥当性をチェック
+        if (operation === "leftShift" || operation === "rightShift") {
+          if (num2 > 32) {
+            // 32ビットを超えるシフトは実用的でない
+            setOperationError(t.baseConverter.invalidInput);
+            setOperationResult("");
+            return;
+          }
         }
       }
 
-      const num2 =
-        operation !== "not"
-          ? parseInt(operand2.trim().toLowerCase(), parseInt(operandBase))
-          : 0;
       let result: number;
 
       switch (operation) {
@@ -266,10 +261,20 @@ export default function BaseConverterClient({
           result = num1 ^ num2;
           break;
         case "not":
-          result = ~num1;
+          // 32ビットNOT演算として扱う
+          result = ~num1 >>> 0; // 符号なし32ビットとして扱う
           break;
         case "leftShift":
-          result = num1 << num2;
+          // 左シフトの結果をチェック
+          const shiftedValue = num1 << num2;
+          result = shiftedValue >>> 0; // 符号なし32ビットとして扱う
+
+          // オーバーフローのチェック（元の値が復元できるかどうか）
+          if (result >> num2 !== num1 && num2 > 0) {
+            setOperationError(t.baseConverter.invalidInput);
+            setOperationResult("");
+            return;
+          }
           break;
         case "rightShift":
           result = num1 >> num2;
@@ -278,25 +283,28 @@ export default function BaseConverterClient({
           result = 0;
       }
 
-      // 結果が安全な範囲内かチェック
-      if (Math.abs(result) > Number.MAX_SAFE_INTEGER) {
-        setOperationError(t.baseConverter.invalidInput);
-        setOperationResult("");
-        return;
+      // 結果の表示
+      if (operation === "not" || operation === "leftShift") {
+        // NOT演算と左シフトは符号なし32ビットとして表示
+        const converted = convertNumber(result.toString(), 10);
+        setOperationResult(
+          `Dec: ${result}, Bin: ${converted.binary}, Oct: ${converted.octal}, Hex: ${converted.hexadecimal}`
+        );
+      } else {
+        // その他の演算
+        if (result >= 0) {
+          const converted = convertNumber(result.toString(), 10);
+          setOperationResult(
+            `Dec: ${result}, Bin: ${converted.binary}, Oct: ${converted.octal}, Hex: ${converted.hexadecimal}`
+          );
+        } else {
+          // 負数の場合は10進数のみ表示
+          setOperationResult(
+            `Dec: ${result}, Bin: ${t.baseConverter.negativeValueNote}, Oct: ${t.baseConverter.negativeValueNote}, Hex: ${t.baseConverter.negativeValueNote}`
+          );
+        }
       }
 
-      const converted = convertNumber(Math.abs(result).toString(), 10);
-      setOperationResult(
-        `Dec: ${result}, Bin: ${
-          result >= 0 ? converted.binary : t.baseConverter.negativeValueNote
-        }, Oct: ${
-          result >= 0 ? converted.octal : t.baseConverter.negativeValueNote
-        }, Hex: ${
-          result >= 0
-            ? converted.hexadecimal
-            : t.baseConverter.negativeValueNote
-        }`
-      );
       setOperationError(""); // 成功時はエラーメッセージをクリア
     } catch (error) {
       setOperationError(t.baseConverter.invalidInput);
