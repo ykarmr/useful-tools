@@ -297,6 +297,13 @@ export const TOOL_NAMES: Record<string, Record<string, string>> = {
     ru: "Политика Конфиденциальности",
     zh: "隐私政策",
   },
+  baseConverter: {
+    ja: "進数変換",
+    en: "Base Converter",
+    es: "Convertidor de Bases",
+    ru: "Конвертер Систем Счисления",
+    zh: "进制转换器",
+  },
 };
 
 // カラーパレット
