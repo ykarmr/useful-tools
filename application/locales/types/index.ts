@@ -41,6 +41,7 @@ import { BmiCalculatorTranslations } from "./pages/tools/bmi-calculator";
 import { HtmlEscapeTranslations } from "./pages/tools/html-escape";
 import { PixelArtEditorTranslations } from "./pages/tools/pixel-art-editor";
 import { DataConverterTranslations } from "./pages/tools/data-converter";
+import { BaseConverterTranslations } from "./pages/tools/base-converter";
 
 export interface Translations {
   common: CommonTranslations;
@@ -82,4 +83,5 @@ export interface Translations {
   htmlEscape: HtmlEscapeTranslations;
   pixelArtEditor: PixelArtEditorTranslations;
   dataConverter: DataConverterTranslations;
+  baseConverter: BaseConverterTranslations;
 }

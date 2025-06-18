@@ -34,6 +34,7 @@ import { bmiCalculator } from "./pages/tools/bmi-calculator";
 import { htmlEscape } from "./pages/tools/html-escape";
 import { pixelArtEditor } from "./pages/tools/pixel-art-editor";
 import { dataConverter } from "./pages/tools/data-converter";
+import { baseConverter } from "./pages/tools/base-converter";
 import { ad } from "./ad";
 import { common } from "./common";
 import { footer } from "./footer";
@@ -79,6 +80,7 @@ const es: Translations = {
   htmlEscape,
   pixelArtEditor,
   dataConverter,
+  baseConverter,
 };
 
 export default es;

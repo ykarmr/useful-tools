@@ -32,6 +32,7 @@ import {
   BarChart3,
   Activity,
   Code,
+  Binary,
 } from "lucide-react";
 import AdBanner from "@/components/layout/ad-banner";
 import { Locale, Translations } from "@/locales";
@@ -106,7 +107,10 @@ const toolCategories = [
   },
   {
     key: "code",
-    tools: [{ key: "htmlEscape", icon: Code, href: "/html-escape" }],
+    tools: [
+      { key: "htmlEscape", icon: Code, href: "/html-escape" },
+      { key: "baseConverter", icon: Binary, href: "/base-converter" },
+    ],
   },
 ];
 

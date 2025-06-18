@@ -53,6 +53,7 @@ export default async function sitemap({
     "/html-escape",
     "/pixel-art-editor",
     "/data-converter",
+    "/base-converter",
   ];
 
   const sitemap: MetadataRoute.Sitemap = [];
