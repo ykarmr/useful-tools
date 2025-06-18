@@ -55,13 +55,11 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
   const [rotation, setRotation] = useState(0);
   const [editingItem, setEditingItem] = useState<string | null>(null);
   const [editText, setEditText] = useState("");
+  const [winner, setWinner] = useState<RouletteItem | null>(null);
   const wheelRef = useRef<HTMLDivElement>(null);
-  const spinDuration = 3500 + Math.random() * 1500; // 3500ms + 0-1500ms = 3.5-5.0秒
 
-  // Winner zone configuration (30 degrees centered at top)
-  const WINNER_ZONE_ANGLE = 30; // degrees
-  const WINNER_ZONE_START = -WINNER_ZONE_ANGLE / 2; // -15 degrees from top
-  const WINNER_ZONE_END = WINNER_ZONE_ANGLE / 2; // +15 degrees from top
+  // Arrow pointer configuration (fixed at top - 0 degrees)
+  const ARROW_ANGLE = 0; // degrees - points to top
 
   // Load items from localStorage on mount
   useEffect(() => {
@@ -178,78 +176,61 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
 
   // Normalize angle to 0-360 range
   const normalizeAngle = (angle: number): number => {
-    while (angle < 0) angle += 360;
-    while (angle >= 360) angle -= 360;
-    return angle;
+    return ((angle % 360) + 360) % 360;
   };
 
-  // Check if a segment is in the winner zone
-  const isSegmentInWinnerZone = (segmentIndex: number): boolean => {
-    if (enabledItems.length === 0) return false;
+  // 当選ロジック：上部（0度位置）にあるセグメントを特定する関数（完全再実装）
+  const getPointedSegment = (currentRotation: number): number => {
+    if (enabledItems.length === 0) return -1;
 
+    // セグメント1つあたりの角度
     const segmentAngle = 360 / enabledItems.length;
 
-    // Calculate segment's current position after rotation
-    // Segments start at -90 degrees (top), so we add 90 to normalize to 0 degrees = top
-    const segmentStartAngle = normalizeAngle(
-      segmentIndex * segmentAngle - rotation + 90
-    );
-    const segmentEndAngle = normalizeAngle(
-      (segmentIndex + 1) * segmentAngle - rotation + 90
-    );
+    // 回転角度を正規化
+    const normalizedRotation = normalizeAngle(currentRotation);
 
-    // Winner zone is from 345 to 15 degrees (30 degrees centered at 0/360)
-    const zoneStart = 360 - 15; // 345 degrees
-    const zoneEnd = 15; // 15 degrees
+    // ホイールは時計回りに回転する
+    // セグメントは上部（0度）から時計回りに0, 1, 2...の順で配置されている
+    // 回転後に上部（0度）位置にあるセグメントのインデックスを計算
 
-    // Check if segment overlaps with winner zone
-    if (segmentStartAngle <= segmentEndAngle) {
-      // Normal case: segment doesn't cross 0 degrees
-      return (
-        (segmentStartAngle <= zoneEnd && segmentEndAngle >= zoneStart) ||
-        segmentStartAngle <= zoneEnd ||
-        segmentEndAngle >= zoneStart
-      );
-    } else {
-      // Segment crosses 0 degrees
-      return true; // If segment crosses 0, it's likely in the zone
-    }
+    // 回転により、元々上部にあったセグメント0が現在どの位置にあるかを計算
+    // そして、現在上部（0度）にあるのは元々どのセグメントかを逆算する
+    const segmentIndex =
+      Math.floor((360 - normalizedRotation) / segmentAngle) %
+      enabledItems.length;
+
+    return segmentIndex;
+  };
+
+  // Check if a segment is pointed by the arrow
+  const isSegmentPointed = (segmentIndex: number): boolean => {
+    if (enabledItems.length === 0) return false;
+    return getPointedSegment(rotation) === segmentIndex;
   };
 
   const spinWheel = () => {
     if (enabledItems.length < 2 || isSpinning) return;
 
     setIsSpinning(true);
+    setWinner(null);
 
-    // ランダムな回転時間を生成（3.5〜5.0秒）
-
-    // Calculate random rotation
-    const spins = 5 + Math.random() * 5; // 5-10 full rotations
-    const randomAngle = Math.random() * 360;
-    const totalRotation = rotation + spins * 360 + randomAngle;
+    // より自然なランダム回転を計算
+    const minSpins = 5;
+    const maxSpins = 10;
+    const spins = minSpins + Math.random() * (maxSpins - minSpins);
+    const randomFinalAngle = Math.random() * 360;
+    const totalRotation = rotation + spins * 360 + randomFinalAngle;
+    const spinDuration = 3500 + Math.random() * 1500;
 
     setRotation(totalRotation);
 
-    // Determine winner after animation
+    // 当選者決定
     setTimeout(() => {
       try {
         if (enabledItems.length > 0) {
-          const segmentAngle = 360 / enabledItems.length;
+          const winnerIndex = getPointedSegment(totalRotation);
 
-          // Find which segment is at the top (0 degrees) after rotation
-          // The winner zone is fixed at the top, so we need to find which segment is there
-          const normalizedRotation = normalizeAngle(totalRotation);
-
-          // Calculate which segment is at the top (accounting for the -90 degree offset)
-          const topAngle = normalizeAngle(90 - normalizedRotation);
-          const winnerIndex =
-            Math.floor(topAngle / segmentAngle) % enabledItems.length;
-
-          alert(
-            `${t.roulette?.winner || "Winner!"}: ${
-              enabledItems[winnerIndex].text
-            }`
-          );
+          setWinner(enabledItems[winnerIndex]);
         }
       } catch (error) {
         console.error("Error selecting roulette item:", error);
@@ -259,22 +240,26 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
     }, spinDuration);
   };
 
-  // Create winner zone path (fixed at top)
-  const createWinnerZonePath = () => {
+  const resetGame = () => {
+    setWinner(null);
+    setRotation(0);
+  };
+
+  // Create winner zone path - arrow pointer pointing down at top position
+  const createArrowPointerPath = () => {
     const centerX = 150;
     const centerY = 150;
-    const radius = 140;
+    const arrowLength = 50;
+    const arrowWidth = 35;
 
-    // Winner zone from -15 to +15 degrees (30 degrees total at top)
-    const startAngleRad = ((360 - 15) * Math.PI) / 180; // 345 degrees
-    const endAngleRad = (15 * Math.PI) / 180; // 15 degrees
+    // Arrow pointing down from top center (0 degrees position)
+    const tipX = centerX;
+    const tipY = centerY - 125; // Just outside the wheel at top
+    const baseY = tipY - arrowLength;
+    const leftX = centerX - arrowWidth / 2;
+    const rightX = centerX + arrowWidth / 2;
 
-    const x1 = centerX + radius * Math.cos(startAngleRad);
-    const y1 = centerY + radius * Math.sin(startAngleRad);
-    const x2 = centerX + radius * Math.cos(endAngleRad);
-    const y2 = centerY + radius * Math.sin(endAngleRad);
-
-    return `M ${centerX} ${centerY} L ${x1} ${y1} A ${radius} ${radius} 0 0 1 ${x2} ${y2} Z`;
+    return `M ${tipX} ${tipY} L ${leftX} ${baseY} L ${rightX} ${baseY} Z`;
   };
 
   // Create wheel segments
@@ -287,26 +272,27 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
     const segmentAngle = 360 / enabledItems.length;
 
     return enabledItems.map((item, index) => {
-      const startAngle = (index * segmentAngle - 90) * (Math.PI / 180); // Start from top (-90 degrees)
-      const endAngle = ((index + 1) * segmentAngle - 90) * (Math.PI / 180);
+      // セグメントは上部（0度）から時計回りに配置
+      const startAngle = index * segmentAngle * (Math.PI / 180);
+      const endAngle = (index + 1) * segmentAngle * (Math.PI / 180);
       const midAngle = (startAngle + endAngle) / 2;
 
       // Calculate path for segment
-      const x1 = centerX + radius * Math.cos(startAngle);
-      const y1 = centerY + radius * Math.sin(startAngle);
-      const x2 = centerX + radius * Math.cos(endAngle);
-      const y2 = centerY + radius * Math.sin(endAngle);
+      const x1 = centerX + radius * Math.cos(startAngle - Math.PI / 2); // -90度オフセット（上部から開始）
+      const y1 = centerY + radius * Math.sin(startAngle - Math.PI / 2);
+      const x2 = centerX + radius * Math.cos(endAngle - Math.PI / 2);
+      const y2 = centerY + radius * Math.sin(endAngle - Math.PI / 2);
 
       const largeArcFlag = segmentAngle > 180 ? 1 : 0;
       const pathData = `M ${centerX} ${centerY} L ${x1} ${y1} A ${radius} ${radius} 0 ${largeArcFlag} 1 ${x2} ${y2} Z`;
 
       // Calculate text position
       const textRadius = radius * 0.7;
-      const textX = centerX + textRadius * Math.cos(midAngle);
-      const textY = centerY + textRadius * Math.sin(midAngle);
-      const textRotation = (midAngle * 180) / Math.PI;
+      const textX = centerX + textRadius * Math.cos(midAngle - Math.PI / 2);
+      const textY = centerY + textRadius * Math.sin(midAngle - Math.PI / 2);
+      const textRotation = ((midAngle - Math.PI / 2) * 180) / Math.PI;
 
-      const isInWinnerZone = isSegmentInWinnerZone(index);
+      const isPointed = isSegmentPointed(index);
 
       return (
         <g key={item.id}>
@@ -317,14 +303,14 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
             stroke="#ffffff"
             strokeWidth="2"
             style={{
-              filter: isInWinnerZone ? "brightness(1.1)" : "none",
+              filter: isPointed
+                ? "brightness(1.2) drop-shadow(0 0 8px rgba(34, 197, 94, 0.5))"
+                : "none",
             }}
           />
 
-          {/* Winner zone highlight */}
-          {isInWinnerZone && (
-            <path d={pathData} fill="rgba(34, 197, 94, 0.2)" />
-          )}
+          {/* Arrow pointer highlight */}
+          {isPointed && <path d={pathData} fill="rgba(34, 197, 94, 0.3)" />}
 
           {/* Text */}
           <text
@@ -364,64 +350,42 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
       }
       icon={Target}
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4">
+      {/* モバイル対応：縦積みレイアウト */}
+      <div className="space-y-6">
         {/* Wheel Section */}
         <ToolSection>
           <div className="relative">
-            {/* Winner Zone Indicator */}
-            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-6 z-20">
-              <div className="bg-gradient-to-b from-green-400 to-green-600 text-white px-4 py-2 rounded-lg shadow-lg">
+            {/* Arrow Pointer Indicator - モバイル対応 */}
+            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-6 md:-translate-y-8 z-20">
+              <div className="bg-gradient-to-b from-green-400 to-green-600 text-white px-2 py-1 md:px-4 md:py-2 rounded-lg shadow-lg">
                 <div className="text-xs font-bold text-center">
-                  {t.roulette?.winnerZone || "WINNER ZONE"}
+                  {t.roulette?.winnerPointer || "WINNER POINTER"}
                 </div>
-                <div className="text-xs text-center opacity-90">
-                  {t.roulette?.landingArea || "Landing Area"}
+                <div className="text-xs text-center opacity-90 hidden md:block">
+                  {t.roulette?.arrowPoints || "Arrow Points Here"}
                 </div>
-              </div>
-              {/* Arrow pointing down */}
-              <div className="flex justify-center">
-                <div className="w-0 h-0 border-l-4 border-r-4 border-t-6 border-l-transparent border-r-transparent border-t-green-600"></div>
               </div>
             </div>
 
-            {/* Wheel Container */}
-            <div className="relative w-80 h-80 mx-auto">
-              {/* Fixed Winner Zone Overlay */}
+            {/* Wheel Container - レスポンシブサイズ */}
+            <div className="relative w-72 h-72 sm:w-80 sm:h-80 mx-auto">
+              {/* Fixed Arrow Pointer Overlay */}
               <div className="absolute inset-0 z-10 pointer-events-none">
                 <svg viewBox="0 0 300 300" className="w-full h-full">
-                  {/* Winner zone background */}
+                  {/* Arrow pointer */}
                   <path
-                    d={createWinnerZonePath()}
-                    fill="rgba(34, 197, 94, 0.15)"
-                    stroke="rgba(34, 197, 94, 0.6)"
-                    strokeWidth="2"
-                    strokeDasharray="5,5"
-                  />
-                  {/* Winner zone border lines */}
-                  <line
-                    x1="150"
-                    y1="150"
-                    x2={150 + 140 * Math.cos(((360 - 15) * Math.PI) / 180)}
-                    y2={150 + 140 * Math.sin(((360 - 15) * Math.PI) / 180)}
-                    stroke="rgba(34, 197, 94, 0.8)"
-                    strokeWidth="2"
-                  />
-                  <line
-                    x1="150"
-                    y1="150"
-                    x2={150 + 140 * Math.cos((15 * Math.PI) / 180)}
-                    y2={150 + 140 * Math.sin((15 * Math.PI) / 180)}
-                    stroke="rgba(34, 197, 94, 0.8)"
-                    strokeWidth="2"
-                  />
-                  {/* Center marker for winner zone */}
-                  <line
-                    x1="150"
-                    y1="150"
-                    x2="150"
-                    y2="10"
+                    d={createArrowPointerPath()}
+                    fill="rgba(34, 197, 94, 0.9)"
                     stroke="rgba(34, 197, 94, 1)"
-                    strokeWidth="3"
+                    strokeWidth="2"
+                  />
+                  {/* Arrow shadow for better visibility */}
+                  <path
+                    d={createArrowPointerPath()}
+                    fill="none"
+                    stroke="rgba(0, 0, 0, 0.3)"
+                    strokeWidth="1"
+                    transform="translate(1, 1)"
                   />
                 </svg>
               </div>
@@ -431,14 +395,12 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
                 className="w-full h-full transition-transform ease-out"
                 style={{
                   transform: `rotate(${rotation}deg)`,
-                  transitionDuration: isSpinning
-                    ? `${3.5 + Math.random() * 1.5}s`
-                    : "0s",
+                  transitionDuration: isSpinning ? "4s" : "0s",
                 }}
               >
                 {enabledItems.length === 0 ? (
                   <div className="w-full h-full bg-gray-100 rounded-full border-4 border-gray-300 flex items-center justify-center">
-                    <p className="text-gray-500 text-center px-4">
+                    <p className="text-gray-500 text-center px-4 text-sm">
                       {t.roulette?.addItemsToStart ||
                         "Add items to start spinning"}
                     </p>
@@ -473,30 +435,62 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
               </div>
             </div>
 
-            {/* Instructions */}
-            <div className="mt-4 text-center">
-              <p className="text-sm text-gray-600">
+            {/* Instructions - モバイル対応 */}
+            <div className="mt-4 text-center px-2">
+              <p className="text-xs sm:text-sm text-gray-600">
                 {t.roulette?.segmentsLandInZone ||
-                  "Segments landing in the green zone win"}
+                  "The segment at the top (arrow position) wins"}
               </p>
             </div>
-            <ToolControls className="mt-2">
-              <button
-                onClick={spinWheel}
-                disabled={enabledItems.length < 2 || isSpinning}
-                className="button-primary flex items-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                <Play size={20} />
-                <span>
-                  {isSpinning
-                    ? t.roulette?.spinning || "Spinning..."
-                    : t.roulette?.spinWheel || "Spin Wheel"}
-                </span>
-              </button>
+
+            {/* Winner Display - モバイル対応 */}
+            {winner && (
+              <div className="mt-4 px-2">
+                <div className="bg-gradient-to-r from-green-400 to-green-600 text-white p-4 md:p-6 rounded-xl shadow-lg text-center animate-pulse">
+                  <div className="text-base md:text-lg font-bold mb-2">
+                    🎉 {t.roulette?.winner || "Winner!"} 🎉
+                  </div>
+                  <div
+                    className="text-xl md:text-2xl font-bold px-3 py-2 md:px-4 md:py-2 bg-white bg-opacity-20 rounded-lg inline-block break-words max-w-full"
+                    style={{ textShadow: "1px 1px 2px rgba(0,0,0,0.3)" }}
+                  >
+                    {winner.text}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Control Buttons - 新規追加 */}
+            <ToolControls className="mt-4">
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <button
+                  onClick={spinWheel}
+                  disabled={enabledItems.length < 2 || isSpinning}
+                  className="button-primary flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto"
+                >
+                  <Play size={20} />
+                  <span>
+                    {isSpinning
+                      ? t.roulette?.spinning || "Spinning..."
+                      : t.roulette?.spinWheel || "Spin Wheel"}
+                  </span>
+                </button>
+
+                {(winner || rotation > 0) && (
+                  <button
+                    onClick={resetGame}
+                    disabled={isSpinning}
+                    className="button-secondary flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto"
+                  >
+                    <RotateCcw size={20} />
+                    <span>{t.roulette?.resetGame || "Reset"}</span>
+                  </button>
+                )}
+              </div>
             </ToolControls>
 
             {enabledItems.length < 2 && items.length > 0 && (
-              <p className="text-amber-600 text-sm mt-4 text-center">
+              <p className="text-amber-600 text-sm mt-4 text-center px-2">
                 {t.roulette?.needMoreItems ||
                   "At least 2 enabled items are required to spin the wheel"}
               </p>
@@ -504,9 +498,9 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
           </div>
         </ToolSection>
 
-        {/* Add New Item */}
+        {/* Add New Item - モバイル対応 */}
         <ToolSection title={t.roulette?.addItems || "Add Items"}>
-          <div className="flex gap-3">
+          <div className="flex flex-col sm:flex-row gap-3">
             <input
               type="text"
               value={newItem}
@@ -519,13 +513,16 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
             <button
               onClick={addItem}
               disabled={!newItem.trim() || items.length >= 20}
-              className="px-4 py-3 bg-primary-600 text-white rounded-xl hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="px-4 py-3 bg-primary-600 text-white rounded-xl hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors w-full sm:w-auto flex items-center justify-center"
               aria-label={t.common?.add || "Add item"}
             >
-              <Plus size={20} />
+              <Plus size={20} className="sm:mr-0 mr-2" />
+              <span className="sm:hidden">
+                {t.roulette?.addItems || "Add Item"}
+              </span>
             </button>
           </div>
-          <div className="flex justify-between text-sm text-gray-500 mt-3">
+          <div className="flex flex-col sm:flex-row sm:justify-between gap-1 text-sm text-gray-500 mt-3">
             <span>
               {interpolate(t.roulette?.itemsCount || "{count}/20 items", {
                 count: items.length.toString(),
@@ -537,7 +534,8 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
               })}
             </span>
           </div>
-          {/* Items List */}
+
+          {/* Items List - モバイル対応 */}
           <ToolSection title={t.roulette?.currentItems || "Current Items"}>
             {items.length === 0 ? (
               <div className="text-center py-8">
@@ -550,19 +548,19 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
                 </p>
               </div>
             ) : (
-              <div className="space-y-2 max-h-64 overflow-y-auto">
+              <div className="space-y-2 max-h-64 sm:max-h-80 overflow-y-auto">
                 {items.map((item) => (
                   <div
                     key={item.id}
-                    className={`flex items-center justify-between p-4 rounded-xl transition-all ${
+                    className={`flex items-center justify-between p-3 sm:p-4 rounded-xl transition-all ${
                       item.enabled
                         ? "bg-white border border-gray-200 shadow-sm"
                         : "bg-gray-50 border border-gray-100 opacity-60"
                     }`}
                   >
-                    <div className="flex items-center space-x-3 flex-1">
+                    <div className="flex items-center space-x-2 sm:space-x-3 flex-1 min-w-0">
                       <div
-                        className="w-4 h-4 rounded-full border-2 border-white shadow-sm"
+                        className="w-3 h-3 sm:w-4 sm:h-4 rounded-full border-2 border-white shadow-sm flex-shrink-0"
                         style={{
                           backgroundColor: item.enabled
                             ? item.color
@@ -571,51 +569,53 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
                       ></div>
 
                       {editingItem === item.id ? (
-                        // 編集モード
-                        <div className="flex items-center space-x-2 flex-1">
+                        // 編集モード - モバイル対応
+                        <div className="flex items-center space-x-1 sm:space-x-2 flex-1 min-w-0">
                           <input
                             type="text"
                             value={editText}
                             onChange={(e) => setEditText(e.target.value)}
                             onKeyDown={handleEditKeyDown}
                             onBlur={saveEdit}
-                            className="flex-1 px-3 py-1 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="flex-1 px-2 py-1 sm:px-3 sm:py-1 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm min-w-0"
                             maxLength={20}
                             autoFocus
                           />
                           <button
                             onClick={saveEdit}
-                            className="p-1 text-green-600 hover:text-green-700 hover:bg-green-50 rounded transition-colors"
+                            className="p-1 text-green-600 hover:text-green-700 hover:bg-green-50 rounded transition-colors flex-shrink-0"
                             aria-label={
                               t.roulette?.saveChanges || "Save changes"
                             }
                           >
-                            <Check size={16} />
+                            <Check size={14} />
                           </button>
                           <button
                             onClick={cancelEditing}
-                            className="p-1 text-gray-600 hover:text-gray-700 hover:bg-gray-50 rounded transition-colors"
+                            className="p-1 text-gray-600 hover:text-gray-700 hover:bg-gray-50 rounded transition-colors flex-shrink-0"
                             aria-label={t.roulette?.cancel || "Cancel"}
                           >
-                            <X size={16} />
+                            <X size={14} />
                           </button>
                         </div>
                       ) : (
-                        // 表示モード
-                        <div className="flex items-center space-x-2 flex-1">
+                        // 表示モード - モバイル対応
+                        <div className="flex items-center space-x-2 flex-1 min-w-0">
                           <span
-                            className={`font-medium cursor-pointer hover:text-blue-600 transition-colors ${
+                            className={`font-medium cursor-pointer hover:text-blue-600 transition-colors text-sm sm:text-base truncate ${
                               item.enabled
                                 ? "text-gray-900"
                                 : "text-gray-500 line-through"
                             }`}
                             onClick={() => startEditing(item.id, item.text)}
-                            title={t.roulette?.clickToEdit || "Click to edit"}
+                            title={`${item.text} - ${
+                              t.roulette?.clickToEdit || "Click to edit"
+                            }`}
                           >
                             {item.text}
                           </span>
                           {!item.enabled && (
-                            <span className="text-xs text-gray-400 bg-gray-200 px-2 py-1 rounded-full">
+                            <span className="text-xs text-gray-400 bg-gray-200 px-1 sm:px-2 py-1 rounded-full flex-shrink-0">
                               {t.roulette?.disabled || "Disabled"}
                             </span>
                           )}
@@ -623,22 +623,22 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
                       )}
                     </div>
 
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-1 flex-shrink-0">
                       {editingItem !== item.id && (
                         <button
                           onClick={() => startEditing(item.id, item.text)}
-                          className="p-2 text-gray-400 hover:text-blue-500 hover:bg-blue-50 rounded-lg transition-colors"
+                          className="p-1.5 sm:p-2 text-gray-400 hover:text-blue-500 hover:bg-blue-50 rounded-lg transition-colors"
                           aria-label={interpolate(
                             t.roulette?.editItem || "Edit {item}",
                             { item: item.text }
                           )}
                         >
-                          <Edit2 size={16} />
+                          <Edit2 size={14} />
                         </button>
                       )}
                       <button
                         onClick={() => toggleItemEnabled(item.id)}
-                        className={`p-2 rounded-lg transition-colors ${
+                        className={`p-1.5 sm:p-2 rounded-lg transition-colors ${
                           item.enabled
                             ? "text-gray-400 hover:text-orange-500 hover:bg-orange-50"
                             : "text-gray-400 hover:text-green-500 hover:bg-green-50"
@@ -656,20 +656,20 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
                         }
                       >
                         {item.enabled ? (
-                          <EyeOff size={16} />
+                          <EyeOff size={14} />
                         ) : (
-                          <Eye size={16} />
+                          <Eye size={14} />
                         )}
                       </button>
                       <button
                         onClick={() => removeItem(item.id)}
-                        className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                        className="p-1.5 sm:p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
                         aria-label={interpolate(
                           t.roulette?.removeItem || "Remove {item}",
                           { item: item.text }
                         )}
                       >
-                        <Trash2 size={16} />
+                        <Trash2 size={14} />
                       </button>
                     </div>
                   </div>
@@ -679,6 +679,7 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
           </ToolSection>
         </ToolSection>
       </div>
+
       {/* FAQ セクション */}
       <ToolSection>
         <ToolFaq faqList={t.roulette.faqList} t={t} />
