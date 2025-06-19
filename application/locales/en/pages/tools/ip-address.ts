@@ -11,6 +11,27 @@ export const ipAddress: IpAddressTranslations = {
     "ISP",
     "internet service provider",
   ],
+  howToUse: {
+    title: "How to Use IP Address Information Tool",
+    steps: [
+      "Your public IP address is automatically retrieved and displayed when you open the page",
+      "View detailed information including location, ISP details, and coordinates",
+      "Click on any information to copy it to your clipboard",
+      "Use the 'Refresh Information' button to update to the latest information",
+    ],
+  },
+  features: {
+    title: "Key Features",
+    items: [
+      "Automatic detection and display of public IP address",
+      "Location information display (city, region, country)",
+      "Internet Service Provider (ISP) information display",
+      "Timezone and coordinate information display",
+      "One-click copy functionality for all information",
+      "Manual information refresh capability",
+      "Privacy and security advisory notes",
+    ],
+  },
   location: "Location Information",
   country: "Country",
   region: "Region",

@@ -11,6 +11,27 @@ export const ipAddress: IpAddressTranslations = {
     "ISP",
     "geolocalización IP",
   ],
+  howToUse: {
+    title: "Cómo Usar la Herramienta de Información de IP",
+    steps: [
+      "Tu dirección IP pública se obtiene y muestra automáticamente al abrir la página",
+      "Ve información detallada incluyendo ubicación, detalles del ISP y coordenadas",
+      "Haz clic en cualquier información para copiarla al portapapeles",
+      "Usa el botón 'Actualizar Información' para obtener los datos más recientes",
+    ],
+  },
+  features: {
+    title: "Características Principales",
+    items: [
+      "Detección y visualización automática de la dirección IP pública",
+      "Visualización de información de ubicación (ciudad, región, país)",
+      "Visualización de información del Proveedor de Servicios de Internet (ISP)",
+      "Información de zona horaria y coordenadas",
+      "Función de copia con un clic para toda la información",
+      "Capacidad de actualización manual de información",
+      "Notas informativas sobre privacidad y seguridad",
+    ],
+  },
   location: "Ubicación",
   country: "País",
   region: "Región",

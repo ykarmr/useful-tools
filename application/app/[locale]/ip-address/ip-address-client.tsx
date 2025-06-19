@@ -8,6 +8,7 @@ import ToolDisplay from "@/components/layout/tool-display";
 import ToolResult from "@/components/layout/tool-result";
 import ToolStats from "@/components/layout/tool-stats";
 import ToolFaq from "@/components/layout/tool-faq";
+import ToolHowToUse from "@/components/layout/tool-how-to-use";
 import { Locale, Translations } from "@/locales";
 
 interface IPInfo {
@@ -154,6 +155,18 @@ export default function IPAddressClient({ locale, t }: IPAddressClientProps) {
       description={t.ipAddress.description}
       icon={Globe}
     >
+      {/* How To Use セクション */}
+      <ToolSection>
+        <ToolHowToUse
+          title={t.ipAddress.howToUse.title}
+          steps={t.ipAddress.howToUse.steps}
+          features={{
+            title: t.ipAddress.features.title,
+            items: t.ipAddress.features.items,
+          }}
+        />
+      </ToolSection>
+
       {/* IP Address Display */}
       <ToolSection>
         <ToolDisplay size="large" centered>

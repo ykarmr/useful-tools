@@ -4,6 +4,14 @@ export interface IpAddressTranslations {
   title: string;
   description: string;
   keywords: string[];
+  howToUse: {
+    title: string;
+    steps: string[];
+  };
+  features: {
+    title: string;
+    items: string[];
+  };
   location: string;
   country: string;
   region: string;
