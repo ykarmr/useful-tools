@@ -27,7 +27,7 @@ import { urlAnalyzer } from "./pages/tools/url-analyzer";
 import { unitConversion } from "./pages/tools/unit-conversion";
 import subnetCalculator from "./pages/tools/subnet-calculator";
 import { petAgeConversion } from "./pages/tools/pet-age-conversion";
-import { imageConverter } from "./pages/tools//image-converter";
+import { imageConverter } from "./pages/tools/image-converter";
 import { colorPalette } from "./pages/tools/color-palette";
 import { textStatistics } from "./pages/tools/text-statistics";
 import { bmiCalculator } from "./pages/tools/bmi-calculator";
