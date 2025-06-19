@@ -68,26 +68,52 @@ program
   });
 
 /**
+ * 全ツールのOGP画像を生成
+ */
+async function generateAllToolsOgp(
+  generator: OgpGenerator,
+  specificLocale?: string
+) {
+  const {
+    getTranslations,
+    SUPPORTED_LOCALES,
+    TOOL_NAMES,
+  } = require("./config");
+
+  // applicationのservices翻訳を取得してツール一覧を取得
+  const locales = specificLocale ? [specificLocale] : SUPPORTED_LOCALES;
+
+  for (const locale of locales) {
+    try {
+      const translations = getTranslations(locale);
+      // ここでは既存のTOOL_NAMESを使用
+      const toolNames = Object.keys(TOOL_NAMES);
+
+      for (const toolKey of toolNames) {
+        const toolTitle = TOOL_NAMES[toolKey]?.[locale] || toolKey;
+        await generator.generatePageOgpImage(locale, toolTitle, toolKey);
+      }
+
+      logSuccess(`${locale}の全ツールOGP画像を生成しました`);
+    } catch (error) {
+      logError(`${locale}のツールOGP画像生成に失敗しました`, error as Error);
+    }
+  }
+}
+
+/**
  * OGP画像生成コマンド
  */
 program
   .command("ogp")
   .description("すべての言語のOGP画像を生成")
   .option("-l, --locale <locale>", "特定の言語のみ生成 (ja, en, es, ru, zh)")
-  .option("-p, --page <page>", "特定ページのOGP画像を生成")
-  .option("-t, --title <title>", "ページタイトル（--pageオプションと併用）")
   .action(async (options) => {
     try {
       logInfo("OGP画像生成を開始します...");
       const generator = new OgpGenerator();
 
-      if (options.page && options.title && options.locale) {
-        await generator.generatePageOgpImage(
-          options.locale,
-          options.title,
-          options.page
-        );
-      } else if (options.locale) {
+      if (options.locale) {
         const ogpBuffer = await generator.generateOgpImage(options.locale);
         const outputPath = path.join(
           __dirname,
@@ -107,6 +133,31 @@ program
   });
 
 /**
+ * 全ページのOGP画像を一括生成するコマンド
+ */
+program
+  .command("ogp-all")
+  .description("全ページ（ツール + 静的ページ）のOGP画像を一括生成")
+  .option("-l, --locale <locale>", "特定の言語のみ生成 (ja, en, es, ru, zh)")
+  .action(async (options) => {
+    try {
+      logInfo("全ページのOGP画像生成を開始します...");
+      const generator = new OgpGenerator();
+
+      if (options.locale) {
+        await generator.generateAllPageOgpImages([options.locale]);
+        logSuccess(`${options.locale}の全ページOGP画像を生成しました`);
+      } else {
+        await generator.generateAllPageOgpImages();
+        logSuccess("全言語・全ページのOGP画像を生成しました");
+      }
+    } catch (error) {
+      logError("全ページOGP画像生成に失敗しました", error as Error);
+      process.exit(1);
+    }
+  });
+
+/**
  * すべて生成コマンド
  */
 program
@@ -117,25 +168,30 @@ program
       logInfo("すべての画像生成を開始します...");
 
       // 1. ロゴ生成
-      logInfo("ステップ 1/3: ロゴ生成中...");
+      logInfo("ステップ 1/4: ロゴ生成中...");
       const logoGenerator = new LogoGenerator();
       await logoGenerator.generateAllLogos();
 
       // 2. ファビコン生成
-      logInfo("ステップ 2/3: ファビコン生成中...");
+      logInfo("ステップ 2/4: ファビコン生成中...");
       const faviconGenerator = new FaviconGenerator();
       await faviconGenerator.generateAllFavicons();
 
-      // 3. OGP画像生成
-      logInfo("ステップ 3/3: OGP画像生成中...");
+      // 3. OGP画像生成（メイン画像）
+      logInfo("ステップ 3/4: メインOGP画像生成中...");
       const ogpGenerator = new OgpGenerator();
       await ogpGenerator.generateAllOgpImages();
+
+      // 4. 全ページOGP画像生成
+      logInfo("ステップ 4/4: 全ページOGP画像生成中...");
+      await ogpGenerator.generateAllPageOgpImages();
 
       logSuccess("すべての画像生成が完了しました！");
       logInfo("生成された画像は以下のディレクトリで確認できます:");
       logInfo("- ロゴ: application/public/images/logo/");
       logInfo("- ファビコン: application/public/images/favicon/");
       logInfo("- OGP画像: application/public/images/ogp/");
+      logInfo("- ページOGP画像: application/public/images/ogp/pages/");
     } catch (error) {
       logError("画像生成に失敗しました", error as Error);
       process.exit(1);

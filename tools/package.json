@@ -12,6 +12,7 @@
     "generate:logo": "tsx src/cli.ts logo",
     "generate:favicon": "tsx src/cli.ts favicon",
     "generate:ogp": "tsx src/cli.ts ogp",
+    "generate:ogp-all": "tsx src/cli.ts ogp-all",
     "config": "tsx src/cli.ts config",
     "clean": "tsx src/cli.ts clean"
   },

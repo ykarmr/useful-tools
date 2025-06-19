@@ -4,7 +4,17 @@ import {
   CanvasTextAlign,
 } from "canvas";
 import * as path from "path";
-import { LOCALES, COLORS, SIZES, OUTPUT_DIRS, TOOL_NAMES } from "../config";
+import {
+  SUPPORTED_LOCALES,
+  LOCALE_ICONS,
+  LOCALE_LABELS,
+  FALLBACK_LOCALES,
+  getTranslations,
+  COLORS,
+  SIZES,
+  OUTPUT_DIRS,
+  TOOL_NAMES,
+} from "../config";
 import {
   saveFile,
   logProgress,
@@ -166,8 +176,11 @@ export class OgpGenerator {
    * 指定した言語のOGP画像を生成
    */
   public async generateOgpImage(localeCode: string): Promise<Buffer> {
-    const locale = LOCALES[localeCode];
-    if (!locale) {
+    // applicationの翻訳データを取得
+    const translations = getTranslations(localeCode);
+
+    // 翻訳データが取得できない場合はサポートされていない言語としてエラー
+    if (!translations && !FALLBACK_LOCALES.includes(localeCode)) {
       throw new Error(`サポートされていない言語コード: ${localeCode}`);
     }
 
@@ -185,25 +198,37 @@ export class OgpGenerator {
     // フォントファミリーを取得
     const fontFamily = getFontFamily(localeCode);
 
+    // テキスト情報を取得（applicationの翻訳からまたはデフォルト値）
+    const title = translations?.common?.siteTitle || "USEFUL TOOLS";
+
+    const subtitle =
+      translations?.common?.seo?.siteDescription ||
+      "Streamline Your Daily Tasks";
+
+    const description =
+      translations?.common?.seo?.homeDescription ||
+      translations?.common?.seo?.siteDescription ||
+      "A collection of useful tools to streamline your daily tasks.";
+
     // メインタイトルを描画（複数行対応）
     const mainTitle = "USEFUL TOOLS";
     this.drawMultilineText(
       mainTitle,
       280,
       160,
-      64,
+      58,
       fontFamily,
       COLORS.background,
-      width - 320,
-      80
+      width - 360,
+      75
     );
 
     // サブタイトルを描画
     this.drawText(
-      locale.subtitle,
+      subtitle.length > 45 ? subtitle.substring(0, 45) + "..." : subtitle,
       280,
       280,
-      36,
+      32,
       fontFamily,
       "rgba(255, 255, 255, 0.9)",
       "normal",
@@ -212,22 +237,24 @@ export class OgpGenerator {
 
     // 説明文を描画（複数行対応）
     this.drawMultilineText(
-      locale.description,
+      description,
       280,
       340,
-      28,
+      26,
       fontFamily,
       "rgba(255, 255, 255, 0.8)",
-      width - 320,
-      40
+      width - 360,
+      38
     );
 
     // 言語インジケーターを描画
+    const flag = LOCALE_ICONS[localeCode] || "🌐";
+    const localeName = LOCALE_LABELS[localeCode] || localeCode;
     this.drawText(
-      `${locale.flag} ${locale.name}`,
-      width - 50,
+      `${flag} ${localeName}`,
+      width - 120,
       50,
-      24,
+      22,
       fontFamily,
       "rgba(255, 255, 255, 0.7)",
       "normal",
@@ -301,7 +328,7 @@ export class OgpGenerator {
         const testLine = currentLine + char;
         const metrics = this.ctx.measureText(testLine);
 
-        if (metrics.width > maxWidth && currentLine.length > 0) {
+        if (metrics.width > maxWidth * 0.95 && currentLine.length > 0) {
           lines.push(currentLine);
           currentLine = char;
         } else {
@@ -322,7 +349,7 @@ export class OgpGenerator {
           currentLine.length === 0 ? word : `${currentLine} ${word}`;
         const metrics = this.ctx.measureText(testLine);
 
-        if (metrics.width > maxWidth && currentLine.length > 0) {
+        if (metrics.width > maxWidth * 0.95 && currentLine.length > 0) {
           lines.push(currentLine);
           currentLine = word;
         } else {
@@ -344,12 +371,12 @@ export class OgpGenerator {
    */
   public async generateAllOgpImages(): Promise<void> {
     try {
-      logProgress(0, Object.keys(LOCALES).length, "OGP画像生成を開始します...");
+      logProgress(0, SUPPORTED_LOCALES.length, "OGP画像生成を開始します...");
 
       let count = 0;
-      const total = Object.keys(LOCALES).length;
+      const total = SUPPORTED_LOCALES.length;
 
-      for (const [localeCode, locale] of Object.entries(LOCALES)) {
+      for (const localeCode of SUPPORTED_LOCALES) {
         try {
           // メインページ用OGP画像
           const ogpBuffer = await this.generateOgpImage(localeCode);
@@ -363,9 +390,12 @@ export class OgpGenerator {
 
           saveFile(outputPath, ogpBuffer);
           count++;
-          logProgress(count, total, `${locale.name}のOGP画像を生成しました`);
+
+          const localeName = LOCALE_LABELS[localeCode] || localeCode;
+          logProgress(count, total, `${localeName}のOGP画像を生成しました`);
         } catch (error) {
-          logError(`${locale.name}のOGP画像生成に失敗しました`, error as Error);
+          const localeName = LOCALE_LABELS[localeCode] || localeCode;
+          logError(`${localeName}のOGP画像生成に失敗しました`, error as Error);
         }
       }
 
@@ -387,16 +417,118 @@ export class OgpGenerator {
   }
 
   /**
+   * すべてのページ（ツール + 静的ページ）のOGP画像を生成
+   */
+  public async generateAllPageOgpImages(
+    targetLocales?: string[]
+  ): Promise<void> {
+    try {
+      const locales = targetLocales || SUPPORTED_LOCALES;
+
+      // ツールページの一覧を取得
+      const toolPages = Object.keys(TOOL_NAMES);
+
+      // 静的ページの一覧
+      const staticPages = ["services", "contact", "terms", "privacy"];
+
+      // 全ページの一覧
+      const allPages = [...toolPages, ...staticPages];
+
+      const total = locales.length * allPages.length;
+      let count = 0;
+
+      logProgress(0, total, `${total}個のページOGP画像を生成します...`);
+
+      for (const localeCode of locales) {
+        const translations = getTranslations(localeCode);
+
+        if (!translations && !FALLBACK_LOCALES.includes(localeCode)) {
+          logError(`サポートされていない言語コード: ${localeCode}`);
+          continue;
+        }
+
+        for (const pageName of allPages) {
+          try {
+            count++;
+
+            // ページタイトルを取得
+            let pageTitle = "";
+            let pageDescription = "";
+
+            if (translations) {
+              if (toolPages.includes(pageName)) {
+                // ツールページの場合
+                const toolKey = pageName.replace(/-([a-z])/g, (_, letter) =>
+                  letter.toUpperCase()
+                );
+                const toolTranslations = (translations as any)[toolKey];
+                if (toolTranslations) {
+                  pageTitle = toolTranslations.title || pageName;
+                  pageDescription = toolTranslations.description || "";
+                }
+              } else {
+                // 静的ページの場合
+                const pageTranslations =
+                  (translations as any).pages?.[pageName] ||
+                  (translations as any)[pageName];
+                if (pageTranslations) {
+                  pageTitle =
+                    pageTranslations.title || pageTranslations.name || "";
+                  pageDescription = pageTranslations.description || "";
+                }
+              }
+            }
+
+            // フォールバックを使用
+            if (!pageTitle) {
+              pageTitle = pageName;
+            }
+
+            await this.generatePageOgpImage(
+              localeCode,
+              pageTitle,
+              pageName,
+              pageDescription
+            );
+
+            const localeName = LOCALE_LABELS[localeCode] || localeCode;
+            logProgress(
+              count,
+              total,
+              `${localeName} - ${pageTitle} のOGP画像を生成しました`
+            );
+          } catch (error) {
+            const localeName = LOCALE_LABELS[localeCode] || localeCode;
+            logError(
+              `${localeName} - ${pageName} のOGP画像生成に失敗しました`,
+              error as Error
+            );
+          }
+        }
+      }
+
+      logSuccess(`全ページのOGP画像を生成しました (${count}/${total})`);
+    } catch (error) {
+      logError("全ページOGP画像生成処理でエラーが発生しました", error as Error);
+      throw error;
+    }
+  }
+
+  /**
    * 特定ページ用のOGP画像を生成
    */
   public async generatePageOgpImage(
     localeCode: string,
     pageTitle: string,
-    pageName: string
+    pageName: string,
+    pageDescription: string = ""
   ): Promise<void> {
     try {
-      const locale = LOCALES[localeCode];
-      if (!locale) {
+      // applicationの翻訳データを取得
+      const translations = getTranslations(localeCode);
+
+      // 翻訳データが取得できない場合はサポートされていない言語としてエラー
+      if (!translations && !FALLBACK_LOCALES.includes(localeCode)) {
         throw new Error(`サポートされていない言語コード: ${localeCode}`);
       }
 
@@ -414,50 +546,61 @@ export class OgpGenerator {
       // フォントファミリーを取得
       const fontFamily = getFontFamily(localeCode);
 
+      // サイトタイトルを取得
+      const siteTitle = translations?.common?.siteTitle || "USEFUL TOOLS";
+
       // メインタイトルを描画（多言語対応）
       this.drawMultilineText(
-        locale.title,
+        siteTitle,
         280,
         140,
-        56,
+        52,
         fontFamily,
         COLORS.background,
-        width - 320,
-        70
+        width - 360,
+        65
       );
 
-      // ページタイトルを描画（多言語対応のツール名を使用）
-      const localizedPageTitle =
-        TOOL_NAMES[pageName]?.[localeCode] || pageTitle;
+      // ページタイトルを描画（渡されたpageTitleを使用）
       this.drawMultilineText(
-        localizedPageTitle,
+        pageTitle,
         280,
         240,
-        42,
+        38,
         fontFamily,
         "rgba(255, 255, 255, 0.9)",
-        width - 320,
-        50
+        width - 360,
+        48
       );
 
-      // 説明文を描画（位置を下に調整）
+      // 説明文を描画（渡されたpageDescriptionを優先使用）
+      let description = pageDescription;
+      if (!description) {
+        description =
+          translations?.common?.seo?.homeDescription ||
+          translations?.common?.seo?.siteDescription ||
+          "A collection of useful tools to streamline your daily tasks.";
+      }
+
       this.drawMultilineText(
-        locale.description,
+        description,
         280,
         360,
-        26,
+        24,
         fontFamily,
         "rgba(255, 255, 255, 0.8)",
-        width - 320,
-        36
+        width - 360,
+        34
       );
 
       // 言語インジケーターを描画
+      const flag = LOCALE_ICONS[localeCode] || "🌐";
+      const localeName = LOCALE_LABELS[localeCode] || localeCode;
       this.drawText(
-        `${locale.flag} ${locale.name}`,
-        width - 50,
+        `${flag} ${localeName}`,
+        width - 120,
         50,
-        24,
+        22,
         fontFamily,
         "rgba(255, 255, 255, 0.7)",
         "normal",

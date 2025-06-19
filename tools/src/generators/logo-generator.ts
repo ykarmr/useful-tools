@@ -1,6 +1,15 @@
 import { createCanvas, CanvasRenderingContext2D } from "canvas";
 import * as path from "path";
-import { LOCALES, COLORS, SIZES, OUTPUT_DIRS } from "../config";
+import {
+  SUPPORTED_LOCALES,
+  LOCALE_ICONS,
+  LOCALE_LABELS,
+  FALLBACK_LOCALES,
+  getTranslations,
+  COLORS,
+  SIZES,
+  OUTPUT_DIRS,
+} from "../config";
 import { saveFile, logProgress, logSuccess, logError } from "../utils";
 
 /**
@@ -87,15 +96,19 @@ export class LogoGenerator {
    * 指定した言語のロゴを生成
    */
   public async generateLogo(localeCode: string): Promise<Buffer> {
-    const locale = LOCALES[localeCode];
-    if (!locale) {
+    // applicationの翻訳データを取得
+    const translations = getTranslations(localeCode);
+
+    // 翻訳データが取得できない場合はサポートされていない言語としてエラー
+    if (!translations && !FALLBACK_LOCALES.includes(localeCode)) {
       throw new Error(`サポートされていない言語コード: ${localeCode}`);
     }
 
     // ベースロゴを描画
     this.drawBaseLogo();
 
-    // テキストを追加
+    // タイトルテキストを取得（applicationの翻訳から取得、フォールバックは"USEFUL TOOLS"）
+    const title = translations?.common?.siteTitle || "USEFUL TOOLS";
 
     return this.canvas.toBuffer("image/png");
   }
@@ -105,10 +118,33 @@ export class LogoGenerator {
    */
   public async generateAllLogos(): Promise<void> {
     try {
-      logProgress(0, Object.keys(LOCALES).length, "ロゴ生成を開始します...");
+      logProgress(0, SUPPORTED_LOCALES.length, "ロゴ生成を開始します...");
 
       let count = 0;
-      const total = Object.keys(LOCALES).length;
+      const total = SUPPORTED_LOCALES.length;
+
+      // 各言語のロゴを生成
+      for (const localeCode of SUPPORTED_LOCALES) {
+        try {
+          const logoBuffer = await this.generateLogo(localeCode);
+          const filename = `logo-${localeCode}.png`;
+          const outputPath = path.join(
+            __dirname,
+            "../../",
+            OUTPUT_DIRS.logo,
+            filename
+          );
+
+          saveFile(outputPath, logoBuffer);
+          count++;
+
+          const localeName = LOCALE_LABELS[localeCode] || localeCode;
+          logProgress(count, total, `${localeName}のロゴを生成しました`);
+        } catch (error) {
+          const localeName = LOCALE_LABELS[localeCode] || localeCode;
+          logError(`${localeName}のロゴ生成に失敗しました`, error as Error);
+        }
+      }
 
       // デフォルトロゴ（英語版）も生成
       const defaultLogoBuffer = await this.generateLogo("en");
