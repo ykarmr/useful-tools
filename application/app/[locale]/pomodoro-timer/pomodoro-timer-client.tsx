@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { Play, Pause, RotateCcw, Timer, Settings } from "lucide-react";
 import ToolLayout from "@/components/layout/tool-layout";
 import ToolSection from "@/components/layout/tool-section";
@@ -40,18 +40,21 @@ export default function PomodoroTimerClient({
   locale,
   t,
 }: PomodoroTimerClientProps) {
-  // デフォルト設定
-  const defaultSettings: PomodoroSettings = {
-    workDuration: 25 * 60, // 25分
-    shortBreakDuration: 5 * 60, // 5分
-    longBreakDuration: 15 * 60, // 15分
-    totalSessions: 4,
-    autoStart: false,
-    soundEnabled: true,
-  };
+  // デフォルト設定（useMemoで最適化）
+  const defaultSettings: PomodoroSettings = useMemo(
+    () => ({
+      workDuration: 25 * 60, // 25分
+      shortBreakDuration: 5 * 60, // 5分
+      longBreakDuration: 15 * 60, // 15分
+      totalSessions: 4,
+      autoStart: false,
+      soundEnabled: true,
+    }),
+    []
+  );
 
   // 初期状態（SSRとCSRで一致するように）
-  const getInitialState = (): PomodoroState => {
+  const getInitialState = useCallback((): PomodoroState => {
     return {
       currentPhase: "work",
       currentSession: 1,
@@ -60,12 +63,11 @@ export default function PomodoroTimerClient({
       isCompleted: false,
       settings: defaultSettings,
     };
-  };
+  }, [defaultSettings]);
 
   const [state, setState] = useState<PomodoroState>(getInitialState);
   const [isClient, setIsClient] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const lastUpdateTimeRef = useRef<number>(Date.now());
   const backgroundStartTimeRef = useRef<number | null>(null);
   const workerRef = useRef<Worker | null>(null);
@@ -77,15 +79,138 @@ export default function PomodoroTimerClient({
     }
   }, []);
 
-  // Web Worker初期化
-  useEffect(() => {
-    // インラインWeb Workerを作成
-    const workerCode = `
+  // 通知音を再生（useCallbackで最適化）
+  const playNotificationSound = useCallback(() => {
+    // Web Audio APIを使用した簡単な通知音
+    try {
+      const audioContext = new (window.AudioContext ||
+        (window as any).webkitAudioContext)();
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+
+      oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+      gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(
+        0.01,
+        audioContext.currentTime + 0.5
+      );
+
+      oscillator.start();
+      oscillator.stop(audioContext.currentTime + 0.5);
+    } catch (error) {
+      console.log("音の再生に失敗しました:", error);
+    }
+  }, []);
+
+  // ブラウザ通知を表示（useCallbackで最適化）
+  const showNotification = useCallback(
+    (state: PomodoroState) => {
+      if ("Notification" in window && Notification.permission === "granted") {
+        let title = "";
+        let body = "";
+
+        if (state.currentPhase === "work") {
+          title = t.pomodoroTimer.workCompleted || "Work session completed!";
+          body = t.pomodoroTimer.timeForBreak || "Time for a break!";
+        } else if (state.currentPhase === "shortBreak") {
+          title = t.pomodoroTimer.breakCompleted || "Break completed!";
+          body = t.pomodoroTimer.timeForWork || "Time to get back to work!";
+        } else if (state.currentPhase === "longBreak") {
+          title = t.pomodoroTimer.sessionCompleted || "Session completed!";
+          body = t.pomodoroTimer.timeForLongBreak || "Time for a long break!";
+        }
+
+        if (title) {
+          new Notification(title, {
+            body: body,
+            icon: "/favicon.ico",
+            tag: "pomodoro-timer",
+          });
+        }
+      }
+    },
+    [t.pomodoroTimer]
+  );
+
+  // フェーズ完了処理（状態を返すバージョン、useCallbackで最適化）
+  const handlePhaseCompleteForState = useCallback(
+    (currentState: PomodoroState): PomodoroState => {
+      const newState = { ...currentState };
+      newState.isRunning = false;
+
+      // 音の再生（設定で有効な場合）
+      if (newState.settings.soundEnabled) {
+        playNotificationSound();
+      }
+
+      // ブラウザ通知を送信
+      showNotification(newState);
+
+      if (newState.currentPhase === "work") {
+        if (newState.currentSession === newState.settings.totalSessions) {
+          // 全セッション完了後のロングブレイク
+          newState.currentPhase = "longBreak";
+          newState.timeLeft = newState.settings.longBreakDuration;
+        } else {
+          // ショートブレイク
+          newState.currentPhase = "shortBreak";
+          newState.timeLeft = newState.settings.shortBreakDuration;
+        }
+      } else if (newState.currentPhase === "shortBreak") {
+        // 次の作業セッション
+        newState.currentSession += 1;
+        newState.currentPhase = "work";
+        newState.timeLeft = newState.settings.workDuration;
+      } else if (newState.currentPhase === "longBreak") {
+        // サイクル完了
+        newState.isCompleted = true;
+      }
+
+      // 自動スタートが有効で完了していない場合
+      if (newState.settings.autoStart && !newState.isCompleted) {
+        newState.isRunning = true;
+      }
+
+      return newState;
+    },
+    [playNotificationSound, showNotification]
+  );
+
+  // ステートをlocalStorageに保存（useCallbackで最適化）
+  const saveState = useCallback(
+    (newState: PomodoroState) => {
+      if (isClient) {
+        const stateToSave = {
+          currentPhase: newState.currentPhase,
+          currentSession: newState.currentSession,
+          timeLeft: newState.timeLeft,
+          isCompleted: newState.isCompleted,
+          isRunning: newState.isRunning,
+        };
+        localStorage.setItem("pomodoroState", JSON.stringify(stateToSave));
+        localStorage.setItem(
+          "pomodoroSettings",
+          JSON.stringify(newState.settings)
+        );
+        localStorage.setItem("pomodoroLastUpdateTime", Date.now().toString());
+      }
+      lastUpdateTimeRef.current = Date.now();
+      setState(newState);
+    },
+    [isClient]
+  );
+
+  // Web Worker初期化（useMemoで最適化）
+  const workerCode = useMemo(
+    () => `
       let intervalId = null;
       let lastTick = Date.now();
       
       self.onmessage = function(e) {
-        const { action, data } = e.data;
+        const { action } = e.data;
         
         if (action === 'start') {
           lastTick = Date.now();
@@ -104,24 +229,76 @@ export default function PomodoroTimerClient({
           }
         }
       };
-    `;
+    `,
+    []
+  );
 
+  useEffect(() => {
     const blob = new Blob([workerCode], { type: "application/javascript" });
-    workerRef.current = new Worker(URL.createObjectURL(blob));
+    const workerUrl = URL.createObjectURL(blob);
+    workerRef.current = new Worker(workerUrl);
 
     workerRef.current.onmessage = (e) => {
       const { type, elapsed } = e.data;
-      if (type === "tick" && state.isRunning && elapsed > 0) {
-        const newState = { ...state };
-        newState.timeLeft = Math.max(0, newState.timeLeft - elapsed);
+      if (type === "tick" && elapsed > 0) {
+        setState((prevState) => {
+          if (!prevState.isRunning) return prevState;
 
-        if (newState.timeLeft === 0) {
-          const completedState = handlePhaseCompleteForState(newState);
-          saveState(completedState);
-          workerRef.current?.postMessage({ action: "stop" });
-        } else {
-          saveState(newState);
-        }
+          const newState = { ...prevState };
+          newState.timeLeft = Math.max(0, newState.timeLeft - elapsed);
+
+          if (newState.timeLeft === 0) {
+            const completedState = handlePhaseCompleteForState(newState);
+            // localStorageへの保存は直接行う
+            if (isClient) {
+              const stateToSave = {
+                currentPhase: completedState.currentPhase,
+                currentSession: completedState.currentSession,
+                timeLeft: completedState.timeLeft,
+                isCompleted: completedState.isCompleted,
+                isRunning: completedState.isRunning,
+              };
+              localStorage.setItem(
+                "pomodoroState",
+                JSON.stringify(stateToSave)
+              );
+              localStorage.setItem(
+                "pomodoroSettings",
+                JSON.stringify(completedState.settings)
+              );
+              localStorage.setItem(
+                "pomodoroLastUpdateTime",
+                Date.now().toString()
+              );
+            }
+            workerRef.current?.postMessage({ action: "stop" });
+            return completedState;
+          } else {
+            // localStorageへの保存は直接行う
+            if (isClient) {
+              const stateToSave = {
+                currentPhase: newState.currentPhase,
+                currentSession: newState.currentSession,
+                timeLeft: newState.timeLeft,
+                isCompleted: newState.isCompleted,
+                isRunning: newState.isRunning,
+              };
+              localStorage.setItem(
+                "pomodoroState",
+                JSON.stringify(stateToSave)
+              );
+              localStorage.setItem(
+                "pomodoroSettings",
+                JSON.stringify(newState.settings)
+              );
+              localStorage.setItem(
+                "pomodoroLastUpdateTime",
+                Date.now().toString()
+              );
+            }
+            return newState;
+          }
+        });
       }
     };
 
@@ -129,8 +306,10 @@ export default function PomodoroTimerClient({
       if (workerRef.current) {
         workerRef.current.terminate();
       }
+      URL.revokeObjectURL(workerUrl);
     };
-  }, []);
+  }, [workerCode, isClient, handlePhaseCompleteForState]);
+
   useEffect(() => {
     setIsClient(true);
 
@@ -184,111 +363,23 @@ export default function PomodoroTimerClient({
       });
       lastUpdateTimeRef.current = Date.now();
     }
-  }, []);
+  }, [defaultSettings, handlePhaseCompleteForState]);
 
-  // ステートをlocalStorageに保存
-  const saveState = (newState: PomodoroState) => {
-    if (isClient) {
-      const stateToSave = {
-        currentPhase: newState.currentPhase,
-        currentSession: newState.currentSession,
-        timeLeft: newState.timeLeft,
-        isCompleted: newState.isCompleted,
-        isRunning: newState.isRunning,
-      };
-      localStorage.setItem("pomodoroState", JSON.stringify(stateToSave));
-      localStorage.setItem(
-        "pomodoroSettings",
-        JSON.stringify(newState.settings)
-      );
-      localStorage.setItem("pomodoroLastUpdateTime", Date.now().toString());
-    }
-    lastUpdateTimeRef.current = Date.now();
-    setState(newState);
-  };
-
-  const getPhaseDuration = (phase: PomodoroPhase): number => {
-    switch (phase) {
-      case "work":
-        return state.settings.workDuration;
-      case "shortBreak":
-        return state.settings.shortBreakDuration;
-      case "longBreak":
-        return state.settings.longBreakDuration;
-    }
-  };
-
-  // フェーズ完了処理（状態を返すバージョン）
-  const handlePhaseCompleteForState = (
-    currentState: PomodoroState
-  ): PomodoroState => {
-    const newState = { ...currentState };
-    newState.isRunning = false;
-
-    // 音の再生（設定で有効な場合）
-    if (newState.settings.soundEnabled) {
-      playNotificationSound();
-    }
-
-    // ブラウザ通知を送信
-    showNotification(newState);
-
-    if (newState.currentPhase === "work") {
-      if (newState.currentSession === newState.settings.totalSessions) {
-        // 全セッション完了後のロングブレイク
-        newState.currentPhase = "longBreak";
-        newState.timeLeft = newState.settings.longBreakDuration;
-      } else {
-        // ショートブレイク
-        newState.currentPhase = "shortBreak";
-        newState.timeLeft = newState.settings.shortBreakDuration;
+  const getPhaseDuration = useCallback(
+    (phase: PomodoroPhase): number => {
+      switch (phase) {
+        case "work":
+          return state.settings.workDuration;
+        case "shortBreak":
+          return state.settings.shortBreakDuration;
+        case "longBreak":
+          return state.settings.longBreakDuration;
       }
-    } else if (newState.currentPhase === "shortBreak") {
-      // 次の作業セッション
-      newState.currentSession += 1;
-      newState.currentPhase = "work";
-      newState.timeLeft = newState.settings.workDuration;
-    } else if (newState.currentPhase === "longBreak") {
-      // サイクル完了
-      newState.isCompleted = true;
-    }
+    },
+    [state.settings]
+  );
 
-    // 自動スタートが有効で完了していない場合
-    if (newState.settings.autoStart && !newState.isCompleted) {
-      newState.isRunning = true;
-    }
-
-    return newState;
-  };
-
-  // ブラウザ通知を表示
-  const showNotification = (state: PomodoroState) => {
-    if ("Notification" in window && Notification.permission === "granted") {
-      let title = "";
-      let body = "";
-
-      if (state.currentPhase === "work") {
-        title = t.pomodoroTimer.workCompleted || "Work session completed!";
-        body = t.pomodoroTimer.timeForBreak || "Time for a break!";
-      } else if (state.currentPhase === "shortBreak") {
-        title = t.pomodoroTimer.breakCompleted || "Break completed!";
-        body = t.pomodoroTimer.timeForWork || "Time to get back to work!";
-      } else if (state.currentPhase === "longBreak") {
-        title = t.pomodoroTimer.sessionCompleted || "Session completed!";
-        body = t.pomodoroTimer.timeForLongBreak || "Time for a long break!";
-      }
-
-      if (title) {
-        new Notification(title, {
-          body: body,
-          icon: "/favicon.ico",
-          tag: "pomodoro-timer",
-        });
-      }
-    }
-  };
-
-  // Web Workerの管理
+  // Web Workerの管理（useEffectで最適化）
   useEffect(() => {
     if (state.isRunning && state.timeLeft > 0) {
       workerRef.current?.postMessage({ action: "start" });
@@ -297,7 +388,7 @@ export default function PomodoroTimerClient({
     }
   }, [state.isRunning, state.timeLeft]);
 
-  // Page Visibility APIでバックグラウンド対応
+  // Page Visibility APIでバックグラウンド対応（依存配列を修正）
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.hidden) {
@@ -331,93 +422,20 @@ export default function PomodoroTimerClient({
     return () => {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
-  }, [
-    state.isRunning,
-    state.timeLeft,
-    state.currentPhase,
-    state.currentSession,
-    state.settings,
-  ]);
+  }, [state.isRunning, state.timeLeft, handlePhaseCompleteForState, saveState]);
 
-  useEffect(() => {
-    if (state.isRunning && state.timeLeft > 0) {
-      // フォールバック用のsetInterval（Web Workerが利用できない場合）
-      intervalRef.current = setInterval(() => {
-        const currentTime = Date.now();
-        const expectedElapsedSeconds = Math.floor(
-          (currentTime - lastUpdateTimeRef.current) / 1000
-        );
-
-        if (expectedElapsedSeconds >= 1) {
-          const newState = { ...state };
-          newState.timeLeft = Math.max(
-            0,
-            newState.timeLeft - expectedElapsedSeconds
-          );
-          lastUpdateTimeRef.current = currentTime;
-
-          if (newState.timeLeft === 0) {
-            handlePhaseComplete(newState);
-          } else {
-            saveState(newState);
-          }
-        }
-      }, 1000); // Web Workerと併用するため1秒間隔
-    } else {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-    }
-
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-    };
-  }, [state.isRunning, state.timeLeft]);
-
-  const handlePhaseComplete = (currentState: PomodoroState) => {
-    const newState = handlePhaseCompleteForState(currentState);
-    saveState(newState);
-  };
-
-  const playNotificationSound = () => {
-    // Web Audio APIを使用した簡単な通知音
-    try {
-      const audioContext = new (window.AudioContext ||
-        (window as any).webkitAudioContext)();
-      const oscillator = audioContext.createOscillator();
-      const gainNode = audioContext.createGain();
-
-      oscillator.connect(gainNode);
-      gainNode.connect(audioContext.destination);
-
-      oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
-      gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-      gainNode.gain.exponentialRampToValueAtTime(
-        0.01,
-        audioContext.currentTime + 0.5
-      );
-
-      oscillator.start();
-      oscillator.stop(audioContext.currentTime + 0.5);
-    } catch (error) {
-      console.log("音の再生に失敗しました:", error);
-    }
-  };
-
-  const startTimer = () => {
+  const startTimer = useCallback(() => {
     const newState = { ...state, isRunning: true };
     lastUpdateTimeRef.current = Date.now();
     saveState(newState);
-  };
+  }, [state, saveState]);
 
-  const pauseTimer = () => {
+  const pauseTimer = useCallback(() => {
     const newState = { ...state, isRunning: false };
     saveState(newState);
-  };
+  }, [state, saveState]);
 
-  const resetTimer = () => {
+  const resetTimer = useCallback(() => {
     const newState: PomodoroState = {
       currentPhase: "work",
       currentSession: 1,
@@ -428,58 +446,62 @@ export default function PomodoroTimerClient({
     };
     lastUpdateTimeRef.current = Date.now();
     saveState(newState);
-  };
+  }, [state.settings, saveState]);
 
-  const updateSettings = (newSettings: Partial<PomodoroSettings>) => {
-    // NaN値をデフォルト値で置き換える
-    const sanitizedSettings = { ...newSettings };
-    if (
-      sanitizedSettings.workDuration &&
-      isNaN(sanitizedSettings.workDuration)
-    ) {
-      sanitizedSettings.workDuration = defaultSettings.workDuration;
-    }
-    if (
-      sanitizedSettings.shortBreakDuration &&
-      isNaN(sanitizedSettings.shortBreakDuration)
-    ) {
-      sanitizedSettings.shortBreakDuration = defaultSettings.shortBreakDuration;
-    }
-    if (
-      sanitizedSettings.longBreakDuration &&
-      isNaN(sanitizedSettings.longBreakDuration)
-    ) {
-      sanitizedSettings.longBreakDuration = defaultSettings.longBreakDuration;
-    }
-    if (
-      sanitizedSettings.totalSessions &&
-      isNaN(sanitizedSettings.totalSessions)
-    ) {
-      sanitizedSettings.totalSessions = defaultSettings.totalSessions;
-    }
+  const updateSettings = useCallback(
+    (newSettings: Partial<PomodoroSettings>) => {
+      // NaN値をデフォルト値で置き換える
+      const sanitizedSettings = { ...newSettings };
+      if (
+        sanitizedSettings.workDuration &&
+        isNaN(sanitizedSettings.workDuration)
+      ) {
+        sanitizedSettings.workDuration = defaultSettings.workDuration;
+      }
+      if (
+        sanitizedSettings.shortBreakDuration &&
+        isNaN(sanitizedSettings.shortBreakDuration)
+      ) {
+        sanitizedSettings.shortBreakDuration =
+          defaultSettings.shortBreakDuration;
+      }
+      if (
+        sanitizedSettings.longBreakDuration &&
+        isNaN(sanitizedSettings.longBreakDuration)
+      ) {
+        sanitizedSettings.longBreakDuration = defaultSettings.longBreakDuration;
+      }
+      if (
+        sanitizedSettings.totalSessions &&
+        isNaN(sanitizedSettings.totalSessions)
+      ) {
+        sanitizedSettings.totalSessions = defaultSettings.totalSessions;
+      }
 
-    const updatedSettings = { ...state.settings, ...sanitizedSettings };
-    const newState = { ...state, settings: updatedSettings };
+      const updatedSettings = { ...state.settings, ...sanitizedSettings };
+      const newState = { ...state, settings: updatedSettings };
 
-    // 現在のフェーズの時間が変更された場合、時間をリセット
-    if (sanitizedSettings.workDuration && state.currentPhase === "work") {
-      newState.timeLeft = updatedSettings.workDuration;
-    } else if (
-      sanitizedSettings.shortBreakDuration &&
-      state.currentPhase === "shortBreak"
-    ) {
-      newState.timeLeft = updatedSettings.shortBreakDuration;
-    } else if (
-      sanitizedSettings.longBreakDuration &&
-      state.currentPhase === "longBreak"
-    ) {
-      newState.timeLeft = updatedSettings.longBreakDuration;
-    }
+      // 現在のフェーズの時間が変更された場合、時間をリセット
+      if (sanitizedSettings.workDuration && state.currentPhase === "work") {
+        newState.timeLeft = updatedSettings.workDuration;
+      } else if (
+        sanitizedSettings.shortBreakDuration &&
+        state.currentPhase === "shortBreak"
+      ) {
+        newState.timeLeft = updatedSettings.shortBreakDuration;
+      } else if (
+        sanitizedSettings.longBreakDuration &&
+        state.currentPhase === "longBreak"
+      ) {
+        newState.timeLeft = updatedSettings.longBreakDuration;
+      }
 
-    saveState(newState);
-  };
+      saveState(newState);
+    },
+    [state, defaultSettings, saveState]
+  );
 
-  const formatTime = (totalSeconds: number) => {
+  const formatTime = useCallback((totalSeconds: number) => {
     // NaNや無効な値をチェック
     const safeSeconds =
       isNaN(totalSeconds) || totalSeconds < 0 ? 0 : Math.floor(totalSeconds);
@@ -488,9 +510,9 @@ export default function PomodoroTimerClient({
     return `${mins.toString().padStart(2, "0")}:${secs
       .toString()
       .padStart(2, "0")}`;
-  };
+  }, []);
 
-  const getPhaseColor = () => {
+  const getPhaseColor = useCallback(() => {
     switch (state.currentPhase) {
       case "work":
         return "text-red-600";
@@ -501,9 +523,9 @@ export default function PomodoroTimerClient({
       default:
         return "text-gray-600";
     }
-  };
+  }, [state.currentPhase]);
 
-  const getPhaseText = () => {
+  const getPhaseText = useCallback(() => {
     switch (state.currentPhase) {
       case "work":
         return t.pomodoroTimer.workTime;
@@ -514,9 +536,9 @@ export default function PomodoroTimerClient({
       default:
         return "";
     }
-  };
+  }, [state.currentPhase, t.pomodoroTimer]);
 
-  const progress = () => {
+  const progress = useCallback(() => {
     const phaseDuration = getPhaseDuration(state.currentPhase);
     if (isNaN(phaseDuration) || phaseDuration <= 0 || isNaN(state.timeLeft)) {
       return 0;
@@ -526,7 +548,7 @@ export default function PomodoroTimerClient({
     return isNaN(calculatedProgress)
       ? 0
       : Math.max(0, Math.min(100, calculatedProgress));
-  };
+  }, [getPhaseDuration, state.currentPhase, state.timeLeft]);
 
   // ハイドレーションエラーを避けるため、クライアントサイドでのみレンダリング
   if (!isClient) {
