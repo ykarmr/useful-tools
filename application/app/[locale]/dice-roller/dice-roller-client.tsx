@@ -9,6 +9,7 @@ import ToolControls from "@/components/layout/tool-controls";
 import ToolInput from "@/components/layout/tool-input";
 import { Locale, Translations } from "@/locales";
 import ToolFaq from "@/components/layout/tool-faq";
+import ToolHowToUse from "@/components/layout/tool-how-to-use";
 
 interface DiceRollerClientProps {
   locale: Locale;
@@ -94,6 +95,18 @@ export default function DiceRollerClient({ locale, t }: DiceRollerClientProps) {
       description={t.diceRoller.description}
       icon={Dice1}
     >
+      {/* How To Use セクション */}
+      <ToolSection>
+        <ToolHowToUse
+          title={t.diceRoller.howToUse.title}
+          steps={t.diceRoller.howToUse.steps}
+          features={{
+            title: t.diceRoller.features.title,
+            items: t.diceRoller.features.items,
+          }}
+        />
+      </ToolSection>
+
       {/* Dice Display */}
       <ToolSection>
         <div className="flex flex-col items-center mb-4 text-primary-600">

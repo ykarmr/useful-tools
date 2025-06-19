@@ -9,5 +9,13 @@ export interface DiceRollerTranslations {
   result: string;
   resultMessage: string;
   selectCount: string;
+  howToUse: {
+    title: string;
+    steps: string[];
+  };
+  features: {
+    title: string;
+    items: string[];
+  };
   faqList: FAQItem[];
 }
