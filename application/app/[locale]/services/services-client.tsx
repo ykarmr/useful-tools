@@ -88,6 +88,7 @@ const toolCategories = [
       { key: "urlEncoder", icon: LinkIcon, href: "/url-encoder" },
       { key: "markdownPreview", icon: FileText, href: "/markdown-preview" },
       { key: "textStatistics", icon: BarChart3, href: "/text-statistics" },
+      { key: "idGenerator", icon: Hash, href: "/id-generator" },
     ],
   },
   {

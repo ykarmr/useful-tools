@@ -54,6 +54,7 @@ export default async function sitemap({
     "/pixel-art-editor",
     "/data-converter",
     "/base-converter",
+    "/id-generator",
   ];
 
   const sitemap: MetadataRoute.Sitemap = [];

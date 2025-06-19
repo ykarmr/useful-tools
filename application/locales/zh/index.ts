@@ -35,6 +35,7 @@ import { htmlEscape } from "./pages/tools/html-escape";
 import { pixelArtEditor } from "./pages/tools/pixel-art-editor";
 import { dataConverter } from "./pages/tools/data-converter";
 import { baseConverter } from "./pages/tools/base-converter";
+import idGeneratorZh from "./pages/tools/id-generator";
 import { ad } from "./ad";
 import { common } from "./common";
 import { footer } from "./footer";
@@ -81,6 +82,7 @@ const zh: Translations = {
   pixelArtEditor,
   dataConverter,
   baseConverter,
+  idGenerator: idGeneratorZh,
 };
 
 export default zh;

@@ -42,6 +42,7 @@ import { HtmlEscapeTranslations } from "./pages/tools/html-escape";
 import { PixelArtEditorTranslations } from "./pages/tools/pixel-art-editor";
 import { DataConverterTranslations } from "./pages/tools/data-converter";
 import { BaseConverterTranslations } from "./pages/tools/base-converter";
+import { IdGeneratorTranslations } from "./pages/tools/id-generator";
 
 export interface Translations {
   common: CommonTranslations;
@@ -84,4 +85,5 @@ export interface Translations {
   pixelArtEditor: PixelArtEditorTranslations;
   dataConverter: DataConverterTranslations;
   baseConverter: BaseConverterTranslations;
+  idGenerator: IdGeneratorTranslations;
 }

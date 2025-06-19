@@ -296,6 +296,7 @@ components/
 │   ├── tool-layout.tsx - ツール用メインレイアウト
 │   ├── tool-result.tsx - ツール結果表示
 │   ├── tool-section.tsx - ツールセクション
+│   └── tool-how-to-use.tsx - ツールの使い方セクション
 │   └── tool-stats.tsx - ツール統計情報
 └── ui/ - shadcn/ui コンポーネント
 ```
@@ -402,6 +403,18 @@ hooks/
   description={t.[機能名].description}
   icon={[アイコン名]}
 >
+  {/* How To Use セクション */}
+  <ToolSection>
+    {/* ツールの使い方を説明するコンテンツ */}
+    <ToolHowToUse
+      title={t.[機能名].howToUse.title}
+      steps={t.[機能名].howToUse.steps}
+      features={{
+        title: t.[機能名].features.title,
+        items: t.[機能名].features.items,
+      }}
+    />
+  </ToolSection>
   {/* メイン機能セクション */}
   <ToolSection>
     <ToolDisplay>
@@ -441,3 +454,6 @@ hooks/
 - 実装する前に方針の確認を行うこと
 - セクション毎に内容の確認を行うこと
 - ブラウザ内の機能のみで完結するツールを実装すること
+- API Route(/api)は使用しないこと
+- `useEffect`の使用は最小限に抑えること
+- `application/components/ui/toast.tsx`は使用しないこと
