@@ -25,5 +25,18 @@ export interface SubnetCalculatorTranslations {
   errorEmptyMask: string;
   errorInvalidMask: string;
   calculate: string;
+
+  // 使い方ガイド
+  howToUse: {
+    title: string;
+    steps: string[];
+  };
+
+  // 機能
+  features: {
+    title: string;
+    items: string[];
+  };
+
   faqList: FAQItem[];
 }

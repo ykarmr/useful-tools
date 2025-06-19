@@ -8,6 +8,14 @@ export interface WorldClockTranslations {
   local: string;
   searchPlaceholder: string;
   resultsFound: string;
+  howToUse: {
+    title: string;
+    steps: string[];
+  };
+  features: {
+    title: string;
+    items: string[];
+  };
   regions: {
     americas: string;
     europe: string;

@@ -14,6 +14,30 @@ export const worldClock: WorldClockTranslations = {
   local: "Local",
   searchPlaceholder: "Search by city or country name...",
   resultsFound: "results found",
+  howToUse: {
+    title: "How to Use World Clock",
+    steps: [
+      "The current time for selected time zones is displayed at the top of the screen",
+      "Add new cities from the 'Add Time Zone' section below",
+      "Use the search box to filter cities by name or country",
+      "Select from cities organized by geographic regions",
+      "Remove unwanted time zones using the delete button in the top-right corner",
+      "Your settings are automatically saved and restored on your next visit",
+    ],
+  },
+  features: {
+    title: "Key Features",
+    items: [
+      "Support for 200+ major cities worldwide",
+      "Real-time updates every second",
+      "Automatic daylight saving time adjustments",
+      "Search functionality by city and country names",
+      "Regional city categorization",
+      "UTC time difference display",
+      "Automatic save and restore settings",
+      "Responsive design for mobile devices",
+    ],
+  },
   regions: {
     americas: "Americas",
     europe: "Europe",
@@ -456,44 +480,44 @@ export const worldClock: WorldClockTranslations = {
   },
   faqList: [
     {
-      q: "What time zones can I add?",
-      a: "You can add time zones for major cities worldwide. We support standard time zone identifiers such as Asia/Tokyo, America/New_York, Europe/London, and many more. Choose from over 200 cities across Americas, Europe, Asia-Pacific, and Africa & Middle East regions.",
+      q: "What cities can I add to the world clock?",
+      a: "You can add time zones for over 200 major cities worldwide. Choose from cities across four regions: Americas, Europe, Asia-Pacific, and Africa & Middle East. This includes international hubs like Tokyo, New York, London, Paris, and Sydney, as well as many regional cities.",
     },
     {
       q: "Does daylight saving time adjust automatically?",
-      a: "Yes, daylight saving time (DST) is automatically adjusted for each time zone. We use the browser's time zone database to ensure accurate time display. The clock will automatically switch when DST begins or ends in regions like the US and Europe.",
-    },
-    {
-      q: "How many time zones can I display at once?",
-      a: "There's no hard limit on the number of time zones you can display, but we recommend keeping it reasonable for readability. About 10 time zones work well on mobile devices, while up to 20 are comfortable on desktop screens.",
-    },
-    {
-      q: "Are my selected time zones saved?",
-      a: "Yes, your selected time zone list is saved in your browser's local storage. Your settings will be restored when you reload the page. Note that clearing your browser data will also remove these settings.",
-    },
-    {
-      q: "How often do the clocks update?",
-      a: "The clocks update automatically every second to show real-time accurate time. All time zone displays are synchronized to update simultaneously.",
+      a: "Yes, daylight saving time (DST) is automatically adjusted for each time zone. We use the browser's standard time zone API to ensure accurate time display. The clock will automatically switch when DST begins or ends in regions like the US and Europe.",
     },
     {
       q: "How does the search function work?",
-      a: "Enter a city name or country name in the search box to filter the available cities. The search supports partial matches, so you can type 'Lond' to find London, or 'United' to find cities in the United States.",
+      a: "Type a city name or country name in the search box to filter the available cities. The search supports prefix matching and works with localized city names. For example, you can search for 'London', 'United', or 'New' to find relevant cities. The number of search results is also displayed.",
+    },
+    {
+      q: "How many time zones can I display at once?",
+      a: "There's no limit on the number of time zones you can display, but we recommend keeping it reasonable for readability. The responsive design shows up to 5 columns on desktop and 1 column on mobile, with scrolling to view all time zones as needed.",
+    },
+    {
+      q: "Are my selected time zones saved?",
+      a: "Yes, your selected time zone list is saved in your browser's local storage by language. Your settings will be restored when you reload the page. By default, 8 major cities are pre-selected on first use: Tokyo, New York, London, Paris, Sydney, Seoul, Los Angeles, and Dubai.",
+    },
+    {
+      q: "How often do the clocks update?",
+      a: "The clocks update automatically every second to show real-time accurate time. All time zone displays are synchronized to update simultaneously, including seconds precision.",
     },
     {
       q: "What does the UTC display mean?",
-      a: "The UTC (Coordinated Universal Time) display shows how many hours each time zone is offset from UTC. For example, 'UTC+9' represents Japan Standard Time, which is 9 hours ahead of UTC. 'Local' indicates the time zone matches your current regional time.",
+      a: "The UTC display at the bottom of each time zone card shows how many hours that time zone differs from Coordinated Universal Time (UTC). For example, 'UTC+9' means Japan Standard Time, which is 9 hours ahead of UTC. 'Local' indicates that the time zone matches your current location.",
     },
     {
-      q: "Can I use this on mobile devices?",
-      a: "Yes, the world clock is optimized for mobile devices and works great on smartphones and tablets. It supports touch interactions and automatically adjusts the layout based on your screen size.",
+      q: "How are cities organized by region?",
+      a: "In the time zone addition screen, cities are organized into four main regions: Americas, Europe, Asia-Pacific, and Africa & Middle East. Within each region, cities are further organized to help you find your desired location easily.",
     },
     {
-      q: "Does it work offline?",
-      a: "After the initial load, the cached data allows the clock to display time offline. However, some features like adding or removing time zones may require an internet connection.",
+      q: "Does it work well on mobile devices?",
+      a: "Yes, the world clock features a responsive design that works seamlessly on smartphones and tablets. The layout automatically adjusts to your screen size and is optimized for touch interactions.",
     },
     {
-      q: "How can I calculate time differences?",
-      a: "Use the UTC display under each city to calculate time differences. For example, Tokyo (UTC+9) and New York (UTC-5) have a 14-hour difference (13 hours during daylight saving time). You can also visually compare the times displayed for each city to understand the time difference intuitively.",
+      q: "How do I remove time zones?",
+      a: "Click or tap the delete button (trash icon) in the top-right corner of each time zone card to remove it. The updated settings are immediately saved to local storage and will be remembered for your next visit.",
     },
   ],
 };

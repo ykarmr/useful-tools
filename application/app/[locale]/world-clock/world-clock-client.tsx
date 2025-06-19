@@ -5,6 +5,7 @@ import { Plus, Trash2, Globe, Search } from "lucide-react";
 import ToolLayout from "@/components/layout/tool-layout";
 import ToolSection from "@/components/layout/tool-section";
 import ToolFaq from "@/components/layout/tool-faq";
+import ToolHowToUse from "@/components/layout/tool-how-to-use";
 import { Input } from "@/components/ui/input";
 import { Locale, Translations } from "@/locales";
 
@@ -648,6 +649,18 @@ export default function WorldClockClient({ locale, t }: WorldClockClientProps) {
       description={t.worldClock.description}
       icon={Globe}
     >
+      {/* How To Use セクション */}
+      <ToolSection>
+        <ToolHowToUse
+          title={t.worldClock.howToUse.title}
+          steps={t.worldClock.howToUse.steps}
+          features={{
+            title: t.worldClock.features.title,
+            items: t.worldClock.features.items,
+          }}
+        />
+      </ToolSection>
+
       {/* Time Zones Grid */}
       <ToolSection>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mb-8">

@@ -15,6 +15,30 @@ export const worldClock: WorldClockTranslations = {
   local: "Local",
   searchPlaceholder: "Buscar por ciudad o país...",
   resultsFound: "resultados encontrados",
+  howToUse: {
+    title: "Cómo usar el Reloj Mundial",
+    steps: [
+      "La hora actual de las zonas horarias seleccionadas se muestra en la parte superior",
+      "Agregue nuevas ciudades desde la sección 'Agregar Zona Horaria' a continuación",
+      "Use la caja de búsqueda para filtrar ciudades por nombre o país",
+      "Seleccione de ciudades organizadas por regiones geográficas",
+      "Elimine zonas horarias no deseadas usando el botón eliminar en la esquina superior derecha",
+      "Su configuración se guarda automáticamente y se restaura en su próxima visita",
+    ],
+  },
+  features: {
+    title: "Características Principales",
+    items: [
+      "Soporte para más de 200 ciudades principales en todo el mundo",
+      "Actualizaciones en tiempo real cada segundo",
+      "Ajustes automáticos de horario de verano",
+      "Funcionalidad de búsqueda por nombres de ciudades y países",
+      "Categorización regional de ciudades",
+      "Visualización de diferencia horaria UTC",
+      "Guardado y restauración automática de configuraciones",
+      "Diseño responsivo para dispositivos móviles",
+    ],
+  },
   regions: {
     americas: "Américas",
     europe: "Europa",
@@ -457,44 +481,44 @@ export const worldClock: WorldClockTranslations = {
   },
   faqList: [
     {
-      q: "¿Qué zonas horarias puedo agregar?",
-      a: "Puedes agregar zonas horarias de las principales ciudades del mundo. Admitimos identificadores estándar de zonas horarias como Asia/Tokyo, America/New_York, Europe/London, y muchos más. Elige entre más de 200 ciudades de las Américas, Europa, Asia-Pacífico, y África y Medio Oriente.",
+      q: "¿Qué ciudades puedo agregar al reloj mundial?",
+      a: "Puedes agregar zonas horarias para más de 200 ciudades principales en todo el mundo. Elige de ciudades en cuatro regiones: Américas, Europa, Asia-Pacífico, y África y Oriente Medio. Esto incluye centros internacionales como Tokio, Nueva York, Londres, París y Sídney, así como muchas ciudades regionales.",
     },
     {
       q: "¿Se ajusta automáticamente el horario de verano?",
-      a: "Sí, el horario de verano se ajusta automáticamente para cada zona horaria. Usamos la base de datos de zonas horarias del navegador para garantizar una visualización precisa de la hora. El reloj cambiará automáticamente cuando comience o termine el horario de verano en regiones como EE.UU. y Europa.",
-    },
-    {
-      q: "¿Cuántas zonas horarias puedo mostrar a la vez?",
-      a: "No hay un límite estricto en el número de zonas horarias que puedes mostrar, pero recomendamos mantenerlo razonable para la legibilidad. Alrededor de 10 zonas horarias funcionan bien en dispositivos móviles, mientras que hasta 20 son cómodas en pantallas de escritorio.",
-    },
-    {
-      q: "¿Se guardan mis zonas horarias seleccionadas?",
-      a: "Sí, tu lista de zonas horarias seleccionadas se guarda en el almacenamiento local de tu navegador. Tu configuración se restaurará cuando recargues la página. Ten en cuenta que limpiar los datos del navegador también eliminará estas configuraciones.",
-    },
-    {
-      q: "¿Con qué frecuencia se actualizan los relojes?",
-      a: "Los relojes se actualizan automáticamente cada segundo para mostrar la hora precisa en tiempo real. Todas las pantallas de zonas horarias están sincronizadas para actualizarse simultáneamente.",
+      a: "Sí, el horario de verano se ajusta automáticamente para cada zona horaria. Usamos la API estándar de zonas horarias del navegador para garantizar una visualización precisa de la hora. El reloj cambiará automáticamente cuando comience o termine el horario de verano en regiones como EE.UU. y Europa.",
     },
     {
       q: "¿Cómo funciona la función de búsqueda?",
-      a: "Ingresa el nombre de una ciudad o país en el cuadro de búsqueda para filtrar las ciudades disponibles. La búsqueda admite coincidencias parciales, por lo que puedes escribir 'Madr' para encontrar Madrid, o 'Estados' para encontrar ciudades en Estados Unidos.",
+      a: "Escriba el nombre de una ciudad o país en la caja de búsqueda para filtrar las ciudades disponibles. La búsqueda admite coincidencias de prefijo y funciona con nombres de ciudades localizados. Por ejemplo, puede buscar 'Londres', 'Estados', o 'Nueva' para encontrar ciudades relevantes. También se muestra el número de resultados de búsqueda.",
+    },
+    {
+      q: "¿Cuántas zonas horarias puedo mostrar a la vez?",
+      a: "No hay límite en el número de zonas horarias que puedes mostrar, pero recomendamos mantenerlo razonable para la legibilidad. El diseño responsivo muestra hasta 5 columnas en escritorio y 1 columna en móvil, con desplazamiento para ver todas las zonas horarias según sea necesario.",
+    },
+    {
+      q: "¿Se guardan mis zonas horarias seleccionadas?",
+      a: "Sí, tu lista de zonas horarias seleccionadas se guarda en el almacenamiento local de tu navegador por idioma. Tu configuración se restaurará cuando recargues la página. Por defecto, 8 ciudades principales están preseleccionadas en el primer uso: Tokio, Nueva York, Londres, París, Sídney, Seúl, Los Ángeles y Dubái.",
+    },
+    {
+      q: "¿Con qué frecuencia se actualizan los relojes?",
+      a: "Los relojes se actualizan automáticamente cada segundo para mostrar la hora precisa en tiempo real. Todas las pantallas de zonas horarias están sincronizadas para actualizarse simultáneamente, incluyendo precisión de segundos.",
     },
     {
       q: "¿Qué significa la visualización UTC?",
-      a: "La visualización UTC (Tiempo Universal Coordinado) muestra cuántas horas cada zona horaria se desvía del UTC. Por ejemplo, 'UTC+1' representa la hora de Europa Central, que está 1 hora adelante del UTC. 'Local' indica que la zona horaria coincide con tu hora regional actual.",
+      a: "La visualización UTC en la parte inferior de cada tarjeta de zona horaria muestra cuántas horas difiere esa zona horaria del Tiempo Universal Coordinado (UTC). Por ejemplo, 'UTC+9' significa Hora Estándar de Japón, que está 9 horas adelante de UTC. 'Local' indica que la zona horaria coincide con tu ubicación actual.",
     },
     {
-      q: "¿Puedo usarlo en dispositivos móviles?",
-      a: "Sí, el reloj mundial está optimizado para dispositivos móviles y funciona excelente en teléfonos inteligentes y tabletas. Admite interacciones táctiles y ajusta automáticamente el diseño según el tamaño de tu pantalla.",
+      q: "¿Cómo se organizan las ciudades por región?",
+      a: "En la pantalla de adición de zonas horarias, las ciudades se organizan en cuatro regiones principales: Américas, Europa, Asia-Pacífico, y África y Oriente Medio. Dentro de cada región, las ciudades se organizan además para ayudarte a encontrar tu ubicación deseada fácilmente.",
     },
     {
-      q: "¿Funciona sin conexión?",
-      a: "Después de la carga inicial, los datos en caché permiten que el reloj muestre la hora sin conexión. Sin embargo, algunas funciones como agregar o eliminar zonas horarias pueden requerir una conexión a internet.",
+      q: "¿Funciona bien en dispositivos móviles?",
+      a: "Sí, el reloj mundial cuenta con un diseño responsivo que funciona perfectamente en teléfonos inteligentes y tabletas. El diseño se ajusta automáticamente al tamaño de tu pantalla y está optimizado para interacciones táctiles.",
     },
     {
-      q: "¿Cómo puedo calcular diferencias horarias?",
-      a: "Usa la visualización UTC debajo de cada ciudad para calcular diferencias horarias. Por ejemplo, Tokio (UTC+9) y Nueva York (UTC-5) tienen una diferencia de 14 horas (13 horas durante el horario de verano). También puedes comparar visualmente las horas mostradas para cada ciudad para entender la diferencia horaria de manera intuitiva.",
+      q: "¿Cómo elimino zonas horarias?",
+      a: "Haz clic o toca el botón eliminar (icono de papelera) en la esquina superior derecha de cada tarjeta de zona horaria para eliminarla. La configuración actualizada se guarda inmediatamente en el almacenamiento local y se recordará para tu próxima visita.",
     },
   ],
 };

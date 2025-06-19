@@ -7,6 +7,7 @@ import ToolSection from "@/components/layout/tool-section";
 import ToolDisplay from "@/components/layout/tool-display";
 import ToolControls from "@/components/layout/tool-controls";
 import ToolFaq from "@/components/layout/tool-faq";
+import ToolHowToUse from "@/components/layout/tool-how-to-use";
 import { Locale, Translations } from "@/locales";
 
 interface SubnetCalculatorClientProps {
@@ -124,6 +125,18 @@ export default function SubnetCalculatorClient({
       description={t.subnetCalculator.description}
       icon={Network}
     >
+      {/* How To Use セクション */}
+      <ToolSection>
+        <ToolHowToUse
+          title={t.subnetCalculator.howToUse.title}
+          steps={t.subnetCalculator.howToUse.steps}
+          features={{
+            title: t.subnetCalculator.features.title,
+            items: t.subnetCalculator.features.items,
+          }}
+        />
+      </ToolSection>
+
       {/* 入力欄カード */}
       <ToolSection>
         <div className="card w-full">
