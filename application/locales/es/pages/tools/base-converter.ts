@@ -67,26 +67,54 @@ export const baseConverter: BaseConverterTranslations = {
   negativeValueNote: "Valor negativo",
   asciiTableNote:
     "Solo se muestra un subconjunto. Los caracteres ASCII imprimibles van del 32 (espacio) al 126 (~), totalizando 95 caracteres.",
+  howToUse: {
+    title: "Cómo Usar",
+    steps: [
+      "Introduce un número en el campo de entrada",
+      "Selecciona la base de entrada (binario, octal, decimal o hexadecimal)",
+      "Haz clic en el botón 'Convertir' para realizar la conversión",
+      "Los resultados se muestran simultáneamente en las cuatro bases numéricas",
+      "Haz clic en cualquier resultado para copiarlo al portapapeles",
+      "Para operaciones de bits, usa la sección de operaciones de bits para seleccionar números y operadores",
+      "Para ver códigos de caracteres ASCII, haz clic en el botón mostrar tabla",
+    ],
+  },
+  features: {
+    title: "Características Principales",
+    items: [
+      "Conversión entre binario, octal, decimal y hexadecimal",
+      "Operaciones de bits (AND, OR, XOR, NOT, operaciones de desplazamiento)",
+      "Visualización de tabla de códigos de caracteres ASCII",
+      "Validación automática de entrada y visualización de errores",
+      "Función de copia con un clic",
+      "Soporte para números grandes (dentro del rango de enteros seguros de JavaScript)",
+      "Visualización simultánea en múltiples bases numéricas",
+    ],
+  },
   faqList: [
     {
-      q: "¿Qué es la conversión de bases numéricas?",
-      a: "La conversión de bases numéricas es representar el mismo valor numérico usando diferentes sistemas numéricos (bases). Se usa comúnmente en programación ya que las computadoras operan en binario.",
+      q: "¿Para qué puedo usar el convertidor de bases numéricas?",
+      a: "El convertidor es útil para programación, desarrollo de sistemas y diseño de circuitos digitales donde se necesitan diferentes representaciones de bases numéricas. El binario se usa comúnmente para procesamiento interno de computadoras, mientras que el hexadecimal se usa a menudo para direcciones de memoria y códigos de color.",
     },
     {
-      q: "¿Qué es binario (base 2)?",
-      a: "Binario es un sistema numérico que usa solo dos dígitos: 0 y 1. Es el lenguaje fundamental de las computadoras, donde cada dígito representa un bit.",
+      q: "¿Desde qué bases numéricas puedo convertir?",
+      a: "Esta herramienta soporta cuatro bases numéricas: binario (0,1), octal (0-7), decimal (0-9) y hexadecimal (0-9,A-F). Cualquier número de entrada se convierte automáticamente a las otras tres bases.",
     },
     {
-      q: "¿Por qué se usa comúnmente hexadecimal?",
-      a: "Hexadecimal proporciona una forma compacta de representar números binarios. Cada dígito hex corresponde exactamente a 4 dígitos binarios, facilitando la lectura de secuencias binarias largas.",
+      q: "¿Qué operaciones de bits están disponibles?",
+      a: "Puedes realizar operaciones lógicas AND (&), OR (|), XOR (^), NOT (~) y operaciones de desplazamiento izquierdo (<<), desplazamiento derecho (>>). Estas se usan comúnmente en programación para procesamiento eficiente y gestión de banderas.",
     },
     {
-      q: "¿Qué son las operaciones de bits?",
-      a: "Las operaciones de bits son operaciones lógicas realizadas en bits individuales. Incluyen operaciones AND, OR, XOR, NOT y desplazamiento de bits, comúnmente usadas para programación eficiente.",
+      q: "¿Hay límites en los números de entrada?",
+      a: "La herramienta soporta enteros positivos dentro del rango de enteros seguros de JavaScript (Number.MAX_SAFE_INTEGER), que es aproximadamente 9,007 billones. Los números negativos no están soportados.",
     },
     {
-      q: "¿Qué es ASCII?",
-      a: "ASCII (Código Estándar Americano para el Intercambio de Información) es un estándar de codificación de caracteres que asigna valores numéricos a caracteres para procesamiento por computadora.",
+      q: "¿Cómo uso la tabla de caracteres ASCII?",
+      a: "La tabla ASCII muestra caracteres imprimibles estándar (espacio a ~) y sus códigos decimales, binarios y hexadecimales correspondientes. Es útil como referencia al trabajar con códigos de caracteres en programación.",
+    },
+    {
+      q: "¿Cómo funciona la función de copia?",
+      a: "Haz clic en el botón de copia junto a cualquier resultado de conversión para copiar el valor (con prefijo) al portapapeles. Por ejemplo: los números binarios se copian como '0b1010', hexadecimal como '0xA'.",
     },
   ],
 };

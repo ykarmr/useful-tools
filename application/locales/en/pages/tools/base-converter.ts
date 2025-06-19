@@ -67,26 +67,54 @@ export const baseConverter: BaseConverterTranslations = {
   negativeValueNote: "Negative value",
   asciiTableNote:
     "Only a subset is displayed. ASCII printable characters range from 32 (space) to 126 (~), totaling 95 characters.",
+  howToUse: {
+    title: "How to Use",
+    steps: [
+      "Enter a number in the input field",
+      "Select the input base (binary, octal, decimal, or hexadecimal)",
+      "Click the 'Convert' button to perform the conversion",
+      "Results are displayed simultaneously in all four number bases",
+      "Click any result to copy it to the clipboard",
+      "For bit operations, use the bit operations section to select numbers and operators",
+      "To view ASCII character codes, click the show table button",
+    ],
+  },
+  features: {
+    title: "Key Features",
+    items: [
+      "Convert between binary, octal, decimal, and hexadecimal",
+      "Bit operations (AND, OR, XOR, NOT, shift operations)",
+      "ASCII character code table display",
+      "Automatic input validation and error display",
+      "One-click copy functionality",
+      "Support for large numbers (within JavaScript's safe integer range)",
+      "Simultaneous display in multiple number bases",
+    ],
+  },
   faqList: [
     {
-      q: "What is number base conversion?",
-      a: "Number base conversion is representing the same numerical value using different number systems (bases). It's commonly used in programming since computers operate in binary.",
+      q: "What can I use the number base converter for?",
+      a: "The converter is useful for programming, system development, and digital circuit design where different number base representations are needed. Binary is commonly used for computer internal processing, while hexadecimal is often used for memory addresses and color codes.",
     },
     {
-      q: "What is binary (base 2)?",
-      a: "Binary is a number system that uses only two digits: 0 and 1. It's the fundamental language of computers, where each digit represents a bit.",
+      q: "Which number bases can I convert from?",
+      a: "This tool supports four number bases: binary (0,1), octal (0-7), decimal (0-9), and hexadecimal (0-9,A-F). Any input number is automatically converted to the other three bases.",
     },
     {
-      q: "Why is hexadecimal commonly used?",
-      a: "Hexadecimal provides a compact way to represent binary numbers. Each hex digit corresponds to exactly 4 binary digits, making it easier to read long binary sequences.",
+      q: "What bit operations are available?",
+      a: "You can perform AND (&), OR (|), XOR (^), NOT (~) logical operations and left shift (<<), right shift (>>) operations. These are commonly used in programming for efficient processing and flag management.",
     },
     {
-      q: "What are bit operations?",
-      a: "Bit operations are logical operations performed on individual bits. They include AND, OR, XOR, NOT operations and bit shifting, commonly used for efficient programming.",
+      q: "Are there limits on input numbers?",
+      a: "The tool supports positive integers within JavaScript's safe integer range (Number.MAX_SAFE_INTEGER), which is approximately 9,007 trillion. Negative numbers are not supported.",
     },
     {
-      q: "What is ASCII?",
-      a: "ASCII (American Standard Code for Information Interchange) is a character encoding standard that assigns numerical values to characters for computer processing.",
+      q: "How do I use the ASCII character table?",
+      a: "The ASCII table shows standard printable characters (space to ~) and their corresponding decimal, binary, and hexadecimal codes. It's useful as a reference when working with character codes in programming.",
+    },
+    {
+      q: "How does the copy function work?",
+      a: "Click the copy button next to any conversion result to copy the value (with prefix) to the clipboard. For example: binary numbers are copied as '0b1010', hexadecimal as '0xA'.",
     },
   ],
 };

@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import ToolLayout from "@/components/layout/tool-layout";
 import ToolSection from "@/components/layout/tool-section";
+import ToolHowToUse from "@/components/layout/tool-how-to-use";
 import { Locale, Translations } from "@/locales";
 import ToolFaq from "@/components/layout/tool-faq";
 import { Button } from "@/components/ui/button";
@@ -328,6 +329,18 @@ export default function BaseConverterClient({
       description={t.baseConverter.description}
       icon={Binary}
     >
+      {/* How To Use セクション */}
+      <ToolSection>
+        <ToolHowToUse
+          title={t.baseConverter.howToUse.title}
+          steps={t.baseConverter.howToUse.steps}
+          features={{
+            title: t.baseConverter.features.title,
+            items: t.baseConverter.features.items,
+          }}
+        />
+      </ToolSection>
+
       {/* 進数変換セクション */}
       <ToolSection>
         <Card>

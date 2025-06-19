@@ -51,6 +51,14 @@ export interface BaseConverterTranslations {
   enterValueFirst: string;
   negativeValueNote: string;
   asciiTableNote: string;
+  howToUse: {
+    title: string;
+    steps: string[];
+  };
+  features: {
+    title: string;
+    items: string[];
+  };
   faqList: Array<{
     q: string;
     a: string;
