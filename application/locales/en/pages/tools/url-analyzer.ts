@@ -39,6 +39,27 @@ export const urlAnalyzer: UrlAnalyzerTranslations = {
   noQueryParams: "No Query Parameters",
   paramName: "Parameter Name",
   paramValue: "Parameter Value",
+  howToUse: {
+    title: "How to Use",
+    steps: [
+      "Paste or enter the URL you want to analyze in the input field",
+      "Click the 'Analyze' button to parse the URL",
+      "Check the basic information section for details like protocol, hostname, and path",
+      "If query parameters exist, they will be displayed individually with names and values",
+      "Use the copy buttons next to each item to copy information to your clipboard",
+    ],
+    features: {
+      title: "Key Features",
+      items: [
+        "Detailed analysis of URL components (protocol, host, path, etc.)",
+        "Individual display and management of query parameters",
+        "One-click copy functionality for each item",
+        "Sample URL for testing functionality",
+        "Responsive design with mobile support",
+        "Private processing (data is not sent externally)",
+      ],
+    },
+  },
   faqList: [
     {
       q: "What does the URL Analyzer do?",

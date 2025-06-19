@@ -39,6 +39,27 @@ export const urlAnalyzer: UrlAnalyzerTranslations = {
   noQueryParams: "Sin Parámetros de Consulta",
   paramName: "Nombre del Parámetro",
   paramValue: "Valor del Parámetro",
+  howToUse: {
+    title: "Cómo Usar",
+    steps: [
+      "Pegue o ingrese la URL que desea analizar en el campo de entrada",
+      "Haga clic en el botón 'Analizar' para procesar la URL",
+      "Verifique la sección de información básica para detalles como protocolo, nombre del host y ruta",
+      "Si existen parámetros de consulta, se mostrarán individualmente con nombres y valores",
+      "Use los botones de copiar junto a cada elemento para copiar información al portapapeles",
+    ],
+    features: {
+      title: "Características Principales",
+      items: [
+        "Análisis detallado de componentes de URL (protocolo, host, ruta, etc.)",
+        "Visualización y gestión individual de parámetros de consulta",
+        "Funcionalidad de copia con un clic para cada elemento",
+        "URL de ejemplo para probar la funcionalidad",
+        "Diseño responsive con soporte móvil",
+        "Procesamiento privado (los datos no se envían externamente)",
+      ],
+    },
+  },
   faqList: [
     {
       q: "¿Qué tipos de URL puede analizar esta herramienta?",

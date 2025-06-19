@@ -30,5 +30,13 @@ export interface UrlAnalyzerTranslations {
   clear: string;
   copied: string;
   notAvailable: string;
+  howToUse: {
+    title: string;
+    steps: string[];
+    features: {
+      title: string;
+      items: string[];
+    };
+  };
   faqList: FAQItem[];
 }

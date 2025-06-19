@@ -22,6 +22,7 @@ import ToolControls from "@/components/layout/tool-controls";
 import ToolResult from "@/components/layout/tool-result";
 import ToolLayout from "@/components/layout/tool-layout";
 import ToolFaq from "@/components/layout/tool-faq";
+import ToolHowToUse from "@/components/layout/tool-how-to-use";
 import { Locale, Translations } from "@/locales";
 
 interface UrlInfo {
@@ -122,16 +123,20 @@ export default function UrlAnalyzerClient({
     value: string;
     copyable?: boolean;
   }) => (
-    <div className="flex justify-between items-center py-2">
-      <span className="font-medium text-gray-600">{label}:</span>
-      <div className="flex items-center gap-2">
-        <span className="text-right break-all max-w-xs">{value}</span>
+    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center py-2 gap-1 sm:gap-2">
+      <span className="font-medium text-gray-600 text-sm sm:text-base flex-shrink-0">
+        {label}:
+      </span>
+      <div className="flex items-center gap-2 min-w-0 flex-1">
+        <span className="text-sm sm:text-base break-all flex-1 text-left sm:text-right">
+          {value}
+        </span>
         {copyable && value !== t.urlAnalyzer.notAvailable && (
           <Button
             variant="ghost"
             size="sm"
             onClick={() => copyToClipboard(value, label)}
-            className="h-6 w-6 p-0"
+            className="h-6 w-6 p-0 flex-shrink-0"
           >
             <Copy className="h-3 w-3" />
           </Button>
@@ -148,29 +153,41 @@ export default function UrlAnalyzerClient({
       description={t.urlAnalyzer.description}
       icon={LinkIcon}
     >
+      {/* How To Use セクション */}
+      <ToolSection>
+        <ToolHowToUse
+          title={t.urlAnalyzer.howToUse.title}
+          steps={t.urlAnalyzer.howToUse.steps}
+          features={{
+            title: t.urlAnalyzer.howToUse.features.title,
+            items: t.urlAnalyzer.howToUse.features.items,
+          }}
+        />
+      </ToolSection>
+
       <ToolSection>
         <div className="space-y-4">
           {/* 入力フォームと操作ボタン（レスポンシブ対応） */}
-          <div className="flex flex-col gap-2 sm:flex-row">
+          <div className="flex flex-col gap-3 sm:gap-2">
             <Input
               type="url"
               placeholder={t.urlAnalyzer.urlPlaceholder}
               value={url}
               onChange={(e) => setUrl(e.target.value)}
-              className="flex-1"
+              className="w-full text-sm sm:text-base"
             />
-            <div className="flex gap-2 sm:gap-2">
+            <div className="flex flex-col sm:flex-row gap-2">
               <Button
                 onClick={analyzeUrl}
                 variant="outline"
-                className="w-full sm:w-auto"
+                className="w-full sm:flex-1 text-sm sm:text-base"
               >
                 {t.urlAnalyzer.analyze}
               </Button>
               <Button
                 variant="outline"
                 onClick={loadSample}
-                className="w-full sm:w-auto"
+                className="w-full sm:w-auto text-sm sm:text-base"
               >
                 {t.urlAnalyzer.sample}
               </Button>
@@ -188,10 +205,12 @@ export default function UrlAnalyzerClient({
               <div className="space-y-6">
                 {/* Basic URL Information */}
                 <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <Globe className="h-5 w-5" />
-                      {t.urlAnalyzer.basicInfo}
+                  <CardHeader className="pb-3 sm:pb-4">
+                    <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+                      <Globe className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
+                      <span className="break-words">
+                        {t.urlAnalyzer.basicInfo}
+                      </span>
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-2">
@@ -239,12 +258,19 @@ export default function UrlAnalyzerClient({
 
                 {/* Query Parameters */}
                 <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <Search className="h-5 w-5" />
-                      {t.urlAnalyzer.queryParams}
+                  <CardHeader className="pb-3 sm:pb-4">
+                    <CardTitle className="flex flex-col sm:flex-row sm:items-center gap-2 text-base sm:text-lg">
+                      <div className="flex items-center gap-2">
+                        <Search className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
+                        <span className="break-words">
+                          {t.urlAnalyzer.queryParams}
+                        </span>
+                      </div>
                       {Object.keys(urlInfo.queryParams).length > 0 && (
-                        <Badge variant="secondary">
+                        <Badge
+                          variant="secondary"
+                          className="text-xs sm:text-sm"
+                        >
                           {t.urlAnalyzer.queryCount}:{" "}
                           {Object.keys(urlInfo.queryParams).length}
                         </Badge>
@@ -262,15 +288,15 @@ export default function UrlAnalyzerClient({
                           ([key, value], index) => (
                             <div
                               key={index}
-                              className="border rounded-lg p-3 bg-gray-50"
+                              className="p-3 bg-gray-50 rounded-lg"
                             >
-                              <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                              <div className="space-y-3">
                                 <div>
-                                  <div className="text-sm font-medium text-gray-600 mb-1">
+                                  <div className="text-xs sm:text-sm font-medium text-gray-600 mb-1">
                                     {t.urlAnalyzer.paramName}
                                   </div>
                                   <div className="flex items-center gap-2">
-                                    <code className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm font-mono">
+                                    <code className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs sm:text-sm font-mono break-all flex-1">
                                       {key}
                                     </code>
                                     <Button
@@ -282,18 +308,18 @@ export default function UrlAnalyzerClient({
                                           `param-name-${index}`
                                         )
                                       }
-                                      className="h-6 w-6 p-0"
+                                      className="h-6 w-6 p-0 flex-shrink-0"
                                     >
                                       <Copy className="h-3 w-3" />
                                     </Button>
                                   </div>
                                 </div>
                                 <div>
-                                  <div className="text-sm font-medium text-gray-600 mb-1">
+                                  <div className="text-xs sm:text-sm font-medium text-gray-600 mb-1">
                                     {t.urlAnalyzer.paramValue}
                                   </div>
                                   <div className="flex items-center gap-2">
-                                    <code className="bg-green-100 text-green-800 px-2 py-1 rounded text-sm font-mono break-all">
+                                    <code className="bg-green-100 text-green-800 px-2 py-1 rounded text-xs sm:text-sm font-mono break-all flex-1">
                                       {value}
                                     </code>
                                     <Button
@@ -305,7 +331,7 @@ export default function UrlAnalyzerClient({
                                           `param-value-${index}`
                                         )
                                       }
-                                      className="h-6 w-6 p-0"
+                                      className="h-6 w-6 p-0 flex-shrink-0"
                                     >
                                       <Copy className="h-3 w-3" />
                                     </Button>
@@ -327,9 +353,9 @@ export default function UrlAnalyzerClient({
                                 .join("&");
                               copyToClipboard(queryString, "all-params");
                             }}
-                            className="w-full"
+                            className="w-full text-xs sm:text-sm"
                           >
-                            <Copy className="h-4 w-4 mr-2" />
+                            <Copy className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
                             {t.urlAnalyzer.copy} {t.urlAnalyzer.queryParams}
                           </Button>
                         </div>
@@ -349,7 +375,7 @@ export default function UrlAnalyzerClient({
       </ToolSection>
 
       {copiedField && (
-        <div className="fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-md shadow-lg">
+        <div className="fixed bottom-4 right-4 bg-green-500 text-white px-3 py-2 sm:px-4 sm:py-2 rounded-md shadow-lg text-sm sm:text-base z-50">
           {t.urlAnalyzer.copied}
         </div>
       )}
