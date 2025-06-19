@@ -20,6 +20,7 @@ import ToolControls from "@/components/layout/tool-controls";
 import ToolInput from "@/components/layout/tool-input";
 import ToolResult from "@/components/layout/tool-result";
 import ToolFaq from "@/components/layout/tool-faq";
+import ToolHowToUse from "@/components/layout/tool-how-to-use";
 import { SupportedLocale } from "@/lib/i18n";
 import { interpolate, Translations } from "@/locales";
 
@@ -350,11 +351,23 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
       }
       icon={Target}
     >
+      {/* How To Use セクション */}
+      <ToolSection className="mb-8">
+        <ToolHowToUse
+          title={t.roulette?.howToUse?.title || "How to Use the Roulette"}
+          steps={t.roulette?.howToUse?.steps || []}
+          features={{
+            title: t.roulette?.features?.title || "Key Features",
+            items: t.roulette?.features?.items || [],
+          }}
+        />
+      </ToolSection>
+
       {/* レスポンシブレイアウト：モバイルは縦積み、PCは2カラム */}
-      <div className="lg:grid lg:grid-cols-2 lg:gap-8 space-y-6 lg:space-y-0">
+      <div className="lg:grid lg:grid-cols-2 lg:gap-8 space-y-6 lg:space-y-0 mt-6">
         {/* Left Column: Wheel Section */}
         <div className="lg:order-1">
-          <ToolSection>
+          <ToolSection className="mt-4">
             <div className="relative">
               {/* Arrow Pointer Indicator - モバイル対応 */}
               <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-6 md:-translate-y-8 z-20">

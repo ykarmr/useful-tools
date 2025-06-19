@@ -42,5 +42,13 @@ export interface RouletteTranslations {
   clickToEdit: string;
   autoHideEnabled: string;
   autoHideDisabled: string;
+  howToUse: {
+    title: string;
+    steps: string[];
+  };
+  features: {
+    title: string;
+    items: string[];
+  };
   faqList: FAQItem[];
 }

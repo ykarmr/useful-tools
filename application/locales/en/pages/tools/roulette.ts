@@ -55,26 +55,56 @@ export const roulette: RouletteTranslations = {
   clickToEdit: "Click to edit",
   autoHideEnabled: "Auto-hide ON",
   autoHideDisabled: "Auto-hide OFF",
+  howToUse: {
+    title: "How to Use the Roulette",
+    steps: [
+      "Enter an option in the 'Enter an option...' field and click the plus button to add it",
+      "Add at least 2 items (up to 20 maximum)",
+      "Each item is automatically assigned a color and displayed on the wheel",
+      "Click 'Spin Wheel' button to start the roulette",
+      "When the wheel stops, the segment pointed by the top arrow becomes the winner",
+    ],
+  },
+  features: {
+    title: "Key Features",
+    items: [
+      "Add up to 20 items",
+      "Individual item editing, deletion, and temporary disabling",
+      "Colorful segment display for easy visualization",
+      "Clear winner indication with top arrow pointer",
+      "Automatic data saving (local storage)",
+      "Responsive design for mobile devices",
+      "Smooth rotation with animations",
+    ],
+  },
   faqList: [
     {
-      q: "How many items can I add to the roulette?",
-      a: "You can add up to 20 items to the roulette wheel. If you have more options, consider grouping similar items together.",
+      q: "How is the winner determined?",
+      a: "The winner is determined by the green arrow pointer at the top of the roulette. The segment that the arrow points to when the wheel stops spinning is the winner.",
     },
     {
-      q: "Are the results truly random?",
-      a: "Yes, we use JavaScript's random number generator to ensure completely random results. Each enabled item has an equal probability of being selected.",
+      q: "How many items can I add to the roulette?",
+      a: "You can add up to 20 items to the roulette wheel. The more items you add, the smaller each segment becomes.",
+    },
+    {
+      q: "How do I edit an item?",
+      a: "Click on the item text or the edit button (pencil icon) to enter edit mode. While editing, press Enter to save or Escape to cancel.",
     },
     {
       q: "Can I temporarily disable items?",
-      a: "Yes, you can click the button next to each item to temporarily disable it. Disabled items will be excluded from the roulette results without being deleted.",
+      a: "Yes, click the eye icon next to each item to temporarily disable it. Disabled items are excluded from the roulette and shown in gray.",
     },
     {
-      q: "Is my roulette data saved?",
+      q: "Are the results truly random?",
+      a: "Yes, we use JavaScript's random number generator to ensure completely random results. All enabled items have an equal probability of being selected.",
+    },
+    {
+      q: "Is my data saved?",
       a: "Your item list is automatically saved to your browser's local storage. When you reload the page, your previously added items will be restored.",
     },
     {
-      q: "Can I edit items after adding them?",
-      a: "Yes, you can click on any item text or the edit button to modify its content. While editing, press Enter to save or Escape to cancel your changes.",
+      q: "Can I use this on mobile devices?",
+      a: "Yes, the roulette is designed with responsive layout and works smoothly on smartphones and tablets.",
     },
   ],
 };

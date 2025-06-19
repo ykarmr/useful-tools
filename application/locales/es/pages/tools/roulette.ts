@@ -43,26 +43,56 @@ export const roulette: RouletteTranslations = {
   clickToEdit: "Haz clic para editar",
   autoHideEnabled: "Auto-ocultar ON",
   autoHideDisabled: "Auto-ocultar OFF",
+  howToUse: {
+    title: "Cómo usar la Ruleta",
+    steps: [
+      "Ingresa una opción en el campo 'Ingrese una opción...' y haz clic en el botón más para agregarla",
+      "Agrega al menos 2 elementos (máximo 20)",
+      "Cada elemento se asigna automáticamente un color y se muestra en la ruleta",
+      "Haz clic en 'Girar la ruleta' para comenzar",
+      "Cuando la ruleta se detenga, el segmento señalado por la flecha superior será el ganador",
+    ],
+  },
+  features: {
+    title: "Características Principales",
+    items: [
+      "Agregar hasta 20 elementos",
+      "Edición, eliminación y deshabilitación individual de elementos",
+      "Visualización colorida de segmentos para fácil identificación",
+      "Indicación clara del ganador con flecha superior",
+      "Guardado automático de datos (almacenamiento local)",
+      "Diseño responsivo para dispositivos móviles",
+      "Rotación suave con animaciones",
+    ],
+  },
   faqList: [
     {
-      q: "¿Cuántos elementos puedo agregar a la ruleta?",
-      a: "Puedes agregar hasta 20 elementos a la ruleta. Si tienes más opciones, considera agrupar elementos similares juntos.",
+      q: "¿Cómo se determina el ganador?",
+      a: "El ganador se determina por la flecha verde en la parte superior de la ruleta. El segmento que señala la flecha cuando la ruleta deja de girar es el ganador.",
     },
     {
-      q: "¿Los resultados son verdaderamente aleatorios?",
-      a: "Sí, utilizamos el generador de números aleatorios de JavaScript para asegurar resultados completamente aleatorios. Cada elemento habilitado tiene la misma probabilidad de ser seleccionado.",
+      q: "¿Cuántos elementos puedo agregar a la ruleta?",
+      a: "Puedes agregar hasta 20 elementos a la ruleta. Mientras más elementos agregues, más pequeño se vuelve cada segmento.",
+    },
+    {
+      q: "¿Cómo edito un elemento?",
+      a: "Haz clic en el texto del elemento o en el botón de editar (ícono de lápiz) para entrar en modo de edición. Mientras editas, presiona Enter para guardar o Escape para cancelar.",
     },
     {
       q: "¿Puedo deshabilitar elementos temporalmente?",
-      a: "Sí, puedes hacer clic en el botón junto a cada elemento para deshabilitarlo temporalmente. Los elementos deshabilitados serán excluidos de los resultados de la ruleta sin ser eliminados.",
+      a: "Sí, haz clic en el ícono del ojo junto a cada elemento para deshabilitarlo temporalmente. Los elementos deshabilitados se excluyen de la ruleta y se muestran en gris.",
     },
     {
-      q: "¿Se guardan los datos de mi ruleta?",
+      q: "¿Los resultados son verdaderamente aleatorios?",
+      a: "Sí, utilizamos el generador de números aleatorios de JavaScript para asegurar resultados completamente aleatorios. Todos los elementos habilitados tienen la misma probabilidad de ser seleccionados.",
+    },
+    {
+      q: "¿Se guardan mis datos?",
       a: "Tu lista de elementos se guarda automáticamente en el almacenamiento local de tu navegador. Cuando recargues la página, tus elementos previamente agregados serán restaurados.",
     },
     {
-      q: "¿Puedo editar elementos después de agregarlos?",
-      a: "Sí, puedes hacer clic en el texto de cualquier elemento o en el botón de editar para modificar su contenido. Mientras editas, presiona Enter para guardar o Escape para cancelar los cambios.",
+      q: "¿Puedo usar esto en dispositivos móviles?",
+      a: "Sí, la ruleta está diseñada con diseño responsivo y funciona sin problemas en teléfonos inteligentes y tabletas.",
     },
   ],
 };
