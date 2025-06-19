@@ -44,26 +44,56 @@ export const colorPalette: ColorPaletteTranslations = {
   exportPalette: "Export Palette",
   downloadCSS: "Download as CSS Variables",
   downloadJSON: "Download as JSON",
+  howToUse: {
+    title: "How to Use",
+    steps: [
+      "Select a base color using the color picker or enter a HEX code",
+      "Choose a palette type: monochromatic, analogous, complementary, triadic, or tetradic",
+      "Click 'Generate Palette' to create a color scheme based on color theory",
+      "Use 'Random Color' to experiment with different base colors",
+      "Choose display format (HEX, RGB, or HSL) to suit your needs",
+      "Test color accessibility with color blind simulation",
+      "Click any color to copy its code to clipboard",
+      "Export palettes as CSS variables or JSON for development use",
+    ],
+  },
+  features: {
+    title: "Key Features",
+    items: [
+      "Color theory-based palette generation (monochromatic, analogous, complementary, triadic, tetradic)",
+      "Multiple color format support (HEX, RGB, HSL)",
+      "Color blind accessibility simulation (protanopia, deuteranopia, tritanopia)",
+      "One-click color code copying",
+      "Luminance calculation for contrast analysis",
+      "Export as CSS variables or JSON format",
+      "Random color generation for inspiration",
+      "Responsive design for all devices",
+    ],
+  },
   faqList: [
     {
-      q: "What is color theory?",
-      a: "Color theory is a set of principles used to create harmonious color combinations. It includes concepts like complementary, analogous, and triadic colors that help create visually appealing and balanced color palettes.",
+      q: "What are the different palette types?",
+      a: "Monochromatic uses variations of one hue, analogous uses adjacent colors on the color wheel, complementary uses opposite colors, triadic uses three equally spaced colors, and tetradic uses four colors forming a rectangle on the color wheel.",
+    },
+    {
+      q: "How does color blind simulation work?",
+      a: "The tool simulates three types of color vision deficiency: protanopia (red-blind), deuteranopia (green-blind), and tritanopia (blue-blind). This helps ensure your palette is accessible to users with color vision differences.",
+    },
+    {
+      q: "What is luminance and why is it important?",
+      a: "Luminance measures the perceived brightness of a color (0-100%). It's crucial for determining text-background contrast ratios to meet accessibility standards like WCAG guidelines.",
+    },
+    {
+      q: "How can I use the exported CSS variables?",
+      a: "Copy the exported CSS variables into your stylesheet's :root selector. You can then use them throughout your CSS like 'color: var(--color-1)' for consistent theming.",
+    },
+    {
+      q: "Can I input colors in RGB or HSL format?",
+      a: "Currently, you can only input colors in HEX format (#RRGGBB), but the tool displays colors in HEX, RGB, and HSL formats. You can copy colors in any of these formats.",
     },
     {
       q: "What's the difference between HEX, RGB, and HSL?",
-      a: "HEX uses hexadecimal notation (#FF0000), RGB uses red-green-blue values (rgb(255,0,0)), and HSL uses hue-saturation-lightness (hsl(0,100%,50%)). Each format serves different purposes in design and development.",
-    },
-    {
-      q: "What is color blind simulation?",
-      a: "Color blind simulation shows how colors appear to people with different types of color vision deficiency. This helps ensure your design is accessible to all users.",
-    },
-    {
-      q: "How can I use the generated palettes?",
-      a: "Generated palettes can be used for web design, graphic design, branding, presentations, and more. You can export them as CSS variables or JSON for direct use in development projects.",
-    },
-    {
-      q: "What is a monochromatic palette?",
-      a: "A monochromatic palette uses variations of a single hue by changing its brightness and saturation. It creates elegant, cohesive designs with subtle variations.",
+      a: "HEX uses hexadecimal notation (#FF0000), RGB uses red-green-blue values (0-255), and HSL uses hue (0-360°), saturation (0-100%), and lightness (0-100%). Each format serves different design and development purposes.",
     },
   ],
 };

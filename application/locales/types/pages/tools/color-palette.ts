@@ -33,5 +33,13 @@ export interface ColorPaletteTranslations {
   exportPalette: string;
   downloadCSS: string;
   downloadJSON: string;
+  howToUse: {
+    title: string;
+    steps: string[];
+  };
+  features: {
+    title: string;
+    items: string[];
+  };
   faqList: FAQItem[];
 }

@@ -44,26 +44,56 @@ export const colorPalette: ColorPaletteTranslations = {
   exportPalette: "Exportar Paleta",
   downloadCSS: "Descargar como Variables CSS",
   downloadJSON: "Descargar como JSON",
+  howToUse: {
+    title: "Cómo Usar",
+    steps: [
+      "Selecciona un color base usando el selector de color o ingresa un código HEX",
+      "Elige un tipo de paleta: monocromática, análoga, complementaria, triádica o tetrádica",
+      "Haz clic en 'Generar Paleta' para crear un esquema de colores basado en la teoría del color",
+      "Usa 'Color Aleatorio' para experimentar con diferentes colores base",
+      "Elige el formato de visualización (HEX, RGB o HSL) según tus necesidades",
+      "Prueba la accesibilidad del color con simulación de daltonismo",
+      "Haz clic en cualquier color para copiar su código al portapapeles",
+      "Exporta paletas como variables CSS o JSON para uso en desarrollo",
+    ],
+  },
+  features: {
+    title: "Características Principales",
+    items: [
+      "Generación de paletas basada en teoría del color (monocromática, análoga, complementaria, triádica, tetrádica)",
+      "Soporte para múltiples formatos de color (HEX, RGB, HSL)",
+      "Simulación de accesibilidad para daltonismo (protanopia, deuteranopia, tritanopia)",
+      "Copia de códigos de color con un clic",
+      "Cálculo de luminancia para análisis de contraste",
+      "Exportación en formato de variables CSS o JSON",
+      "Generación de colores aleatorios para inspiración",
+      "Diseño responsivo para todos los dispositivos",
+    ],
+  },
   faqList: [
     {
-      q: "¿Qué es la teoría del color?",
-      a: "La teoría del color es un conjunto de principios utilizados para crear combinaciones de colores armoniosas. Incluye conceptos como colores complementarios, análogos y triádicos.",
+      q: "¿Cuáles son los diferentes tipos de paleta?",
+      a: "Monocromática usa variaciones de un tono, análoga usa colores adyacentes en la rueda cromática, complementaria usa colores opuestos, triádica usa tres colores equidistantes, y tetrádica usa cuatro colores formando un rectángulo en la rueda cromática.",
+    },
+    {
+      q: "¿Cómo funciona la simulación de daltonismo?",
+      a: "La herramienta simula tres tipos de deficiencia de visión cromática: protanopia (ceguera al rojo), deuteranopia (ceguera al verde) y tritanopia (ceguera al azul). Esto ayuda a asegurar que tu paleta sea accesible para usuarios con diferencias en la visión del color.",
+    },
+    {
+      q: "¿Qué es la luminancia y por qué es importante?",
+      a: "La luminancia mide el brillo percibido de un color (0-100%). Es crucial para determinar las relaciones de contraste texto-fondo para cumplir con estándares de accesibilidad como las directrices WCAG.",
+    },
+    {
+      q: "¿Cómo puedo usar las variables CSS exportadas?",
+      a: "Copia las variables CSS exportadas en el selector :root de tu hoja de estilo. Luego puedes usarlas en todo tu CSS como 'color: var(--color-1)' para un tema consistente.",
+    },
+    {
+      q: "¿Puedo ingresar colores en formato RGB o HSL?",
+      a: "Actualmente, solo puedes ingresar colores en formato HEX (#RRGGBB), pero la herramienta muestra colores en formatos HEX, RGB y HSL. Puedes copiar colores en cualquiera de estos formatos.",
     },
     {
       q: "¿Cuál es la diferencia entre HEX, RGB y HSL?",
-      a: "HEX usa notación hexadecimal (#FF0000), RGB usa valores rojo-verde-azul (rgb(255,0,0)), y HSL usa tono-saturación-luminosidad (hsl(0,100%,50%)).",
-    },
-    {
-      q: "¿Qué es la simulación de daltonismo?",
-      a: "La simulación de daltonismo muestra cómo aparecen los colores para personas con diferentes tipos de deficiencia de visión cromática.",
-    },
-    {
-      q: "¿Cómo puedo usar las paletas generadas?",
-      a: "Las paletas generadas se pueden usar para diseño web, diseño gráfico, branding, presentaciones y más. Puedes exportarlas como variables CSS o JSON.",
-    },
-    {
-      q: "¿Qué es una paleta monocromática?",
-      a: "Una paleta monocromática usa variaciones de un solo tono cambiando su brillo y saturación. Crea diseños elegantes y cohesivos.",
+      a: "HEX usa notación hexadecimal (#FF0000), RGB usa valores rojo-verde-azul (0-255), y HSL usa tono (0-360°), saturación (0-100%) y luminosidad (0-100%). Cada formato sirve para diferentes propósitos de diseño y desarrollo.",
     },
   ],
 };

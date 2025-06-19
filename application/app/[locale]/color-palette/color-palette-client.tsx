@@ -9,6 +9,7 @@ import ToolControls from "@/components/layout/tool-controls";
 import ToolInput from "@/components/layout/tool-input";
 import ToolResult from "@/components/layout/tool-result";
 import ToolFaq from "@/components/layout/tool-faq";
+import ToolHowToUse from "@/components/layout/tool-how-to-use";
 import { Locale, Translations } from "@/locales";
 
 interface ColorInfo {
@@ -356,6 +357,18 @@ export default function ColorPaletteClient({
       description={t.colorPalette.description}
       icon={Palette}
     >
+      {/* How To Use セクション */}
+      <ToolSection>
+        <ToolHowToUse
+          title={t.colorPalette.howToUse.title}
+          steps={t.colorPalette.howToUse.steps}
+          features={{
+            title: t.colorPalette.features.title,
+            items: t.colorPalette.features.items,
+          }}
+        />
+      </ToolSection>
+
       {/* 入力・設定セクション */}
       <ToolSection>
         <ToolInput>
