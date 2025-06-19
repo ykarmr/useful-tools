@@ -10,6 +10,27 @@ export const userAgent: UserAgentTranslations = {
     "device details",
     "user agent string",
   ],
+  howToUse: {
+    title: "How to Use",
+    steps: [
+      "Open the page and your browser information will be automatically detected",
+      "Check basic browser and OS information in the device overview",
+      "View detailed technical information in the device information section",
+      "Copy the user agent string for use in other applications",
+      "Check supported browser features and capabilities",
+    ],
+  },
+  features: {
+    title: "Key Features",
+    items: [
+      "Automatic detection of browser type and version",
+      "Operating system identification",
+      "Device type classification (desktop/mobile/tablet)",
+      "Full user agent string display and copy functionality",
+      "Browser feature support overview",
+      "Detailed platform information display",
+    ],
+  },
   browser: "Browser",
   os: "Operating System",
   device: "Device",

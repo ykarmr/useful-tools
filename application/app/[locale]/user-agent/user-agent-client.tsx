@@ -8,6 +8,7 @@ import ToolDisplay from "@/components/layout/tool-display";
 import ToolResult from "@/components/layout/tool-result";
 import ToolStats from "@/components/layout/tool-stats";
 import ToolFaq from "@/components/layout/tool-faq";
+import ToolHowToUse from "@/components/layout/tool-how-to-use";
 import { Locale, Translations } from "@/locales";
 
 interface UserAgentInfo {
@@ -126,6 +127,18 @@ export default function UserAgentClient({ locale, t }: UserAgentClientProps) {
       description={t.userAgent.description}
       icon={Globe}
     >
+      {/* How To Use セクション */}
+      <ToolSection>
+        <ToolHowToUse
+          title={t.userAgent.howToUse.title}
+          steps={t.userAgent.howToUse.steps}
+          features={{
+            title: t.userAgent.features.title,
+            items: t.userAgent.features.items,
+          }}
+        />
+      </ToolSection>
+
       {/* Device Overview */}
       <ToolSection>
         <ToolDisplay size="large" centered>

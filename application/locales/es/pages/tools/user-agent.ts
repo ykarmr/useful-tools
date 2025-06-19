@@ -10,6 +10,27 @@ export const userAgent: UserAgentTranslations = {
     "análisis de user agent",
     "detector de navegador",
   ],
+  howToUse: {
+    title: "Cómo Usar",
+    steps: [
+      "Al abrir la página, se detectará automáticamente la información de tu navegador",
+      "Consulta la información básica del navegador y SO en la vista general del dispositivo",
+      "Ve información técnica detallada en la sección de información del dispositivo",
+      "Copia la cadena de user agent para usar en otras aplicaciones",
+      "Consulta las características y capacidades soportadas por el navegador",
+    ],
+  },
+  features: {
+    title: "Características Principales",
+    items: [
+      "Detección automática del tipo y versión del navegador",
+      "Identificación del sistema operativo",
+      "Clasificación del tipo de dispositivo (escritorio/móvil/tablet)",
+      "Visualización y copia de la cadena completa de user agent",
+      "Vista general de las características soportadas por el navegador",
+      "Visualización detallada de información de plataforma",
+    ],
+  },
   browser: "Navegador",
   os: "Sistema Operativo",
   device: "Dispositivo",
