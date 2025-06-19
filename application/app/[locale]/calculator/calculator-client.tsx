@@ -7,6 +7,7 @@ import ToolSection from "@/components/layout/tool-section";
 import ToolDisplay from "@/components/layout/tool-display";
 import { Locale, Translations } from "@/locales";
 import ToolFaq from "@/components/layout/tool-faq";
+import ToolHowToUse from "@/components/layout/tool-how-to-use";
 
 interface CalculatorClientProps {
   locale: Locale;
@@ -223,6 +224,18 @@ export default function CalculatorClient({ locale, t }: CalculatorClientProps) {
       description={t.calculator.description}
       icon={Calculator}
     >
+      {/* How To Use Section */}
+      <ToolSection>
+        <ToolHowToUse
+          title={t.calculator.howToUse.title}
+          steps={t.calculator.howToUse.steps}
+          features={{
+            title: t.calculator.features.title,
+            items: t.calculator.features.items,
+          }}
+        />
+      </ToolSection>
+
       {/* Calculator Display */}
       <ToolSection>
         <div className="max-w-sm mx-auto">
