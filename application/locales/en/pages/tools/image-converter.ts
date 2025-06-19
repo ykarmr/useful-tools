@@ -126,6 +126,31 @@ export const imageConverter: ImageConverterTranslations = {
   processingNow: "Processing",
   formatConversionNote: "format",
 
+  // 使い方ガイド
+  howToUse: {
+    title: "How to Use",
+    steps: [
+      "Drag & drop image files or click to select files you want to convert",
+      "Choose output format (JPEG, PNG, WebP, BMP)",
+      "Adjust quality and size settings as needed",
+      "Click 'Convert' button to start conversion",
+      "Download individually or all together after conversion is complete",
+    ],
+  },
+
+  // 機能
+  features: {
+    title: "Key Features",
+    items: [
+      "Batch conversion of multiple images (up to 20 files)",
+      "Support for major image formats (JPEG, PNG, WebP, BMP)",
+      "Quality adjustment and file size optimization",
+      "Aspect ratio modification and custom size settings",
+      "Before/after comparison preview feature",
+      "Easy drag & drop operation",
+    ],
+  },
+
   // FAQ
   faqList: [
     {

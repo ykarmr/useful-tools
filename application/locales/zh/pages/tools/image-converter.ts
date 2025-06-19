@@ -117,6 +117,31 @@ export const imageConverter: ImageConverterTranslations = {
   processingNow: "处理中",
   formatConversionNote: "格式",
 
+  // 使用指南
+  howToUse: {
+    title: "使用方法",
+    steps: [
+      "拖放图像文件或点击选择要转换的文件",
+      "选择输出格式（JPEG、PNG、WebP、BMP）",
+      "根据需要调整质量和大小设置",
+      "点击「转换」按钮开始转换",
+      "转换完成后可单独下载或批量下载",
+    ],
+  },
+
+  // 功能特点
+  features: {
+    title: "主要功能",
+    items: [
+      "批量转换多个图像（最多20个文件）",
+      "支持主要图像格式（JPEG、PNG、WebP、BMP）",
+      "质量调整和文件大小优化",
+      "长宽比修改和自定义大小设置",
+      "转换前后对比预览功能",
+      "简单的拖放操作",
+    ],
+  },
+
   faqList: [
     {
       q: "支持哪些图像格式？",

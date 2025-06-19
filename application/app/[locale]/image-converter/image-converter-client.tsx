@@ -20,6 +20,7 @@ import {
 import ToolLayout from "@/components/layout/tool-layout";
 import ToolSection from "@/components/layout/tool-section";
 import ToolFaq from "@/components/layout/tool-faq";
+import ToolHowToUse from "@/components/layout/tool-how-to-use";
 import { Locale, Translations } from "@/locales";
 
 interface ImageFile {
@@ -476,6 +477,18 @@ export default function ImageConverterClient({
       description={t.imageConverter.description}
       icon={Image}
     >
+      {/* How To Use セクション */}
+      <ToolSection>
+        <ToolHowToUse
+          title={t.imageConverter.howToUse.title}
+          steps={t.imageConverter.howToUse.steps}
+          features={{
+            title: t.imageConverter.features.title,
+            items: t.imageConverter.features.items,
+          }}
+        />
+      </ToolSection>
+
       {/* ファイルドロップエリア */}
       <ToolSection>
         <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-3 sm:p-4 lg:p-6 border border-blue-100">

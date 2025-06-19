@@ -120,6 +120,31 @@ export const imageConverter: ImageConverterTranslations = {
   processingNow: "Procesando",
   formatConversionNote: "formato",
 
+  // Guía de uso
+  howToUse: {
+    title: "Cómo Usar",
+    steps: [
+      "Arrastra y suelta archivos de imagen o haz clic para seleccionar los archivos que deseas convertir",
+      "Elige el formato de salida (JPEG, PNG, WebP, BMP)",
+      "Ajusta la configuración de calidad y tamaño según sea necesario",
+      "Haz clic en el botón 'Convertir' para iniciar la conversión",
+      "Descarga individualmente o todo junto después de que se complete la conversión",
+    ],
+  },
+
+  // Características
+  features: {
+    title: "Características Principales",
+    items: [
+      "Conversión en lote de múltiples imágenes (hasta 20 archivos)",
+      "Soporte para formatos de imagen principales (JPEG, PNG, WebP, BMP)",
+      "Ajuste de calidad y optimización del tamaño del archivo",
+      "Modificación de relación de aspecto y configuración de tamaño personalizado",
+      "Función de vista previa de comparación antes/después",
+      "Operación fácil de arrastrar y soltar",
+    ],
+  },
+
   faqList: [
     {
       q: "¿Qué formatos de imagen están soportados?",
