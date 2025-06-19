@@ -10,6 +10,7 @@ import ToolControls from "@/components/layout/tool-controls";
 import ToolResult from "@/components/layout/tool-result";
 import ToolStats from "@/components/layout/tool-stats";
 import ToolFaq from "@/components/layout/tool-faq";
+import ToolHowToUse from "@/components/layout/tool-how-to-use";
 import { Locale, Translations } from "@/locales";
 
 interface BmiCalculatorClientProps {
@@ -193,6 +194,18 @@ export default function BmiCalculatorClient({
       description={t.bmiCalculator.description}
       icon={Heart}
     >
+      {/* How To Use セクション */}
+      <ToolSection>
+        <ToolHowToUse
+          title={t.bmiCalculator.howToUse.title}
+          steps={t.bmiCalculator.howToUse.steps}
+          features={{
+            title: t.bmiCalculator.features.title,
+            items: t.bmiCalculator.features.items,
+          }}
+        />
+      </ToolSection>
+
       {/* BMI結果表示 */}
       {result && (
         <ToolSection>

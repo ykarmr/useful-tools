@@ -72,5 +72,17 @@ export interface BmiCalculatorTranslations {
     lbs: string;
   };
 
+  // 使い方ガイド
+  howToUse: {
+    title: string;
+    steps: string[];
+  };
+
+  // 機能
+  features: {
+    title: string;
+    items: string[];
+  };
+
   faqList: FAQItem[];
 }

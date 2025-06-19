@@ -80,26 +80,73 @@ export const bmiCalculator: BmiCalculatorTranslations = {
     lbs: "lbs",
   },
 
+  // Guía de uso
+  howToUse: {
+    title: "Cómo usar la Calculadora de IMC",
+    steps: [
+      "Selecciona el sistema de unidades (Métrico o Imperial)",
+      "Ingresa tu altura (cm o ft・in)",
+      "Ingresa tu peso (kg o lbs)",
+      "Haz clic en el botón 'Calcular IMC'",
+      "Revisa tu valor de IMC, categoría, rango de peso ideal y consejos de salud",
+      "Usa el botón Resetear para comenzar un nuevo cálculo",
+    ],
+  },
+
+  // Características
+  features: {
+    title: "Características Principales",
+    items: [
+      "Soporte para sistemas de unidades métrico e imperial",
+      "Validación de entrada en tiempo real con mensajes de error",
+      "Cálculo automático de IMC y clasificación por categorías",
+      "Cálculo del rango de peso ideal basado en IMC 18.5-25",
+      "Consejos de salud personalizados según la categoría de IMC",
+      "Visualización de estadísticas detalladas (altura, peso, IMC, rango de peso ideal)",
+      "Visualización de IMC con códigos de color (bajo peso: azul, normal: verde, sobrepeso: amarillo, obeso: rojo)",
+    ],
+  },
+
   faqList: [
     {
       q: "¿Qué es el IMC?",
-      a: "El IMC (Índice de Masa Corporal) es una medida internacionalmente reconocida de grasa corporal basada en altura y peso. Se calcula como peso(kg) ÷ altura(m)².",
+      a: "El IMC (Índice de Masa Corporal) es una medida internacionalmente reconocida de grasa corporal basada en altura y peso. Se calcula como peso(kg) ÷ altura(m)² y es recomendado por la Organización Mundial de la Salud (OMS) como indicador estándar.",
     },
     {
-      q: "¿Cuáles son las categorías del IMC?",
-      a: "Las categorías del IMC son: Menos de 18.5 (bajo peso), 18.5-24.9 (peso normal), 25-29.9 (sobrepeso), y 30 y superior (obeso).",
+      q: "¿Cuáles son las categorías del IMC y códigos de color?",
+      a: "Esta herramienta categoriza el IMC con códigos de color: Menos de 18.5 (bajo peso, azul), 18.5-24.9 (peso normal, verde), 25-29.9 (sobrepeso, amarillo), y 30+ (obeso, rojo). El IMC 22 se considera óptimo con los menores riesgos para la salud.",
     },
     {
-      q: "¿Qué debo hacer si mi IMC es alto?",
-      a: "Si tu IMC es superior a 25, considera mejorar tu dieta y aumentar la actividad física. Apunta a una pérdida gradual de peso de 0.5-1 kg por semana para resultados sostenibles.",
+      q: "¿Puedo usar tanto unidades métricas como imperiales?",
+      a: "Sí, puedes cambiar entre sistemas métrico (cm・kg) e imperial (ft・in・lbs) usando el selector de unidades. Al cambiar unidades, los campos de entrada se actualizan automáticamente y los resultados se muestran en tu sistema seleccionado.",
     },
     {
-      q: "¿Hay limitaciones en el IMC?",
-      a: "El IMC no considera la masa muscular, por lo que puede sobreestimar la grasa corporal en atletas y subestimarla en adultos mayores. Es mejor usarlo junto con otras evaluaciones de salud.",
+      q: "¿Cómo ingreso la altura en pies y pulgadas?",
+      a: "Al usar unidades imperiales, ingresa la altura en dos campos separados: pies (0-8) a la izquierda y pulgadas (0-11.9) a la derecha. Por ejemplo, para 5 pies 9 pulgadas, ingresa '5' en el campo de pies y '9' en el de pulgadas.",
     },
     {
-      q: "¿Cómo se calcula el peso ideal?",
-      a: "El peso ideal se calcula usando IMC 22 como objetivo, con un rango saludable de IMC 18.5 a 25. El IMC 22 está estadísticamente asociado con los menores riesgos para la salud.",
+      q: "¿Cómo se calcula el rango de peso ideal?",
+      a: "El rango de peso ideal usa valores de IMC de 18.5-25 con la fórmula 'altura(m)² × IMC'. El límite inferior es altura² × 18.5, el superior es altura² × 25. Para unidades imperiales, el resultado se convierte automáticamente a libras.",
+    },
+    {
+      q: "¿Qué tipo de consejos de salud se proporcionan?",
+      a: "Basado en tu categoría de IMC, la herramienta proporciona consejos específicos: bajo peso sugiere mejora nutricional, peso normal recomienda mantener hábitos actuales, sobrepeso sugiere cambios dietéticos y ejercicio, mientras que obeso recomienda consultar profesionales de la salud.",
+    },
+    {
+      q: "¿Qué información se muestra en la sección de estadísticas?",
+      a: "La sección de estadísticas muestra información detallada del cálculo incluyendo tu altura y peso ingresados, valor de IMC calculado, clasificación de categoría corporal y rango de peso ideal (mínimo y máximo). Todos los valores se muestran en tu sistema de unidades seleccionado.",
+    },
+    {
+      q: "¿Hay restricciones en los valores de entrada?",
+      a: "Por seguridad y precisión, la altura debe estar entre 50-300cm (aproximadamente 1.6-9.8ft) y el peso entre 1-500kg (aproximadamente 2-1100lbs). Las pulgadas deben ser 0-11 (ya que 12 pulgadas = 1 pie). Aparecen mensajes de error para valores fuera de estos rangos.",
+    },
+    {
+      q: "¿Cuáles son las limitaciones del IMC?",
+      a: "El IMC no considera la masa muscular, densidad ósea o composición corporal. Puede sobreestimar la grasa corporal en individuos musculosos (atletas) y subestimarla en adultos mayores o aquellos con menor masa muscular. Usa esta herramienta como referencia general junto con otros indicadores de salud.",
+    },
+    {
+      q: "¿Cómo reinicio el cálculo?",
+      a: "Un botón 'Reiniciar' aparece cuando has ingresado valores o cuando se muestran resultados. Haz clic en este botón para limpiar todos los valores de entrada y resultados de cálculo, permitiéndote comenzar un nuevo cálculo desde cero.",
     },
   ],
 };
