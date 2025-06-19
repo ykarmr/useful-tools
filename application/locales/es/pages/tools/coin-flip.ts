@@ -15,6 +15,24 @@ export const coinFlip: CoinFlipTranslations = {
   tails: "Cruz",
   flipping: "Lanzando...",
   selectCount: "Selecciona el número de lanzamientos",
+  howToUse: {
+    title: "Cómo Usar",
+    steps: [
+      "Selecciona el número de monedas a lanzar (1-10 monedas)",
+      "Haz clic en el botón 'Lanzar Moneda'",
+      "Observa las monedas girar y determinar aleatoriamente el resultado",
+      "Ve el resultado (cara o cruz) mostrado",
+    ],
+    features: {
+      title: "Características",
+      items: [
+        "Lanzamiento múltiple de monedas simultáneamente (hasta 10 monedas)",
+        "Pantalla de animación en tiempo real",
+        "Pantalla de resultados instantánea",
+        "Generación de resultados completamente aleatoria",
+      ],
+    },
+  },
   faqList: [
     {
       q: "¿Cómo lanzo la moneda?",

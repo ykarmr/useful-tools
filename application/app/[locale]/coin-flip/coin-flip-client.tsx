@@ -6,6 +6,7 @@ import ToolLayout from "@/components/layout/tool-layout";
 import ToolSection from "@/components/layout/tool-section";
 import ToolDisplay from "@/components/layout/tool-display";
 import ToolControls from "@/components/layout/tool-controls";
+import ToolHowToUse from "@/components/layout/tool-how-to-use";
 import { Locale, Translations } from "@/locales";
 import ToolFaq from "@/components/layout/tool-faq";
 
@@ -46,6 +47,18 @@ export default function CoinFlipClient({ locale, t }: CoinFlipClientProps) {
       description={t.coinFlip.description}
       icon={Coins}
     >
+      {/* How To Use セクション */}
+      <ToolSection>
+        <ToolHowToUse
+          title={t.coinFlip.howToUse.title}
+          steps={t.coinFlip.howToUse.steps}
+          features={{
+            title: t.coinFlip.howToUse.features.title,
+            items: t.coinFlip.howToUse.features.items,
+          }}
+        />
+      </ToolSection>
+
       {/* Coin Display */}
       <ToolSection>
         <ToolDisplay size="large">

@@ -15,6 +15,24 @@ export const coinFlip: CoinFlipTranslations = {
   tails: "Tails",
   flipping: "Flipping...",
   selectCount: "Select number of flips",
+  howToUse: {
+    title: "How to Use",
+    steps: [
+      "Select the number of coins to flip (1-10 coins)",
+      "Click the 'Flip Coin' button",
+      "Watch the coins spin and randomly determine the result",
+      "View the result (heads or tails) displayed",
+    ],
+    features: {
+      title: "Features",
+      items: [
+        "Multiple coin flips simultaneously (up to 10 coins)",
+        "Real-time animation display",
+        "Instant result display",
+        "Completely random result generation",
+      ],
+    },
+  },
   faqList: [
     {
       q: "How do I flip the coin?",

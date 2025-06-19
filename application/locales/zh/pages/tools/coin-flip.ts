@@ -9,6 +9,24 @@ export const coinFlip: CoinFlipTranslations = {
   tails: "反面",
   flipping: "翻转中...",
   selectCount: "选择翻转次数",
+  howToUse: {
+    title: "使用方法",
+    steps: [
+      "选择要翻转的硬币数量（1-10枚硬币）",
+      '点击"翻转硬币"按钮',
+      "观看硬币旋转并随机确定结果",
+      "查看显示的结果（正面或反面）",
+    ],
+    features: {
+      title: "功能",
+      items: [
+        "同时翻转多枚硬币（最多10枚硬币）",
+        "实时动画显示",
+        "即时结果显示",
+        "完全随机的结果生成",
+      ],
+    },
+  },
   faqList: [
     {
       q: "如何翻转硬币？",
