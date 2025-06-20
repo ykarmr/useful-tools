@@ -1,53 +1,60 @@
 import { ServicesTranslations } from "@/locales/types/pages/services";
 
 export const services: ServicesTranslations = {
-  title: "All Tools",
+  title: "Free Online Tools Collection",
+  description:
+    "Access 30+ free online tools to streamline your daily tasks. Calculator, timer, random generators, converters, and more practical web applications for instant use.",
   subtitle:
-    "Discover our comprehensive collection of productivity tools, each designed with care and attention to detail.",
+    "Discover powerful, free tools designed to boost your productivity. All accessible instantly in your browser with no registration required.",
   keywords: [
-    "online tools",
-    "free tools",
+    "free online tools",
     "productivity tools",
-    "task management",
-    "decision-making tools",
-    "random number generator",
-    "roulette",
-    "todo list",
+    "web applications",
     "calculator",
-    "dice roller",
+    "timer",
+    "random generator",
+    "converter tools",
+    "text processing",
+    "time management",
+    "todo list",
+    "QR code generator",
+    "unit converter",
+    "color palette",
+    "developer tools",
+    "network utilities",
   ],
   categories: {
     productivity: {
-      title: "Productivity",
-      description: "Tools to help you stay organized and efficient",
+      title: "Productivity Tools",
+      description: "Essential tools to enhance work efficiency",
     },
     random: {
-      title: "Random & Decision",
-      description: "Make decisions and generate random content",
+      title: "Random & Decision Making",
+      description: "Tools for decision support and random content generation",
     },
     time: {
       title: "Time & Clock",
       description: "Time management and clock utilities",
     },
     network: {
-      title: "Network & Web",
-      description: "Network information and web development tools",
+      title: "Network & Web Tools",
+      description: "Network analysis and web development utilities",
     },
     textContent: {
-      title: "Text & Content",
-      description: "Text processing and content creation tools",
+      title: "Text & Content Processing",
+      description: "Document creation and text editing tools",
     },
     converter: {
-      title: "Converters",
-      description: "Various format conversion tools",
+      title: "Conversion Tools",
+      description: "Convert between various formats and units",
     },
     health: {
       title: "Health & Wellness",
-      description: "Health management and body check tools",
+      description: "Health monitoring and wellness calculators",
     },
     code: {
       title: "Developer Tools",
-      description: "Tools for programming and web development",
+      description: "Programming and web development utilities",
     },
   },
 };

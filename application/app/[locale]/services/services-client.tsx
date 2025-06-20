@@ -116,23 +116,32 @@ const toolCategories = [
 ];
 
 export default function ServicesClient({ locale, t }: ServicesClientProps) {
-  // 安全なプロパティアクセス
-  const services = t?.services || {};
-
   return (
     <div className="animate-fade-in">
+      {/* ページヘッダー */}
+      <div className="text-center mb-12">
+        <h1 className="text-4xl font-bold text-gray-900 mb-4">
+          {t.services.title}
+        </h1>
+        <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          {t.services.subtitle}
+        </p>
+      </div>
+
       {/* Tool Categories */}
       <div className="space-y-12">
         {toolCategories.map((category) => (
           <div key={category.key} className="card">
             <div className="mb-6">
               <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                {/* @ts-ignore */}
-                {services.categories?.[category.key]?.title || category.key}
+                {t.services.categories[
+                  category.key as keyof typeof t.services.categories
+                ]?.title || category.key}
               </h2>
               <p className="text-gray-600">
-                {/* @ts-ignore */}
-                {services.categories?.[category.key]?.description || ""}
+                {t.services.categories[
+                  category.key as keyof typeof t.services.categories
+                ]?.description || ""}
               </p>
             </div>
 

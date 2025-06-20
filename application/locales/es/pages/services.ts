@@ -1,55 +1,61 @@
 import { ServicesTranslations } from "@/locales/types/pages/services";
 
 export const services: ServicesTranslations = {
-  title: "Todas las Herramientas",
+  title: "Herramientas Online Gratuitas",
+  description:
+    "Accede a más de 30 herramientas online gratuitas para optimizar tus tareas diarias. Calculadora, temporizador, generadores aleatorios, convertidores y más aplicaciones web prácticas.",
   subtitle:
-    "Descubre nuestra colección integral de herramientas de productividad, cada una diseñada con cuidado y atención al detalle.",
+    "Descubre herramientas potentes y gratuitas diseñadas para aumentar tu productividad. Todas accesibles al instante desde tu navegador sin necesidad de registro.",
   keywords: [
-    "herramientas en línea",
-    "herramientas gratuitas",
+    "herramientas online gratuitas",
     "herramientas de productividad",
-    "gestión de tareas",
-    "herramientas de decisión",
-    "generador de números aleatorios",
-    "ruleta",
-    "lista de tareas",
+    "aplicaciones web",
     "calculadora",
-    "lanzador de dados",
+    "temporizador",
+    "generador aleatorio",
+    "herramientas de conversión",
+    "procesamiento de texto",
+    "gestión del tiempo",
+    "lista de tareas",
+    "generador de códigos QR",
+    "conversor de unidades",
+    "paleta de colores",
+    "herramientas para desarrolladores",
+    "utilidades de red",
   ],
   categories: {
     productivity: {
-      title: "Productividad",
-      description:
-        "Herramientas para ayudarte a mantenerte organizado y eficiente",
+      title: "Herramientas de Productividad",
+      description: "Herramientas esenciales para mejorar la eficiencia laboral",
     },
     random: {
-      title: "Aleatorio y Decisión",
-      description: "Tomar decisiones y generar contenido aleatorio",
+      title: "Aleatorio y Toma de Decisiones",
+      description:
+        "Herramientas para apoyo en decisiones y generación de contenido aleatorio",
     },
     time: {
       title: "Tiempo y Reloj",
       description: "Gestión del tiempo y utilidades de reloj",
     },
     network: {
-      title: "Red y Web",
-      description: "Información de red y herramientas de desarrollo web",
+      title: "Herramientas de Red y Web",
+      description: "Análisis de red y utilidades de desarrollo web",
     },
     textContent: {
-      title: "Texto y Contenido",
-      description:
-        "Herramientas de procesamiento de texto y creación de contenido",
+      title: "Procesamiento de Texto y Contenido",
+      description: "Herramientas de creación de documentos y edición de texto",
     },
     converter: {
-      title: "Convertidores",
-      description: "Herramientas de conversión de varios formatos",
+      title: "Herramientas de Conversión",
+      description: "Conversión entre varios formatos y unidades",
     },
     health: {
       title: "Salud y Bienestar",
-      description: "Herramientas de gestión de salud y control corporal",
+      description: "Monitoreo de salud y calculadoras de bienestar",
     },
     code: {
-      title: "Herramientas de Desarrollo",
-      description: "Herramientas para programación y desarrollo web",
+      title: "Herramientas para Desarrolladores",
+      description: "Utilidades de programación y desarrollo web",
     },
   },
 };

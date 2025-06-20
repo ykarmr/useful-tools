@@ -1,5 +1,6 @@
 export interface ServicesTranslations {
   title: string;
+  description: string;
   subtitle: string;
   keywords: string[];
   categories: {

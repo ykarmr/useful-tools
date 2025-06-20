@@ -4,52 +4,62 @@ export const privacy: PrivacyTranslations = {
   title: "Política de Privacidad",
   lastUpdated: "Última actualización: {date}",
   description:
-    "Esta Política de Privacidad describe cómo manejamos su información personal cuando utiliza nuestro sitio web y servicios.",
+    "Política de Privacidad de USEFUL TOOLS. Descubre cómo protegemos tu información personal y manejamos los datos. Usa nuestras herramientas del navegador con confianza y seguridad.",
   keywords: [
     "política de privacidad",
     "protección de datos",
-    "recopilación de información",
-    "cookies",
-    "derechos del usuario",
-    "seguridad de datos",
+    "información personal",
+    "USEFUL TOOLS",
+    "herramientas navegador",
+    "herramientas gratis",
+    "herramientas web",
+    "calculadora",
+    "temporizador",
+    "lanzar moneda",
+    "seguridad",
+    "proyecto personal",
+    "privacidad usuario",
+    "manejo datos",
+    "protección privacidad",
+    "términos servicio",
   ],
   introduction:
-    "Esta Política de Privacidad describe cómo recopilamos, usamos y protegemos su información cuando utiliza nuestro sitio web de herramientas útiles.",
+    "USEFUL TOOLS es un sitio web de operación personal que ofrece herramientas gratuitas y convenientes, incluyendo calculadoras, temporizadores y lanzadores de monedas que funcionan completamente en tu navegador. Priorizamos tu privacidad por encima de todo y nos comprometemos a proteger tu información personal. Esta Política de Privacidad proporciona información detallada sobre cómo manejamos tus datos cuando usas nuestro sitio.",
   sections: {
     informationCollection: {
-      title: "Información que Recopilamos",
+      title: "Qué Información Recopilamos",
       content:
-        "Podemos recopilar los siguientes tipos de información:\n• Datos de uso y análisis\n• Información del dispositivo (tipo de navegador, sistema operativo)\n• Cookies y tecnologías similares para la funcionalidad del sitio web\n• Información que proporciona voluntariamente a través de formularios de contacto",
+        "Para proporcionar y mejorar nuestros servicios, podemos recopilar los siguientes tipos de información:\n\n**Información Recopilada Automáticamente**\n• Información de acceso (horarios de visita, páginas vistas, etc.)\n• Información del navegador (tipo de navegador, SO, tamaño de pantalla, etc.)\n• Patrones de uso del sitio (qué herramientas usa, etc.)\n\n**Información que Usted Proporciona**\n• Contenido que ingresa en nuestro formulario de contacto\n\n**Nota Importante**\nTodas las herramientas en nuestro sitio (calculadoras, temporizadores, etc.) funcionan completamente dentro de su navegador, y cualquier dato que ingrese se procesa solo en su dispositivo. Estos datos nunca se envían a nuestros servidores.",
     },
     howWeUse: {
-      title: "Cómo Usamos Su Información",
+      title: "Cómo Usamos la Información",
       content:
-        "Utilizamos la información recopilada para:\n• Proporcionar y mantener nuestros servicios\n• Mejorar la experiencia del usuario\n• Analizar patrones de uso del sitio web\n• Responder a sus consultas y solicitudes de soporte\n• Garantizar la seguridad del sitio web y prevenir el abuso",
+        "Utilizamos la información recopilada solo para los siguientes propósitos:\n\n**Operación y Mejora del Sitio**\n• Proporcionar herramientas y mejorar la funcionalidad\n• Optimizar la visualización del sitio\n• Desarrollar nuevas funciones y mejorar las existentes\n\n**Análisis de Uso**\n• Entender qué herramientas son más populares\n• Mejorar la experiencia del usuario\n• Mejorar el rendimiento del sitio\n\n**Soporte al Cliente**\n• Responder a consultas\n\n**Seguridad**\n• Prevenir uso no autorizado\n• Asegurar la seguridad del sitio",
     },
     dataSharing: {
-      title: "Compartir Datos",
+      title: "Compartir Información con Terceros",
       content:
-        "No vendemos, intercambiamos o alquilamos su información personal a terceros. Solo podemos compartir información en las siguientes circunstancias:\n• Con su consentimiento explícito\n• Para cumplir con obligaciones legales\n• Para proteger nuestros derechos y seguridad",
+        "Nunca vendemos o compartimos inapropiadamente su información con terceros. Sin embargo, podemos compartir información mínima necesaria solo en los siguientes casos:\n\n**Requisitos Legales**\n• Cuando la divulgación es requerida por ley\n• Ante solicitudes formales de tribunales o autoridades\n\n**Protección del Sitio**\n• Cuando es necesario para proteger el sitio u otros usuarios\n\n**Provisión de Servicios**\n• Google Analytics (para análisis de uso)\n• Servicios de hosting (para operación del sitio)\n\nSeleccionamos cuidadosamente proveedores de servicios confiables que implementan medidas apropiadas de protección de privacidad.",
     },
     cookies: {
-      title: "Cookies y Seguimiento",
+      title: "Cookies y Almacenamiento Local",
       content:
-        "Utilizamos cookies y tecnologías similares para:\n• Recordar sus preferencias\n• Analizar el tráfico del sitio web\n• Mejorar la funcionalidad del sitio web\n\nPuede controlar la configuración de cookies a través de las preferencias de su navegador.",
+        "Utilizamos cookies y Almacenamiento Local (funciones de almacenamiento del navegador) para proporcionar un mejor servicio.\n\n**Uso de Cookies**\n• Análisis de uso del sitio (Google Analytics)\n• Recordar sus configuraciones y patrones de uso\n• Mejorar la funcionalidad del sitio\n\n**Uso del Almacenamiento Local**\n• Guardar contenido de entrada y configuraciones en cada herramienta\n• Almacenar preferencias para una mejor experiencia\n\n**Cambiar Configuraciones**\nPuede desactivar cookies o eliminar datos del Almacenamiento Local a través de la configuración de su navegador. Sin embargo, algunas funciones pueden estar limitadas.",
     },
     dataSecurity: {
-      title: "Seguridad de Datos",
+      title: "Seguridad de la Información",
       content:
-        "Implementamos medidas de seguridad apropiadas para proteger su información contra acceso no autorizado, alteración, divulgación o destrucción. Sin embargo, ningún método de transmisión por internet es 100% seguro.",
+        "Para proteger su información, implementamos las siguientes medidas:\n\n**Medidas Técnicas**\n• Comunicaciones cifradas SSL\n• Verificaciones regulares de seguridad\n• Uso de servicios de hosting seguros\n\n**Medidas Operativas**\n• Recopilar solo la información mínima necesaria\n• Copias de seguridad regulares\n• Conciencia continua de seguridad\n\n**Nota Importante**\nAunque no podemos eliminar completamente todos los riesgos asociados con las comunicaciones por internet, implementamos las mejores medidas de seguridad posibles. Por favor, entienda que no podemos garantizar seguridad absoluta.",
     },
     yourRights: {
       title: "Sus Derechos",
       content:
-        "Usted tiene derecho a:\n• Acceder a su información personal\n• Solicitar corrección de datos inexactos\n• Solicitar eliminación de sus datos\n• Objetar al procesamiento de datos\n• Portabilidad de datos",
+        "Usted tiene los siguientes derechos con respecto a su información:\n\n• Solicitar acceso a la información recopilada\n• Solicitar corrección o eliminación de información\n• Solicitar detener el uso de su información\n• Portabilidad de datos (transferir datos a otros servicios)\n\nPara ejercer estos derechos, contáctenos a través de nuestro formulario de contacto. Responderemos lo más rápido posible.",
     },
     contact: {
-      title: "Contáctenos",
+      title: "Contáctanos",
       content:
-        "Si tiene alguna pregunta sobre esta Política de Privacidad, contáctenos a través de nuestro formulario de contacto.",
+        "Si tiene preguntas sobre esta Política de Privacidad, no dude en contactarnos a través de nuestro formulario de contacto. Como este es un proyecto personal, las respuestas pueden tomar algún tiempo, pero definitivamente abordaremos sus inquietudes.",
     },
   },
 };

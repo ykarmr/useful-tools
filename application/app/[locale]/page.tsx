@@ -57,6 +57,18 @@ export async function generateMetadata({
       "structured-data": JSON.stringify(
         generateHomePageStructuredData(locale, t.home, t.common)
       ),
+      "google-site-verification": "",
+      "application-name": t.common.siteTitle,
+      "msapplication-TileColor": "#3B82F6",
+      "msapplication-config": "/browserconfig.xml",
+      "theme-color": "#3B82F6",
+      "mobile-web-app-capable": "yes",
+      "apple-mobile-web-app-capable": "yes",
+      "apple-mobile-web-app-status-bar-style": "default",
+      "apple-mobile-web-app-title": t.common.siteTitle,
+      "apple-touch-icon": "/images/logo/logo.png",
+      "mask-icon": "/images/logo/logo.svg",
+      "msapplication-TileImage": "/images/logo/logo.png",
     },
   };
 }
@@ -245,7 +257,10 @@ export default async function HomePage({ params }: HomePageProps) {
             </p>
           </div>
 
-          <div className="grid  gap-8 max-w-7xl mx-auto mb-12" role="list">
+          <div
+            className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto mb-12"
+            role="list"
+          >
             {featuredTools.map((tool, index) => {
               const Icon = tool.icon;
               return (

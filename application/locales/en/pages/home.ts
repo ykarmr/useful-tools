@@ -1,33 +1,40 @@
 import { HomeTranslations } from "@/locales/types/pages/tools/home";
 
 export const home: HomeTranslations = {
-  title: "Comprehensive Free Online Tools for Productivity",
+  title: "USEFUL TOOLS - Free Online Utility Tools Collection",
   subtitle:
-    "A collection of 20+ free online tools to help you make decisions, manage tasks, and boost productivity.",
+    "30+ practical free online tools for productivity, calculations, random generation, and text processing. Instant browser-based utilities.",
   keywords: [
-    "online tools",
-    "free tools",
+    "free online tools",
+    "browser tools",
+    "utility tools",
     "productivity tools",
-    "task management",
-    "decision-making tools",
-    "random number generator",
-    "roulette",
+    "calculator",
+    "random generator",
+    "text converter",
+    "QR code generator",
+    "JSON formatter",
+    "roulette wheel",
+    "timer",
     "todo list",
+    "web utilities",
+    "instant tools",
+    "no registration tools",
   ],
   description:
-    "Explore our comprehensive collection of free online tools designed to help you make informed decisions, manage tasks, and enhance productivity. Whether you need a simple roulette wheel for decision-making or a powerful todo list to organize your life, we have the right tool for you.",
+    "Streamline your workflow with 30+ free online tools. Calculator, roulette, timers, QR generator, JSON formatter, text converters, and more. No registration required, privacy-focused, instant browser access.",
   tryRoulette: "Try Roulette",
   manageTasks: "Manage Tasks",
   chooseTool: "Choose a Tool",
   chooseToolDescription:
-    "Select from our comprehensive collection of free online tools designed to help you be more productive.",
+    "Select from 30+ practical free online tools designed to enhance your daily workflow and productivity.",
   rouletteDescription:
-    "Make decisions easily with our interactive roulette wheel. Add options and let the wheel decide for you.",
+    "Make decisions effortlessly. Add your options and spin the wheel for fair, unbiased choices.",
   todoDescription:
-    "Stay organized with our simple yet powerful todo manager. Track tasks, set priorities, and manage deadlines.",
+    "Simple yet powerful task management. Set deadlines, track progress, and stay organized efficiently.",
   readyToStart: "Ready to boost your productivity?",
   readyToStartDescription:
-    "Our tools are designed to help you work smarter, not harder. Try them now for free.",
+    "No registration needed, completely free. Start using practical tools instantly in your browser.",
   startUsingTools: "Start Using Tools",
   popularTools: "Popular Tools",
   allTools: "All Tools",

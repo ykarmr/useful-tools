@@ -57,10 +57,13 @@ export default async function PrivacyPage({ params }: Props) {
               {t.privacy.introduction}
             </p>
 
-            <div className="space-y-8">
+            <div className="space-y-10">
               {Object.entries(t.privacy.sections).map(([key, section]) => (
-                <section key={key}>
-                  <h2 className="text-xl font-semibold text-gray-900 mb-4">
+                <section
+                  key={key}
+                  className="border-b border-gray-100 pb-8 last:border-b-0 last:pb-0"
+                >
+                  <h2 className="text-xl font-semibold text-gray-900 mb-5">
                     {section.title}
                   </h2>
                   <div className="text-gray-700 leading-relaxed whitespace-pre-line">

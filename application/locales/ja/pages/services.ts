@@ -1,53 +1,60 @@
 import { ServicesTranslations } from "@/locales/types/pages/services";
 
 export const services: ServicesTranslations = {
-  title: "すべてのツール",
+  title: "便利ツール一覧",
+  description:
+    "日常業務を効率化する30以上の無料オンラインツール。計算機、タイマー、ランダム生成、変換ツールなど、すぐに使える実用的なWebアプリケーションを提供。",
   subtitle:
-    "細心の注意と配慮を持って設計された、包括的な生産性ツールのコレクションを発見してください。",
+    "日常のタスクを効率化する、厳選された便利ツールコレクション。すべて無料でブラウザ上ですぐに利用できます。",
   keywords: [
-    "オンラインツール",
-    "無料ツール",
-    "生産性ツール",
-    "タスク管理",
-    "意思決定ツール",
-    "ランダム数生成器",
-    "ルーレット",
-    "TODOリスト",
-    "電卓",
-    "サイコロ",
+    "無料オンラインツール",
+    "便利ツール",
+    "生産性向上",
+    "計算機",
+    "タイマー",
+    "ランダム生成",
+    "変換ツール",
+    "テキスト処理",
+    "時間管理",
+    "TODO",
+    "QRコード生成",
+    "単位変換",
+    "カラーパレット",
+    "開発者ツール",
+    "ネットワークツール",
   ],
   categories: {
     productivity: {
-      title: "生産性",
-      description: "整理整頓と効率性を保つためのツール",
+      title: "生産性ツール",
+      description: "作業効率を高める実用的なツール",
     },
     random: {
-      title: "ランダム・決定",
-      description: "決定を下し、ランダムなコンテンツを生成",
+      title: "ランダム生成・決定支援",
+      description: "意思決定やランダムコンテンツ生成をサポート",
     },
     time: {
       title: "時間・時計",
-      description: "時間管理と時計ユーティリティ",
+      description: "時間管理と時計機能",
     },
     network: {
       title: "ネットワーク・Web",
-      description: "ネットワーク情報とWeb開発ツール",
+      description: "ネットワーク情報とWeb開発サポート",
     },
     textContent: {
-      title: "テキスト・コンテンツ",
-      description: "テキスト処理とコンテンツ作成ツール",
+      title: "テキスト・コンテンツ処理",
+      description: "文書作成とテキスト編集ツール",
     },
     converter: {
-      title: "コンバーター",
-      description: "様々な形式の変換ツール",
+      title: "変換ツール",
+      description: "様々な形式・単位の変換機能",
     },
     health: {
       title: "健康・ウェルネス",
-      description: "健康管理と体調チェックツール",
+      description: "健康管理と体調チェック",
     },
     code: {
-      title: "開発者ツール",
-      description: "プログラミングとWeb開発に役立つツール",
+      title: "開発者向けツール",
+      description: "プログラミングとWeb開発を効率化",
     },
   },
 };

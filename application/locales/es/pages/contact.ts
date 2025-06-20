@@ -2,36 +2,37 @@ import { ContactTranslations } from "@/locales/types/pages/contact";
 
 export const contact: ContactTranslations = {
   title: "Contáctanos",
-  subtitle: "Ponte en contacto con nosotros",
+  subtitle: "Nos encantaría conocer tu opinión",
   keywords: [
     "contacto",
     "soporte",
     "consulta",
     "comentarios",
     "preguntas",
-    "servicio al cliente",
+    "sugerencias",
     "ayuda",
     "contáctanos",
   ],
   description:
-    "¿Tienes preguntas, sugerencias o comentarios? Nos encantaría escucharte. Envíanos un mensaje y te responderemos lo antes posible.",
+    "¿Tienes preguntas sobre USEFUL TOOLS? ¿Ideas para nuevas funciones? Damos la bienvenida a todos los comentarios, sugerencias y consultas. Tu opinión nos ayuda a crear mejores herramientas para todos. Como este es un proyecto personal, los tiempos de respuesta pueden variar, pero definitivamente te responderemos.",
   form: {
     name: "Nombre",
-    namePlaceholder: "Tu nombre completo",
-    nameRequired: "El nombre es obligatorio",
+    namePlaceholder: "Juan Pérez",
+    nameRequired: "Por favor ingresa tu nombre",
     email: "Correo electrónico",
     emailPlaceholder: "tu.email@ejemplo.com",
-    emailRequired: "El correo electrónico es obligatorio",
+    emailRequired: "Por favor ingresa tu correo electrónico",
     emailInvalid: "Por favor ingresa una dirección de correo válida",
     message: "Mensaje",
-    messagePlaceholder: "Cuéntanos más sobre tu consulta...",
-    messageRequired: "El mensaje es obligatorio",
-    messageMinLength: "El mensaje debe tener al menos 10 caracteres",
+    messagePlaceholder:
+      "Comparte tus preguntas, comentarios o sugerencias de funciones...",
+    messageRequired: "Por favor ingresa tu mensaje",
+    messageMinLength: "Por favor ingresa al menos 10 caracteres",
     submit: "Enviar Mensaje",
     submitting: "Enviando...",
     success:
-      "¡Gracias! Tu mensaje ha sido enviado exitosamente. Te responderemos pronto.",
+      "¡Gracias! Tu mensaje ha sido enviado exitosamente. Podemos tardar un tiempo en responder, pero definitivamente te contactaremos.",
     error:
-      "Lo siento, hubo un error al enviar tu mensaje. Por favor intenta de nuevo más tarde.",
+      "Lo sentimos, hubo un error al enviar tu mensaje. Por favor espera un momento e intenta de nuevo.",
   },
 };

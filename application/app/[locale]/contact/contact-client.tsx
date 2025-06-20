@@ -6,9 +6,8 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Mail, CheckCircle, AlertCircle } from "lucide-react";
+import { CheckCircle, AlertCircle } from "lucide-react";
 import type { Translations } from "@/locales";
 
 interface ContactClientProps {
@@ -113,127 +112,104 @@ export default function ContactClient({ t }: ContactClientProps) {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="max-w-6xl mx-auto px-4 py-12">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+      <div className="max-w-4xl mx-auto px-4 py-12">
+        <div className="bg-white rounded-lg shadow-sm p-8">
+          <h1 className="text-3xl font-bold text-gray-900 mb-4">
             {t.contact.title}
           </h1>
-          <p className="text-xl text-gray-600 mb-2">{t.contact.subtitle}</p>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            {t.contact.description}
-          </p>
-        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Contact Form */}
-          <div className="lg:col-span-2">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Mail className="h-5 w-5" />
-                  {t.contact.form.submit}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                {submitStatus === "success" && (
-                  <Alert className="mb-6 border-green-200 bg-green-50">
-                    <CheckCircle className="h-4 w-4 text-green-600" />
-                    <AlertDescription className="text-green-800">
-                      {t.contact.form.success}
-                    </AlertDescription>
-                  </Alert>
-                )}
+          <div className="prose max-w-none">
+            <p className="text-lg text-gray-700 mb-8 leading-relaxed">
+              {t.contact.description}
+            </p>
 
-                {submitStatus === "error" && (
-                  <Alert className="mb-6 border-red-200 bg-red-50">
-                    <AlertCircle className="h-4 w-4 text-red-600" />
-                    <AlertDescription className="text-red-800">
-                      {t.contact.form.error}
-                    </AlertDescription>
-                  </Alert>
-                )}
+            {submitStatus === "success" && (
+              <Alert className="mb-6 border-green-200 bg-green-50">
+                <CheckCircle className="h-4 w-4 text-green-600" />
+                <AlertDescription className="text-green-800">
+                  {t.contact.form.success}
+                </AlertDescription>
+              </Alert>
+            )}
 
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label
-                        htmlFor="name"
-                        className="block text-sm font-medium text-gray-700 mb-2"
-                      >
-                        {t.contact.form.name}
-                      </label>
-                      <Input
-                        id="name"
-                        type="text"
-                        value={formData.name}
-                        onChange={handleChange("name")}
-                        placeholder={t.contact.form.namePlaceholder}
-                        className={errors.name ? "border-red-500" : ""}
-                      />
-                      {errors.name && (
-                        <p className="text-red-500 text-sm mt-1">
-                          {errors.name}
-                        </p>
-                      )}
-                    </div>
+            {submitStatus === "error" && (
+              <Alert className="mb-6 border-red-200 bg-red-50">
+                <AlertCircle className="h-4 w-4 text-red-600" />
+                <AlertDescription className="text-red-800">
+                  {t.contact.form.error}
+                </AlertDescription>
+              </Alert>
+            )}
 
-                    <div>
-                      <label
-                        htmlFor="email"
-                        className="block text-sm font-medium text-gray-700 mb-2"
-                      >
-                        {t.contact.form.email}
-                      </label>
-                      <Input
-                        id="email"
-                        type="email"
-                        value={formData.email}
-                        onChange={handleChange("email")}
-                        placeholder={t.contact.form.emailPlaceholder}
-                        className={errors.email ? "border-red-500" : ""}
-                      />
-                      {errors.email && (
-                        <p className="text-red-500 text-sm mt-1">
-                          {errors.email}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="message"
-                      className="block text-sm font-medium text-gray-700 mb-2"
-                    >
-                      {t.contact.form.message}
-                    </label>
-                    <Textarea
-                      id="message"
-                      value={formData.message}
-                      onChange={handleChange("message")}
-                      placeholder={t.contact.form.messagePlaceholder}
-                      rows={6}
-                      className={errors.message ? "border-red-500" : ""}
-                    />
-                    {errors.message && (
-                      <p className="text-red-500 text-sm mt-1">
-                        {errors.message}
-                      </p>
-                    )}
-                  </div>
-
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full"
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium text-gray-700 mb-2"
                   >
-                    {isSubmitting
-                      ? t.contact.form.submitting
-                      : t.contact.form.submit}
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
+                    {t.contact.form.name}
+                  </label>
+                  <Input
+                    id="name"
+                    type="text"
+                    value={formData.name}
+                    onChange={handleChange("name")}
+                    placeholder={t.contact.form.namePlaceholder}
+                    className={errors.name ? "border-red-500" : ""}
+                  />
+                  {errors.name && (
+                    <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+                  )}
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
+                    {t.contact.form.email}
+                  </label>
+                  <Input
+                    id="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleChange("email")}
+                    placeholder={t.contact.form.emailPlaceholder}
+                    className={errors.email ? "border-red-500" : ""}
+                  />
+                  {errors.email && (
+                    <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                  )}
+                </div>
+              </div>
+
+              <div>
+                <label
+                  htmlFor="message"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
+                  {t.contact.form.message}
+                </label>
+                <Textarea
+                  id="message"
+                  value={formData.message}
+                  onChange={handleChange("message")}
+                  placeholder={t.contact.form.messagePlaceholder}
+                  rows={6}
+                  className={errors.message ? "border-red-500" : ""}
+                />
+                {errors.message && (
+                  <p className="text-red-500 text-sm mt-1">{errors.message}</p>
+                )}
+              </div>
+
+              <Button type="submit" disabled={isSubmitting} className="w-full">
+                {isSubmitting
+                  ? t.contact.form.submitting
+                  : t.contact.form.submit}
+              </Button>
+            </form>
           </div>
         </div>
       </div>
