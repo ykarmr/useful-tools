@@ -1,20 +1,23 @@
 import { BmiCalculatorTranslations } from "@/locales/types/pages/tools/bmi-calculator";
 
 export const bmiCalculator: BmiCalculatorTranslations = {
-  title: "BMI計算ツール",
+  title: "BMI計算機",
+  subTitle: "無料で簡単に体格指数を計算",
   description:
-    "身長と体重からBMI（体格指数）を計算し、適正体重範囲と健康アドバイスを提供します",
+    "身長と体重からBMI（体格指数）を自動計算。適正体重範囲と健康アドバイスも提供する無料ツール。メートル法・ヤード・ポンド法対応で、世界中で使用可能です。",
   keywords: [
     "BMI計算",
+    "BMI計算機",
     "体格指数",
     "適正体重",
     "健康管理",
-    "肥満度",
+    "肥満度チェック",
     "体重管理",
     "ダイエット",
     "健康診断",
-    "メタボリック",
+    "メタボ対策",
     "フィットネス",
+    "無料ツール",
   ],
 
   // 入力セクション

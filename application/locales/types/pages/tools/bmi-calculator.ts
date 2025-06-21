@@ -2,6 +2,7 @@ import { FAQItem } from "../../faq";
 
 export interface BmiCalculatorTranslations {
   title: string;
+  subTitle: string;
   description: string;
   keywords: string[];
 

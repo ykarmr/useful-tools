@@ -10,9 +10,9 @@ export function generateToolMetadata(
   toolTranslations: any,
   siteTranslations: Translations["common"]
 ): Metadata {
-  // subtitle がある場合は「title - subtitle」の形式にする
-  const baseTitle = toolTranslations.subtitle
-    ? `${toolTranslations.title} - ${toolTranslations.subtitle}`
+  // subTitle がある場合は「title - subTitle」の形式にする
+  const baseTitle = toolTranslations.subTitle
+    ? `${toolTranslations.title} - ${toolTranslations.subTitle}`
     : toolTranslations.title;
   const title = `${baseTitle} | ${siteTranslations.siteTitle}`;
   const description = toolTranslations.description;

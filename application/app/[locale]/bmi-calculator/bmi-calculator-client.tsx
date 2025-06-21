@@ -191,6 +191,7 @@ export default function BmiCalculatorClient({
       locale={locale}
       t={t}
       title={t.bmiCalculator.title}
+      subtitle={t.bmiCalculator.subTitle}
       description={t.bmiCalculator.description}
       icon={Heart}
     >

@@ -2,39 +2,42 @@ import { BmiCalculatorTranslations } from "@/locales/types/pages/tools/bmi-calcu
 
 export const bmiCalculator: BmiCalculatorTranslations = {
   title: "BMI Calculator",
+  subTitle: "Free & Easy Body Mass Index Calculator",
   description:
-    "Calculate your BMI (Body Mass Index) from height and weight, with ideal weight range and health advice",
+    "Calculate your BMI (Body Mass Index) instantly from height and weight. Get ideal weight range and personalized health advice. Free tool supporting both metric and imperial units.",
   keywords: [
     "BMI calculator",
-    "body mass index",
-    "ideal weight",
-    "health management",
-    "obesity",
+    "body mass index calculator",
+    "BMI checker",
+    "ideal weight calculator",
+    "health calculator",
+    "obesity calculator",
     "weight management",
-    "diet",
-    "health checkup",
-    "metabolic",
-    "fitness",
+    "diet calculator",
+    "health assessment",
+    "fitness calculator",
+    "free BMI tool",
+    "weight tracker",
   ],
 
   // Input section
-  inputSection: "Body Information",
+  inputSection: "Enter Your Information",
   heightLabel: "Height",
-  heightPlaceholder: "e.g. 170",
+  heightPlaceholder: "e.g., 170",
   weightLabel: "Weight",
-  weightPlaceholder: "e.g. 65",
+  weightPlaceholder: "e.g., 65",
   unitSystem: "Unit System",
   metric: "Metric (cm・kg)",
   imperial: "Imperial (ft・lbs)",
 
   // Results
-  resultSection: "BMI Calculation Results",
+  resultSection: "Your BMI Results",
   bmiValue: "BMI Value",
-  bmiCategory: "Category",
-  idealWeightRange: "Ideal Weight Range",
-  idealWeightDescription: "Ideal weight range based on BMI 18.5-25",
-  healthAdvice: "Health Advice",
-  recommendation: "Recommendation",
+  bmiCategory: "Weight Category",
+  idealWeightRange: "Healthy Weight Range",
+  idealWeightDescription: "Recommended weight range based on BMI 18.5-25",
+  healthAdvice: "Health Recommendations",
+  recommendation: "Our Recommendation",
 
   // BMI categories
   categories: {
@@ -47,13 +50,13 @@ export const bmiCalculator: BmiCalculatorTranslations = {
   // Advice
   advice: {
     underweight:
-      "Your weight is below the healthy range. Consider a balanced diet with adequate calories and consult a healthcare provider if needed.",
+      "Your weight is below the healthy range. Focus on nutrient-rich foods and consider consulting a healthcare professional to develop a healthy weight gain plan.",
     normal:
-      "Your weight is within the healthy range. Maintain your current healthy lifestyle habits.",
+      "Excellent! Your weight is in the healthy range. Keep up your current lifestyle with balanced nutrition and regular physical activity.",
     overweight:
-      "Your weight is above the healthy range. Consider reviewing your diet and incorporating regular physical activity.",
+      "Your weight is above the healthy range. Consider adopting a balanced diet and increasing physical activity to reach a healthier weight.",
     obese:
-      "Your weight indicates obesity. This increases health risks. Consult with a healthcare provider for a comprehensive weight management plan.",
+      "Your BMI indicates obesity, which may increase health risks. We recommend consulting with a healthcare provider to create a safe and effective weight management plan.",
   },
 
   // Statistics
@@ -69,10 +72,10 @@ export const bmiCalculator: BmiCalculatorTranslations = {
 
   // Error messages
   errors: {
-    invalidHeight: "Please enter a valid height",
-    invalidWeight: "Please enter a valid weight",
-    heightRange: "Height must be between 50cm and 300cm",
-    weightRange: "Weight must be between 1kg and 500kg",
+    invalidHeight: "Please enter a valid height value",
+    invalidWeight: "Please enter a valid weight value",
+    heightRange: "Height must be between 50-300 cm (1.6-9.8 ft)",
+    weightRange: "Weight must be between 1-500 kg (2-1100 lbs)",
   },
 
   // Buttons

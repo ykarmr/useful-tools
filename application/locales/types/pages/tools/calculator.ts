@@ -12,6 +12,7 @@ export interface Feature {
 
 export interface CalculatorTranslations {
   title: string;
+  subTitle: string;
   description: string;
   keywords: string[];
   howToUse: {
