@@ -9,6 +9,10 @@ export function generateToolStructuredData(
   siteTranslations: Translations["common"]
 ) {
   const toolUrl = `${baseUrl}/${locale}/${toolKey}`;
+  // subtitle がある場合は「title - subtitle」の形式にする
+  const fullTitle = toolTranslations.subtitle
+    ? `${toolTranslations.title} - ${toolTranslations.subtitle}`
+    : toolTranslations.title;
 
   return {
     "@context": "https://schema.org",
@@ -17,7 +21,7 @@ export function generateToolStructuredData(
       {
         "@type": "WebApplication",
         "@id": `${toolUrl}#webapp`,
-        name: toolTranslations.title,
+        name: fullTitle,
         description: toolTranslations.description,
         url: toolUrl,
         applicationCategory: "UtilityApplication",
@@ -35,7 +39,7 @@ export function generateToolStructuredData(
       {
         "@type": "SoftwareApplication",
         "@id": `${toolUrl}#software`,
-        name: toolTranslations.title,
+        name: fullTitle,
         description: toolTranslations.description,
         url: toolUrl,
         applicationCategory: "UtilityApplication",

@@ -7,6 +7,7 @@ interface ToolLayoutProps {
   locale: Locale;
   t: Translations;
   title: string;
+  subtitle?: string;
   description: string;
   icon?: React.ComponentType<{ size?: number; className?: string }>;
   showSidebar?: boolean;
@@ -19,6 +20,7 @@ export default function ToolLayout({
   locale,
   t,
   title,
+  subtitle,
   description,
   icon: Icon,
   showSidebar = true,
@@ -40,9 +42,14 @@ export default function ToolLayout({
                   </div>
                 </div>
               )}
-              <h1 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-4 lg:mb-6">
+              <h1 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-2">
                 {title}
               </h1>
+              {subtitle && (
+                <h2 className="text-xl lg:text-2xl font-semibold text-primary-600 mb-4 lg:mb-6">
+                  {subtitle}
+                </h2>
+              )}
               <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
                 {description}
               </p>

@@ -10,7 +10,11 @@ export function generateToolMetadata(
   toolTranslations: any,
   siteTranslations: Translations["common"]
 ): Metadata {
-  const title = `${toolTranslations.title} | ${siteTranslations.siteTitle}`;
+  // subtitle がある場合は「title - subtitle」の形式にする
+  const baseTitle = toolTranslations.subtitle
+    ? `${toolTranslations.title} - ${toolTranslations.subtitle}`
+    : toolTranslations.title;
+  const title = `${baseTitle} | ${siteTranslations.siteTitle}`;
   const description = toolTranslations.description;
   const keywords = toolTranslations.keywords || [];
   const toolUrl = `${baseUrl}/${locale}/${toolKey}`;
@@ -35,7 +39,7 @@ export function generateToolMetadata(
       },
     },
     openGraph: {
-      title: toolTranslations.title,
+      title: baseTitle,
       description,
       url: toolUrl,
       type: "website",
@@ -46,7 +50,7 @@ export function generateToolMetadata(
           url: ogImageUrl,
           width: 1200,
           height: 630,
-          alt: toolTranslations.title,
+          alt: baseTitle,
         },
       ],
     },

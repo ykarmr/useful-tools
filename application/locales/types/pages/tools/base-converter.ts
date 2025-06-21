@@ -1,5 +1,6 @@
 export interface BaseConverterTranslations {
   title: string;
+  subtitle: string;
   description: string;
   keywords: string[];
   conversionTitle: string;

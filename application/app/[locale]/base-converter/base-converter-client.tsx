@@ -326,6 +326,7 @@ export default function BaseConverterClient({
       locale={locale}
       t={t}
       title={t.baseConverter.title}
+      subtitle={t.baseConverter.subtitle}
       description={t.baseConverter.description}
       icon={Binary}
     >
