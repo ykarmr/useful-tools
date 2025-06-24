@@ -2,6 +2,7 @@ import { FAQItem } from "../../faq";
 
 export interface CoinFlipTranslations {
   title: string;
+  subTitle: string;
   description: string;
   keywords: string[];
   flip: string;

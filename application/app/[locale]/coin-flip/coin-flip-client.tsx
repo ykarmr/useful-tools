@@ -44,6 +44,7 @@ export default function CoinFlipClient({ locale, t }: CoinFlipClientProps) {
       locale={locale}
       t={t}
       title={t.coinFlip.title}
+      subtitle={t.coinFlip.subTitle}
       description={t.coinFlip.description}
       icon={Coins}
     >

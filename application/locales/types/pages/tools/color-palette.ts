@@ -2,6 +2,7 @@ import { FAQItem } from "../../faq";
 
 export interface ColorPaletteTranslations {
   title: string;
+  subTitle: string;
   description: string;
   keywords: string[];
   baseColor: string;

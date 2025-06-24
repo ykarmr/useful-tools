@@ -2,26 +2,32 @@ import { CoinFlipTranslations } from "@/locales/types/pages/tools/coin-flip";
 
 export const coinFlip: CoinFlipTranslations = {
   title: "Lanzamiento de Moneda",
-  description: "Lanza una moneda para decisiones rápidas",
+  subTitle: "Herramienta de Decisión Rápida",
+  description:
+    "Toma decisiones rápidas con nuestra herramienta intuitiva de lanzamiento de monedas. Compatible con múltiples monedas y resultados aleatorios instantáneos y justos para ayudarte a decidir entre opciones.",
   keywords: [
-    "lanzamiento de moneda",
-    "decisión rápida",
+    "lanzar moneda",
     "cara o cruz",
+    "herramienta decisión",
     "elección aleatoria",
-    "toma de decisiones",
+    "cara o sello",
+    "tomar decisiones",
+    "decisión rápida",
+    "elección binaria",
+    "juego suerte",
   ],
   flip: "Lanzar Moneda",
   heads: "Cara",
   tails: "Cruz",
   flipping: "Lanzando...",
-  selectCount: "Selecciona el número de lanzamientos",
+  selectCount: "Número de monedas",
   howToUse: {
     title: "Cómo Usar",
     steps: [
       "Selecciona el número de monedas a lanzar (1-10 monedas)",
       "Haz clic en el botón 'Lanzar Moneda'",
-      "Observa las monedas girar y determinar aleatoriamente el resultado",
-      "Ve el resultado (cara o cruz) mostrado",
+      "Observa las monedas girar y determinar el resultado",
+      "Ve el resultado (cara o cruz)",
     ],
     features: {
       title: "Características",
@@ -40,19 +46,19 @@ export const coinFlip: CoinFlipTranslations = {
     },
     {
       q: "¿Cómo se determina el resultado?",
-      a: "El resultado se determina aleatoriamente, mostrando cara o cruz.",
+      a: "El resultado se determina mediante un generador de números aleatorios. Cada resultado tiene una probabilidad del 50%.",
     },
     {
-      q: "¿Cuándo se actualiza el resultado del lanzamiento?",
+      q: "¿Cuándo se actualiza el resultado de la moneda?",
       a: "El resultado se actualiza cada vez que lanzas la moneda.",
     },
     {
-      q: "¿Hay un historial de lanzamientos de moneda?",
-      a: "Esta herramienta no guarda historial; los resultados se muestran solo para la sesión actual.",
+      q: "¿Se guarda el historial de lanzamientos?",
+      a: "Esta herramienta no guarda historial. Los resultados solo se muestran durante la sesión actual.",
     },
     {
-      q: "¿Puedo lanzar varias monedas a la vez?",
-      a: "Sí, puedes seleccionar el número de monedas a lanzar antes de comenzar.",
+      q: "¿Puedo lanzar múltiples monedas a la vez?",
+      a: "Sí, puedes seleccionar el número de monedas a lanzar (1-10) antes de comenzar.",
     },
   ],
 };

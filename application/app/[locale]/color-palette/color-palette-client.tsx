@@ -1,11 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Palette, Copy, Check, Shuffle, Download } from "lucide-react";
 import ToolLayout from "@/components/layout/tool-layout";
 import ToolSection from "@/components/layout/tool-section";
 import ToolDisplay from "@/components/layout/tool-display";
-import ToolControls from "@/components/layout/tool-controls";
 import ToolInput from "@/components/layout/tool-input";
 import ToolResult from "@/components/layout/tool-result";
 import ToolFaq from "@/components/layout/tool-faq";
@@ -33,6 +32,34 @@ type PaletteType =
 type ColorFormat = "hex" | "rgb" | "hsl";
 type ColorBlindType = "normal" | "protanopia" | "deuteranopia" | "tritanopia";
 
+// プリセットカラー（定数として外部化）
+const PRESET_COLORS = [
+  "#FF6B6B",
+  "#4ECDC4",
+  "#45B7D1",
+  "#96CEB4",
+  "#FFEAA7",
+  "#DDA0DD",
+  "#FFB6C1",
+  "#98D8C8",
+  "#F7DC6F",
+  "#BB8FCE",
+  "#85C1E9",
+  "#F8C471",
+  "#82E0AA",
+  "#F1948A",
+  "#AED6F1",
+  "#F9E79F",
+  "#D5A6BD",
+  "#A3E4DB",
+  "#FFD93D",
+  "#6BCF7F",
+  "#4D96FF",
+  "#9B59B6",
+  "#E74C3C",
+  "#2ECC71",
+] as const;
+
 export default function ColorPaletteClient({
   locale,
   t,
@@ -44,15 +71,27 @@ export default function ColorPaletteClient({
     useState<ColorBlindType>("normal");
   const [palette, setPalette] = useState<ColorInfo[]>([]);
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
+  const [showColorPicker, setShowColorPicker] = useState(false);
+
+  // 初回ロード時とベースカラー変更時に自動でパレット生成
+  useEffect(() => {
+    if (isValidHex(baseColor)) {
+      generatePalette();
+    }
+  }, [baseColor, paletteType]);
 
   // Hexカラー値のバリデーション
   const isValidHex = (hex: string): boolean => {
     return /^#[0-9A-F]{6}$/i.test(hex);
   };
 
+  // 数値をクランプする汎用関数
+  const clamp = (value: number, min: number, max: number): number => {
+    return Math.max(min, Math.min(max, Math.round(value)));
+  };
+
   // 色の変換ユーティリティ関数
   const hexToRgb = (hex: string): { r: number; g: number; b: number } => {
-    // バリデーションを追加
     if (!isValidHex(hex)) {
       console.warn(`Invalid hex color: ${hex}, using fallback color`);
       hex = "#000000"; // フォールバック色
@@ -141,19 +180,26 @@ export default function ColorPaletteClient({
   };
 
   const rgbToHex = (r: number, g: number, b: number): string => {
-    // RGB値を0-255の範囲にクランプ
-    r = Math.max(0, Math.min(255, Math.round(r)));
-    g = Math.max(0, Math.min(255, Math.round(g)));
-    b = Math.max(0, Math.min(255, Math.round(b)));
-    return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+    const clampedR = clamp(r, 0, 255);
+    const clampedG = clamp(g, 0, 255);
+    const clampedB = clamp(b, 0, 255);
+    return (
+      "#" +
+      ((1 << 24) + (clampedR << 16) + (clampedG << 8) + clampedB)
+        .toString(16)
+        .slice(1)
+    );
   };
 
   const calculateLuminance = (r: number, g: number, b: number): number => {
-    const [rs, gs, bs] = [r, g, b].map((c) => {
-      c = c / 255;
-      return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
-    });
-    return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
+    const toLinear = (c: number): number => {
+      const normalized = c / 255;
+      return normalized <= 0.03928
+        ? normalized / 12.92
+        : Math.pow((normalized + 0.055) / 1.055, 2.4);
+    };
+
+    return 0.2126 * toLinear(r) + 0.7152 * toLinear(g) + 0.0722 * toLinear(b);
   };
 
   const createColorInfo = (hex: string): ColorInfo => {
@@ -164,8 +210,15 @@ export default function ColorPaletteClient({
     return { hex, rgb, hsl, luminance };
   };
 
+  // パレット生成のヘルパー関数
+  const createColorFromHSL = (h: number, s: number, l: number): ColorInfo => {
+    const rgb = hslToRgb(h, s, l);
+    const hex = rgbToHex(rgb.r, rgb.g, rgb.b);
+    return createColorInfo(hex);
+  };
+
   // パレット生成関数（手動実行時のみ）
-  const generatePalette = () => {
+  const generatePalette = useCallback(() => {
     const baseRgb = hexToRgb(baseColor);
     const baseHsl = rgbToHsl(baseRgb.r, baseRgb.g, baseRgb.b);
     const colors: ColorInfo[] = [createColorInfo(baseColor)];
@@ -173,85 +226,66 @@ export default function ColorPaletteClient({
     switch (paletteType) {
       case "monochromatic":
         for (let i = 1; i <= 4; i++) {
-          const lightness = Math.max(
-            10,
-            Math.min(90, baseHsl.l + (i - 2) * 20)
-          );
-          const rgb = hslToRgb(baseHsl.h, baseHsl.s, lightness);
-          const hex = rgbToHex(rgb.r, rgb.g, rgb.b);
-          colors.push(createColorInfo(hex));
+          const lightness = clamp(baseHsl.l + (i - 2) * 20, 10, 90);
+          colors.push(createColorFromHSL(baseHsl.h, baseHsl.s, lightness));
         }
         break;
 
       case "analogous":
         [-30, -15, 15, 30].forEach((offset) => {
           const hue = (baseHsl.h + offset + 360) % 360;
-          const rgb = hslToRgb(hue, baseHsl.s, baseHsl.l);
-          const hex = rgbToHex(rgb.r, rgb.g, rgb.b);
-          colors.push(createColorInfo(hex));
+          colors.push(createColorFromHSL(hue, baseHsl.s, baseHsl.l));
         });
         break;
 
       case "complementary":
         const compHue = (baseHsl.h + 180) % 360;
-        colors.push(
-          createColorInfo(
-            (() => {
-              const { r, g, b } = hslToRgb(compHue, baseHsl.s, baseHsl.l);
-              return rgbToHex(r, g, b);
-            })()
-          )
-        );
+        colors.push(createColorFromHSL(compHue, baseHsl.s, baseHsl.l));
         // 類似色も追加
         [-30, 30].forEach((offset) => {
           const hue = (baseHsl.h + offset + 360) % 360;
-          const rgb = hslToRgb(hue, baseHsl.s, baseHsl.l);
-          colors.push(createColorInfo(rgbToHex(rgb.r, rgb.g, rgb.b)));
+          colors.push(createColorFromHSL(hue, baseHsl.s, baseHsl.l));
         });
         // 補色の類似色も追加
         [-30, 30].forEach((offset) => {
           const hue = (compHue + offset + 360) % 360;
-          const rgb = hslToRgb(hue, baseHsl.s, baseHsl.l);
-          colors.push(createColorInfo(rgbToHex(rgb.r, rgb.g, rgb.b)));
+          colors.push(createColorFromHSL(hue, baseHsl.s, baseHsl.l));
         });
         break;
 
       case "triadic":
         [120, 240].forEach((offset) => {
           const hue = (baseHsl.h + offset) % 360;
-          const rgb = hslToRgb(hue, baseHsl.s, baseHsl.l);
-          colors.push(createColorInfo(rgbToHex(rgb.r, rgb.g, rgb.b)));
+          colors.push(createColorFromHSL(hue, baseHsl.s, baseHsl.l));
         });
         // 各色の明度バリエーション
         [60, 180].forEach((offset) => {
           const hue = (baseHsl.h + offset) % 360;
-          const lightness = Math.max(20, Math.min(80, baseHsl.l + 20));
-          const rgb = hslToRgb(hue, baseHsl.s, lightness);
-          colors.push(createColorInfo(rgbToHex(rgb.r, rgb.g, rgb.b)));
+          const lightness = clamp(baseHsl.l + 20, 20, 80);
+          colors.push(createColorFromHSL(hue, baseHsl.s, lightness));
         });
         break;
 
       case "tetradic":
         [90, 180, 270].forEach((offset) => {
           const hue = (baseHsl.h + offset) % 360;
-          const rgb = hslToRgb(hue, baseHsl.s, baseHsl.l);
-          colors.push(createColorInfo(rgbToHex(rgb.r, rgb.g, rgb.b)));
+          colors.push(createColorFromHSL(hue, baseHsl.s, baseHsl.l));
         });
         // 中間色も追加
         const midHue = (baseHsl.h + 45) % 360;
-        const midRgb = hslToRgb(midHue, baseHsl.s * 0.7, baseHsl.l);
-        colors.push(createColorInfo(rgbToHex(midRgb.r, midRgb.g, midRgb.b)));
+        colors.push(createColorFromHSL(midHue, baseHsl.s * 0.7, baseHsl.l));
         break;
     }
 
     setPalette(colors);
-  };
+  }, [baseColor, paletteType]);
 
   // ランダム色生成（パレット生成状態をリセット）
   const generateRandomColor = () => {
     const randomColor = Math.floor(Math.random() * 16777215);
     const randomHex = "#" + randomColor.toString(16).padStart(6, "0");
     setBaseColor(randomHex);
+    setShowColorPicker(false);
   };
 
   // 色の表示形式変換
@@ -272,11 +306,8 @@ export default function ColorPaletteClient({
   const simulateColorBlind = (color: ColorInfo): string => {
     if (colorBlindType === "normal") return color.hex;
 
-    let { r, g, b } = color.rgb;
-    // 元の値を保存して循環参照を防ぐ
-    const originalR = r;
-    const originalG = g;
-    const originalB = b;
+    const { r: originalR, g: originalG, b: originalB } = color.rgb;
+    let r: number, g: number, b: number;
 
     switch (colorBlindType) {
       case "protanopia": // 赤色盲
@@ -294,9 +325,11 @@ export default function ColorPaletteClient({
         g = 0.433 * originalG + 0.567 * originalB;
         b = 0.475 * originalG + 0.525 * originalB;
         break;
+      default:
+        return color.hex;
     }
 
-    return rgbToHex(Math.round(r), Math.round(g), Math.round(b));
+    return rgbToHex(r, g, b);
   };
 
   // コピー機能
@@ -308,6 +341,22 @@ export default function ColorPaletteClient({
     } catch (err) {
       console.error("Failed to copy: ", err);
     }
+  };
+
+  // ファイルダウンロードヘルパー関数
+  const downloadFile = (content: string, filename: string, type: string) => {
+    const blob = new Blob([content], { type });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+
+    link.href = url;
+    link.download = filename;
+    link.style.display = "none";
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
   };
 
   // エクスポート機能
@@ -337,23 +386,34 @@ export default function ColorPaletteClient({
     }
   };
 
-  const downloadFile = (content: string, filename: string, type: string) => {
-    const blob = new Blob([content], { type });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  };
+  // 初回ロード時とベースカラー変更時に自動でパレット生成
+  useEffect(() => {
+    if (isValidHex(baseColor)) {
+      generatePalette();
+    }
+  }, [baseColor, paletteType, generatePalette]);
+
+  // カラーピッカー外側クリック時に閉じる
+  useEffect(() => {
+    if (!showColorPicker) return;
+
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Element;
+      if (!target.closest(".color-picker-container")) {
+        setShowColorPicker(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [showColorPicker]);
 
   return (
     <ToolLayout
       locale={locale}
       t={t}
       title={t.colorPalette.title}
+      subtitle={t.colorPalette.subTitle}
       description={t.colorPalette.description}
       icon={Palette}
     >
@@ -372,85 +432,311 @@ export default function ColorPaletteClient({
       {/* 入力・設定セクション */}
       <ToolSection>
         <ToolInput>
-          <div className="space-y-6">
+          <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-8 border border-gray-200 dark:border-gray-700 space-y-8">
+            {/* ベースカラー選択 */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+              <label className="flex items-center gap-3 text-lg font-semibold text-gray-800 dark:text-gray-200 mb-6">
                 {t.colorPalette.baseColor}
-              </label>
-              <div className="flex gap-3">
-                <div className="relative">
-                  {" "}
-                  <input
-                    type="color"
-                    value={baseColor}
-                    onChange={(e) => {
-                      setBaseColor(e.target.value);
-                    }}
-                    className="w-14 h-12 border-2 border-gray-300 dark:border-gray-600 rounded-lg cursor-pointer bg-white dark:bg-gray-800"
-                  />
+                <div className="flex items-center gap-2 px-3 py-1 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-full text-blue-600 dark:text-blue-400 text-xs">
+                  <div className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse"></div>
+                  <span className="font-medium">リアルタイム</span>
                 </div>
-                <input
-                  type="text"
-                  value={baseColor}
-                  onChange={(e) => {
-                    const value = e.target.value;
-                    setBaseColor(value);
-                    // 無効な値の場合のフィードバック（必要に応じて）
-                    if (value && !isValidHex(value)) {
-                      console.warn("Invalid hex color format");
-                    }
-                  }}
-                  placeholder={t.colorPalette.baseColorPlaceholder}
-                  className="flex-1 px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-800 dark:text-white"
-                  pattern="^#[0-9A-Fa-f]{6}$"
-                  title="6桁の16進数カラーコード（例: #FF0000）"
-                />
+              </label>
+
+              {/* メインカラーディスプレイ */}
+              <div className="flex items-center gap-6 mb-6">
+                <div className="relative">
+                  <div
+                    className="w-24 h-24 rounded-3xl shadow-2xl cursor-pointer transition-all duration-300 hover:scale-105 border-4 border-white dark:border-gray-600 group"
+                    style={{
+                      background: `linear-gradient(135deg, ${baseColor}, ${baseColor}dd)`,
+                    }}
+                    onClick={() => setShowColorPicker(!showColorPicker)}
+                  >
+                    {/* ホバー効果 */}
+                    <div className="absolute inset-0 rounded-3xl bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    {/* カラーピッカーアイコン */}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <Palette className="w-8 h-8 text-white drop-shadow-lg" />
+                    </div>
+                  </div>
+                  {/* グラデーション背景効果 */}
+                  <div
+                    className="absolute -inset-2 rounded-3xl opacity-30 blur-xl transition-opacity duration-300 group-hover:opacity-50"
+                    style={{
+                      background: `linear-gradient(135deg, ${baseColor}, ${baseColor}80)`,
+                    }}
+                  ></div>
+                </div>
+
+                <div className="flex-1">
+                  <div className="relative">
+                    <input
+                      type="text"
+                      value={baseColor}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        if (isValidHex(value) || value.startsWith("#")) {
+                          setBaseColor(value);
+                        }
+                      }}
+                      placeholder={t.colorPalette.baseColorPlaceholder}
+                      className="w-full px-6 py-4 text-xl font-mono border-2 border-gray-300 dark:border-gray-600 rounded-2xl focus:outline-none focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 dark:bg-gray-800 dark:text-white transition-all duration-200 shadow-sm hover:shadow-md bg-white"
+                      pattern="^#[0-9A-Fa-f]{6}$"
+                      title="6桁の16進数カラーコード（例: #FF0000）"
+                    />
+                    <div className="absolute right-4 top-1/2 -translate-y-1/2">
+                      <button
+                        onClick={() => setShowColorPicker(!showColorPicker)}
+                        className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
+                      >
+                        <Palette className="w-5 h-5 text-gray-500 dark:text-gray-400" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
+
+              {/* カラーピッカー */}
+              {showColorPicker && (
+                <div className="color-picker-container space-y-6 p-6 bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-lg">
+                  {/* プリセットカラー */}
+                  <div>
+                    <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-4">
+                      プリセットカラー
+                    </h4>
+                    <div className="grid grid-cols-6 sm:grid-cols-8 md:grid-cols-12 gap-3">
+                      {PRESET_COLORS.map((color, index) => (
+                        <button
+                          key={index}
+                          onClick={() => {
+                            setBaseColor(color);
+                            setShowColorPicker(false);
+                          }}
+                          className={`w-10 h-10 rounded-xl shadow-md hover:shadow-lg transition-all duration-200 hover:scale-110 border-2 ${
+                            baseColor === color
+                              ? "border-gray-800 dark:border-white"
+                              : "border-white dark:border-gray-600"
+                          }`}
+                          style={{ backgroundColor: color }}
+                          title={color}
+                        />
+                      ))}
+                      {/* ランダムカラーボタン */}
+                      <button
+                        onClick={generateRandomColor}
+                        className="w-10 h-10 rounded-xl shadow-md hover:shadow-lg transition-all duration-200 hover:scale-110 border-2 border-dashed border-gray-400 dark:border-gray-500 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 flex items-center justify-center group"
+                        title="ランダムカラー"
+                      >
+                        <Shuffle className="w-4 h-4 text-gray-600 dark:text-gray-400 group-hover:text-gray-800 dark:group-hover:text-gray-200 transition-colors duration-200" />
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* HSL調整スライダー */}
+                  <div className="space-y-4">
+                    <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+                      色相・彩度・明度調整
+                    </h4>
+                    {(() => {
+                      const rgb = hexToRgb(baseColor);
+                      const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+
+                      return (
+                        <div className="space-y-4">
+                          {/* 色相 */}
+                          <div>
+                            <label className="text-xs text-gray-600 dark:text-gray-400 mb-2 block">
+                              色相 (Hue): {Math.round(hsl.h)}°
+                            </label>
+                            <input
+                              type="range"
+                              min="0"
+                              max="360"
+                              value={hsl.h}
+                              onChange={(e) => {
+                                const newHue = parseInt(e.target.value);
+                                const newRgb = hslToRgb(newHue, hsl.s, hsl.l);
+                                const newHex = rgbToHex(
+                                  newRgb.r,
+                                  newRgb.g,
+                                  newRgb.b
+                                );
+                                setBaseColor(newHex);
+                              }}
+                              className="w-full h-3 rounded-lg appearance-none cursor-pointer"
+                              style={{
+                                background:
+                                  "linear-gradient(to right, #ff0000 0%, #ffff00 17%, #00ff00 33%, #00ffff 50%, #0000ff 67%, #ff00ff 83%, #ff0000 100%)",
+                              }}
+                            />
+                          </div>
+
+                          {/* 彩度 */}
+                          <div>
+                            <label className="text-xs text-gray-600 dark:text-gray-400 mb-2 block">
+                              彩度 (Saturation): {Math.round(hsl.s)}%
+                            </label>
+                            <input
+                              type="range"
+                              min="0"
+                              max="100"
+                              value={hsl.s}
+                              onChange={(e) => {
+                                const newSaturation = parseInt(e.target.value);
+                                const newRgb = hslToRgb(
+                                  hsl.h,
+                                  newSaturation,
+                                  hsl.l
+                                );
+                                const newHex = rgbToHex(
+                                  newRgb.r,
+                                  newRgb.g,
+                                  newRgb.b
+                                );
+                                setBaseColor(newHex);
+                              }}
+                              className="w-full h-3 rounded-lg appearance-none cursor-pointer"
+                              style={{
+                                background: `linear-gradient(to right, 
+                                  ${(() => {
+                                    const lowSatRgb = hslToRgb(hsl.h, 0, hsl.l);
+                                    const highSatRgb = hslToRgb(
+                                      hsl.h,
+                                      100,
+                                      hsl.l
+                                    );
+                                    return `${rgbToHex(
+                                      lowSatRgb.r,
+                                      lowSatRgb.g,
+                                      lowSatRgb.b
+                                    )}, ${rgbToHex(
+                                      highSatRgb.r,
+                                      highSatRgb.g,
+                                      highSatRgb.b
+                                    )}`;
+                                  })()})`,
+                              }}
+                            />
+                          </div>
+
+                          {/* 明度 */}
+                          <div>
+                            <label className="text-xs text-gray-600 dark:text-gray-400 mb-2 block">
+                              明度 (Lightness): {Math.round(hsl.l)}%
+                            </label>
+                            <input
+                              type="range"
+                              min="0"
+                              max="100"
+                              value={hsl.l}
+                              onChange={(e) => {
+                                const newLightness = parseInt(e.target.value);
+                                const newRgb = hslToRgb(
+                                  hsl.h,
+                                  hsl.s,
+                                  newLightness
+                                );
+                                const newHex = rgbToHex(
+                                  newRgb.r,
+                                  newRgb.g,
+                                  newRgb.b
+                                );
+                                setBaseColor(newHex);
+                              }}
+                              className="w-full h-3 rounded-lg appearance-none cursor-pointer"
+                              style={{
+                                background: `linear-gradient(to right, 
+                                  #000000, 
+                                  ${(() => {
+                                    const midRgb = hslToRgb(hsl.h, hsl.s, 50);
+                                    return rgbToHex(
+                                      midRgb.r,
+                                      midRgb.g,
+                                      midRgb.b
+                                    );
+                                  })()}, 
+                                  #ffffff)`,
+                              }}
+                            />
+                          </div>
+                        </div>
+                      );
+                    })()}
+                  </div>
+
+                  {/* ネイティブカラーピッカー */}
+                  <div>
+                    <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-4">
+                      詳細カラーピッカー
+                    </h4>
+                    <input
+                      type="color"
+                      value={baseColor}
+                      onChange={(e) => setBaseColor(e.target.value)}
+                      className="w-full h-12 rounded-xl border-2 border-gray-300 dark:border-gray-600 cursor-pointer"
+                    />
+                  </div>
+
+                  {/* 閉じるボタン */}
+                  <div className="flex justify-end pt-4 border-t border-gray-200 dark:border-gray-700">
+                    <button
+                      onClick={() => setShowColorPicker(false)}
+                      className="px-6 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200"
+                    >
+                      閉じる
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
 
+            {/* パレットタイプ選択 */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+              <label className="flex items-center gap-3 text-lg font-semibold text-gray-800 dark:text-gray-200 mb-4">
                 {t.colorPalette.paletteType}
+                <div className="flex items-center gap-2 px-3 py-1 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-full text-purple-600 dark:text-purple-400 text-xs">
+                  <div className="w-1.5 h-1.5 bg-purple-500 rounded-full animate-pulse"></div>
+                  <span className="font-medium">自動更新</span>
+                </div>
               </label>
-              <select
-                value={paletteType}
-                onChange={(e) => {
-                  setPaletteType(e.target.value as PaletteType);
-                }}
-                className="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-800 dark:text-white"
-              >
-                <option value="monochromatic">
-                  {t.colorPalette.monochromatic}
-                </option>
-                <option value="analogous">{t.colorPalette.analogous}</option>
-                <option value="complementary">
-                  {t.colorPalette.complementary}
-                </option>
-                <option value="triadic">{t.colorPalette.triadic}</option>
-                <option value="tetradic">{t.colorPalette.tetradic}</option>
-              </select>
+              <div className="relative">
+                <select
+                  value={paletteType}
+                  onChange={(e) => {
+                    setPaletteType(e.target.value as PaletteType);
+                  }}
+                  className="w-full appearance-none px-6 py-4 text-lg border-2 border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 dark:bg-gray-800 dark:text-white transition-all duration-200 shadow-sm hover:shadow-md bg-white"
+                >
+                  <option value="monochromatic">
+                    {t.colorPalette.monochromatic}
+                  </option>
+                  <option value="analogous">{t.colorPalette.analogous}</option>
+                  <option value="complementary">
+                    {t.colorPalette.complementary}
+                  </option>
+                  <option value="triadic">{t.colorPalette.triadic}</option>
+                  <option value="tetradic">{t.colorPalette.tetradic}</option>
+                </select>
+                <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none">
+                  <svg
+                    className="w-6 h-6 text-gray-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </div>
+              </div>
             </div>
           </div>
         </ToolInput>
-
-        <ToolControls>
-          <div className="flex flex-wrap gap-4 justify-center pt-4">
-            <button
-              onClick={generatePalette}
-              className="button-primary px-6 py-3 text-base font-medium flex items-center"
-            >
-              <Palette className="w-5 h-5 mr-3" />
-              {t.colorPalette.generatePalette}
-            </button>
-            <button
-              onClick={generateRandomColor}
-              className="button-secondary px-6 py-3 text-base font-medium flex items-center"
-            >
-              <Shuffle className="w-5 h-5 mr-3" />
-              {t.colorPalette.randomColor}
-            </button>
-          </div>
-        </ToolControls>
       </ToolSection>
 
       {/* パレット表示セクション */}
@@ -458,113 +744,211 @@ export default function ColorPaletteClient({
         <ToolSection>
           <ToolResult>
             {/* 表示設定 */}
-            <div className="mb-6 pb-6 border-b border-gray-200 dark:border-gray-700">
+            <div className="mb-8 p-6 bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700">
+              <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-6">
+                表示設定
+              </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
                     {t.colorPalette.colorFormat}
                   </label>
-                  <select
-                    value={colorFormat}
-                    onChange={(e) =>
-                      setColorFormat(e.target.value as ColorFormat)
-                    }
-                    className="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-800 dark:text-white"
-                  >
-                    <option value="hex">{t.colorPalette.hexFormat}</option>
-                    <option value="rgb">{t.colorPalette.rgbFormat}</option>
-                    <option value="hsl">{t.colorPalette.hslFormat}</option>
-                  </select>
+                  <div className="relative">
+                    <select
+                      value={colorFormat}
+                      onChange={(e) =>
+                        setColorFormat(e.target.value as ColorFormat)
+                      }
+                      className="w-full appearance-none px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 dark:bg-gray-800 dark:text-white transition-all duration-200 shadow-sm hover:shadow-md bg-white"
+                    >
+                      <option value="hex">{t.colorPalette.hexFormat}</option>
+                      <option value="rgb">{t.colorPalette.rgbFormat}</option>
+                      <option value="hsl">{t.colorPalette.hslFormat}</option>
+                    </select>
+                    <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+                      <svg
+                        className="w-5 h-5 text-gray-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </div>
+                  </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
                     {t.colorPalette.colorBlindTest}
                   </label>
-                  <select
-                    value={colorBlindType}
-                    onChange={(e) =>
-                      setColorBlindType(e.target.value as ColorBlindType)
-                    }
-                    className="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-800 dark:text-white"
-                  >
-                    <option value="normal">{t.colorPalette.normal}</option>
-                    <option value="protanopia">
-                      {t.colorPalette.protanopia}
-                    </option>
-                    <option value="deuteranopia">
-                      {t.colorPalette.deuteranopia}
-                    </option>
-                    <option value="tritanopia">
-                      {t.colorPalette.tritanopia}
-                    </option>
-                  </select>
+                  <div className="relative">
+                    <select
+                      value={colorBlindType}
+                      onChange={(e) =>
+                        setColorBlindType(e.target.value as ColorBlindType)
+                      }
+                      className="w-full appearance-none px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 dark:bg-gray-800 dark:text-white transition-all duration-200 shadow-sm hover:shadow-md bg-white"
+                    >
+                      <option value="normal">{t.colorPalette.normal}</option>
+                      <option value="protanopia">
+                        {t.colorPalette.protanopia}
+                      </option>
+                      <option value="deuteranopia">
+                        {t.colorPalette.deuteranopia}
+                      </option>
+                      <option value="tritanopia">
+                        {t.colorPalette.tritanopia}
+                      </option>
+                    </select>
+                    <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+                      <svg
+                        className="w-5 h-5 text-gray-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
 
             {/* パレット表示 */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-              {palette.map((color, index) => {
-                const displayColor = simulateColorBlind(color);
-                const formattedColor = formatColor(color);
-                const isCopied = copiedIndex === index;
+            <div className="mb-8">
+              <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-6 text-center flex items-center justify-center gap-3">
+                <Palette className="w-8 h-8 text-blue-500" />
+                生成されたカラーパレット
+                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6 transition-all duration-500 ease-in-out">
+                {palette.map((color, index) => {
+                  const displayColor = simulateColorBlind(color);
+                  const formattedColor = formatColor(color);
+                  const isCopied = copiedIndex === index;
+                  const isBase = index === 0;
 
-                return (
-                  <div
-                    key={index}
-                    className="group bg-white dark:bg-gray-800 rounded-xl border-2 border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition-all duration-200"
-                  >
+                  return (
                     <div
-                      className="w-full h-32 rounded-t-lg cursor-pointer transition-transform hover:scale-[1.02] mb-4"
-                      style={{ backgroundColor: displayColor }}
-                      onClick={() => copyToClipboard(formattedColor, index)}
-                    />
-                    <div className="px-4 pb-4 space-y-3">
-                      <button
+                      key={`${color.hex}-${index}`}
+                      className={`group relative overflow-hidden rounded-2xl transition-all duration-500 transform hover:scale-105 hover:z-10 animate-in fade-in slide-in-from-bottom-4 ${
+                        isBase
+                          ? "ring-4 ring-blue-500/30 shadow-lg shadow-blue-500/20"
+                          : "shadow-lg hover:shadow-2xl"
+                      }`}
+                      style={{
+                        animationDelay: `${index * 100}ms`,
+                        animationFillMode: "both",
+                      }}
+                    >
+                      {/* ベースカラーバッジ */}
+                      {isBase && (
+                        <div className="absolute top-3 left-3 z-10 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+                          ベース
+                        </div>
+                      )}
+
+                      {/* カラー表示エリア */}
+                      <div
+                        className="w-full h-48 cursor-pointer relative overflow-hidden group-hover:h-52 transition-all duration-300"
+                        style={{
+                          background: `linear-gradient(135deg, ${displayColor}, ${displayColor}dd)`,
+                        }}
                         onClick={() => copyToClipboard(formattedColor, index)}
-                        className="w-full text-sm font-mono hover:text-primary-600 dark:hover:text-primary-400 transition-colors flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600"
                       >
-                        {isCopied ? (
-                          <>
-                            <Check className="w-4 h-4 text-green-600" />
-                            <span className="text-green-600">
-                              {t.colorPalette.copied}
-                            </span>
-                          </>
-                        ) : (
-                          <>
-                            <Copy className="w-4 h-4" />
-                            <span className="truncate">{formattedColor}</span>
-                          </>
-                        )}
-                      </button>
-                      <div className="text-xs text-gray-500 dark:text-gray-400 text-center">
-                        <div className="bg-gray-50 dark:bg-gray-700 rounded-lg py-3 px-4">
-                          {t.colorPalette.luminance}:{" "}
-                          <span className="font-mono">
-                            {(color.luminance * 100).toFixed(1)}%
-                          </span>
+                        {/* グラデーションオーバーレイ */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/10"></div>
+
+                        {/* ホバー時の拡大効果 */}
+                        <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-5 transition-opacity duration-300"></div>
+
+                        {/* コピーアイコン */}
+                        <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                          <div className="bg-black/20 backdrop-blur-sm rounded-full p-2">
+                            <Copy className="w-4 h-4 text-white" />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* カラー情報パネル */}
+                      <div className="bg-white dark:bg-gray-800 p-4 space-y-3">
+                        {/* カラーコードボタン */}
+                        <button
+                          onClick={() => copyToClipboard(formattedColor, index)}
+                          className="w-full group/btn relative overflow-hidden font-mono text-sm hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200 flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-gray-50 dark:bg-gray-700 hover:bg-blue-50 dark:hover:bg-gray-600 border border-gray-200 dark:border-gray-600"
+                        >
+                          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+                          {isCopied ? (
+                            <>
+                              <Check className="w-4 h-4 text-green-600 animate-in zoom-in duration-200" />
+                              <span className="text-green-600 font-semibold">
+                                {t.colorPalette.copied}
+                              </span>
+                            </>
+                          ) : (
+                            <>
+                              <Copy className="w-4 h-4 transition-transform group-hover/btn:scale-110" />
+                              <span className="truncate font-semibold">
+                                {formattedColor}
+                              </span>
+                            </>
+                          )}
+                        </button>
+
+                        {/* 輝度情報 */}
+                        <div className="bg-gray-50 dark:bg-gray-700 rounded-lg py-3 px-4 border border-gray-200 dark:border-gray-600">
+                          <div className="text-xs text-gray-600 dark:text-gray-400 text-center">
+                            <div className="flex items-center justify-between">
+                              <span className="font-medium">
+                                {t.colorPalette.luminance}:
+                              </span>
+                              <span className="font-mono font-bold">
+                                {(color.luminance * 100).toFixed(1)}%
+                              </span>
+                            </div>
+                            {/* 輝度バー */}
+                            <div className="mt-2 h-1.5 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden">
+                              <div
+                                className="h-full bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-full transition-all duration-500"
+                                style={{ width: `${color.luminance * 100}%` }}
+                              ></div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
 
-            <div className="mt-8 flex flex-wrap gap-4 justify-center pt-6 border-t border-gray-200 dark:border-gray-700">
+            {/* エクスポートボタン */}
+            <div className="flex flex-wrap gap-4 justify-center pt-6 border-t border-gray-200 dark:border-gray-700">
               <button
                 onClick={() => exportPalette("css")}
-                className="button-secondary px-5 py-2.5 text-sm font-medium flex items-center"
+                className="group relative overflow-hidden bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-6 py-3 text-sm font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex items-center"
               >
+                <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
                 <Download className="w-4 h-4 mr-2" />
                 {t.colorPalette.downloadCSS}
               </button>
               <button
                 onClick={() => exportPalette("json")}
-                className="button-secondary px-5 py-2.5 text-sm font-medium flex items-center"
+                className="group relative overflow-hidden bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white px-6 py-3 text-sm font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex items-center"
               >
+                <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
                 <Download className="w-4 h-4 mr-2" />
                 {t.colorPalette.downloadJSON}
               </button>

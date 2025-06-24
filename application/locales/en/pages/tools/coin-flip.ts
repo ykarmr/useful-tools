@@ -2,26 +2,32 @@ import { CoinFlipTranslations } from "@/locales/types/pages/tools/coin-flip";
 
 export const coinFlip: CoinFlipTranslations = {
   title: "Coin Flip",
-  description: "Flip a coin for quick decisions",
+  subTitle: "Quick Decision Making Tool",
+  description:
+    "Make swift decisions with our intuitive coin flip tool. Support for multiple coins and instant, fair random results to help you decide between options.",
   keywords: [
     "coin flip",
     "coin toss",
-    "decision making",
+    "decision tool",
     "random choice",
     "heads or tails",
+    "decision maker",
+    "quick decision",
+    "binary choice",
+    "luck game",
   ],
   flip: "Flip Coin",
   heads: "Heads",
   tails: "Tails",
   flipping: "Flipping...",
-  selectCount: "Select number of flips",
+  selectCount: "Number of coins",
   howToUse: {
     title: "How to Use",
     steps: [
       "Select the number of coins to flip (1-10 coins)",
       "Click the 'Flip Coin' button",
-      "Watch the coins spin and randomly determine the result",
-      "View the result (heads or tails) displayed",
+      "Watch the coins spin and determine the result",
+      "View the result (heads or tails)",
     ],
     features: {
       title: "Features",
@@ -40,19 +46,19 @@ export const coinFlip: CoinFlipTranslations = {
     },
     {
       q: "How is the result determined?",
-      a: "The result is determined randomly, showing either heads or tails.",
+      a: "The result is determined using a random number generator. Each outcome has a 50% probability.",
     },
     {
-      q: "When is the coin result updated?",
+      q: "When does the coin result update?",
       a: "The result updates each time you flip the coin.",
     },
     {
-      q: "Is there a history of coin flips?",
-      a: "This tool does not save history; results are shown only for the current session.",
+      q: "Is coin flip history saved?",
+      a: "This tool does not save history. Results are only shown for the current session.",
     },
     {
       q: "Can I flip multiple coins at once?",
-      a: "Yes, you can select the number of coins to flip before starting.",
+      a: "Yes, you can select the number of coins to flip (1-10) before starting.",
     },
   ],
 };
