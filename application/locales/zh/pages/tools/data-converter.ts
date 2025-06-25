@@ -2,6 +2,7 @@ import { DataConverterTranslations } from "../../../types/pages/tools/data-conve
 
 export const dataConverter: DataConverterTranslations = {
   title: "数据格式转换器",
+  subTitle: "JSON ⇔ YAML ⇔ TOML 转换器",
   description:
     "在线工具，可在 JSON、YAML 和 TOML 数据格式之间进行转换。非常适合配置文件和数据结构转换。",
   keywords: [
@@ -18,6 +19,7 @@ export const dataConverter: DataConverterTranslations = {
   outputLabel: "转换结果",
   formatLabel: "格式",
   sampleDataLabel: "示例数据",
+  inputPlaceholder: "请输入要转换的数据...",
   outputPlaceholder: "转换结果将显示在这里...",
   convertButton: "转换",
   formatButton: "格式化",
@@ -40,6 +42,16 @@ export const dataConverter: DataConverterTranslations = {
     emptyInput: "请输入要转换的数据",
     copied: "已复制到剪贴板",
     copyError: "复制失败",
+  },
+  howToUse: {
+    title: "使用方法",
+    steps: [
+      "在左侧区域输入要转换的数据",
+      "选择输入格式（JSON/YAML/TOML）",
+      "选择输出格式（JSON/YAML/TOML）",
+      "点击'转换'按钮执行转换",
+      "查看转换结果，如需要可进行复制",
+    ],
   },
   features: {
     title: "功能特色",

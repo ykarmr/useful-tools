@@ -2,6 +2,7 @@ import { DataConverterTranslations } from "../../../types/pages/tools/data-conve
 
 export const dataConverter: DataConverterTranslations = {
   title: "Data Format Converter",
+  subTitle: "JSON ⇔ YAML ⇔ TOML Converter",
   description:
     "Online tool for converting between JSON, YAML, and TOML data formats. Perfect for configuration files and data structure conversion.",
   keywords: [
@@ -18,6 +19,7 @@ export const dataConverter: DataConverterTranslations = {
   outputLabel: "Conversion Result",
   formatLabel: "Format",
   sampleDataLabel: "Sample Data",
+  inputPlaceholder: "Enter the data you want to convert...",
   outputPlaceholder: "Conversion result will be displayed here...",
   convertButton: "Convert",
   formatButton: "Format",
@@ -40,6 +42,16 @@ export const dataConverter: DataConverterTranslations = {
     emptyInput: "Please enter data to convert",
     copied: "Copied to clipboard",
     copyError: "Failed to copy",
+  },
+  howToUse: {
+    title: "How to Use",
+    steps: [
+      "Enter the data you want to convert in the left area",
+      "Select the input format (JSON/YAML/TOML)",
+      "Select the output format (JSON/YAML/TOML)",
+      "Click the 'Convert' button to perform conversion",
+      "Review the conversion result and copy if needed",
+    ],
   },
   features: {
     title: "Features & Benefits",

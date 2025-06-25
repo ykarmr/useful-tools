@@ -289,12 +289,9 @@ components/
 │   ├── footer.tsx - フッター
 │   ├── header.tsx - ヘッダー
 │   ├── main-layout.tsx - メインレイアウト
-│   ├── tool-controls.tsx - ツール操作コントロール
 │   ├── tool-display.tsx - ツール表示部分
 │   ├── tool-faq.tsx - FAQ セクション
-│   ├── tool-input.tsx - ツール入力部分
 │   ├── tool-layout.tsx - ツール用メインレイアウト
-│   ├── tool-result.tsx - ツール結果表示
 │   ├── tool-section.tsx - ツールセクション
 │   └── tool-how-to-use.tsx - ツールの使い方セクション
 │   └── tool-stats.tsx - ツール統計情報
@@ -417,15 +414,7 @@ hooks/
   </ToolSection>
   {/* メイン機能セクション */}
   <ToolSection>
-    <ToolDisplay>
-      {/* 結果表示エリア */}
-    </ToolDisplay>
-    <ToolInput>
-      {/* 入力フォーム */}
-    </ToolInput>
-    <ToolControls>
-      {/* 操作ボタン */}
-    </ToolControls>
+
   </ToolSection>
 
   {/* 統計情報セクション（必要に応じて） */}
@@ -464,7 +453,7 @@ hooks/
 - tools ページは、同じ系統のレイアウトにすること
 - 自然な文章になるように作成すること
 - 18n 対応を忘れないこと
-- Apple 製のアプリ のようなシンプルで洗練されたユーザフレンドリーなデザインを目指すこと
+- Apple 製のアプリ のようなシンプルで洗練されたおしゃれでユーザフレンドリーなデザインを目指すこと
 - SEO とアクセシビリティに配慮すること
 - ツールの使い方や特徴を明確に伝えること
 - ツールの操作方法や結果の解釈を分かりやすく説明すること

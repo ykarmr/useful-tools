@@ -2,12 +2,14 @@ import { FAQItem } from "../../faq";
 
 export interface DataConverterTranslations {
   title: string;
+  subTitle: string;
   description: string;
   keywords: string[];
   inputLabel: string;
   outputLabel: string;
   formatLabel: string;
   sampleDataLabel: string;
+  inputPlaceholder: string;
   outputPlaceholder: string;
   convertButton: string;
   formatButton: string;
@@ -30,6 +32,10 @@ export interface DataConverterTranslations {
     emptyInput: string;
     copied: string;
     copyError: string;
+  };
+  howToUse: {
+    title: string;
+    steps: string[];
   };
   features: {
     title: string;

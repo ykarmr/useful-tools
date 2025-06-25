@@ -1,13 +1,18 @@
+import DataConverterClient from "./data-converter-client";
 import {
   getTranslations,
   isValidLocale,
+  getAlternates,
   getSupportedLocales,
 } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { baseUrl } from "@/lib/const";
-import { getAlternates } from "@/lib/i18n";
-import DataConverterClient from "./data-converter-client";
+import { generateToolMetadata } from "@/lib/metadata";
+import {
+  generateToolStructuredData,
+  generateFAQStructuredData,
+} from "@/lib/structured-data";
 
 interface DataConverterPageProps {
   params: Promise<{ locale: string }>;
@@ -35,15 +40,23 @@ export async function generateMetadata({
   const t = getTranslations(locale);
 
   return {
-    title: `${t.dataConverter.title} | ${t.common.siteTitle}`,
-    description: t.dataConverter.description,
-    keywords: t.dataConverter.keywords || [],
-    openGraph: {
-      title: t.dataConverter.title,
-      description: t.dataConverter.description,
-      url: `${baseUrl}/${locale}/data-converter`,
+    ...generateToolMetadata(
+      locale,
+      "data-converter",
+      t.dataConverter,
+      t.common
+    ),
+    other: {
+      "structured-data": JSON.stringify([
+        generateToolStructuredData(
+          locale,
+          "data-converter",
+          t.dataConverter,
+          t.common
+        ),
+        generateFAQStructuredData(t.dataConverter.faqList),
+      ]),
     },
-    alternates: getAlternates(locale, "data-converter"),
   };
 }
 

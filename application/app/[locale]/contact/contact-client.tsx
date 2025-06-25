@@ -1,16 +1,16 @@
 "use client";
 
 import type React from "react";
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { CheckCircle, AlertCircle } from "lucide-react";
-import type { Translations } from "@/locales";
+import { CheckCircle, AlertCircle, Mail } from "lucide-react";
+import type { Locale, Translations } from "@/locales";
 
 interface ContactClientProps {
+  locale: Locale;
   t: Translations;
 }
 
@@ -27,7 +27,7 @@ interface FormErrors {
   message?: string;
 }
 
-export default function ContactClient({ t }: ContactClientProps) {
+export default function ContactClient({ locale, t }: ContactClientProps) {
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
@@ -111,106 +111,108 @@ export default function ContactClient({ t }: ContactClientProps) {
     };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-4xl mx-auto px-4 py-12">
-        <div className="bg-white rounded-lg shadow-sm p-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">
-            {t.contact.title}
-          </h1>
+    <div className="max-w-4xl mx-auto">
+      <div className="bg-white rounded-lg shadow-sm p-8">
+        <div className="flex items-center gap-3 mb-6">
+          <Mail className="h-8 w-8 text-blue-600" />
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900">
+              {t.contact.title}
+            </h1>
+            <p className="text-lg text-gray-600 mt-1">{t.contact.subtitle}</p>
+          </div>
+        </div>
 
-          <div className="prose max-w-none">
-            <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-              {t.contact.description}
-            </p>
+        <div className="prose max-w-none">
+          <p className="text-lg text-gray-700 mb-8 leading-relaxed">
+            {t.contact.description}
+          </p>
 
-            {submitStatus === "success" && (
-              <Alert className="mb-6 border-green-200 bg-green-50">
-                <CheckCircle className="h-4 w-4 text-green-600" />
-                <AlertDescription className="text-green-800">
-                  {t.contact.form.success}
-                </AlertDescription>
-              </Alert>
-            )}
+          {submitStatus === "success" && (
+            <Alert className="mb-6 border-green-200 bg-green-50">
+              <CheckCircle className="h-4 w-4 text-green-600" />
+              <AlertDescription className="text-green-800">
+                {t.contact.form.success}
+              </AlertDescription>
+            </Alert>
+          )}
 
-            {submitStatus === "error" && (
-              <Alert className="mb-6 border-red-200 bg-red-50">
-                <AlertCircle className="h-4 w-4 text-red-600" />
-                <AlertDescription className="text-red-800">
-                  {t.contact.form.error}
-                </AlertDescription>
-              </Alert>
-            )}
+          {submitStatus === "error" && (
+            <Alert className="mb-6 border-red-200 bg-red-50">
+              <AlertCircle className="h-4 w-4 text-red-600" />
+              <AlertDescription className="text-red-800">
+                {t.contact.form.error}
+              </AlertDescription>
+            </Alert>
+          )}
 
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label
-                    htmlFor="name"
-                    className="block text-sm font-medium text-gray-700 mb-2"
-                  >
-                    {t.contact.form.name}
-                  </label>
-                  <Input
-                    id="name"
-                    type="text"
-                    value={formData.name}
-                    onChange={handleChange("name")}
-                    placeholder={t.contact.form.namePlaceholder}
-                    className={errors.name ? "border-red-500" : ""}
-                  />
-                  {errors.name && (
-                    <p className="text-red-500 text-sm mt-1">{errors.name}</p>
-                  )}
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium text-gray-700 mb-2"
-                  >
-                    {t.contact.form.email}
-                  </label>
-                  <Input
-                    id="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleChange("email")}
-                    placeholder={t.contact.form.emailPlaceholder}
-                    className={errors.email ? "border-red-500" : ""}
-                  />
-                  {errors.email && (
-                    <p className="text-red-500 text-sm mt-1">{errors.email}</p>
-                  )}
-                </div>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
+                  {t.contact.form.name}
+                </label>
+                <Input
+                  id="name"
+                  type="text"
+                  value={formData.name}
+                  onChange={handleChange("name")}
+                  placeholder={t.contact.form.namePlaceholder}
+                  className={errors.name ? "border-red-500" : ""}
+                />
+                {errors.name && (
+                  <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+                )}
               </div>
 
               <div>
                 <label
-                  htmlFor="message"
+                  htmlFor="email"
                   className="block text-sm font-medium text-gray-700 mb-2"
                 >
-                  {t.contact.form.message}
+                  {t.contact.form.email}
                 </label>
-                <Textarea
-                  id="message"
-                  value={formData.message}
-                  onChange={handleChange("message")}
-                  placeholder={t.contact.form.messagePlaceholder}
-                  rows={6}
-                  className={errors.message ? "border-red-500" : ""}
+                <Input
+                  id="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleChange("email")}
+                  placeholder={t.contact.form.emailPlaceholder}
+                  className={errors.email ? "border-red-500" : ""}
                 />
-                {errors.message && (
-                  <p className="text-red-500 text-sm mt-1">{errors.message}</p>
+                {errors.email && (
+                  <p className="text-red-500 text-sm mt-1">{errors.email}</p>
                 )}
               </div>
+            </div>
 
-              <Button type="submit" disabled={isSubmitting} className="w-full">
-                {isSubmitting
-                  ? t.contact.form.submitting
-                  : t.contact.form.submit}
-              </Button>
-            </form>
-          </div>
+            <div>
+              <label
+                htmlFor="message"
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
+                {t.contact.form.message}
+              </label>
+              <Textarea
+                id="message"
+                value={formData.message}
+                onChange={handleChange("message")}
+                placeholder={t.contact.form.messagePlaceholder}
+                rows={6}
+                className={errors.message ? "border-red-500" : ""}
+              />
+              {errors.message && (
+                <p className="text-red-500 text-sm mt-1">{errors.message}</p>
+              )}
+            </div>
+
+            <Button type="submit" disabled={isSubmitting} className="w-full">
+              {isSubmitting ? t.contact.form.submitting : t.contact.form.submit}
+            </Button>
+          </form>
         </div>
       </div>
     </div>
