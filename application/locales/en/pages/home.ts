@@ -1,7 +1,7 @@
 import { HomeTranslations } from "@/locales/types/pages/tools/home";
 
 export const home: HomeTranslations = {
-  title: "USEFUL TOOLS - Free Online Utility Tools Collection",
+  title: "USEFUL TOOLS",
   subtitle:
     "30+ practical free online tools for productivity, calculations, random generation, and text processing. Instant browser-based utilities.",
   keywords: [

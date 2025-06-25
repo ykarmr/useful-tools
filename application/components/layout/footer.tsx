@@ -35,9 +35,7 @@ export default function Footer({ locale, t }: FooterProps) {
             <a
               href={`/${locale}`}
               className="flex items-center space-x-2 font-bold text-xl text-gray-900 hover:text-primary-600 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded-lg"
-              aria-label={`${t.header.logo} - ${
-                locale === "ja" ? "ホームページに戻る" : "Go to homepage"
-              }`}
+              aria-label={`${t.header.logo} - ${t.footer.backToHome}`}
             >
               <img
                 src={`/images/logo/logo.png`}

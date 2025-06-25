@@ -8,4 +8,5 @@ export interface FooterTranslations {
   termsOfService: string;
   copyright: string;
   description: string;
+  backToHome: string;
 }

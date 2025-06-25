@@ -9,6 +9,6 @@ export const footer: FooterTranslations = {
   privacyPolicy: "Privacy Policy",
   termsOfService: "Terms of Service",
   copyright: "USEFUL TOOLS. All rights reserved.",
-  description:
-    "A comprehensive collection of free online tools to boost your productivity and simplify your daily workflow.",
+  description: "Free online tools to streamline your daily workflow.",
+  backToHome: "Back to home",
 };

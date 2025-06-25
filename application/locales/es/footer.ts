@@ -10,5 +10,6 @@ export const footer: FooterTranslations = {
   termsOfService: "Términos de Servicio",
   copyright: "USEFUL TOOLS. Todos los derechos reservados.",
   description:
-    "Una colección integral de herramientas en línea gratuitas para aumentar tu productividad y simplificar tu flujo de trabajo diario.",
+    "Herramientas gratuitas en línea para optimizar tu trabajo diario.",
+  backToHome: "Volver al inicio",
 };
