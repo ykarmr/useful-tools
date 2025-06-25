@@ -2,12 +2,50 @@ import { DigitalClockTranslations } from "@/locales/types/pages/tools/digital-cl
 
 export const digitalClock: DigitalClockTranslations = {
   title: "数字时钟",
-  description: "显示当前时间的数字时钟",
-  keywords: ["数字时钟", "时间", "时钟", "24小时制", "秒数", "日期"],
+  subTitle: "可自定义显示选项的精美数字时钟",
+  description:
+    "一款简洁明了的数字时钟，支持自定义设置，包括24小时制切换、秒数显示和日期显示。在大屏精美显示中查看准确的实时更新。",
+  keywords: [
+    "数字时钟",
+    "可自定义时钟",
+    "在线时钟",
+    "时间显示",
+    "24小时制",
+    "秒数显示",
+    "日期显示",
+    "实时时钟",
+    "精确时间",
+  ],
+  settings: "显示设置",
+  format24Hour: "24小时制",
   showSeconds: "显示秒数",
   showDate: "显示日期",
-  format24Hour: "24小时制",
-  settings: "显示设置",
+  fullscreen: "全屏显示",
+  exitFullscreen: "退出全屏",
+  fullscreenMode: "全屏模式",
+  howToUse: {
+    title: "数字时钟使用方法",
+    steps: [
+      "时钟自动显示当前时间",
+      "使用显示设置自定义时间显示格式",
+      "开启或关闭24小时制",
+      "选择是否显示秒数",
+      "选择是否显示日期",
+      "点击全屏显示按钮即可全屏显示时钟",
+    ],
+  },
+  features: {
+    title: "主要功能",
+    items: [
+      "实时显示更新",
+      "在24小时制和12小时制之间切换",
+      "显示/隐藏秒数",
+      "显示/隐藏日期",
+      "全屏显示模式",
+      "简洁明了的设计",
+      "响应式布局",
+    ],
+  },
   faqList: [
     {
       q: "如何更改时钟显示设置？",
@@ -28,6 +66,10 @@ export const digitalClock: DigitalClockTranslations = {
     {
       q: "可以显示其他时区的时间吗？",
       a: "目前只能显示您设备的本地时间。要查看其他时区的时间，请使用世界时钟功能。",
+    },
+    {
+      q: "如何使用全屏模式？",
+      a: "点击全屏显示按钮即可在整个屏幕上显示时钟。您可以按ESC键或点击屏幕任意位置退出全屏模式。",
     },
   ],
 };
