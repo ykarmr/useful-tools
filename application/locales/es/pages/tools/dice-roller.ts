@@ -2,7 +2,9 @@ import { DiceRollerTranslations } from "@/locales/types/pages/tools/dice-roller"
 
 export const diceRoller: DiceRollerTranslations = {
   title: "Lanzador de Dados",
-  description: "Lanza dados con lados personalizables",
+  subTitle: "Herramienta Digital de Dados Poliédricos",
+  description:
+    "Herramienta online para lanzar varios tipos de dados de 4 a 32 caras con estadísticas e historial.",
   keywords: [
     "lanzador de dados",
     "dados",
@@ -11,35 +13,47 @@ export const diceRoller: DiceRollerTranslations = {
     "juegos",
     "juegos de mesa",
   ],
-  roll: "Lanzar Dados",
-  sides: "Lados",
-  result: "Resultado",
-  resultMessage: "¡Has lanzado un {result}!",
-  selectCount: "Selecciona el número de dados a lanzar",
+  roll: "Lanzar",
+  sides: "Caras",
+  count: "Cantidad",
+  total: "Total",
+  history: "Historial",
+  clearHistory: "Limpiar Historial",
+  statistics: {
+    title: "Estadísticas",
+    overallStats: "Estadísticas Generales",
+    totalRolls: "Total de Dados",
+    rollSessions: "Sesiones de Lanzamiento",
+    averageValue: "Valor Promedio",
+    highestLowest: "Máximo / Mínimo",
+    currentSettings: "Configuración Actual",
+    totalSum: "Suma Total",
+    distribution: "Distribución de Resultados",
+  },
   howToUse: {
-    title: "Cómo Usar el Lanzador de Dados",
+    title: "Cómo Usar",
     steps: [
-      "Selecciona el número de caras del dado (4 a 32 caras)",
-      "Elige el número de dados a lanzar (1 a 10 dados)",
-      "Haz clic en el botón 'Lanzar Dados'",
-      "Observa la animación de los dados y ve los resultados mostrados",
+      "Selecciona el tipo de dado (4 a 32 caras disponibles)",
+      "Establece la cantidad de dados a lanzar (1 a 10)",
+      "Haz clic en el botón Lanzar",
+      "Ve los resultados animados y consulta estadísticas detalladas en el historial",
     ],
   },
   features: {
     title: "Características Principales",
     items: [
-      "Soporte para varios tipos de dados de 4 a 32 caras",
+      "9 tipos diferentes de dados de 4 a 32 caras",
       "Lanza hasta 10 dados simultáneamente",
       "Visualización de animación en tiempo real",
-      "Generación de resultados completamente aleatoria",
-      "Perfecto para juegos de rol de mesa y juegos de mesa",
-      "Operación simple e intuitiva",
+      "Generación aleatoria criptográficamente segura",
+      "Estadísticas detalladas (promedio, máximo/mínimo, distribución)",
+      "Seguimiento del historial de los últimos 10 lanzamientos",
     ],
   },
   faqList: [
     {
       q: "¿Qué tipos de dados están disponibles?",
-      a: "Puedes usar dados de 4, 6, 8, 10, 12, 16, 20, 24 y 32 caras. Se admiten todos los dados comunes utilizados en juegos de rol de mesa y juegos de mesa.",
+      a: "Puedes usar dados de 4, 6, 8, 10, 12, 16, 20, 24 y 32 caras. Se incluyen todos los dados poliédricos comunes utilizados en juegos de rol de mesa y juegos de mesa.",
     },
     {
       q: "¿Cuál es el número máximo de dados que puedo lanzar a la vez?",
@@ -47,11 +61,11 @@ export const diceRoller: DiceRollerTranslations = {
     },
     {
       q: "¿Son realmente aleatorios los resultados de los dados?",
-      a: "Sí, utilizamos la función Math.random() de JavaScript para generar resultados completamente aleatorios. Cada cara tiene la misma probabilidad de aparecer, asegurando resultados justos.",
+      a: "Sí, utilizamos la generación de números aleatorios criptográficamente segura de JavaScript para asegurar resultados completamente aleatorios. Cada cara tiene la misma probabilidad de aparecer.",
     },
     {
       q: "¿Puedo ver el historial de mis lanzamientos de dados?",
-      a: "La versión actual no incluye una función de historial. Solo se muestra el último resultado, y los resultados anteriores se sobrescriben cuando lanzas nuevos dados.",
+      a: "Sí, se muestran los últimos 10 lanzamientos en la sección de historial con estadísticas detalladas para cada lanzamiento, incluyendo valores promedio, resultados máximos/mínimos y distribución de resultados.",
     },
     {
       q: "¿Puedo lanzar los dados nuevamente mientras se reproduce la animación?",
@@ -59,7 +73,7 @@ export const diceRoller: DiceRollerTranslations = {
     },
     {
       q: "¿Para qué puedo usar esta herramienta?",
-      a: "Esta herramienta es perfecta para juegos de rol de mesa (D&D, Pathfinder, etc.), juegos de mesa, aprendizaje de probabilidades, escenarios de selección aleatoria y cualquier situación donde necesites resultados justos y aleatorios.",
+      a: "Perfecta para juegos de rol de mesa (D&D, Pathfinder, etc.), juegos de mesa, aprendizaje de probabilidades y cualquier situación que requiera selección aleatoria. Las estadísticas detalladas la hacen ideal para la educación en probabilidades.",
     },
   ],
 };
