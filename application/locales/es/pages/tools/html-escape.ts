@@ -2,8 +2,8 @@ import { HtmlEscapeTranslations } from "@/locales/types/pages/tools/html-escape"
 
 export const htmlEscape: HtmlEscapeTranslations = {
   title: "Herramienta de Escape HTML",
-  description:
-    "Una herramienta para escapar y desescapar caracteres especiales HTML de forma segura.",
+  subtitle: "Escapa y desescapa caracteres especiales HTML de forma segura",
+  description: "Escapa y desescapa caracteres especiales HTML de forma segura.",
   keywords: [
     "escape HTML",
     "caracteres especiales HTML",
@@ -14,11 +14,44 @@ export const htmlEscape: HtmlEscapeTranslations = {
     "seguridad",
     "prevención XSS",
   ],
-  inputLabel: "Cadena a escapar",
+  howToUse: {
+    title: "Cómo usar la herramienta de escape HTML",
+    steps: [
+      "Pega o escribe tu texto HTML o entidades HTML en el área de entrada",
+      "Haz clic en 'Escapar' para convertir caracteres especiales a entidades HTML",
+      "Haz clic en 'Desescapar' para convertir entidades HTML de vuelta a texto regular",
+      "Copia el resultado usando el botón copiar o limpia todo para empezar de nuevo",
+    ],
+  },
+  features: {
+    title: "Características principales",
+    items: [
+      {
+        title: "Conversión bidireccional",
+        description: "Escapa y desescapa entidades HTML con alta precisión",
+      },
+      {
+        title: "Prevención XSS",
+        description:
+          "Ayuda a prevenir ataques de cross-site scripting escapando adecuadamente la entrada del usuario",
+      },
+      {
+        title: "Soporte completo de caracteres",
+        description:
+          "Maneja todas las entidades HTML incluyendo entidades nombradas, numéricas y hexadecimales",
+      },
+      {
+        title: "Procesamiento en tiempo real",
+        description:
+          "Conversión instantánea con estadísticas detalladas y conteo de caracteres",
+      },
+    ],
+  },
+  inputLabel: "Texto a escapar",
   inputPlaceholder:
-    'Ingrese código HTML (ej: <div class="example">Hello & World</div>)',
-  outputLabel: "Cadena escapada",
-  outputPlaceholder: "El resultado escapado se mostrará aquí",
+    'Ingresa código HTML (ej.: <div class="example">Hello & World</div>)',
+  outputLabel: "Texto escapado",
+  outputPlaceholder: "El resultado escapado aparece aquí",
   escapeButton: "Escapar",
   unescapeButton: "Desescapar",
   clearButton: "Limpiar",
@@ -26,7 +59,7 @@ export const htmlEscape: HtmlEscapeTranslations = {
   copiedMessage: "¡Copiado!",
   // Mensajes de error
   messages: {
-    inputRequired: "Por favor ingrese una cadena",
+    inputRequired: "Ingresa texto para escapar",
     noContentToCopy: "No hay contenido para copiar",
     copyFailed: "Error al copiar",
     charactersEscaped: " caracteres escapados",
@@ -85,12 +118,12 @@ export const htmlEscape: HtmlEscapeTranslations = {
       a: "Los principales caracteres que se escapan son: < se convierte en &lt;, > se convierte en &gt;, & se convierte en &amp;, \" se convierte en &quot;, ' se convierte en &#x27;. Estos caracteres tienen significado especial en HTML, por lo que necesitan ser escapados para mostrarse como texto.",
     },
     {
-      q: "¿Cuándo debo usar el escape HTML?",
-      a: "Use el escape HTML al incrustar entrada de usuario en HTML, al mostrar etiquetas HTML como texto, y como medida de seguridad para prevenir ataques XSS. Es esencial en el desarrollo de aplicaciones web.",
+      q: "¿Cuándo usar el escape HTML?",
+      a: "Usa el escape HTML al incrustar entrada de usuario en HTML, mostrar etiquetas HTML como texto y como medida de seguridad para prevenir ataques XSS. Es esencial en desarrollo de aplicaciones web.",
     },
     {
-      q: "¿Cuándo uso el desescapado?",
-      a: "Use el desescapado cuando quiera convertir HTML escapado de vuelta a su forma original o al restaurar datos escapados guardados en una base de datos. Sin embargo, úselo con cuidado entendiendo los riesgos de seguridad.",
+      q: "¿Cuándo usar el desescapado?",
+      a: "Usa el desescapado para convertir HTML escapado a su forma original o restaurar datos escapados de una base de datos. Úsalo con precaución entendiendo los riesgos de seguridad.",
     },
   ],
 };

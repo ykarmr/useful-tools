@@ -31,7 +31,7 @@
 - 機能修正時に、規約とプライバシーポリシーの更新が必要な場合は、必ず行うこと
 - 翻訳ガイドラインに従って、各言語の翻訳を行うこと
 - meta 情報の設定は Google Search Console のガイドラインに従うこと
-- title と subTitle, description の構成
+- title と subtitle, description の構成
   - title: ツール名
-  - subTitle: ツールの簡単な説明
+  - subtitle: ツールの簡単な説明
   - description: ツールの詳細な説明

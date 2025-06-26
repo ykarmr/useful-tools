@@ -2,7 +2,8 @@ import { HtmlEscapeTranslations } from "@/locales/types/pages/tools/html-escape"
 
 export const htmlEscape: HtmlEscapeTranslations = {
   title: "HTML Escape Tool",
-  description: "A tool to safely escape and unescape HTML special characters.",
+  subtitle: "Safely escape and unescape HTML special characters",
+  description: "Safely escape and unescape HTML special characters.",
   keywords: [
     "HTML escape",
     "HTML special characters",
@@ -13,11 +14,45 @@ export const htmlEscape: HtmlEscapeTranslations = {
     "security",
     "XSS prevention",
   ],
-  inputLabel: "String to escape",
+  howToUse: {
+    title: "How to Use HTML Escape Tool",
+    steps: [
+      "Paste or type your HTML text or HTML entities in the input area",
+      "Click 'Escape' to convert special characters to HTML entities",
+      "Click 'Unescape' to convert HTML entities back to regular text",
+      "Copy the result using the copy button or clear all to start over",
+    ],
+  },
+  features: {
+    title: "Key Features",
+    items: [
+      {
+        title: "Bidirectional Conversion",
+        description:
+          "Both escape and unescape HTML entities with high accuracy",
+      },
+      {
+        title: "XSS Prevention",
+        description:
+          "Helps prevent cross-site scripting attacks by properly escaping user input",
+      },
+      {
+        title: "Complete Character Support",
+        description:
+          "Handles all HTML entities including named, numeric, and hexadecimal entities",
+      },
+      {
+        title: "Real-time Processing",
+        description:
+          "Instant conversion with detailed statistics and character count",
+      },
+    ],
+  },
+  inputLabel: "Text to escape",
   inputPlaceholder:
     'Enter HTML code (e.g., <div class="example">Hello & World</div>)',
-  outputLabel: "Escaped string",
-  outputPlaceholder: "Escaped result will be displayed here",
+  outputLabel: "Escaped text",
+  outputPlaceholder: "Escaped result appears here",
   escapeButton: "Escape",
   unescapeButton: "Unescape",
   clearButton: "Clear",
@@ -25,9 +60,9 @@ export const htmlEscape: HtmlEscapeTranslations = {
   copiedMessage: "Copied!",
   // Error messages
   messages: {
-    inputRequired: "Please enter a string",
+    inputRequired: "Enter text to escape",
     noContentToCopy: "No content to copy",
-    copyFailed: "Failed to copy",
+    copyFailed: "Copy failed",
     charactersEscaped: " characters escaped",
     charactersUnescaped: " characters unescaped",
   },

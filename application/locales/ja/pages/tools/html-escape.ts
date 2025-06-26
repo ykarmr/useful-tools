@@ -2,8 +2,8 @@ import { HtmlEscapeTranslations } from "@/locales/types/pages/tools/html-escape"
 
 export const htmlEscape: HtmlEscapeTranslations = {
   title: "HTMLエスケープツール",
-  description:
-    "HTMLの特殊文字を安全にエスケープ・アンエスケープするツールです。",
+  subtitle: "HTML特殊文字を安全にエスケープ・アンエスケープ",
+  description: "HTML特殊文字を安全にエスケープ・アンエスケープします。",
   keywords: [
     "HTMLエスケープ",
     "HTML特殊文字",
@@ -14,21 +14,53 @@ export const htmlEscape: HtmlEscapeTranslations = {
     "セキュリティ",
     "XSS対策",
   ],
-  inputLabel: "エスケープする文字列",
+  howToUse: {
+    title: "HTMLエスケープツールの使い方",
+    steps: [
+      "入力エリアにHTMLテキストまたはHTMLエンティティを貼り付けまたは入力",
+      "「エスケープ」をクリックして特殊文字をHTMLエンティティに変換",
+      "「アンエスケープ」をクリックしてHTMLエンティティを通常の文字に戻す",
+      "コピーボタンで結果をコピー、またはクリアして最初からやり直し",
+    ],
+  },
+  features: {
+    title: "主な機能",
+    items: [
+      {
+        title: "双方向変換",
+        description:
+          "HTMLエンティティのエスケープとアンエスケープを高精度で実行",
+      },
+      {
+        title: "XSS対策",
+        description:
+          "ユーザー入力を適切にエスケープしてクロスサイトスクリプティング攻撃を防止",
+      },
+      {
+        title: "完全な文字サポート",
+        description: "名前付き、数値、16進数のHTMLエンティティをすべて処理",
+      },
+      {
+        title: "リアルタイム処理",
+        description: "詳細な統計と文字数カウントによる即座の変換",
+      },
+    ],
+  },
+  inputLabel: "エスケープするテキスト",
   inputPlaceholder:
-    'HTMLコードを入力してください（例：<div class="example">Hello & World</div>）',
-  outputLabel: "エスケープされた文字列",
-  outputPlaceholder: "エスケープされた結果がここに表示されます",
+    'HTMLコードを入力（例：<div class="example">Hello & World</div>）',
+  outputLabel: "エスケープされたテキスト",
+  outputPlaceholder: "エスケープ結果がここに表示されます",
   escapeButton: "エスケープ",
   unescapeButton: "アンエスケープ",
   clearButton: "クリア",
   copyButton: "コピー",
-  copiedMessage: "コピーしました！",
+  copiedMessage: "コピーしました",
   // エラーメッセージ
   messages: {
-    inputRequired: "文字列を入力してください",
+    inputRequired: "エスケープするテキストを入力してください",
     noContentToCopy: "コピーする内容がありません",
-    copyFailed: "コピーに失敗しました",
+    copyFailed: "コピーできませんでした",
     charactersEscaped: "個の文字をエスケープしました",
     charactersUnescaped: "個の文字をアンエスケープしました",
   },
@@ -85,12 +117,12 @@ export const htmlEscape: HtmlEscapeTranslations = {
       a: "主に以下の文字がエスケープされます：< は &lt;、> は &gt;、& は &amp;、\" は &quot;、' は &#x27;。これらの文字はHTMLで特別な意味を持つため、テキストとして表示するにはエスケープが必要です。",
     },
     {
-      q: "いつHTMLエスケープを使うべきですか？",
-      a: "ユーザー入力をHTMLに埋め込む際、HTMLタグをテキストとして表示したい際、XSS攻撃を防ぐためのセキュリティ対策として使用します。特にWebアプリケーション開発では必須の処理です。",
+      q: "いつHTMLエスケープを使用しますか？",
+      a: "ユーザー入力をHTMLに埋め込む際、HTMLタグをテキストとして表示する際、XSS攻撃防止のセキュリティ対策として使用します。Webアプリケーション開発では必須の処理です。",
     },
     {
-      q: "アンエスケープはいつ使いますか？",
-      a: "エスケープされたHTMLを元の形に戻したい場合や、データベースに保存されたエスケープ済みデータを復元する場合に使用します。ただし、セキュリティリスクを理解した上で慎重に行ってください。",
+      q: "アンエスケープはいつ使用しますか？",
+      a: "エスケープされたHTMLを元の形に復元する場合や、データベースに保存されたエスケープ済みデータを復元する場合に使用します。セキュリティリスクを理解した上で慎重に行ってください。",
     },
   ],
 };

@@ -1,8 +1,20 @@
 // HTMLエスケープツールの型定義
 export interface HtmlEscapeTranslations {
   title: string;
+  subtitle: string;
   description: string;
   keywords: string[];
+  howToUse: {
+    title: string;
+    steps: string[];
+  };
+  features: {
+    title: string;
+    items: Array<{
+      title: string;
+      description: string;
+    }>;
+  };
   inputLabel: string;
   inputPlaceholder: string;
   outputLabel: string;
