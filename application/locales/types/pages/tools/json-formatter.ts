@@ -2,6 +2,7 @@ import { FAQItem } from "../../faq";
 
 export interface JsonFormatterTranslations {
   title: string;
+  subtitle: string;
   description: string;
   keywords: string[];
   input: string;
@@ -23,5 +24,13 @@ export interface JsonFormatterTranslations {
   indent2: string;
   indent4: string;
   indent8: string;
+  howToUse: {
+    title: string;
+    steps: string[];
+  };
+  features: {
+    title: string;
+    items: string[];
+  };
   faqList: FAQItem[];
 }
