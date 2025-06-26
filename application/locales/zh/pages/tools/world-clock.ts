@@ -8,6 +8,9 @@ export const worldClock: WorldClockTranslations = {
   local: "本地",
   searchPlaceholder: "按城市或国家名称搜索...",
   resultsFound: "个结果",
+  fullscreen: "全屏显示",
+  exitFullscreen: "退出全屏",
+  fullscreenMode: "全屏模式",
   howToUse: {
     title: "如何使用世界时钟",
     steps: [

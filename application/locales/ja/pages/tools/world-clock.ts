@@ -14,6 +14,9 @@ export const worldClock: WorldClockTranslations = {
   local: "ローカル",
   searchPlaceholder: "都市名や国名で検索...",
   resultsFound: "件の結果が見つかりました",
+  fullscreen: "全画面表示",
+  exitFullscreen: "全画面終了",
+  fullscreenMode: "全画面モード",
   howToUse: {
     title: "世界時計の使い方",
     steps: [

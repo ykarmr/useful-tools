@@ -15,6 +15,9 @@ export const worldClock: WorldClockTranslations = {
   local: "Local",
   searchPlaceholder: "Buscar por ciudad o país...",
   resultsFound: "resultados encontrados",
+  fullscreen: "Pantalla Completa",
+  exitFullscreen: "Salir de Pantalla Completa",
+  fullscreenMode: "Modo Pantalla Completa",
   howToUse: {
     title: "Cómo usar el Reloj Mundial",
     steps: [

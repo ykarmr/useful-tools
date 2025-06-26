@@ -14,6 +14,9 @@ export const worldClock: WorldClockTranslations = {
   local: "Локальное",
   searchPlaceholder: "Поиск по названию города или страны...",
   resultsFound: "результатов найдено",
+  fullscreen: "Полноэкранный режим",
+  exitFullscreen: "Выйти из полноэкранного режима",
+  fullscreenMode: "Полноэкранный режим",
   howToUse: {
     title: "Как пользоваться мировыми часами",
     steps: [

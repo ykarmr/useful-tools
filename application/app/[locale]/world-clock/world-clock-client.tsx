@@ -1,12 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Plus, Trash2, Globe, Search } from "lucide-react";
+import { Plus, Trash2, Globe, Search, Maximize, X } from "lucide-react";
 import ToolLayout from "@/components/layout/tool-layout";
 import ToolSection from "@/components/layout/tool-section";
 import ToolFaq from "@/components/layout/tool-faq";
 import ToolHowToUse from "@/components/layout/tool-how-to-use";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { Locale, Translations } from "@/locales";
 
 interface TimeZone {
@@ -25,6 +26,7 @@ export default function WorldClockClient({ locale, t }: WorldClockClientProps) {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [selectedTimezones, setSelectedTimezones] = useState<TimeZone[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   // より多くのタイムゾーンを追加し、各言語でローカライズされた都市名を使用
   const getPopularTimezones = () => {
@@ -575,6 +577,42 @@ export default function WorldClockClient({ locale, t }: WorldClockClientProps) {
     );
   }, [selectedTimezones, locale]);
 
+  // フルスクリーンモード時のbodyスクロール制御
+  useEffect(() => {
+    if (isFullscreen) {
+      // フルスクリーンモード時はbodyのスクロールを無効化
+      document.body.style.overflow = "hidden";
+      // iOSでのスクロール問題を防ぐ
+      document.body.style.position = "fixed";
+      document.body.style.width = "100%";
+      document.body.style.top = "0";
+    } else {
+      // フルスクリーンモード終了時は元に戻す
+      document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.width = "";
+      document.body.style.top = "";
+    }
+
+    // クリーンアップ関数
+    return () => {
+      document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.width = "";
+      document.body.style.top = "";
+    };
+  }, [isFullscreen]);
+
+  // コンポーネントのアンマウント時にbodyスタイルをリセット
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.width = "";
+      document.body.style.top = "";
+    };
+  }, []);
+
   const addTimezone = (timezone: ReturnType<typeof getPopularTimezones>[0]) => {
     if (selectedTimezones.find((tz) => tz.timezone === timezone.timezone))
       return;
@@ -592,14 +630,23 @@ export default function WorldClockClient({ locale, t }: WorldClockClientProps) {
     setSelectedTimezones(selectedTimezones.filter((tz) => tz.id !== id));
   };
 
-  const formatTime = (date: Date, timezone: string) => {
-    return date.toLocaleTimeString(locale, {
+  const formatTime = (
+    date: Date,
+    timezone: string,
+    includeSeconds: boolean = true
+  ) => {
+    const options: Intl.DateTimeFormatOptions = {
       timeZone: timezone,
       hour: "2-digit",
       minute: "2-digit",
-      second: "2-digit",
       hour12: locale === "en",
-    });
+    };
+
+    if (includeSeconds) {
+      options.second = "2-digit";
+    }
+
+    return date.toLocaleTimeString(locale, options);
   };
 
   const formatDate = (date: Date, timezone: string) => {
@@ -625,6 +672,49 @@ export default function WorldClockClient({ locale, t }: WorldClockClientProps) {
     return `UTC${sign}${diff}`;
   };
 
+  // 全画面表示関連の関数
+  const handleFullscreenToggle = () => {
+    setIsFullscreen(!isFullscreen);
+  };
+
+  const handleFullscreenClose = () => {
+    setIsFullscreen(false);
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === "Escape") {
+      handleFullscreenClose();
+    }
+  };
+
+  // スマホでのタッチ操作を改善するためのハンドラー
+  const handleTouchStart = (event: React.TouchEvent) => {
+    // タッチの開始位置を記録（タッチエンドで判定に使用）
+    const touch = event.touches[0];
+    (event.currentTarget as HTMLElement).dataset.touchStartX =
+      touch.clientX.toString();
+    (event.currentTarget as HTMLElement).dataset.touchStartY =
+      touch.clientY.toString();
+  };
+
+  const handleTouchEnd = (event: React.TouchEvent) => {
+    // タッチの終了位置と開始位置を比較して、意図的なタップかどうかを判定
+    const touch = event.changedTouches[0];
+    const startX = parseFloat(
+      (event.currentTarget as HTMLElement).dataset.touchStartX || "0"
+    );
+    const startY = parseFloat(
+      (event.currentTarget as HTMLElement).dataset.touchStartY || "0"
+    );
+    const deltaX = Math.abs(touch.clientX - startX);
+    const deltaY = Math.abs(touch.clientY - startY);
+
+    // 10px以内の移動であれば、タップとして扱う
+    if (deltaX < 10 && deltaY < 10) {
+      handleFullscreenClose();
+    }
+  };
+
   // タイムゾーンリストをフィルタリングする関数
   const getFilteredTimezones = () => {
     if (!searchQuery.trim()) {
@@ -642,135 +732,244 @@ export default function WorldClockClient({ locale, t }: WorldClockClientProps) {
   };
 
   return (
-    <ToolLayout
-      locale={locale}
-      t={t}
-      title={t.worldClock.title}
-      description={t.worldClock.description}
-      icon={Globe}
-    >
-      {/* How To Use セクション */}
-      <ToolSection>
-        <ToolHowToUse
-          title={t.worldClock.howToUse.title}
-          steps={t.worldClock.howToUse.steps}
-          features={{
-            title: t.worldClock.features.title,
-            items: t.worldClock.features.items,
-          }}
-        />
-      </ToolSection>
+    <>
+      {/* メインコンテンツ */}
+      <div className={isFullscreen ? "overflow-hidden h-screen" : ""}>
+        <ToolLayout
+          locale={locale}
+          t={t}
+          title={t.worldClock.title}
+          description={t.worldClock.description}
+          icon={Globe}
+        >
+          {/* How To Use セクション */}
+          <ToolSection>
+            <ToolHowToUse
+              title={t.worldClock.howToUse.title}
+              steps={t.worldClock.howToUse.steps}
+              features={{
+                title: t.worldClock.features.title,
+                items: t.worldClock.features.items,
+              }}
+            />
+          </ToolSection>
 
-      {/* Time Zones Grid */}
-      <ToolSection>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mb-8">
-          {selectedTimezones.map((timezone) => (
-            <div
-              key={timezone.id}
-              className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-4 relative hover:shadow-md transition-shadow"
-            >
-              <button
-                onClick={() => removeTimezone(timezone.id)}
-                className="absolute top-2 right-2 text-gray-400 hover:text-red-500 transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-1 rounded"
-                aria-label={`Remove ${timezone.name} timezone`}
-              >
-                <Trash2 size={14} />
-              </button>
+          {/* Time Zones Grid */}
+          <ToolSection>
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-lg font-semibold text-gray-800">
+                {selectedTimezones.length} {t.worldClock.addTimezone}
+              </h3>
+              {selectedTimezones.length > 0 && (
+                <Button
+                  onClick={handleFullscreenToggle}
+                  variant="outline"
+                  size="sm"
+                  className="bg-blue-50 border-blue-300 text-blue-600 hover:bg-blue-100"
+                >
+                  <Maximize className="w-4 h-4 mr-2" />
+                  {t.worldClock.fullscreen}
+                </Button>
+              )}
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mb-8">
+              {selectedTimezones.map((timezone) => (
+                <div
+                  key={timezone.id}
+                  className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-4 relative hover:shadow-md transition-shadow min-w-0 overflow-hidden"
+                >
+                  <button
+                    onClick={() => removeTimezone(timezone.id)}
+                    className="absolute top-2 right-2 text-gray-400 hover:text-red-500 transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-1 rounded"
+                    aria-label={`Remove ${timezone.name} timezone`}
+                  >
+                    <Trash2 size={14} />
+                  </button>
 
-              <div className="text-center pr-5">
-                <h3 className="text-sm font-bold text-gray-900 mb-1 truncate">
-                  {timezone.name}
-                </h3>
-                <p className="text-xs text-gray-600 mb-3 truncate">
-                  {timezone.country}
-                </p>
+                  <div className="text-center pr-5">
+                    <h3 className="text-sm font-bold text-gray-900 mb-1 truncate">
+                      {timezone.name}
+                    </h3>
+                    <p className="text-xs text-gray-600 mb-3 truncate">
+                      {timezone.country}
+                    </p>
 
-                <div className="text-xl font-mono font-bold text-blue-600 mb-1">
-                  {formatTime(currentTime, timezone.timezone)}
+                    <div className="text-base sm:text-lg md:text-xl font-mono font-bold text-blue-600 mb-1 break-all overflow-hidden">
+                      <span className="sm:hidden">
+                        {formatTime(currentTime, timezone.timezone, false)}
+                      </span>
+                      <span className="hidden sm:inline">
+                        {formatTime(currentTime, timezone.timezone, true)}
+                      </span>
+                    </div>
+
+                    <div className="text-xs text-gray-600 mb-2 truncate">
+                      {formatDate(currentTime, timezone.timezone)}
+                    </div>
+
+                    <div className="text-xs text-gray-500 bg-white rounded-full px-2 py-1 inline-block truncate max-w-full">
+                      {getTimeDifference(timezone.timezone)}
+                    </div>
+                  </div>
                 </div>
+              ))}
+            </div>
+          </ToolSection>
 
-                <div className="text-xs text-gray-600 mb-2">
-                  {formatDate(currentTime, timezone.timezone)}
+          {/* Add Timezone */}
+          <ToolSection title={t.worldClock.addTimezone} icon={Plus}>
+            <div className="bg-gray-50 rounded-xl p-6">
+              {/* 検索フィールド */}
+              <div className="mb-6">
+                <div className="relative">
+                  <Search
+                    className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                    size={20}
+                  />
+                  <Input
+                    type="text"
+                    placeholder={t.worldClock.searchPlaceholder}
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="pl-10 pr-4 py-2 w-full max-w-md"
+                  />
                 </div>
+                {searchQuery && (
+                  <p className="text-sm text-gray-600 mt-2">
+                    {getFilteredTimezones().length} {t.worldClock.resultsFound}
+                  </p>
+                )}
+              </div>
 
-                <div className="text-xs text-gray-500 bg-white rounded-full px-2 py-1 inline-block">
-                  {getTimeDifference(timezone.timezone)}
+              {/* 地域別にタイムゾーンをグループ化して表示 */}
+              {Object.entries(
+                getFilteredTimezones()
+                  .filter(
+                    (tz) =>
+                      !selectedTimezones.find(
+                        (selected) => selected.timezone === tz.timezone
+                      )
+                  )
+                  .reduce((acc, tz) => {
+                    if (!acc[tz.region]) acc[tz.region] = [];
+                    acc[tz.region].push(tz);
+                    return acc;
+                  }, {} as Record<string, typeof availableTimezones>)
+              ).map(([region, timezones]) => (
+                <div key={region} className="mb-6 last:mb-0">
+                  <h3 className="text-lg font-semibold text-gray-800 mb-3">
+                    {(t.worldClock.regions as any)[region] || region}
+                  </h3>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
+                    {timezones.map((timezone) => (
+                      <button
+                        key={`${timezone.key}-${timezone.timezone}`}
+                        onClick={() => addTimezone(timezone)}
+                        className="p-3 bg-white rounded-lg border hover:border-primary-300 hover:bg-primary-50 transition-all text-left focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+                      >
+                        <div className="font-medium text-gray-900 text-sm truncate">
+                          {timezone.name}
+                        </div>
+                        <div className="text-xs text-gray-600 truncate">
+                          {timezone.country}
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </ToolSection>
+
+          {/* FAQ セクション */}
+          <ToolSection>
+            <ToolFaq faqList={t.worldClock.faqList} t={t} />
+          </ToolSection>
+        </ToolLayout>
+      </div>
+
+      {/* 全画面表示モーダル */}
+      {isFullscreen && (
+        <div
+          className="fixed inset-0 z-[9999] bg-black cursor-pointer overflow-hidden touch-none select-none"
+          onClick={handleFullscreenClose}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          onKeyDown={handleKeyDown}
+          tabIndex={0}
+          role="dialog"
+          aria-label={t.worldClock.fullscreenMode}
+        >
+          <div
+            className="w-full h-full max-w-7xl mx-auto p-2 sm:p-4 md:p-6 select-none overflow-y-auto scrollbar-hide"
+            onClick={(e) => e.stopPropagation()}
+            onTouchStart={(e) => e.stopPropagation()}
+            onTouchEnd={(e) => e.stopPropagation()}
+          >
+            <div className="min-h-full py-4 sm:py-6 md:py-8 flex flex-col justify-center">
+              <div className="w-full">
+                {/* スマホ用のスクロール可能なレイアウト */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-2 sm:gap-3 md:gap-4">
+                  {selectedTimezones.map((timezone) => (
+                    <div
+                      key={timezone.id}
+                      className="bg-gray-900/80 rounded-lg sm:rounded-xl p-2 sm:p-3 md:p-4 text-center border border-gray-700 min-w-0 overflow-hidden"
+                      onClick={(e) => e.stopPropagation()}
+                      onTouchStart={(e) => e.stopPropagation()}
+                      onTouchEnd={(e) => e.stopPropagation()}
+                    >
+                      <h3 className="text-xs sm:text-sm md:text-base font-bold text-white mb-1 truncate">
+                        {timezone.name}
+                      </h3>
+                      <p className="text-xs text-gray-300 mb-1 sm:mb-2 truncate">
+                        {timezone.country}
+                      </p>
+
+                      <div className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-mono font-bold text-green-400 mb-1 tracking-tight break-all overflow-hidden leading-tight">
+                        <span className="sm:hidden">
+                          {formatTime(currentTime, timezone.timezone, false)}
+                        </span>
+                        <span className="hidden sm:inline">
+                          {formatTime(currentTime, timezone.timezone, true)}
+                        </span>
+                      </div>
+
+                      <div className="text-xs text-gray-300 mb-1 sm:mb-2 truncate">
+                        {formatDate(currentTime, timezone.timezone)}
+                      </div>
+
+                      <div className="text-xs text-gray-400 bg-gray-800 rounded-full px-2 py-1 inline-block truncate max-w-full">
+                        {getTimeDifference(timezone.timezone)}
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
-          ))}
-        </div>
-      </ToolSection>
-
-      {/* Add Timezone */}
-      <ToolSection title={t.worldClock.addTimezone} icon={Plus}>
-        <div className="bg-gray-50 rounded-xl p-6">
-          {/* 検索フィールド */}
-          <div className="mb-6">
-            <div className="relative">
-              <Search
-                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
-                size={20}
-              />
-              <Input
-                type="text"
-                placeholder={t.worldClock.searchPlaceholder}
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 pr-4 py-2 w-full max-w-md"
-              />
-            </div>
-            {searchQuery && (
-              <p className="text-sm text-gray-600 mt-2">
-                {getFilteredTimezones().length} {t.worldClock.resultsFound}
-              </p>
-            )}
           </div>
 
-          {/* 地域別にタイムゾーンをグループ化して表示 */}
-          {Object.entries(
-            getFilteredTimezones()
-              .filter(
-                (tz) =>
-                  !selectedTimezones.find(
-                    (selected) => selected.timezone === tz.timezone
-                  )
-              )
-              .reduce((acc, tz) => {
-                if (!acc[tz.region]) acc[tz.region] = [];
-                acc[tz.region].push(tz);
-                return acc;
-              }, {} as Record<string, typeof availableTimezones>)
-          ).map(([region, timezones]) => (
-            <div key={region} className="mb-6 last:mb-0">
-              <h3 className="text-lg font-semibold text-gray-800 mb-3">
-                {(t.worldClock.regions as any)[region] || region}
-              </h3>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
-                {timezones.map((timezone) => (
-                  <button
-                    key={`${timezone.key}-${timezone.timezone}`}
-                    onClick={() => addTimezone(timezone)}
-                    className="p-3 bg-white rounded-lg border hover:border-primary-300 hover:bg-primary-50 transition-all text-left focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
-                  >
-                    <div className="font-medium text-gray-900 text-sm truncate">
-                      {timezone.name}
-                    </div>
-                    <div className="text-xs text-gray-600 truncate">
-                      {timezone.country}
-                    </div>
-                  </button>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </ToolSection>
+          {/* 閉じるボタン - スマホ対応 */}
+          <Button
+            onClick={(e) => {
+              e.stopPropagation();
+              handleFullscreenClose();
+            }}
+            variant="outline"
+            size="sm"
+            className="absolute top-2 right-2 sm:top-4 sm:right-4 bg-black/40 border-green-400/50 text-green-400 hover:bg-green-400/20 z-10"
+          >
+            <X className="w-4 h-4 sm:mr-2" />
+            <span className="hidden sm:inline">
+              {t.worldClock.exitFullscreen}
+            </span>
+          </Button>
 
-      {/* FAQ セクション */}
-      <ToolSection>
-        <ToolFaq faqList={t.worldClock.faqList} t={t} />
-      </ToolSection>
-    </ToolLayout>
+          {/* ESCキーのヒント - デスクトップのみ表示 */}
+          <div className="hidden sm:block absolute bottom-4 left-1/2 transform -translate-x-1/2 text-green-300/70 text-sm">
+            ESC {t.worldClock.exitFullscreen}
+          </div>
+        </div>
+      )}
+    </>
   );
 }

@@ -8,6 +8,9 @@ export interface WorldClockTranslations {
   local: string;
   searchPlaceholder: string;
   resultsFound: string;
+  fullscreen: string;
+  exitFullscreen: string;
+  fullscreenMode: string;
   howToUse: {
     title: string;
     steps: string[];
