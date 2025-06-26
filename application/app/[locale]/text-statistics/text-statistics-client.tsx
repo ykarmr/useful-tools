@@ -1,12 +1,20 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { BarChart3, Copy, Check, Download, FileText } from "lucide-react";
+import {
+  BarChart3,
+  Copy,
+  Check,
+  Download,
+  FileText,
+  Sparkles,
+  Activity,
+  Clock,
+  Globe,
+} from "lucide-react";
 import ToolLayout from "@/components/layout/tool-layout";
 import ToolSection from "@/components/layout/tool-section";
-import ToolInput from "@/components/layout/tool-input";
-import ToolControls from "@/components/layout/tool-controls";
-import ToolStats from "@/components/layout/tool-stats";
+import ToolHowToUse from "@/components/layout/tool-how-to-use";
 import ToolFaq from "@/components/layout/tool-faq";
 import { Locale, Translations } from "@/locales";
 
@@ -319,126 +327,143 @@ ${statistics.mostCommonWords
       locale={locale}
       t={t}
       title={t.textStatistics.title}
+      subtitle={t.textStatistics.subtitle}
       description={t.textStatistics.description}
       icon={BarChart3}
     >
+      {/* How To Use セクション */}
+      <ToolSection>
+        <ToolHowToUse
+          title={t.textStatistics.howToUse.title}
+          steps={t.textStatistics.howToUse.steps}
+          features={{
+            title: t.textStatistics.features.title,
+            items: t.textStatistics.features.items,
+          }}
+        />
+      </ToolSection>
+
       {/* テキスト入力セクション */}
       <ToolSection>
-        <div className="mb-4">
-          <label
-            htmlFor="text-input"
-            className="block text-sm font-medium text-gray-700 mb-2"
-          >
-            {t.textStatistics.inputLabel}
-          </label>
-          <textarea
-            id="text-input"
-            value={inputText}
-            onChange={(e) => setInputText(e.target.value)}
-            placeholder={t.textStatistics.inputPlaceholder}
-            className="w-full h-48 px-4 py-3 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-            aria-describedby="text-input-description"
-            aria-label={t.textStatistics.inputAriaLabel}
-          />
-          <div id="text-input-description" className="sr-only">
-            {t.textStatistics.inputDescription}
-          </div>
-        </div>
-
-        <div className="flex flex-wrap gap-3 justify-between items-center">
-          <div className="text-sm text-gray-500">
-            {inputText.length > 0 && (
-              <span>
-                {t.textStatistics.inputCharacterCount.replace(
-                  "{count}",
-                  inputText.length.toLocaleString()
+        <div className="bg-gradient-to-br from-white to-blue-50/50 border border-gray-200 rounded-xl p-6 shadow-sm">
+          <div className="mb-6">
+            <label
+              htmlFor="text-input"
+              className="flex items-center text-lg font-semibold text-gray-900 mb-3"
+            >
+              <FileText className="w-5 h-5 mr-2 text-blue-600" />
+              {t.textStatistics.inputLabel}
+            </label>
+            <div className="relative">
+              <textarea
+                id="text-input"
+                value={inputText}
+                onChange={(e) => setInputText(e.target.value)}
+                placeholder={t.textStatistics.inputPlaceholder}
+                className="w-full h-64 px-4 py-4 bg-white border-2 border-gray-200 rounded-xl resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 text-gray-900 placeholder-gray-400 shadow-inner"
+                aria-describedby="text-input-description"
+                aria-label={t.textStatistics.inputAriaLabel}
+              />
+              <div className="absolute bottom-3 right-3 flex items-center space-x-3">
+                {inputText.length > 0 && (
+                  <div className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium border border-blue-200">
+                    {t.textStatistics.inputCharacterCount.replace(
+                      "{count}",
+                      inputText.length.toLocaleString()
+                    )}
+                  </div>
                 )}
-              </span>
-            )}
+                <button
+                  onClick={clearText}
+                  className="flex items-center px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors duration-200 text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                  disabled={!inputText.trim()}
+                >
+                  <FileText className="w-4 h-4 mr-2" />
+                  {t.textStatistics.clear}
+                </button>
+              </div>
+            </div>
+            <div id="text-input-description" className="sr-only">
+              {t.textStatistics.inputDescription}
+            </div>
           </div>
-          <button
-            onClick={clearText}
-            className="flex items-center px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors duration-200 text-sm font-medium"
-            disabled={!inputText.trim()}
-          >
-            <FileText className="w-4 h-4 mr-2" />
-            {t.textStatistics.clear}
-          </button>
         </div>
       </ToolSection>
 
       {/* 統計表示セクション */}
       {inputText.trim() && (
         <ToolSection>
-          <div className="space-y-6">
+          <div className="space-y-8">
             {/* 基本統計 */}
-            <div className="bg-white border border-gray-200 rounded-lg p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                <BarChart3 className="w-5 h-5 mr-2 text-primary-600" />
+            <div className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200 rounded-xl p-8 shadow-sm">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-2 rounded-lg mr-3">
+                  <BarChart3 className="w-6 h-6 text-white" />
+                </div>
                 {t.textStatistics.statistics}
               </h3>
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-                <div className="text-center p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg">
-                  <div className="text-2xl font-bold text-blue-600">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+                <div className="text-center p-6 bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-200">
+                  <div className="text-3xl font-bold">
                     {statistics.characters.toLocaleString()}
                   </div>
-                  <div className="text-sm text-blue-700 mt-1">
+                  <div className="text-sm mt-2 opacity-90">
                     {t.textStatistics.characters}
                   </div>
                 </div>
-                <div className="text-center p-4 bg-gradient-to-br from-green-50 to-green-100 rounded-lg">
-                  <div className="text-2xl font-bold text-green-600">
+                <div className="text-center p-6 bg-gradient-to-br from-green-500 to-emerald-600 text-white rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-200">
+                  <div className="text-3xl font-bold">
                     {statistics.charactersNoSpaces.toLocaleString()}
                   </div>
-                  <div className="text-sm text-green-700 mt-1">
+                  <div className="text-sm mt-2 opacity-90">
                     {t.textStatistics.charactersNoSpaces}
                   </div>
                 </div>
-                <div className="text-center p-4 bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg">
-                  <div className="text-2xl font-bold text-purple-600">
+                <div className="text-center p-6 bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-200">
+                  <div className="text-3xl font-bold">
                     {statistics.words.toLocaleString()}
                   </div>
-                  <div className="text-sm text-purple-700 mt-1">
+                  <div className="text-sm mt-2 opacity-90">
                     {t.textStatistics.words}
                   </div>
                 </div>
-                <div className="text-center p-4 bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg">
-                  <div className="text-2xl font-bold text-orange-600">
+                <div className="text-center p-6 bg-gradient-to-br from-orange-500 to-red-600 text-white rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-200">
+                  <div className="text-3xl font-bold">
                     {statistics.sentences.toLocaleString()}
                   </div>
-                  <div className="text-sm text-orange-700 mt-1">
+                  <div className="text-sm mt-2 opacity-90">
                     {t.textStatistics.sentences}
                   </div>
                 </div>
-                <div className="text-center p-4 bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-lg">
-                  <div className="text-2xl font-bold text-indigo-600">
+                <div className="text-center p-6 bg-gradient-to-br from-indigo-500 to-indigo-600 text-white rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-200">
+                  <div className="text-3xl font-bold">
                     {statistics.paragraphs.toLocaleString()}
                   </div>
-                  <div className="text-sm text-indigo-700 mt-1">
+                  <div className="text-sm mt-2 opacity-90">
                     {t.textStatistics.paragraphs}
                   </div>
                 </div>
-                <div className="text-center p-4 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg">
-                  <div className="text-2xl font-bold text-gray-600">
+                <div className="text-center p-6 bg-gradient-to-br from-gray-500 to-gray-600 text-white rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-200">
+                  <div className="text-3xl font-bold">
                     {statistics.lines.toLocaleString()}
                   </div>
-                  <div className="text-sm text-gray-700 mt-1">
+                  <div className="text-sm mt-2 opacity-90">
                     {t.textStatistics.lines}
                   </div>
                 </div>
-                <div className="text-center p-4 bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-lg">
-                  <div className="text-2xl font-bold text-emerald-600">
+                <div className="text-center p-6 bg-gradient-to-br from-emerald-500 to-teal-600 text-white rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-200">
+                  <div className="text-3xl font-bold">
                     {statistics.readingTime.toFixed(1)}
                   </div>
-                  <div className="text-sm text-emerald-700 mt-1">
+                  <div className="text-sm mt-2 opacity-90">
                     {t.textStatistics.readingTime} ({t.textStatistics.minutes})
                   </div>
                 </div>
-                <div className="text-center p-4 bg-gradient-to-br from-rose-50 to-rose-100 rounded-lg">
-                  <div className="text-2xl font-bold text-rose-600">
+                <div className="text-center p-6 bg-gradient-to-br from-rose-500 to-pink-600 text-white rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-200">
+                  <div className="text-3xl font-bold">
                     {statistics.avgWordsPerSentence.toFixed(1)}
                   </div>
-                  <div className="text-sm text-rose-700 mt-1">
+                  <div className="text-sm mt-2 opacity-90">
                     {t.textStatistics.avgWordsPerSentence}
                   </div>
                 </div>
@@ -447,40 +472,46 @@ ${statistics.mostCommonWords
 
             {/* 詳細分析 */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <div className="bg-white border border-gray-200 rounded-lg p-6">
-                <h4 className="font-semibold text-gray-900 mb-3 flex items-center">
-                  <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+              <div className="bg-gradient-to-br from-white to-green-50/50 border border-green-200 rounded-xl p-6 shadow-sm">
+                <h4 className="font-bold text-gray-900 mb-4 flex items-center text-lg">
+                  <div className="bg-green-500 p-2 rounded-lg mr-3">
+                    <Activity className="w-5 h-5 text-white" />
+                  </div>
                   {t.textStatistics.textComplexity}
                 </h4>
                 <div
-                  className={`inline-flex px-4 py-2 rounded-full text-sm font-medium ${
+                  className={`inline-flex px-6 py-3 rounded-full text-base font-semibold shadow-md ${
                     statistics.complexity === "simple"
-                      ? "bg-green-100 text-green-800 border border-green-200"
+                      ? "bg-gradient-to-r from-green-500 to-emerald-600 text-white"
                       : statistics.complexity === "moderate"
-                      ? "bg-yellow-100 text-yellow-800 border border-yellow-200"
-                      : "bg-red-100 text-red-800 border border-red-200"
+                      ? "bg-gradient-to-r from-yellow-500 to-orange-600 text-white"
+                      : "bg-gradient-to-r from-red-500 to-red-600 text-white"
                   }`}
                 >
                   {t.textStatistics[statistics.complexity]}
                 </div>
               </div>
 
-              <div className="bg-white border border-gray-200 rounded-lg p-6">
-                <h4 className="font-semibold text-gray-900 mb-3 flex items-center">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
+              <div className="bg-gradient-to-br from-white to-blue-50/50 border border-blue-200 rounded-xl p-6 shadow-sm">
+                <h4 className="font-bold text-gray-900 mb-4 flex items-center text-lg">
+                  <div className="bg-blue-500 p-2 rounded-lg mr-3">
+                    <Globe className="w-5 h-5 text-white" />
+                  </div>
                   {t.textStatistics.languageDetection}
                 </h4>
-                <div className="text-gray-700 bg-blue-50 px-3 py-2 rounded-lg border border-blue-200">
+                <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-3 rounded-full text-base font-semibold shadow-md">
                   {statistics.detectedLanguage}
                 </div>
               </div>
 
-              <div className="bg-white border border-gray-200 rounded-lg p-6">
-                <h4 className="font-semibold text-gray-900 mb-3 flex items-center">
-                  <div className="w-2 h-2 bg-purple-500 rounded-full mr-2"></div>
+              <div className="bg-gradient-to-br from-white to-purple-50/50 border border-purple-200 rounded-xl p-6 shadow-sm">
+                <h4 className="font-bold text-gray-900 mb-4 flex items-center text-lg">
+                  <div className="bg-purple-500 p-2 rounded-lg mr-3">
+                    <Clock className="w-5 h-5 text-white" />
+                  </div>
                   {t.textStatistics.avgSentencesPerParagraph}
                 </h4>
-                <div className="text-2xl font-bold text-purple-600">
+                <div className="text-3xl font-bold text-purple-600">
                   {statistics.avgSentencesPerParagraph.toFixed(1)}
                 </div>
               </div>
@@ -488,23 +519,25 @@ ${statistics.mostCommonWords
 
             {/* 最頻出単語 */}
             {statistics.mostCommonWords.length > 0 && (
-              <div className="bg-white border border-gray-200 rounded-lg p-6">
-                <h4 className="font-semibold text-gray-900 mb-4 flex items-center">
-                  <div className="w-2 h-2 bg-amber-500 rounded-full mr-2"></div>
+              <div className="bg-gradient-to-br from-white to-amber-50/50 border border-amber-200 rounded-xl p-8 shadow-sm">
+                <h4 className="font-bold text-gray-900 mb-6 flex items-center text-xl">
+                  <div className="bg-gradient-to-r from-amber-500 to-orange-600 p-2 rounded-lg mr-3">
+                    <Sparkles className="w-6 h-6 text-white" />
+                  </div>
                   {t.textStatistics.mostCommonWords}
                 </h4>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                   {statistics.mostCommonWords
                     .slice(0, 10)
                     .map(({ word, frequency }, index) => (
                       <div
                         key={index}
-                        className="bg-gradient-to-br from-amber-50 to-yellow-50 border border-amber-200 p-3 rounded-lg text-center hover:shadow-md transition-shadow duration-200"
+                        className="bg-gradient-to-br from-amber-100 to-yellow-200 border-2 border-amber-300 p-4 rounded-xl text-center hover:shadow-lg hover:scale-105 transition-all duration-200 group"
                       >
-                        <div className="font-semibold text-amber-800 truncate">
+                        <div className="font-bold text-amber-900 truncate text-lg group-hover:text-amber-700">
                           {word}
                         </div>
-                        <div className="text-sm text-amber-600 mt-1">
+                        <div className="text-sm text-amber-700 mt-2 font-medium">
                           {t.textStatistics.frequencyCount.replace(
                             "{count}",
                             frequency.toString()
@@ -517,39 +550,42 @@ ${statistics.mostCommonWords
             )}
 
             {/* アクションボタン */}
-            <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
-              <h4 className="font-semibold text-gray-900 mb-4 text-center">
+            <div className="bg-gradient-to-br from-white to-gray-50/50 border-2 border-gray-200 rounded-xl p-8 shadow-sm">
+              <h4 className="font-bold text-gray-900 mb-6 text-xl text-center flex items-center justify-center">
+                <Download className="w-6 h-6 mr-3 text-gray-600" />
                 {t.textStatistics.exportOptions}
               </h4>
-              <div className="flex flex-wrap gap-3 justify-center">
+              <div className="flex flex-wrap gap-4 justify-center">
                 <button
                   onClick={copyStatistics}
-                  className="flex items-center px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200 text-sm font-medium text-gray-700 shadow-sm"
+                  className="flex items-center px-6 py-3 bg-white border-2 border-gray-300 rounded-xl hover:border-gray-400 hover:shadow-md transition-all duration-200 text-base font-semibold text-gray-700 transform hover:scale-105"
                 >
                   {copied ? (
                     <>
-                      <Check className="w-4 h-4 mr-2 text-green-600" />
-                      {t.textStatistics.copied}
+                      <Check className="w-5 h-5 mr-2 text-green-600" />
+                      <span className="text-green-600">
+                        {t.textStatistics.copied}
+                      </span>
                     </>
                   ) : (
                     <>
-                      <Copy className="w-4 h-4 mr-2 text-gray-500" />
+                      <Copy className="w-5 h-5 mr-2 text-gray-500" />
                       {t.textStatistics.copyStats}
                     </>
                   )}
                 </button>
                 <button
                   onClick={() => exportData("txt")}
-                  className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 text-sm font-medium shadow-sm"
+                  className="flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-200 text-base font-semibold shadow-md transform hover:scale-105"
                 >
-                  <Download className="w-4 h-4 mr-2" />
+                  <Download className="w-5 h-5 mr-2" />
                   {t.textStatistics.downloadTXT}
                 </button>
                 <button
                   onClick={() => exportData("json")}
-                  className="flex items-center px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors duration-200 text-sm font-medium shadow-sm"
+                  className="flex items-center px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-xl hover:from-purple-700 hover:to-purple-800 transition-all duration-200 text-base font-semibold shadow-md transform hover:scale-105"
                 >
-                  <Download className="w-4 h-4 mr-2" />
+                  <Download className="w-5 h-5 mr-2" />
                   {t.textStatistics.downloadJSON}
                 </button>
               </div>
@@ -561,16 +597,18 @@ ${statistics.mostCommonWords
       {/* テキストが空の場合の表示 */}
       {!inputText.trim() && (
         <ToolSection>
-          <div className="text-center py-16 bg-gradient-to-br from-gray-50 to-blue-50 rounded-lg border border-gray-200">
+          <div className="text-center py-20 bg-gradient-to-br from-blue-50 to-indigo-100 rounded-xl border-2 border-blue-200 shadow-inner">
             <div className="max-w-md mx-auto">
-              <div className="bg-white rounded-full w-24 h-24 mx-auto mb-6 flex items-center justify-center shadow-lg">
-                <BarChart3 className="w-12 h-12 text-blue-600" />
+              <div className="bg-gradient-to-r from-blue-500 to-purple-600 rounded-full w-32 h-32 mx-auto mb-8 flex items-center justify-center shadow-xl transform hover:scale-110 transition-transform duration-300">
+                <BarChart3 className="w-16 h-16 text-white" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">
                 {t.textStatistics.emptyStateTitle}
               </h3>
-              <p className="text-gray-600 mb-4">{t.textStatistics.noText}</p>
-              <div className="text-sm text-gray-500">
+              <p className="text-gray-600 mb-6 text-lg">
+                {t.textStatistics.noText}
+              </p>
+              <div className="text-base text-gray-500 bg-white/50 px-6 py-4 rounded-xl border border-blue-200 backdrop-blur-sm">
                 {t.textStatistics.emptyStateDescription}
               </div>
             </div>

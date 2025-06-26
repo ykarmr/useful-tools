@@ -2,6 +2,7 @@ import { TextStatisticsTranslations } from "../../../types/pages/tools/text-stat
 
 export const textStatistics: TextStatisticsTranslations = {
   title: "Analizador de Estadísticas de Texto",
+  subtitle: "Analiza estadísticas detalladas de texto al instante",
   description:
     "Analiza el conteo de caracteres, palabras, tiempo de lectura y estadísticas detalladas con herramienta integral de análisis de texto",
   keywords: [
@@ -57,26 +58,52 @@ export const textStatistics: TextStatisticsTranslations = {
   downloadTXT: "Descargar Estadísticas como TXT",
   downloadJSON: "Descargar Estadísticas como JSON",
   noText: "Por favor ingresa texto para analizar.",
+  howToUse: {
+    title: "Cómo Usar",
+    steps: [
+      "Ingresa el texto que deseas analizar en el área de texto de arriba",
+      "Las estadísticas básicas como conteo de caracteres, palabras y oraciones aparecerán automáticamente",
+      "El tiempo de lectura y la complejidad del texto también se analizan simultáneamente",
+      "Copia las estadísticas o descárgalas como archivo",
+    ],
+  },
+  features: {
+    title: "Características",
+    items: [
+      "Conteo automático de caracteres, palabras, oraciones y párrafos",
+      "Estimación de tiempo de lectura (optimizado por idioma)",
+      "Análisis de complejidad del texto",
+      "Detección automática de idioma",
+      "Análisis de frecuencia de palabras",
+      "Funcionalidad de exportación de estadísticas",
+      "Análisis en tiempo real",
+      "Soporte multiidioma",
+    ],
+  },
   faqList: [
     {
       q: "¿Cómo se calcula el tiempo de lectura?",
-      a: "El tiempo de lectura se calcula basado en velocidades promedio de lectura (Español: 200-300 palabras/minuto). Es una estimación y puede variar entre individuos.",
+      a: "El tiempo de lectura se calcula basado en velocidades promedio de lectura. Usamos 400 caracteres/minuto para japonés y 250 palabras/minuto para español. Es una estimación ya que las velocidades de lectura individuales varían.",
+    },
+    {
+      q: "¿Qué idiomas son compatibles?",
+      a: "Se admiten idiomas principales incluyendo japonés, inglés, chino, coreano, ruso, español y francés. Se realiza análisis optimizado por idioma para cada uno.",
     },
     {
       q: "¿Cómo se cuentan las palabras?",
-      a: "Las palabras se identifican por espacios y signos de puntuación. Para idiomas sin espacios, se usa análisis morfológico para identificar límites de palabras.",
+      a: "Se realiza segmentación de palabras apropiada basada en el idioma. El español usa delimitadores de espacio, mientras que el japonés reconoce grupos de hiragana, katakana, kanji y caracteres alfanuméricos como palabras.",
     },
     {
       q: "¿Cómo se determina la complejidad del texto?",
-      a: "La complejidad del texto se evalúa basándose en factores como la longitud promedio de oraciones, diversidad de vocabulario y uso de palabras complejas.",
-    },
-    {
-      q: "¿Para qué puedo usar esta herramienta?",
-      a: "Esta herramienta es útil para escribir blogs, trabajos académicos, optimización de redes sociales, estimaciones de traducción y diversas tareas de escritura.",
+      a: "La complejidad del texto se determina basándose en el promedio de palabras por oración. Para español: menos de 15 palabras es simple, 15-25 palabras es moderado, más de 25 palabras es complejo.",
     },
     {
       q: "¿Puedo exportar las estadísticas?",
-      a: "Sí, puedes descargar los resultados del análisis como archivos de texto o formato JSON para almacenamiento de datos e integración con otras herramientas.",
+      a: "Sí. Puedes descargar estadísticas como archivos de texto (.txt) o formato JSON. Esto es conveniente para almacenamiento de datos e integración con otras herramientas.",
+    },
+    {
+      q: "¿Se almacena mi texto de entrada?",
+      a: "No. El texto de entrada se procesa solo dentro de tu navegador y nunca se envía a servidores. Tu privacidad está protegida.",
     },
   ],
 };

@@ -2,6 +2,7 @@ import { FAQItem } from "../../faq";
 
 export interface TextStatisticsTranslations {
   title: string;
+  subtitle: string;
   description: string;
   keywords: string[];
   inputLabel: string;
@@ -44,5 +45,13 @@ export interface TextStatisticsTranslations {
   downloadTXT: string;
   downloadJSON: string;
   noText: string;
+  howToUse: {
+    title: string;
+    steps: string[];
+  };
+  features: {
+    title: string;
+    items: string[];
+  };
   faqList: FAQItem[];
 }

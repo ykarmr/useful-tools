@@ -2,6 +2,7 @@ import { TextStatisticsTranslations } from "../../../types/pages/tools/text-stat
 
 export const textStatistics: TextStatisticsTranslations = {
   title: "Text Statistics Analyzer",
+  subtitle: "Analyze detailed text statistics instantly",
   description:
     "Analyze text character count, word count, reading time and detailed statistics with comprehensive text analysis tool",
   keywords: [
@@ -57,26 +58,52 @@ export const textStatistics: TextStatisticsTranslations = {
   downloadTXT: "Download Statistics as TXT",
   downloadJSON: "Download Statistics as JSON",
   noText: "Please enter text to analyze.",
+  howToUse: {
+    title: "How to Use",
+    steps: [
+      "Enter the text you want to analyze in the text area above",
+      "Basic statistics like character count, word count, and sentence count will appear automatically",
+      "Reading time and text complexity are also analyzed simultaneously",
+      "Copy the statistics or download them as a file",
+    ],
+  },
+  features: {
+    title: "Features",
+    items: [
+      "Automatic counting of characters, words, sentences, and paragraphs",
+      "Reading time estimation (optimized per language)",
+      "Text complexity analysis",
+      "Automatic language detection",
+      "Word frequency analysis",
+      "Statistics export functionality",
+      "Real-time analysis",
+      "Multi-language support",
+    ],
+  },
   faqList: [
     {
       q: "How is reading time calculated?",
-      a: "Reading time is calculated based on average reading speeds (English: 200-300 words/minute, other languages may vary). This is an estimate and actual reading time may differ between individuals.",
+      a: "Reading time is calculated based on average reading speeds. We use 400 characters/minute for Japanese and 250 words/minute for English. This is an estimate as individual reading speeds vary.",
+    },
+    {
+      q: "Which languages are supported?",
+      a: "Major languages including Japanese, English, Chinese, Korean, Russian, Spanish, and French are supported. Language-optimized analysis is performed for each.",
     },
     {
       q: "How are words counted?",
-      a: "Words are identified by spaces and punctuation marks. For languages without spaces (like Chinese/Japanese), morphological analysis is used to identify word boundaries.",
+      a: "Appropriate word segmentation is performed based on the language. English uses space delimiters, while Japanese recognizes groups of hiragana, katakana, kanji, and alphanumeric characters as words.",
     },
     {
       q: "How is text complexity determined?",
-      a: "Text complexity is evaluated based on factors like average sentence length, vocabulary diversity, and the use of complex words. This helps assess readability.",
-    },
-    {
-      q: "What can I use this tool for?",
-      a: "This tool is useful for blog writing, academic papers, social media optimization, translation estimates, content quality checks, and various writing tasks.",
+      a: "Text complexity is determined based on average words per sentence. For Japanese: under 15 words is simple, 15-25 words is moderate, over 25 words is complex.",
     },
     {
       q: "Can I export the statistics?",
-      a: "Yes, you can download the analysis results as text files or JSON format for data storage and integration with other tools.",
+      a: "Yes. You can download statistics as text files (.txt) or JSON format. This is convenient for data storage and integration with other tools.",
+    },
+    {
+      q: "Is my input text stored?",
+      a: "No. Input text is processed only within your browser and never sent to servers. Your privacy is protected.",
     },
   ],
 };
