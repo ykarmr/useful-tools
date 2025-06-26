@@ -2,13 +2,17 @@ import { UrlEncoderTranslations } from "@/locales/types/pages/tools/url-encoder"
 
 export const urlEncoder: UrlEncoderTranslations = {
   title: "URL Encoder/Decoder",
-  description: "Encode and decode URLs for safe transmission and storage",
+  subtitle: "Convert special characters in URLs to safe format",
+  description:
+    "Encode and decode URLs for safe transmission and web application use",
   keywords: [
     "URL Encoder",
     "URL Decoder",
     "Encode URL",
     "Decode URL",
     "URL Tools",
+    "Percent Encoding",
+    "Character Conversion",
   ],
   encode: "Encode",
   decode: "Decode",
@@ -25,22 +29,46 @@ export const urlEncoder: UrlEncoderTranslations = {
   invalidInput: "Error: Invalid input",
   enterUrl: "Enter URL to encode",
   enterEncodedUrl: "Enter encoded URL to decode",
+  howToUse: {
+    title: "How to Use URL Encoder/Decoder",
+    steps: [
+      "Select encode or decode mode",
+      "Enter your URL or encoded URL in the input field",
+      "The result will be displayed automatically and can be copied to clipboard",
+      "Use the switch button to easily toggle between encoding and decoding modes",
+    ],
+  },
+  features: {
+    title: "Key Features",
+    items: [
+      "Real-time encoding and decoding",
+      "RFC 3986 compliant percent encoding",
+      "Safe conversion of international characters",
+      "One-click copy to clipboard",
+      "Error handling for invalid input",
+      "Responsive design for all devices",
+    ],
+  },
   faqList: [
     {
       q: "What is URL encoding?",
-      a: "URL encoding is the process of converting special characters that cannot be used in URLs into a safe format. For example, spaces become %20.",
+      a: "URL encoding (percent encoding) is the process of converting special characters and non-ASCII characters that cannot be used in URLs into hexadecimal codes starting with %. This allows web browsers to correctly interpret URLs.",
     },
     {
-      q: "Why is URL encoding necessary?",
-      a: "URLs cannot directly contain certain characters (spaces, &, =, etc.), so these need to be converted to hexadecimal codes starting with %.",
+      q: "When do I need URL encoding?",
+      a: "URL encoding is needed when search queries contain non-English characters, when sending form data, specifying API parameters, or when file names contain special characters. It's essential for web application development.",
     },
     {
       q: "Which characters get encoded?",
-      a: "Spaces, non-ASCII characters, special symbols (&, =, ?, #, etc.), and characters that have special meaning in URLs get encoded.",
+      a: "Spaces, non-ASCII characters, special symbols (&, =, ?, #, +, etc.), control characters, and characters that have special meaning in URLs get encoded. Safe characters (alphanumeric and some symbols) remain unchanged.",
     },
     {
-      q: "Can I decode encoded URLs?",
-      a: "Yes, this tool supports both encoding and decoding. Use the switch button to toggle between modes.",
+      q: "Can I decode encoded URLs back to original form?",
+      a: "Yes, you can use the decode function of this tool to restore encoded URLs to their original format. However, if the encoded string is malformed, an error will be displayed.",
+    },
+    {
+      q: "Is there a length limit for URLs processed by this tool?",
+      a: "The tool can handle long URLs within browser limits, but URLs under 2000 characters are generally recommended. Very long URLs may cause issues with some web servers.",
     },
   ],
 };

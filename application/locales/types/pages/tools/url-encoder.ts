@@ -2,6 +2,7 @@ import { FAQItem } from "../../faq";
 
 export interface UrlEncoderTranslations {
   title: string;
+  subtitle: string;
   description: string;
   keywords: string[];
   encode: string;
@@ -19,5 +20,13 @@ export interface UrlEncoderTranslations {
   spaceToPercent: string;
   decodedUrl: string;
   invalidInput: string;
+  howToUse: {
+    title: string;
+    steps: string[];
+  };
+  features: {
+    title: string;
+    items: string[];
+  };
   faqList: FAQItem[];
 }

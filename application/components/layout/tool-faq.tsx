@@ -19,16 +19,16 @@ export default function ToolFaq({ faqList, t }: Props) {
         {faqList.map((item, idx) => (
           <div
             key={idx}
-            className="bg-white rounded-xl shadow-md border border-gray-100"
+            className="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden"
           >
             <button
-              className="w-full flex justify-between items-center px-6 py-4 text-left focus:outline-none"
+              className="w-full flex justify-between items-center px-6 py-4 text-left focus:outline-none hover:bg-gray-50 transition-colors duration-200"
               onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
               aria-expanded={openIndex === idx}
             >
-              <span className="font-medium text-gray-900">{item.q}</span>
+              <span className="font-medium text-gray-900 pr-4">{item.q}</span>
               <span
-                className={`ml-3 transition-transform duration-200 ${
+                className={`ml-3 transition-transform duration-200 flex-shrink-0 ${
                   openIndex === idx ? "rotate-90" : ""
                 }`}
               >
@@ -45,13 +45,13 @@ export default function ToolFaq({ faqList, t }: Props) {
               </span>
             </button>
             <div
-              className={`px-6 text-gray-700 text-base transition-all duration-300 ${
+              className={`px-6 text-gray-700 text-base transition-all duration-300 ease-in-out ${
                 openIndex === idx
-                  ? "max-h-40 opacity-100"
+                  ? "max-h-96 opacity-100 pb-4"
                   : "max-h-0 opacity-0 overflow-hidden"
               }`}
             >
-              <span className="block ">{item.a}</span>
+              <div className="leading-relaxed">{item.a}</div>
             </div>
           </div>
         ))}
