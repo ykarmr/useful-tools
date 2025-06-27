@@ -11,7 +11,7 @@ export const common: CommonTranslations = {
   yes: "是",
   no: "否",
   openTool: "打开工具",
-  viewAllTools: "查看所有可用工具",
+  viewAllTools: "查看所有工具",
   seo: {
     siteTitle: "USEFUL TOOLS",
     siteDescription:
@@ -31,11 +31,11 @@ export const common: CommonTranslations = {
       "网络工具",
       "在线实用程序",
     ],
-    titleTemplate: "%s | USEFUL TOOLS - 免费在线工具集合",
-    defaultTitle: "USEFUL TOOLS - 提升生产力的免费在线工具集合",
-    homeTitle: "免费在线工具集合 - 提升生产力的综合工具",
+    titleTemplate: "%s | USEFUL TOOLS - 免费在线工具",
+    defaultTitle: "USEFUL TOOLS - 提升生产力的免费在线工具",
+    homeTitle: "免费在线工具 - 提升生产力的综合工具",
     homeDescription:
-      "通过20多个免费在线工具提升生产力。轮盘、待办事项管理器、计算器、计时器、二维码生成器等。适合所有人的专业工具集合。",
+      "通过20多个免费在线工具提升生产力。轮盘、待办事项管理器、计算器、计时器、二维码生成器等。适合所有人的专业工具。",
     homeKeywords: [
       "免费工具",
       "在线工具",
@@ -49,16 +49,16 @@ export const common: CommonTranslations = {
       "实用程序",
       "网络应用",
     ],
-    ogImageAlt: "USEFUL TOOLS - 免费在线工具集合",
+    ogImageAlt: "USEFUL TOOLS - 免费在线工具",
     twitterCreator: "@usefultools",
     structuredData: {
       organizationName: "USEFUL TOOLS 团队",
       applicationCategory: "实用程序应用",
       operatingSystem: "任何",
-      searchActionDescription: "查看所有可用工具",
+      searchActionDescription: "查看所有工具",
     },
     manifest: {
-      name: "USEFUL TOOLS - 免费在线工具集合",
+      name: "USEFUL TOOLS - 免费在线工具",
       shortName: "USEFUL TOOLS",
       description:
         "提升生产力的免费在线工具，包括轮盘、待办事项管理器、计算器、计时器和实用工具。",

@@ -30,11 +30,11 @@ export const common: CommonTranslations = {
       "ユーティリティツール",
       "ウェブツール",
     ],
-    titleTemplate: "%s | USEFUL TOOLS - 無料オンラインツール集",
-    defaultTitle: "USEFUL TOOLS - 生産性向上のための無料オンラインツール集",
-    homeTitle: "無料オンラインツール集 - 生産性向上のための包括的ツール",
+    titleTemplate: "%s | USEFUL TOOLS - 無料オンラインツール",
+    defaultTitle: "USEFUL TOOLS - 生産性向上のための無料オンラインツール",
+    homeTitle: "無料オンラインツール - 生産性向上のための包括的ツール",
     homeDescription:
-      "20以上の無料オンラインツールで生産性を向上。ルーレット、TODOマネージャー、電卓、タイマー、QRコード生成など。すべての人のためのプロフェッショナルツールコレクション。",
+      "20以上の無料オンラインツールで生産性を向上。ルーレット、TODOマネージャー、電卓、タイマー、QRコード生成など。すべての人のためのプロフェッショナルツール。",
     homeKeywords: [
       "無料ツール",
       "オンラインツール",
@@ -48,7 +48,7 @@ export const common: CommonTranslations = {
       "ユーティリティ",
       "ウェブアプリ",
     ],
-    ogImageAlt: "USEFUL TOOLS - 無料オンラインツール集",
+    ogImageAlt: "USEFUL TOOLS - 無料オンラインツール",
     twitterCreator: "@usefultools",
     structuredData: {
       organizationName: "USEFUL TOOLS チーム",
@@ -57,7 +57,7 @@ export const common: CommonTranslations = {
       searchActionDescription: "すべてのツールを表示",
     },
     manifest: {
-      name: "USEFUL TOOLS - 無料オンラインツール集",
+      name: "USEFUL TOOLS - 無料オンラインツール",
       shortName: "USEFUL TOOLS",
       description:
         "生産性向上のための無料オンラインツール。ルーレット、TODOマネージャー、電卓、タイマー、ユーティリティツールなど。",

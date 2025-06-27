@@ -11,11 +11,11 @@ export const common: CommonTranslations = {
   yes: "Yes",
   no: "No",
   openTool: "Open tool",
-  viewAllTools: "View all available tools",
+  viewAllTools: "View all tools",
   seo: {
     siteTitle: "USEFUL TOOLS",
     siteDescription:
-      "Discover 20+ free online tools including roulette wheel, todo manager, calculator, timers, and utility tools. Boost your productivity with our comprehensive tool collection.",
+      "Discover 20+ free online tools including roulette wheel, todo manager, calculator, timers, and utility tools. Boost productivity with our comprehensive tool collection.",
     keywords: [
       "free online tools",
       "productivity tools",
@@ -57,7 +57,7 @@ export const common: CommonTranslations = {
       organizationName: "USEFUL TOOLS Team",
       applicationCategory: "UtilitiesApplication",
       operatingSystem: "Any",
-      searchActionDescription: "View all available tools",
+      searchActionDescription: "View all tools",
     },
     manifest: {
       name: "USEFUL TOOLS - Free Online Tools Collection",
@@ -67,7 +67,7 @@ export const common: CommonTranslations = {
       categories: ["productivity", "utilities", "tools"],
     },
   },
-  faqTitle: "Frequently Asked Questions (FAQ)",
+  faqTitle: "Frequently Asked Questions",
   breadcrumb: {
     home: "Home",
     services: "Tools",

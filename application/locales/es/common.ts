@@ -11,7 +11,7 @@ export const common: CommonTranslations = {
   yes: "Sí",
   no: "No",
   openTool: "Abrir herramienta",
-  viewAllTools: "Ver todas las herramientas disponibles",
+  viewAllTools: "Ver todas las herramientas",
   seo: {
     siteTitle: "USEFUL TOOLS",
     siteDescription:
@@ -31,14 +31,13 @@ export const common: CommonTranslations = {
       "herramientas web",
       "utilidades en línea",
     ],
-    titleTemplate:
-      "%s | USEFUL TOOLS - Colección de Herramientas en Línea Gratuitas",
+    titleTemplate: "%s | USEFUL TOOLS - Herramientas en Línea Gratuitas",
     defaultTitle:
-      "USEFUL TOOLS - Colección de Herramientas en Línea Gratuitas para Productividad",
+      "USEFUL TOOLS - Herramientas en Línea Gratuitas para Productividad",
     homeTitle:
-      "Colección de Herramientas en Línea Gratuitas - Herramientas Integrales para Productividad",
+      "Herramientas en Línea Gratuitas - Herramientas Integrales para Productividad",
     homeDescription:
-      "Aumenta la productividad con más de 20 herramientas en línea gratuitas. Ruleta, gestor de tareas, calculadora, temporizadores, generador QR y más. Colección profesional de herramientas para todos.",
+      "Aumenta la productividad con más de 20 herramientas en línea gratuitas. Ruleta, gestor de tareas, calculadora, temporizadores, generador QR y más. Herramientas profesionales para todos.",
     homeKeywords: [
       "herramientas gratuitas",
       "herramientas en línea",
@@ -52,16 +51,16 @@ export const common: CommonTranslations = {
       "utilidades",
       "aplicación web",
     ],
-    ogImageAlt: "USEFUL TOOLS - Colección de Herramientas en Línea Gratuitas",
+    ogImageAlt: "USEFUL TOOLS - Herramientas en Línea Gratuitas",
     twitterCreator: "@usefultools",
     structuredData: {
       organizationName: "Equipo USEFUL TOOLS",
       applicationCategory: "Aplicación de Utilidades",
       operatingSystem: "Cualquiera",
-      searchActionDescription: "Ver todas las herramientas disponibles",
+      searchActionDescription: "Ver todas las herramientas",
     },
     manifest: {
-      name: "USEFUL TOOLS - Colección de Herramientas en Línea Gratuitas",
+      name: "USEFUL TOOLS - Herramientas en Línea Gratuitas",
       shortName: "USEFUL TOOLS",
       description:
         "Herramientas en línea gratuitas para productividad incluyendo ruleta, gestor de tareas, calculadora, temporizadores y herramientas útiles.",
