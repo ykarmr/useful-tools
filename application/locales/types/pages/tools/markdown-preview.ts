@@ -2,8 +2,17 @@ import { FAQItem } from "../../faq";
 
 export interface MarkdownPreviewTranslations {
   title: string;
+  subtitle: string;
   description: string;
   keywords: string[];
+  howToUse: {
+    title: string;
+    steps: string[];
+  };
+  features: {
+    title: string;
+    items: string[];
+  };
   preview: string;
   clear: string;
   copy: string;
@@ -12,6 +21,7 @@ export interface MarkdownPreviewTranslations {
   lineCount: string;
   writeHere: string;
   noPreview: string;
+  noPreviewSubtext: string;
   examples: string;
   headings: string;
   lists: string;

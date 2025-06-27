@@ -24,6 +24,7 @@ import ToolControls from "@/components/layout/tool-controls";
 import ToolInput from "@/components/layout/tool-input";
 import ToolStats from "@/components/layout/tool-stats";
 import ToolFaq from "@/components/layout/tool-faq";
+import ToolHowToUse from "@/components/layout/tool-how-to-use";
 import { Locale, Translations } from "@/locales";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -125,34 +126,57 @@ export default function MarkdownPreviewClient({
       locale={locale}
       t={t}
       title={t.markdownPreview?.title || "Markdown Preview"}
+      subtitle={
+        t.markdownPreview?.subtitle || "Real-time Markdown preview and editor"
+      }
       description={
         t.markdownPreview?.description || "Preview and edit Markdown text"
       }
       icon={FileText}
     >
-      <div className="grid lg:grid-cols-2 gap-6">
+      {/* How To Use セクション */}
+      <ToolSection>
+        <ToolHowToUse
+          title={t.markdownPreview.howToUse.title}
+          steps={t.markdownPreview.howToUse.steps}
+          features={{
+            title: t.markdownPreview.features.title,
+            items: t.markdownPreview.features.items,
+          }}
+        />
+      </ToolSection>
+      <div className="grid lg:grid-cols-2 gap-8">
         {/* Editor Section */}
         <ToolSection title={t.markdownPreview?.writeHere || "Write Here"}>
-          <div className="space-y-2">
+          <div className="space-y-6">
             <ToolInput>
-              <textarea
-                value={markdown}
-                onChange={(e) => setMarkdown(e.target.value)}
-                className="w-full h-96 p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none font-mono text-sm resize-none"
-                placeholder={`# ${
-                  t.markdownPreview?.title || "Markdown Preview"
-                }\n\n${t.markdownPreview?.writeHere || "Write here"}...`}
-              />
+              <div className="relative">
+                <textarea
+                  value={markdown}
+                  onChange={(e) => setMarkdown(e.target.value)}
+                  className="w-full h-[500px] p-6 border-2 border-gray-200/60 rounded-2xl focus:ring-4 focus:ring-primary-500/20 focus:border-primary-400 outline-none font-mono text-sm resize-none bg-gradient-to-br from-white to-gray-50/30 shadow-lg backdrop-blur-sm transition-all duration-300 hover:border-gray-300/80 hover:shadow-xl"
+                  placeholder={`# ${
+                    t.markdownPreview?.title || "Markdown Preview"
+                  }\n\n${t.markdownPreview?.writeHere || "Write here"}...`}
+                />
+                <div className="absolute top-4 right-4 text-xs text-gray-400 bg-white/80 backdrop-blur-sm px-3 py-1.5 rounded-full border border-gray-200/50 shadow-sm">
+                  Markdown
+                </div>
+              </div>
             </ToolInput>
 
             <ToolControls>
               <button
                 onClick={copyToClipboard}
-                className="button-secondary flex items-center space-x-2"
+                className="flex items-center space-x-3 px-6 py-3 bg-gradient-to-r from-white to-gray-50 hover:from-primary-50 hover:to-primary-100 border-2 border-gray-200/60 hover:border-primary-300/60 text-gray-700 hover:text-primary-700 rounded-xl transition-all duration-300 hover:shadow-lg hover:scale-105 disabled:opacity-50 disabled:hover:scale-100 disabled:hover:shadow-none"
                 disabled={!markdown}
               >
-                {copied ? <Check size={18} /> : <Copy size={18} />}
-                <span>
+                {copied ? (
+                  <Check size={18} className="text-green-600" />
+                ) : (
+                  <Copy size={18} />
+                )}
+                <span className="font-medium">
                   {copied
                     ? t.markdownPreview?.copied || "Copied"
                     : t.markdownPreview?.copy || "Copy"}
@@ -161,11 +185,13 @@ export default function MarkdownPreviewClient({
 
               <button
                 onClick={clearMarkdown}
-                className="button-secondary flex items-center space-x-2 text-red-600 hover:text-red-700"
+                className="flex items-center space-x-3 px-6 py-3 bg-gradient-to-r from-white to-gray-50 hover:from-red-50 hover:to-red-100 border-2 border-red-200/60 hover:border-red-300/60 text-red-600 hover:text-red-700 rounded-xl transition-all duration-300 hover:shadow-lg hover:scale-105 disabled:opacity-50 disabled:hover:scale-100 disabled:hover:shadow-none"
                 disabled={!markdown}
               >
                 <Trash2 size={18} />
-                <span>{t.markdownPreview?.clear || "Clear"}</span>
+                <span className="font-medium">
+                  {t.markdownPreview?.clear || "Clear"}
+                </span>
               </button>
             </ToolControls>
 
@@ -175,26 +201,42 @@ export default function MarkdownPreviewClient({
 
         {/* Preview Section */}
         <ToolSection title={t.markdownPreview?.preview || "Preview"}>
-          <div className="bg-white border border-gray-200 rounded-lg p-6 min-h-96 overflow-auto">
-            {markdown ? (
-              <div className="prose max-w-none text-left">
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                  {markdown}
-                </ReactMarkdown>
-              </div>
-            ) : (
-              <div className="text-gray-500 flex flex-col items-start justify-center h-full text-left">
-                <BookOpen size={48} className="mb-4 opacity-50" />
-                <p>{t.markdownPreview?.noPreview || "No preview available"}</p>
-              </div>
-            )}
+          <div className="relative">
+            <div className="bg-gradient-to-br from-white via-gray-50/30 to-white border-2 border-gray-200/60 rounded-2xl p-8 min-h-[500px] overflow-auto shadow-lg backdrop-blur-sm transition-all duration-300 hover:shadow-xl">
+              {markdown ? (
+                <div className="prose prose-lg max-w-none text-left">
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                    {markdown}
+                  </ReactMarkdown>
+                </div>
+              ) : (
+                <div className="text-gray-500 flex flex-col items-center justify-center h-full text-center min-h-[400px]">
+                  <div className="bg-gradient-to-br from-primary-100 to-primary-200 p-6 rounded-2xl mb-6 shadow-sm">
+                    <BookOpen
+                      size={64}
+                      className="text-primary-600 opacity-60"
+                    />
+                  </div>
+                  <p className="text-lg font-medium mb-2 text-gray-700">
+                    {t.markdownPreview?.noPreview || "No preview available"}
+                  </p>
+                  <p className="text-sm text-gray-500">
+                    {t.markdownPreview?.noPreviewSubtext ||
+                      "Start typing in the editor to see the preview"}
+                  </p>
+                </div>
+              )}
+            </div>
+            <div className="absolute top-4 right-4 text-xs text-gray-400 bg-white/80 backdrop-blur-sm px-3 py-1.5 rounded-full border border-gray-200/50 shadow-sm">
+              Preview
+            </div>
           </div>
         </ToolSection>
       </div>
 
       {/* Examples Section */}
       <ToolSection title={t.markdownPreview?.examples || "Examples"}>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
           <ExampleButton
             icon={<Code size={18} />}
             title={t.markdownPreview?.headings || "Headings"}
@@ -258,51 +300,51 @@ export default function MarkdownPreviewClient({
 
       {/* Markdown Guide */}
       <ToolSection title={t.markdownPreview?.markdownGuide || "Markdown Guide"}>
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <MarkdownGuideItem
-            icon={<Code size={18} />}
+            icon={<Code size={20} />}
             title={t.markdownPreview?.headings || "Headings"}
             description={t.markdownPreview?.headingsDesc || "# H1 ## H2 ### H3"}
           />
           <MarkdownGuideItem
-            icon={<PlusSquare size={18} />}
+            icon={<PlusSquare size={20} />}
             title={t.markdownPreview?.emphasis || "Emphasis"}
             description={t.markdownPreview?.emphasisDesc || "**bold** *italic*"}
           />
           <MarkdownGuideItem
-            icon={<List size={18} />}
+            icon={<List size={20} />}
             title={t.markdownPreview?.lists || "Lists"}
             description={t.markdownPreview?.listsDesc || "- item or 1. item"}
           />
           <MarkdownGuideItem
-            icon={<Link2 size={18} />}
+            icon={<Link2 size={20} />}
             title={t.markdownPreview?.links || "Links"}
             description={t.markdownPreview?.linksDesc || "[text](url)"}
           />
           <MarkdownGuideItem
-            icon={<ImageIcon size={18} />}
+            icon={<ImageIcon size={20} />}
             title={t.markdownPreview?.images || "Images"}
             description={t.markdownPreview?.imagesDesc || "![alt](url)"}
           />
           <MarkdownGuideItem
-            icon={<Code size={18} />}
+            icon={<Code size={20} />}
             title={t.markdownPreview?.code || "Code"}
             description={
               t.markdownPreview?.codeDesc || "`inline` or ```block```"
             }
           />
           <MarkdownGuideItem
-            icon={<Quote size={18} />}
+            icon={<Quote size={20} />}
             title={t.markdownPreview?.blockquotes || "Blockquotes"}
             description={t.markdownPreview?.blockquotesDesc || "> quote text"}
           />
           <MarkdownGuideItem
-            icon={<Table size={18} />}
+            icon={<Table size={20} />}
             title={t.markdownPreview?.tables || "Tables"}
             description={t.markdownPreview?.tablesDesc || "| col | col |"}
           />
           <MarkdownGuideItem
-            icon={<Minus size={18} />}
+            icon={<Minus size={20} />}
             title={t.markdownPreview?.horizontalRule || "Horizontal Rule"}
             description={t.markdownPreview?.horizontalRuleDesc || "---"}
           />
@@ -311,7 +353,7 @@ export default function MarkdownPreviewClient({
 
       {/* FAQ Section */}
       <ToolSection>
-        <ToolFaq faqList={t.markdownPreview.faqList} t={t} />
+        <ToolFaq faqList={t.markdownPreview?.faqList || []} t={t} />
       </ToolSection>
     </ToolLayout>
   );
@@ -327,10 +369,14 @@ function ExampleButton({ icon, title, onClick }: ExampleButtonProps) {
   return (
     <button
       onClick={onClick}
-      className="flex items-center gap-2 p-3 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors border border-gray-200"
+      className="group flex flex-col items-center gap-3 p-4 bg-gradient-to-br from-white to-gray-50 hover:from-primary-50 hover:to-primary-100 rounded-xl transition-all duration-200 border-2 border-gray-200 hover:border-primary-300 hover:shadow-md transform hover:-translate-y-1"
     >
-      <span className="text-primary-600">{icon}</span>
-      <span className="text-sm font-medium">{title}</span>
+      <span className="text-primary-600 group-hover:text-primary-700 transition-colors">
+        {icon}
+      </span>
+      <span className="text-sm font-medium text-gray-700 group-hover:text-primary-800 text-center transition-colors">
+        {title}
+      </span>
     </button>
   );
 }
@@ -347,12 +393,16 @@ function MarkdownGuideItem({
   description,
 }: MarkdownGuideItemProps) {
   return (
-    <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-      <div className="flex items-center gap-2 mb-2">
-        <span className="text-primary-600">{icon}</span>
-        <h3 className="font-medium">{title}</h3>
+    <div className="bg-gradient-to-br from-white to-gray-50/50 p-6 rounded-2xl border-2 border-gray-200/60 hover:border-primary-300/60 transition-all duration-300 hover:shadow-lg hover:scale-105 backdrop-blur-sm">
+      <div className="flex items-center gap-3 mb-4">
+        <span className="text-primary-600 bg-gradient-to-br from-primary-100 to-primary-200 p-3 rounded-xl shadow-sm">
+          {icon}
+        </span>
+        <h3 className="font-semibold text-gray-800">{title}</h3>
       </div>
-      <p className="text-sm text-gray-600 font-mono">{description}</p>
+      <p className="text-sm text-gray-600 font-mono bg-gradient-to-r from-gray-100 to-gray-200/50 px-4 py-3 rounded-xl border border-gray-200/60">
+        {description}
+      </p>
     </div>
   );
 }

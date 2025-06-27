@@ -2,6 +2,7 @@ import { MarkdownPreviewTranslations } from "@/locales/types/pages/tools/markdow
 
 export const markdownPreview: MarkdownPreviewTranslations = {
   title: "Markdown预览器",
+  subtitle: "实时Markdown编辑器和预览器",
   description: "实时预览和编辑Markdown文档",
   keywords: [
     "Markdown编辑器",
@@ -10,9 +11,32 @@ export const markdownPreview: MarkdownPreviewTranslations = {
     "Markdown语法",
     "Markdown工具",
   ],
+  howToUse: {
+    title: "使用方法",
+    steps: [
+      "在左侧编辑器中输入Markdown文本",
+      "右侧实时显示HTML预览",
+      "使用示例按钮插入Markdown语法示例",
+      "使用复制按钮将Markdown文本复制到剪贴板",
+      "在统计信息中查看字符数、单词数和行数",
+    ],
+  },
+  features: {
+    title: "主要功能",
+    items: [
+      "实时预览功能",
+      "支持GitHub Flavored Markdown",
+      "丰富的语法支持，包括表格、代码块和引用",
+      "字符、单词和行数统计",
+      "便捷的示例插入功能",
+      "自动保存功能（本地存储）",
+      "响应式设计支持",
+    ],
+  },
   preview: "预览",
   writeHere: "在此编写",
   noPreview: "无预览内容",
+  noPreviewSubtext: "在编辑器中开始输入以查看预览",
   examples: "示例",
   headings: "标题",
   lists: "列表",
@@ -49,19 +73,23 @@ export const markdownPreview: MarkdownPreviewTranslations = {
   faqList: [
     {
       q: "什么是Markdown？",
-      a: "Markdown是一种轻量级标记语言，使用简单的语法格式化文本，可以转换为HTML。",
+      a: "Markdown是一种轻量级标记语言，允许您使用简单的语法格式化文本。",
     },
     {
-      q: "支持哪些Markdown语法？",
-      a: "支持标题、列表、链接、图片、代码块、表格、引用、强调等标准Markdown语法。",
+      q: "如何在Markdown中创建标题？",
+      a: "使用一个或多个'#'字符后跟一个空格。例如，'# 标题1'表示H1。",
     },
     {
-      q: "预览是实时的吗？",
-      a: "是的，输入时会实时更新HTML预览。",
+      q: "可以包含链接和图片吗？",
+      a: "可以，使用语法`[文本](url)`表示链接，`![替代文本](url)`表示图片。",
     },
     {
-      q: "可以复制预览内容吗？",
-      a: "是的，可以将预览的HTML复制到剪贴板供其他地方使用。",
+      q: "如何格式化代码块？",
+      a: "在代码块前后使用三个反引号（```）。",
+    },
+    {
+      q: "有预览Markdown的方法吗？",
+      a: "有的，您可以在编写时实时查看预览。",
     },
   ],
 };

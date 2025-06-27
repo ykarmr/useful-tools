@@ -2,6 +2,7 @@ import { MarkdownPreviewTranslations } from "@/locales/types/pages/tools/markdow
 
 export const markdownPreview: MarkdownPreviewTranslations = {
   title: "Markdown Preview",
+  subtitle: "Real-time Markdown preview and editor",
   description:
     "Write and preview Markdown in real-time with our elegant editor",
   keywords: [
@@ -12,6 +13,28 @@ export const markdownPreview: MarkdownPreviewTranslations = {
     "Markdown tools",
     "Markdown examples",
   ],
+  howToUse: {
+    title: "How to Use",
+    steps: [
+      "Enter Markdown text in the left editor",
+      "View real-time HTML preview on the right side",
+      "Use example buttons to insert sample Markdown syntax",
+      "Copy your Markdown text to clipboard using the copy button",
+      "Check character count, word count, and line count in statistics",
+    ],
+  },
+  features: {
+    title: "Key Features",
+    items: [
+      "Real-time preview functionality",
+      "GitHub Flavored Markdown support",
+      "Rich syntax support including tables, code blocks, and quotes",
+      "Character, word, and line count statistics",
+      "Convenient sample insertion feature",
+      "Auto-save functionality (local storage)",
+      "Responsive design support",
+    ],
+  },
   preview: "Preview",
   clear: "Clear",
   copy: "Copy",
@@ -19,6 +42,7 @@ export const markdownPreview: MarkdownPreviewTranslations = {
   wordCount: "Words",
   writeHere: "Write Here",
   noPreview: "No preview available",
+  noPreviewSubtext: "Start typing in the editor to see the preview",
   examples: "Examples",
   headings: "Headings",
   lists: "Lists",

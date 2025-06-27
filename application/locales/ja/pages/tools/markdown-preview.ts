@@ -2,6 +2,7 @@ import { MarkdownPreviewTranslations } from "@/locales/types/pages/tools/markdow
 
 export const markdownPreview: MarkdownPreviewTranslations = {
   title: "Markdownプレビュー",
+  subtitle: "リアルタイムでMarkdownをプレビュー・編集",
   description:
     "エレガントなエディターでMarkdownをリアルタイムで記述・プレビュー",
   keywords: [
@@ -11,6 +12,28 @@ export const markdownPreview: MarkdownPreviewTranslations = {
     "Markdownガイド",
     "Markdownツール",
   ],
+  howToUse: {
+    title: "使い方",
+    steps: [
+      "左側のエディターにMarkdownテキストを入力",
+      "右側にリアルタイムでHTMLプレビューが表示",
+      "例ボタンでMarkdown記法のサンプルを挿入",
+      "コピーボタンでMarkdownテキストをクリップボードにコピー",
+      "統計情報で文字数、単語数、行数を確認",
+    ],
+  },
+  features: {
+    title: "主な機能",
+    items: [
+      "リアルタイムプレビュー機能",
+      "GitHub Flavored Markdown対応",
+      "テーブル、コードブロック、引用など豊富な記法サポート",
+      "文字数・単語数・行数の統計表示",
+      "便利なサンプル挿入機能",
+      "自動保存機能（ローカルストレージ）",
+      "レスポンシブデザイン対応",
+    ],
+  },
   preview: "プレビュー",
   clear: "クリア",
   copy: "コピー",
@@ -18,6 +41,7 @@ export const markdownPreview: MarkdownPreviewTranslations = {
   wordCount: "単語数",
   writeHere: "ここに書く",
   noPreview: "プレビューがありません",
+  noPreviewSubtext: "エディターに入力を開始してプレビューを表示",
   examples: "例",
   headings: "見出し",
   lists: "リスト",
@@ -51,19 +75,23 @@ export const markdownPreview: MarkdownPreviewTranslations = {
   faqList: [
     {
       q: "Markdownとは何ですか？",
-      a: "Markdownは軽量マークアップ言語で、プレーンテキストを使って文書を構造化し、HTMLに変換できる形式です。",
+      a: "Markdownは軽量マークアップ言語で、シンプルな記法を使ってテキストを装飾できます。",
     },
     {
-      q: "どのようなMarkdown記法がサポートされていますか？",
-      a: "見出し、リスト、リンク、画像、コードブロック、テーブル、引用、強調表示など、標準的なMarkdown記法をサポートしています。",
+      q: "Markdownで見出しを作成するには？",
+      a: "1つ以上の「#」文字の後にスペースを入れます。例：「# 見出し1」でH1見出しになります。",
     },
     {
-      q: "リアルタイムでプレビューされますか？",
-      a: "はい、入力と同時にリアルタイムでHTMLプレビューが更新されます。",
+      q: "リンクや画像を含めることはできますか？",
+      a: "はい、リンクは`[テキスト](URL)`、画像は`![代替テキスト](URL)`の記法を使用します。",
     },
     {
-      q: "プレビューをコピーできますか？",
-      a: "はい、プレビューされたHTMLをクリップボードにコピーして、他の場所で使用できます。",
+      q: "コードブロックの書き方は？",
+      a: "コードブロックの前後に3つのバッククォート（```）を使用します。",
+    },
+    {
+      q: "Markdownをプレビューする方法はありますか？",
+      a: "はい、入力しながらリアルタイムでプレビューを確認できます。",
     },
   ],
 };
