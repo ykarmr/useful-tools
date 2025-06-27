@@ -2,6 +2,7 @@ import { FAQItem } from "../../faq";
 
 export interface RouletteTranslations {
   title: string;
+  subtitle: string;
   description: string;
   keywords: string[];
   addItems: string;

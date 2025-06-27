@@ -11,7 +11,7 @@ export default function ToolFaq({ faqList, t }: Props) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <div>
+    <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-6 lg:p-8 border border-amber-200 shadow-lg">
       <h2 className="text-2xl font-bold mb-6 text-center text-gray-800 tracking-tight">
         {t.common.faqTitle}
       </h2>

@@ -346,13 +346,14 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
       locale={locale}
       t={t}
       title={t.roulette?.title || "Decision Roulette"}
+      subtitle={t.roulette?.subtitle || "Let the wheel decide your choice"}
       description={
         t.roulette?.description || "Add your options and let the wheel decide!"
       }
       icon={Target}
     >
       {/* How To Use セクション */}
-      <ToolSection className="mb-8">
+      <ToolSection>
         <ToolHowToUse
           title={t.roulette?.howToUse?.title || "How to Use the Roulette"}
           steps={t.roulette?.howToUse?.steps || []}
@@ -364,151 +365,169 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
       </ToolSection>
 
       {/* レスポンシブレイアウト：モバイルは縦積み、PCは2カラム */}
-      <div className="lg:grid lg:grid-cols-2 lg:gap-8 space-y-6 lg:space-y-0 mt-6">
+      <div className="lg:grid lg:grid-cols-2 lg:gap-8 space-y-6 lg:space-y-0">
         {/* Left Column: Wheel Section */}
         <div className="lg:order-1">
-          <ToolSection className="mt-4">
-            <div className="relative">
-              {/* Arrow Pointer Indicator - モバイル対応 */}
-              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-6 md:-translate-y-8 z-20">
-                <div className="bg-gradient-to-b from-green-400 to-green-600 text-white px-2 py-1 md:px-4 md:py-2 rounded-lg shadow-lg">
-                  <div className="text-xs font-bold text-center">
-                    {t.roulette?.winnerPointer || "WINNER POINTER"}
-                  </div>
-                  <div className="text-xs text-center opacity-90 hidden md:block">
-                    {t.roulette?.arrowPoints || "Arrow Points Here"}
+          <ToolSection>
+            <div className="bg-gradient-to-br from-gray-50 to-slate-100 rounded-2xl p-6 lg:p-8 border border-gray-200 shadow-lg">
+              <div className="relative mt-6">
+                {/* Arrow Pointer Indicator - モバイル対応 */}
+                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-6 md:-translate-y-8 z-20">
+                  <div className="bg-gradient-to-br from-green-400 via-emerald-500 to-green-600 text-white px-3 py-2 md:px-4 md:py-2 rounded-xl shadow-lg backdrop-blur-sm border border-green-300">
+                    <div className="text-xs font-bold text-center tracking-wide">
+                      {t.roulette?.winnerPointer || "WINNER POINTER"}
+                    </div>
+                    <div className="text-xs text-center opacity-90 hidden md:block">
+                      {t.roulette?.arrowPoints || "Arrow Points Here"}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Wheel Container - レスポンシブサイズ */}
-              <div className="relative w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96 mx-auto">
-                {/* Fixed Arrow Pointer Overlay */}
-                <div className="absolute inset-0 z-10 pointer-events-none">
-                  <svg viewBox="0 0 300 300" className="w-full h-full">
-                    {/* Arrow pointer */}
-                    <path
-                      d={createArrowPointerPath()}
-                      fill="rgba(34, 197, 94, 0.9)"
-                      stroke="rgba(34, 197, 94, 1)"
-                      strokeWidth="2"
-                    />
-                    {/* Arrow shadow for better visibility */}
-                    <path
-                      d={createArrowPointerPath()}
-                      fill="none"
-                      stroke="rgba(0, 0, 0, 0.3)"
-                      strokeWidth="1"
-                      transform="translate(1, 1)"
-                    />
-                  </svg>
+                {/* Wheel Container - レスポンシブサイズ */}
+                <div className="relative w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96 mx-auto">
+                  {/* Fixed Arrow Pointer Overlay */}
+                  <div className="absolute inset-0 z-10 pointer-events-none">
+                    <svg viewBox="0 0 300 300" className="w-full h-full">
+                      {/* Arrow pointer */}
+                      <path
+                        d={createArrowPointerPath()}
+                        fill="rgba(34, 197, 94, 0.9)"
+                        stroke="rgba(34, 197, 94, 1)"
+                        strokeWidth="2"
+                        filter="drop-shadow(0 2px 4px rgba(0,0,0,0.1))"
+                      />
+                      {/* Arrow shadow for better visibility */}
+                      <path
+                        d={createArrowPointerPath()}
+                        fill="none"
+                        stroke="rgba(0, 0, 0, 0.2)"
+                        strokeWidth="1"
+                        transform="translate(1, 1)"
+                      />
+                    </svg>
+                  </div>
+
+                  <div
+                    ref={wheelRef}
+                    className="w-full h-full transition-transform ease-out"
+                    style={{
+                      transform: `rotate(${rotation}deg)`,
+                      transitionDuration: isSpinning ? "4s" : "0s",
+                    }}
+                  >
+                    {enabledItems.length === 0 || enabledItems.length === 1 ? (
+                      <div className="w-full h-full bg-gray-100 rounded-full border-4 border-gray-300 flex items-center justify-center">
+                        <p className="text-gray-500 text-center px-4 text-sm">
+                          {t.roulette?.addItemsToStart ||
+                            "Add items to start spinning"}
+                        </p>
+                      </div>
+                    ) : (
+                      <svg viewBox="0 0 300 300" className="drop-shadow-lg">
+                        {/* Background circle */}
+                        <circle
+                          cx="150"
+                          cy="150"
+                          r="140"
+                          fill="#f8fafc"
+                          stroke="#e2e8f0"
+                          strokeWidth="2"
+                        />
+
+                        {/* Wheel segments */}
+                        {createWheelSegments()}
+
+                        {/* Center circle */}
+                        <circle
+                          cx="150"
+                          cy="150"
+                          r="20"
+                          fill="#1f2937"
+                          stroke="#ffffff"
+                          strokeWidth="3"
+                        />
+                        <circle cx="150" cy="150" r="8" fill="#ffffff" />
+                      </svg>
+                    )}
+                  </div>
                 </div>
 
-                <div
-                  ref={wheelRef}
-                  className="w-full h-full transition-transform ease-out"
-                  style={{
-                    transform: `rotate(${rotation}deg)`,
-                    transitionDuration: isSpinning ? "4s" : "0s",
-                  }}
-                >
-                  {enabledItems.length === 0 || enabledItems.length === 1 ? (
-                    <div className="w-full h-full bg-gray-100 rounded-full border-4 border-gray-300 flex items-center justify-center">
-                      <p className="text-gray-500 text-center px-4 text-sm">
-                        {t.roulette?.addItemsToStart ||
-                          "Add items to start spinning"}
+                {/* Instructions - モバイル対応 */}
+                <div className="mt-4 text-center px-2">
+                  <p className="text-xs sm:text-sm text-gray-600">
+                    {t.roulette?.segmentsLandInZone ||
+                      "The segment at the top (arrow position) wins"}
+                  </p>
+                </div>
+
+                {/* Control Buttons - 改善版 */}
+                <ToolControls className="mt-6">
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button
+                      onClick={spinWheel}
+                      disabled={enabledItems.length < 2 || isSpinning}
+                      className="px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none transition-all w-full sm:w-auto flex items-center justify-center space-x-3"
+                    >
+                      <Play size={24} />
+                      <span className="text-lg">
+                        {isSpinning
+                          ? t.roulette?.spinning || "Spinning..."
+                          : t.roulette?.spinWheel || "Spin Wheel"}
+                      </span>
+                    </button>
+
+                    {(winner || rotation > 0) && (
+                      <button
+                        onClick={resetGame}
+                        disabled={isSpinning}
+                        className="px-6 py-3 bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none transition-all w-full sm:w-auto flex items-center justify-center space-x-2"
+                      >
+                        <RotateCcw size={20} />
+                        <span>{t.roulette?.resetGame || "Reset"}</span>
+                      </button>
+                    )}
+                  </div>
+                </ToolControls>
+
+                {enabledItems.length < 2 && items.length > 0 && (
+                  <div className="mt-4 px-2">
+                    <div className="bg-gradient-to-r from-amber-100 to-yellow-100 border border-amber-300 text-amber-800 p-3 rounded-xl text-center">
+                      <p className="text-sm font-medium">
+                        {t.roulette?.needMoreItems ||
+                          "At least 2 enabled items are required to spin the wheel"}
                       </p>
                     </div>
-                  ) : (
-                    <svg viewBox="0 0 300 300" className="drop-shadow-lg">
-                      {/* Background circle */}
-                      <circle
-                        cx="150"
-                        cy="150"
-                        r="140"
-                        fill="#f8fafc"
-                        stroke="#e2e8f0"
-                        strokeWidth="2"
-                      />
+                  </div>
+                )}
 
-                      {/* Wheel segments */}
-                      {createWheelSegments()}
-
-                      {/* Center circle */}
-                      <circle
-                        cx="150"
-                        cy="150"
-                        r="20"
-                        fill="#1f2937"
-                        stroke="#ffffff"
-                        strokeWidth="3"
-                      />
-                      <circle cx="150" cy="150" r="8" fill="#ffffff" />
-                    </svg>
-                  )}
-                </div>
-              </div>
-
-              {/* Instructions - モバイル対応 */}
-              <div className="mt-4 text-center px-2">
-                <p className="text-xs sm:text-sm text-gray-600">
-                  {t.roulette?.segmentsLandInZone ||
-                    "The segment at the top (arrow position) wins"}
-                </p>
-              </div>
-
-              {/* Control Buttons - 新規追加 */}
-              <ToolControls className="mt-4">
-                <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                  <button
-                    onClick={spinWheel}
-                    disabled={enabledItems.length < 2 || isSpinning}
-                    className="button-primary flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto"
-                  >
-                    <Play size={20} />
-                    <span>
-                      {isSpinning
-                        ? t.roulette?.spinning || "Spinning..."
-                        : t.roulette?.spinWheel || "Spin Wheel"}
-                    </span>
-                  </button>
-
-                  {(winner || rotation > 0) && (
-                    <button
-                      onClick={resetGame}
-                      disabled={isSpinning}
-                      className="button-secondary flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto"
-                    >
-                      <RotateCcw size={20} />
-                      <span>{t.roulette?.resetGame || "Reset"}</span>
-                    </button>
-                  )}
-                </div>
-              </ToolControls>
-
-              {enabledItems.length < 2 && items.length > 0 && (
-                <p className="text-amber-600 text-sm mt-4 text-center px-2">
-                  {t.roulette?.needMoreItems ||
-                    "At least 2 enabled items are required to spin the wheel"}
-                </p>
-              )}
-
-              {/* Winner Display - モバイル対応 */}
-              {winner && (
-                <div className="mt-4 px-2">
-                  <div className="bg-gradient-to-r from-green-400 to-green-600 text-white p-4 md:p-6 rounded-xl shadow-lg text-center animate-pulse">
-                    <div className="text-base md:text-lg font-bold mb-2">
-                      🎉 {t.roulette?.winner || "Winner!"} 🎉
-                    </div>
-                    <div
-                      className="text-xl md:text-2xl font-bold px-3 py-2 md:px-4 md:py-2 bg-white bg-opacity-20 rounded-lg inline-block break-words max-w-full"
-                      style={{ textShadow: "1px 1px 2px rgba(0,0,0,0.3)" }}
-                    >
-                      {winner.text}
+                {/* Winner Display - モバイル対応 */}
+                {winner && (
+                  <div className="mt-6 px-2">
+                    <div className="bg-gradient-to-br from-emerald-400 via-green-500 to-teal-600 text-white p-6 md:p-8 rounded-2xl shadow-2xl text-center transform scale-105 animate-pulse border-4 border-white">
+                      <div className="text-lg md:text-xl font-bold mb-4 flex items-center justify-center space-x-2">
+                        <span className="text-2xl">🎉</span>
+                        <span>{t.roulette?.winner || "Winner!"}</span>
+                        <span className="text-2xl">🎉</span>
+                      </div>
+                      <div
+                        className="text-2xl md:text-3xl font-bold px-4 py-3 md:px-6 md:py-4 bg-white bg-opacity-25 rounded-xl inline-block break-words max-w-full backdrop-blur-sm border border-white border-opacity-30"
+                        style={{
+                          textShadow: "2px 2px 4px rgba(0,0,0,0.3)",
+                          minHeight: "3rem",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        {winner.text}
+                      </div>
+                      <div className="mt-4 text-sm opacity-90">
+                        ✨ {t.roulette?.landedInZone || "Congratulations!"} ✨
+                      </div>
                     </div>
                   </div>
-                </div>
-              )}
+                )}
+              </div>
             </div>
           </ToolSection>
         </div>
@@ -516,50 +535,69 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
         {/* Right Column: Add New Item & Items List */}
         <div className="lg:order-2 space-y-6">
           {/* Add New Item - モバイル対応 */}
-          <ToolSection title={t.roulette?.addItems || "Add Items"}>
-            <div className="flex flex-col sm:flex-row gap-3">
-              <input
-                type="text"
-                value={newItem}
-                onChange={(e) => setNewItem(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && addItem()}
-                placeholder={t.roulette?.enterOption || "Enter an option..."}
-                className="flex-1 input-field"
-                maxLength={20}
-              />
-              <button
-                onClick={addItem}
-                disabled={!newItem.trim() || items.length >= 20}
-                className="px-4 py-3 bg-primary-600 text-white rounded-xl hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors w-full sm:w-auto flex items-center justify-center"
-                aria-label={t.common?.add || "Add item"}
-              >
-                <Plus size={20} className="sm:mr-0 mr-2" />
-                <span className="sm:hidden">
-                  {t.roulette?.addItems || "Add Item"}
-                </span>
-              </button>
-            </div>
-            <div className="flex flex-col sm:flex-row sm:justify-between gap-1 text-sm text-gray-500 mt-3">
-              <span>
-                {interpolate(t.roulette?.itemsCount || "{count}/20 items", {
-                  count: items.length.toString(),
-                })}
-              </span>
-              <span>
-                {interpolate(t.roulette?.enabledCount || "{count} enabled", {
-                  count: enabledItems.length.toString(),
-                })}
-              </span>
-            </div>
+          <ToolSection>
+            <div className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl p-6 lg:p-8 border border-indigo-200 shadow-lg">
+              <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center">
+                <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center mr-3">
+                  <Plus size={18} className="text-white" />
+                </div>
+                {t.roulette?.addItems || "Add Items"}
+              </h3>
 
-            {/* Items List - モバイル対応 */}
-            <div className="mt-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">
+              <div className="flex flex-col sm:flex-row gap-3">
+                <input
+                  type="text"
+                  value={newItem}
+                  onChange={(e) => setNewItem(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && addItem()}
+                  placeholder={t.roulette?.enterOption || "Enter an option..."}
+                  className="flex-1 px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white shadow-sm"
+                  maxLength={20}
+                />
+                <button
+                  onClick={addItem}
+                  disabled={!newItem.trim() || items.length >= 20}
+                  className="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl hover:from-indigo-700 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all w-full sm:w-auto flex items-center justify-center shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                  aria-label={t.common?.add || "Add item"}
+                >
+                  <Plus size={20} className="sm:mr-0 mr-2" />
+                  <span className="sm:hidden font-medium">
+                    {t.roulette?.addItems || "Add Item"}
+                  </span>
+                </button>
+              </div>
+
+              <div className="flex flex-col sm:flex-row sm:justify-between gap-1 text-sm text-gray-600 mt-4 px-1">
+                <span className="font-medium">
+                  {interpolate(t.roulette?.itemsCount || "{count}/20 items", {
+                    count: items.length.toString(),
+                  })}
+                </span>
+                <span className="font-medium text-indigo-600">
+                  {interpolate(t.roulette?.enabledCount || "{count} enabled", {
+                    count: enabledItems.length.toString(),
+                  })}
+                </span>
+              </div>
+            </div>
+          </ToolSection>
+
+          {/* Items List - モバイル対応 */}
+          <ToolSection>
+            <div className="bg-white rounded-2xl p-6 lg:p-8 border border-gray-200 shadow-lg">
+              <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center">
+                <div className="w-8 h-8 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center mr-3">
+                  <Target size={18} className="text-white" />
+                </div>
                 {t.roulette?.currentItems || "Current Items"}
               </h3>
+
               {items.length === 0 ? (
-                <div className="text-center py-8">
-                  <p className="text-gray-500 mb-2">
+                <div className="text-center py-12 bg-gray-50 rounded-xl border-2 border-dashed border-gray-300">
+                  <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Target size={32} className="text-gray-400" />
+                  </div>
+                  <p className="text-gray-500 mb-2 font-medium">
                     {t.roulette?.noItemsAdded || "No items added yet"}
                   </p>
                   <p className="text-sm text-gray-400">
@@ -568,23 +606,26 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
                   </p>
                 </div>
               ) : (
-                <div className="space-y-2 max-h-64 sm:max-h-80 overflow-y-auto">
+                <div className="space-y-3 max-h-80 overflow-y-auto custom-scrollbar">
                   {items.map((item) => (
                     <div
                       key={item.id}
-                      className={`flex items-center justify-between p-3 sm:p-4 rounded-xl transition-all ${
+                      className={`flex items-center justify-between p-4 rounded-xl transition-all border-2 hover:scale-[1.02] ${
                         item.enabled
-                          ? "bg-white border border-gray-200 shadow-sm"
-                          : "bg-gray-50 border border-gray-100 opacity-60"
+                          ? "bg-gradient-to-r from-white to-gray-50 border-gray-200 shadow-md hover:shadow-lg"
+                          : "bg-gradient-to-r from-gray-100 to-gray-200 border-gray-300 opacity-70"
                       }`}
                     >
-                      <div className="flex items-center space-x-2 sm:space-x-3 flex-1 min-w-0">
+                      <div className="flex items-center space-x-3 flex-1 min-w-0">
                         <div
-                          className="w-3 h-3 sm:w-4 sm:h-4 rounded-full border-2 border-white shadow-sm flex-shrink-0"
+                          className="w-5 h-5 rounded-full border-3 border-white shadow-lg flex-shrink-0"
                           style={{
                             backgroundColor: item.enabled
                               ? item.color
                               : "#9CA3AF",
+                            boxShadow: item.enabled
+                              ? `0 0 0 2px ${item.color}40`
+                              : "none",
                           }}
                         ></div>
 
@@ -603,26 +644,26 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
                             />
                             <button
                               onClick={saveEdit}
-                              className="p-1 text-green-600 hover:text-green-700 hover:bg-green-50 rounded transition-colors flex-shrink-0"
+                              className="p-2 text-white bg-green-500 hover:bg-green-600 rounded-lg transition-all shadow-md hover:shadow-lg flex-shrink-0"
                               aria-label={
                                 t.roulette?.saveChanges || "Save changes"
                               }
                             >
-                              <Check size={14} />
+                              <Check size={16} />
                             </button>
                             <button
                               onClick={cancelEditing}
-                              className="p-1 text-gray-600 hover:text-gray-700 hover:bg-gray-50 rounded transition-colors flex-shrink-0"
+                              className="p-2 text-white bg-gray-500 hover:bg-gray-600 rounded-lg transition-all shadow-md hover:shadow-lg flex-shrink-0"
                               aria-label={t.roulette?.cancel || "Cancel"}
                             >
-                              <X size={14} />
+                              <X size={16} />
                             </button>
                           </div>
                         ) : (
                           // 表示モード - モバイル対応
                           <div className="flex items-center space-x-2 flex-1 min-w-0">
                             <span
-                              className={`font-medium cursor-pointer hover:text-blue-600 transition-colors text-sm sm:text-base truncate ${
+                              className={`font-semibold cursor-pointer hover:text-indigo-600 transition-all text-base truncate ${
                                 item.enabled
                                   ? "text-gray-900"
                                   : "text-gray-500 line-through"
@@ -635,7 +676,7 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
                               {item.text}
                             </span>
                             {!item.enabled && (
-                              <span className="text-xs text-gray-400 bg-gray-200 px-1 sm:px-2 py-1 rounded-full flex-shrink-0">
+                              <span className="text-xs text-white bg-gray-400 px-2 py-1 rounded-full flex-shrink-0 font-medium">
                                 {t.roulette?.disabled || "Disabled"}
                               </span>
                             )}
@@ -643,25 +684,25 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
                         )}
                       </div>
 
-                      <div className="flex items-center space-x-1 flex-shrink-0">
+                      <div className="flex items-center space-x-2 flex-shrink-0">
                         {editingItem !== item.id && (
                           <button
                             onClick={() => startEditing(item.id, item.text)}
-                            className="p-1.5 sm:p-2 text-gray-400 hover:text-blue-500 hover:bg-blue-50 rounded-lg transition-colors"
+                            className="p-2 text-gray-500 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-all shadow-sm hover:shadow-md"
                             aria-label={interpolate(
                               t.roulette?.editItem || "Edit {item}",
                               { item: item.text }
                             )}
                           >
-                            <Edit2 size={14} />
+                            <Edit2 size={16} />
                           </button>
                         )}
                         <button
                           onClick={() => toggleItemEnabled(item.id)}
-                          className={`p-1.5 sm:p-2 rounded-lg transition-colors ${
+                          className={`p-2 rounded-lg transition-all shadow-sm hover:shadow-md ${
                             item.enabled
-                              ? "text-gray-400 hover:text-orange-500 hover:bg-orange-50"
-                              : "text-gray-400 hover:text-green-500 hover:bg-green-50"
+                              ? "text-orange-500 hover:text-orange-600 hover:bg-orange-50 bg-orange-25"
+                              : "text-green-500 hover:text-green-600 hover:bg-green-50 bg-green-25"
                           }`}
                           aria-label={
                             item.enabled
@@ -676,20 +717,20 @@ export default function RouletteClient({ locale, t }: RouletteClientProps) {
                           }
                         >
                           {item.enabled ? (
-                            <EyeOff size={14} />
+                            <EyeOff size={16} />
                           ) : (
-                            <Eye size={14} />
+                            <Eye size={16} />
                           )}
                         </button>
                         <button
                           onClick={() => removeItem(item.id)}
-                          className="p-1.5 sm:p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                          className="p-2 text-red-500 hover:text-red-600 hover:bg-red-50 bg-red-25 rounded-lg transition-all shadow-sm hover:shadow-md"
                           aria-label={interpolate(
                             t.roulette?.removeItem || "Remove {item}",
                             { item: item.text }
                           )}
                         >
-                          <Trash2 size={14} />
+                          <Trash2 size={16} />
                         </button>
                       </div>
                     </div>
