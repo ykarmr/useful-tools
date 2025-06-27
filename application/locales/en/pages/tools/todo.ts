@@ -2,6 +2,7 @@ import { TodoTranslations } from "@/locales/types/pages/tools/todo";
 
 export const todo: TodoTranslations = {
   title: "Todo Manager",
+  subtitle: "Boost productivity with efficient task management",
   description:
     "Stay organized and productive with our beautiful todo manager. Track your tasks with priorities and due dates.",
   keywords: [
@@ -16,6 +17,29 @@ export const todo: TodoTranslations = {
     "task scheduler",
     "task reminder",
   ],
+  howToUse: {
+    title: "How to Use",
+    steps: [
+      "Enter a new task in the input field and set priority and due date",
+      "Click 'Add Task' button to add the task to your list",
+      "Click the checkbox next to a task to mark it as completed",
+      "Use the edit icon to modify task content",
+      "Use filter options to view specific types of tasks",
+    ],
+  },
+  features: {
+    title: "Features",
+    items: [
+      "Task priority settings (Low, Medium, High)",
+      "Due date setting with overdue warnings",
+      "Task completion and status management",
+      "Task editing and deletion functionality",
+      "Filter options (All, Active, Completed)",
+      "Visual progress tracking",
+      "Local storage data persistence",
+      "Responsive design for mobile devices",
+    ],
+  },
   addNewTask: "Add New Task",
   whatNeedsToBeDone: "What needs to be done?",
   priority: "Priority",
@@ -47,19 +71,35 @@ export const todo: TodoTranslations = {
   faqList: [
     {
       q: "How should I set task priorities?",
-      a: "Consider both urgency and importance. Set 'High' for urgent and important tasks, 'Medium' for important tasks with normal deadlines, and 'Low' for tasks with flexible timelines.",
+      a: "Consider both urgency and importance. Set 'High' for urgent and important tasks, 'Medium' for important tasks with normal deadlines, and 'Low' for tasks with flexible timelines. The Eisenhower Matrix concept can be helpful as a reference.",
     },
     {
-      q: "What happens to completed tasks?",
-      a: "Completed tasks can be viewed using the 'Completed' filter. You can keep them as a record of your progress or delete them if no longer needed.",
+      q: "What happens when a task with a due date becomes overdue?",
+      a: "Overdue tasks are highlighted in red and display an 'Overdue' label. This helps you quickly identify tasks that need immediate attention.",
+    },
+    {
+      q: "I accidentally deleted a task. Can I restore it?",
+      a: "Unfortunately, there's currently no restore function for deleted tasks. Please be careful when deleting important tasks.",
     },
     {
       q: "Where is my data stored?",
-      a: "All task data is stored in your browser's local storage. Nothing is sent to external servers, ensuring your privacy is protected.",
+      a: "All task data is stored in your browser's local storage. Nothing is sent to external servers, ensuring your privacy is protected. However, tasks will be lost if you clear your browser data.",
     },
     {
-      q: "Can I backup my tasks?",
-      a: "Currently, there's no direct backup feature. For important tasks, we recommend keeping separate notes as a backup.",
+      q: "Can I sync tasks across multiple devices?",
+      a: "Currently, cross-device task synchronization is not available. Tasks are managed independently on each device.",
+    },
+    {
+      q: "Can I categorize tasks?",
+      a: "There's currently no category feature, but you can include tags in task names for organization (e.g., '[Work] Prepare meeting materials').",
+    },
+    {
+      q: "How is the progress bar calculated?",
+      a: "The progress bar shows the percentage of completed tasks divided by total tasks. It provides a visual overview of your overall progress.",
+    },
+    {
+      q: "Can I manage a large number of tasks at once?",
+      a: "While there's no technical limit, for efficient task management, we recommend keeping active tasks to around 20-30 items at a time.",
     },
   ],
 };

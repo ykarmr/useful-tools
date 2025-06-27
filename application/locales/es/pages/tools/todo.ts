@@ -2,6 +2,7 @@ import { TodoTranslations } from "@/locales/types/pages/tools/todo";
 
 export const todo: TodoTranslations = {
   title: "Gestor de Tareas",
+  subtitle: "Mejora la productividad con gestión eficiente de tareas",
   description:
     "Mantente organizado y productivo con nuestro hermoso gestor de tareas. Rastrea tus tareas con prioridades y fechas de vencimiento.",
   keywords: [
@@ -18,6 +19,29 @@ export const todo: TodoTranslations = {
     "task manager",
     "task list",
   ],
+  howToUse: {
+    title: "Cómo Usar",
+    steps: [
+      "Ingresa una nueva tarea en el campo de entrada y establece prioridad y fecha de vencimiento",
+      "Haz clic en 'Añadir Tarea' para agregar la tarea a tu lista",
+      "Haz clic en la casilla junto a una tarea para marcarla como completada",
+      "Usa el ícono de edición para modificar el contenido de la tarea",
+      "Usa las opciones de filtro para ver tipos específicos de tareas",
+    ],
+  },
+  features: {
+    title: "Características",
+    items: [
+      "Configuración de prioridad de tareas (Baja, Media, Alta)",
+      "Configuración de fecha de vencimiento con alertas de vencimiento",
+      "Gestión de finalización y estado de tareas",
+      "Funcionalidad de edición y eliminación de tareas",
+      "Opciones de filtro (Todas, Activas, Completadas)",
+      "Seguimiento visual del progreso",
+      "Persistencia de datos en almacenamiento local",
+      "Diseño responsivo para dispositivos móviles",
+    ],
+  },
   addNewTask: "Añadir Nueva Tarea",
   whatNeedsToBeDone: "¿Qué necesita hacerse?",
   priority: "Prioridad",
@@ -49,19 +73,35 @@ export const todo: TodoTranslations = {
   faqList: [
     {
       q: "¿Cómo debo establecer las prioridades de las tareas?",
-      a: "Considera tanto la urgencia como la importancia. Establece 'Alta' para tareas urgentes e importantes, 'Media' para tareas importantes con plazos normales, y 'Baja' para tareas con horarios flexibles.",
+      a: "Considera tanto la urgencia como la importancia. Establece 'Alta' para tareas urgentes e importantes, 'Media' para tareas importantes con plazos normales, y 'Baja' para tareas con horarios flexibles. La Matriz de Eisenhower puede ser útil como referencia.",
     },
     {
-      q: "¿Qué pasa con las tareas completadas?",
-      a: "Las tareas completadas se pueden ver usando el filtro 'Completadas'. Puedes mantenerlas como registro de tu progreso o eliminarlas si ya no las necesitas.",
+      q: "¿Qué pasa cuando una tarea con fecha de vencimiento se vence?",
+      a: "Las tareas vencidas se destacan en rojo y muestran una etiqueta 'Vencida'. Esto te ayuda a identificar rápidamente las tareas que necesitan atención inmediata.",
+    },
+    {
+      q: "Eliminé accidentalmente una tarea. ¿Puedo restaurarla?",
+      a: "Desafortunadamente, actualmente no hay función de restauración para tareas eliminadas. Ten cuidado al eliminar tareas importantes.",
     },
     {
       q: "¿Dónde se almacenan mis datos?",
-      a: "Todos los datos de tareas se almacenan en el almacenamiento local de tu navegador. No se envía nada a servidores externos, asegurando que tu privacidad esté protegida.",
+      a: "Todos los datos de tareas se almacenan en el almacenamiento local de tu navegador. No se envía nada a servidores externos, asegurando que tu privacidad esté protegida. Sin embargo, las tareas se perderán si borras los datos del navegador.",
     },
     {
-      q: "¿Puedo hacer una copia de seguridad de mis tareas?",
-      a: "Actualmente, no hay una función directa de copia de seguridad. Para tareas importantes, recomendamos mantener notas separadas como respaldo.",
+      q: "¿Puedo sincronizar tareas entre múltiples dispositivos?",
+      a: "Actualmente, la sincronización de tareas entre dispositivos no está disponible. Las tareas se gestionan independientemente en cada dispositivo.",
+    },
+    {
+      q: "¿Puedo categorizar las tareas?",
+      a: "Actualmente no hay función de categorías, pero puedes incluir etiquetas en los nombres de las tareas para organizarlas (ej: '[Trabajo] Preparar materiales de reunión').",
+    },
+    {
+      q: "¿Cómo se calcula la barra de progreso?",
+      a: "La barra de progreso muestra el porcentaje de tareas completadas dividido por el total de tareas. Proporciona una visión general visual de tu progreso general.",
+    },
+    {
+      q: "¿Puedo gestionar un gran número de tareas a la vez?",
+      a: "Aunque no hay límite técnico, para una gestión eficiente de tareas, recomendamos mantener las tareas activas alrededor de 20-30 elementos a la vez.",
     },
   ],
 };
