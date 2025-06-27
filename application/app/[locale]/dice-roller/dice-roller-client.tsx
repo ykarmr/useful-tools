@@ -154,305 +154,375 @@ export default function DiceRollerClient({ locale, t }: DiceRollerClientProps) {
       <ToolSection>
         <div className="space-y-8">
           {/* 設定セクション */}
-          <div className="grid grid-cols-1 gap-6">
-            {/* サイコロの面数選択 */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-800 text-center">
-                {t.diceRoller.sides}
-              </h3>
-              <div className="flex justify-center">
-                <div className="flex items-center bg-white rounded-xl border-2 border-gray-200 p-1">
-                  <label className="px-4 py-2 text-gray-700 font-medium">
-                    D
-                  </label>
-                  <select
-                    value={sides}
-                    onChange={(e) => handleSidesChange(Number(e.target.value))}
-                    disabled={isRolling}
-                    className="
-                      px-3 py-2 bg-transparent border-none rounded-lg font-semibold text-gray-800
-                      focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1
-                      disabled:opacity-50 cursor-pointer
-                    "
-                    aria-label="Number of sides"
-                  >
-                    {diceOptions.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                  </select>
+          <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-gray-200/50">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* サイコロの面数選択 */}
+              <div className="space-y-6">
+                <div className="text-center">
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">
+                    {t.diceRoller.sides}
+                  </h3>
+                  <p className="text-sm text-gray-600">
+                    面数を選択してください
+                  </p>
+                </div>
+                <div className="flex justify-center">
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-2xl blur opacity-20"></div>
+                    <div className="relative bg-white rounded-2xl border-2 border-gray-200/50 overflow-hidden shadow-lg">
+                      <div className="flex items-center">
+                        <div className="px-6 py-4 bg-gradient-to-r from-blue-50 to-purple-50 border-r border-gray-200">
+                          <span className="text-xl font-bold text-gray-700">
+                            D
+                          </span>
+                        </div>
+                        <select
+                          value={sides}
+                          onChange={(e) =>
+                            handleSidesChange(Number(e.target.value))
+                          }
+                          disabled={isRolling}
+                          className="
+                            px-6 py-4 bg-transparent border-none text-xl font-bold text-gray-800
+                            focus:outline-none focus:ring-0 cursor-pointer min-w-[80px]
+                            disabled:opacity-50 disabled:cursor-not-allowed
+                          "
+                          aria-label="Number of sides"
+                        >
+                          {diceOptions.map((option) => (
+                            <option key={option} value={option}>
+                              {option}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* サイコロの個数選択 */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-800 text-center">
-                {t.diceRoller.count}
-              </h3>
-              <div className="flex justify-center">
-                <div className="flex items-center bg-white rounded-xl border-2 border-gray-200 p-1">
-                  <label className="px-4 py-2 text-gray-700 font-medium">
-                    {t.diceRoller.count}:
-                  </label>
-                  <select
-                    value={numDice}
-                    onChange={(e) => selectDiceCount(Number(e.target.value))}
-                    disabled={isRolling}
-                    className="
-                      px-3 py-2 bg-transparent border-none rounded-lg font-semibold text-gray-800
-                      focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1
-                      disabled:opacity-50 cursor-pointer
-                    "
-                    aria-label="Number of dice"
-                  >
-                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => (
-                      <option key={n} value={n}>
-                        {n}
-                      </option>
-                    ))}
-                  </select>
+              {/* サイコロの個数選択 */}
+              <div className="space-y-6">
+                <div className="text-center">
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">
+                    {t.diceRoller.count}
+                  </h3>
+                  <p className="text-sm text-gray-600">
+                    投げる個数を選択してください
+                  </p>
+                </div>
+                <div className="flex justify-center">
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-blue-500 rounded-2xl blur opacity-20"></div>
+                    <div className="relative bg-white rounded-2xl border-2 border-gray-200/50 overflow-hidden shadow-lg">
+                      <div className="flex items-center">
+                        <div className="px-6 py-4 bg-gradient-to-r from-green-50 to-blue-50 border-r border-gray-200">
+                          <span className="text-lg font-semibold text-gray-700">
+                            ×
+                          </span>
+                        </div>
+                        <select
+                          value={numDice}
+                          onChange={(e) =>
+                            selectDiceCount(Number(e.target.value))
+                          }
+                          disabled={isRolling}
+                          className="
+                            px-6 py-4 bg-transparent border-none text-xl font-bold text-gray-800
+                            focus:outline-none focus:ring-0 cursor-pointer min-w-[80px]
+                            disabled:opacity-50 disabled:cursor-not-allowed
+                          "
+                          aria-label="Number of dice"
+                        >
+                          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => (
+                            <option key={n} value={n}>
+                              {n}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* サイコロ表示 */}
-          <div className="space-y-6">
-            <div className="flex flex-wrap gap-3 md:gap-4 justify-center min-h-[100px] items-center px-4">
-              {result.length === 0
-                ? Array.from({ length: numDice }).map((_, i) => (
-                    <div
-                      key={i}
-                      className={`
-                        w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-gray-100 to-gray-200 
-                        rounded-2xl flex items-center justify-center text-gray-400
-                        shadow-lg border-2 border-gray-300
-                        ${isRolling ? "animate-bounce" : ""}
-                      `}
-                    >
-                      <Dice1 className="w-6 h-6 md:w-8 md:h-8" />
-                    </div>
-                  ))
-                : result.map((r, i) => (
-                    <div
-                      key={i}
-                      className={`
-                        w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-white to-blue-50
-                        rounded-2xl flex items-center justify-center text-2xl md:text-3xl font-bold text-blue-700
-                        shadow-lg border-2 border-blue-200 
-                        ${isRolling ? "animate-spin" : "animate-pulse"}
-                        transform transition-all duration-300 hover:scale-110
-                      `}
-                    >
-                      {r}
-                    </div>
-                  ))}
-            </div>
-
-            {/* 合計表示 */}
-            {result.length > 1 && (
-              <div className="text-center">
-                <div className="inline-block bg-gradient-to-r from-green-400 to-blue-500 text-white px-6 py-3 rounded-xl shadow-lg">
-                  <span className="text-sm font-medium opacity-90">
-                    {t.diceRoller.total}:{" "}
-                  </span>
-                  <span className="text-2xl font-bold">{total}</span>
-                </div>
-              </div>
-            )}
-
-            {/* ロールボタン */}
-            <ToolControls>
-              <button
-                onClick={rollDice}
-                disabled={isRolling}
-                className="
-                  button-primary text-lg px-8 py-4 rounded-2xl font-bold
-                  bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600
-                  transform transition-all duration-200 hover:scale-105 active:scale-95
-                  shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed 
-                  disabled:transform-none focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2
-                "
-                aria-label={isRolling ? "Rolling dice" : "Roll dice"}
-              >
-                {isRolling ? (
-                  <div className="flex items-center gap-2">
-                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                    {locale === "ja"
-                      ? "振り中..."
-                      : locale === "en"
-                      ? "Rolling..."
-                      : locale === "es"
-                      ? "Lanzando..."
-                      : locale === "ru"
-                      ? "Бросаем..."
-                      : "投掷中..."}
-                  </div>
-                ) : (
-                  <div className="flex items-center gap-2">
-                    <Dice1 size={20} />
-                    {t.diceRoller.roll}
-                  </div>
-                )}
-              </button>
-            </ToolControls>
-
-            {/* 履歴・統計表示 */}
-            {rollHistory.length > 0 && (
-              <div className="space-y-6">
-                {/* 履歴セクション */}
-                <div className="space-y-3">
-                  <div className="flex justify-between items-center">
-                    <h4 className="font-semibold text-gray-700">
-                      {t.diceRoller.history}
-                    </h4>
-                    <button
-                      onClick={clearHistory}
-                      className="text-xs px-3 py-1 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition-colors"
-                    >
-                      {t.diceRoller.clearHistory}
-                    </button>
-                  </div>
-                  <div className="space-y-2 max-h-96 overflow-y-auto">
-                    {rollHistory.map((roll, index) => (
+          {/* サイコロ表示エリア */}
+          <div className="bg-gradient-to-br from-indigo-50 via-white to-cyan-50 rounded-3xl p-8 shadow-2xl border border-gray-200/50">
+            <div className="space-y-8">
+              {/* サイコロ表示 */}
+              <div className="flex flex-wrap gap-4 md:gap-6 justify-center min-h-[120px] items-center px-4">
+                {result.length === 0
+                  ? Array.from({ length: numDice }).map((_, i) => (
                       <div
-                        key={index}
-                        className="bg-white px-4 py-4 rounded-lg border-2 border-gray-200 shadow-sm"
+                        key={i}
+                        className={`
+                          w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br from-gray-50 to-gray-100
+                          rounded-3xl flex items-center justify-center text-gray-400
+                          shadow-xl border-2 border-gray-200/50 backdrop-blur-sm
+                          transition-all duration-500 hover:scale-105
+                          ${isRolling ? "animate-bounce" : ""}
+                        `}
                       >
-                        {/* ヘッダー情報 */}
-                        <div className="flex justify-between items-start mb-3">
-                          <div className="text-sm font-medium text-gray-600">
+                        <Dice1 className="w-8 h-8 md:w-10 md:h-10" />
+                      </div>
+                    ))
+                  : result.map((r, i) => (
+                      <div
+                        key={i}
+                        className={`
+                          w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br from-white via-blue-50 to-indigo-100
+                          rounded-3xl flex items-center justify-center text-3xl md:text-4xl font-black
+                          shadow-2xl border-2 border-blue-200/50 backdrop-blur-sm
+                          ${isRolling ? "animate-spin" : "animate-pulse"}
+                          transform transition-all duration-500 hover:scale-110 hover:shadow-3xl
+                          relative overflow-hidden
+                        `}
+                        style={{
+                          background: `linear-gradient(135deg, #ffffff 0%, #e0f2fe 50%, ${
+                            r >= sides * 0.8
+                              ? "#c8e6c9"
+                              : r <= sides * 0.2
+                              ? "#ffcdd2"
+                              : "#e1f5fe"
+                          } 100%)`,
+                        }}
+                      >
+                        <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent"></div>
+                        <span className="relative z-10 text-gray-800 drop-shadow-sm">
+                          {r}
+                        </span>
+                      </div>
+                    ))}
+              </div>
+
+              {/* 合計表示 */}
+              {result.length > 1 && (
+                <div className="text-center">
+                  <div className="inline-flex items-center gap-3 bg-gradient-to-r from-emerald-400 via-blue-500 to-purple-600 text-white px-8 py-4 rounded-2xl shadow-2xl relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent"></div>
+                    <span className="relative z-10 text-lg font-semibold opacity-95">
+                      {t.diceRoller.total}
+                    </span>
+                    <span className="relative z-10 text-3xl font-black drop-shadow-sm">
+                      {total}
+                    </span>
+                  </div>
+                </div>
+              )}
+
+              {/* ロールボタン */}
+              <ToolControls>
+                <div className="relative">
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-pink-400 rounded-3xl blur opacity-30"></div>
+                  <button
+                    onClick={rollDice}
+                    disabled={isRolling}
+                    className="
+                      relative text-xl px-12 py-5 rounded-3xl font-black text-white
+                      bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 
+                      hover:from-purple-600 hover:via-pink-600 hover:to-red-600
+                      transform transition-all duration-300 hover:scale-105 active:scale-95
+                      shadow-2xl hover:shadow-3xl disabled:opacity-60 disabled:cursor-not-allowed 
+                      disabled:transform-none focus:outline-none focus:ring-4 focus:ring-purple-300
+                      border-2 border-white/20 backdrop-blur-sm overflow-hidden
+                    "
+                    aria-label={isRolling ? "Rolling dice" : "Roll dice"}
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent"></div>
+                    {isRolling ? (
+                      <div className="relative z-10 flex items-center gap-3">
+                        <div className="w-6 h-6 border-3 border-white border-t-transparent rounded-full animate-spin"></div>
+                        {locale === "ja"
+                          ? "振り中..."
+                          : locale === "en"
+                          ? "Rolling..."
+                          : locale === "es"
+                          ? "Lanzando..."
+                          : locale === "ru"
+                          ? "Бросаем..."
+                          : "投掷中..."}
+                      </div>
+                    ) : (
+                      <div className="relative z-10 flex items-center gap-3">
+                        <Dice1 size={24} />
+                        {t.diceRoller.roll}
+                      </div>
+                    )}
+                  </button>
+                </div>
+              </ToolControls>
+            </div>
+          </div>
+
+          {/* 履歴・統計表示 */}
+          {rollHistory.length > 0 && (
+            <div className="space-y-8">
+              {/* 履歴セクション */}
+              <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-6 shadow-xl border border-gray-200/50">
+                <div className="flex justify-between items-center mb-6">
+                  <h4 className="text-xl font-bold text-gray-800 flex items-center gap-2">
+                    <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                    {t.diceRoller.history}
+                  </h4>
+                  <button
+                    onClick={clearHistory}
+                    className="px-4 py-2 bg-red-50 hover:bg-red-100 text-red-600 rounded-xl 
+                                transition-colors duration-200 text-sm font-medium border border-red-200/50"
+                  >
+                    {t.diceRoller.clearHistory}
+                  </button>
+                </div>
+                <div className="space-y-4 max-h-96 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+                  {rollHistory.map((roll, index) => (
+                    <div
+                      key={index}
+                      className="bg-gradient-to-br from-white to-gray-50/80 p-5 rounded-2xl 
+                                  border border-gray-200/50 shadow-lg hover:shadow-xl transition-all duration-300"
+                    >
+                      {/* ヘッダー情報 */}
+                      <div className="flex justify-between items-start mb-4">
+                        <div className="flex items-center gap-2">
+                          <div
+                            className="bg-gradient-to-r from-blue-500 to-purple-500 text-white 
+                                          px-3 py-1 rounded-lg text-sm font-semibold"
+                          >
                             D{roll.diceSettings.sides} ×{" "}
                             {roll.diceSettings.count}
                           </div>
-                          <div className="text-xs text-gray-400">
-                            {roll.timestamp.toLocaleTimeString(locale, {
-                              hour: "2-digit",
-                              minute: "2-digit",
-                              second: "2-digit",
-                            })}
+                        </div>
+                        <div className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-lg">
+                          {roll.timestamp.toLocaleTimeString(locale, {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                            second: "2-digit",
+                          })}
+                        </div>
+                      </div>
+
+                      {/* 統計情報 */}
+                      <div className="space-y-4">
+                        <div className="text-sm font-bold text-gray-700 text-center flex items-center justify-center gap-2">
+                          <div className="w-1 h-1 bg-gray-400 rounded-full"></div>
+                          {t.diceRoller.statistics.title}
+                          <div className="w-1 h-1 bg-gray-400 rounded-full"></div>
+                        </div>
+
+                        {/* 基本統計 */}
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                          <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-3 rounded-xl text-center border border-blue-200/50">
+                            <div className="text-lg font-black text-blue-700">
+                              {roll.diceSettings.count}
+                            </div>
+                            <div className="text-xs text-blue-600 font-medium">
+                              {t.diceRoller.statistics.totalRolls}
+                            </div>
+                          </div>
+                          <div className="bg-gradient-to-br from-green-50 to-green-100 p-3 rounded-xl text-center border border-green-200/50">
+                            <div className="text-lg font-black text-green-700">
+                              {roll.total}
+                            </div>
+                            <div className="text-xs text-green-600 font-medium">
+                              {t.diceRoller.statistics.totalSum}
+                            </div>
+                          </div>
+                          <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-3 rounded-xl text-center border border-purple-200/50">
+                            <div className="text-lg font-black text-purple-700">
+                              {roll.statistics.average}
+                            </div>
+                            <div className="text-xs text-purple-600 font-medium">
+                              {t.diceRoller.statistics.averageValue}
+                            </div>
+                          </div>
+                          <div className="bg-gradient-to-br from-orange-50 to-orange-100 p-3 rounded-xl text-center border border-orange-200/50">
+                            <div className="text-lg font-black text-orange-700">
+                              {roll.statistics.highest} /{" "}
+                              {roll.statistics.lowest}
+                            </div>
+                            <div className="text-xs text-orange-600 font-medium">
+                              {t.diceRoller.statistics.highestLowest}
+                            </div>
                           </div>
                         </div>
 
-                        {/* 統計情報 */}
+                        {/* 出目分布 */}
                         <div className="space-y-3">
-                          <div className="text-xs font-semibold text-gray-600 text-center">
-                            {t.diceRoller.statistics.title}
+                          <div className="text-sm font-bold text-gray-700 text-center flex items-center justify-center gap-2">
+                            <div className="w-1 h-1 bg-gray-400 rounded-full"></div>
+                            {t.diceRoller.statistics.distribution}
+                            <div className="w-1 h-1 bg-gray-400 rounded-full"></div>
                           </div>
-
-                          {/* 基本統計 */}
-                          <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-                            <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-2 rounded-lg text-center">
-                              <div className="text-sm font-bold text-blue-700">
-                                {roll.diceSettings.count}
-                              </div>
-                              <div className="text-xs text-blue-600">
-                                {t.diceRoller.statistics.totalRolls}
-                              </div>
-                            </div>
-                            <div className="bg-gradient-to-br from-green-50 to-green-100 p-2 rounded-lg text-center">
-                              <div className="text-sm font-bold text-green-700">
-                                {roll.total}
-                              </div>
-                              <div className="text-xs text-green-600">
-                                {t.diceRoller.statistics.totalSum}
-                              </div>
-                            </div>
-                            <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-2 rounded-lg text-center">
-                              <div className="text-sm font-bold text-purple-700">
-                                {roll.statistics.average}
-                              </div>
-                              <div className="text-xs text-purple-600">
-                                {t.diceRoller.statistics.averageValue}
-                              </div>
-                            </div>
-                            <div className="bg-gradient-to-br from-orange-50 to-orange-100 p-2 rounded-lg text-center">
-                              <div className="text-sm font-bold text-orange-700">
-                                {roll.statistics.highest} /{" "}
-                                {roll.statistics.lowest}
-                              </div>
-                              <div className="text-xs text-orange-600">
-                                {t.diceRoller.statistics.highestLowest}
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* 出目分布 */}
-                          <div className="space-y-3">
-                            <div className="text-xs font-semibold text-gray-600 text-center">
-                              {t.diceRoller.statistics.distribution}
-                            </div>
-                            <div className="flex flex-wrap gap-2 justify-center">
-                              {roll.result.map((value, index) => (
-                                <div
-                                  key={index}
-                                  className="
-                                    w-12 h-12 bg-gradient-to-br from-white to-blue-50
+                          <div className="flex flex-wrap gap-2 justify-center">
+                            {roll.result.map((value, index) => (
+                              <div
+                                key={index}
+                                className="
+                                    w-12 h-12 bg-gradient-to-br from-white via-blue-50 to-indigo-100
                                     rounded-2xl flex items-center justify-center
-                                    shadow-lg border-2 border-blue-200 
-                                    transform transition-all duration-300
+                                    shadow-lg border-2 border-blue-200/50 backdrop-blur-sm
+                                    transform transition-all duration-300 hover:scale-110
                                   "
-                                >
-                                  <div className="text-sm font-bold text-blue-700">
-                                    {value}
-                                  </div>
+                              >
+                                <div className="text-sm font-black text-blue-700">
+                                  {value}
                                 </div>
-                              ))}
-                            </div>
+                              </div>
+                            ))}
                           </div>
                         </div>
                       </div>
-                    ))}
-                  </div>
+                    </div>
+                  ))}
                 </div>
+              </div>
 
-                {/* 簡略統計情報セクション */}
-                <div className="space-y-4">
-                  <h4 className="text-center font-semibold text-gray-700">
-                    {t.diceRoller.statistics.overallStats}
-                  </h4>
+              {/* 全体統計セクション */}
+              <div className="bg-gradient-to-br from-slate-50 to-blue-50/50 rounded-3xl p-6 shadow-xl border border-gray-200/50">
+                <h4 className="text-xl font-bold text-gray-800 text-center mb-6 flex items-center justify-center gap-2">
+                  <div className="w-2 h-2 bg-emerald-500 rounded-full"></div>
+                  {t.diceRoller.statistics.overallStats}
+                  <div className="w-2 h-2 bg-emerald-500 rounded-full"></div>
+                </h4>
 
-                  {/* 全体統計（簡単版） */}
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                    <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-3 rounded-xl text-center">
-                      <div className="text-xl font-bold text-blue-700">
-                        {rollHistory.length}
-                      </div>
-                      <div className="text-xs text-blue-600">
-                        {t.diceRoller.statistics.rollSessions}
-                      </div>
+                {/* 全体統計 */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-2xl text-center border border-blue-200/50 shadow-lg">
+                    <div className="text-2xl font-black text-blue-700 mb-1">
+                      {rollHistory.length}
                     </div>
-                    <div className="bg-gradient-to-br from-green-50 to-green-100 p-3 rounded-xl text-center">
-                      <div className="text-xl font-bold text-green-700">
-                        {totalRolls}
-                      </div>
-                      <div className="text-xs text-green-600">
-                        {t.diceRoller.statistics.totalRolls}
-                      </div>
+                    <div className="text-sm text-blue-600 font-semibold">
+                      {t.diceRoller.statistics.rollSessions}
                     </div>
-                    <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-3 rounded-xl text-center">
-                      <div className="text-xl font-bold text-purple-700">
-                        {overallAverageValue}
-                      </div>
-                      <div className="text-xs text-purple-600">
-                        {t.diceRoller.statistics.averageValue}
-                      </div>
+                  </div>
+                  <div className="bg-gradient-to-br from-green-50 to-green-100 p-4 rounded-2xl text-center border border-green-200/50 shadow-lg">
+                    <div className="text-2xl font-black text-green-700 mb-1">
+                      {totalRolls}
                     </div>
-                    <div className="bg-gradient-to-br from-orange-50 to-orange-100 p-3 rounded-xl text-center">
-                      <div className="text-xl font-bold text-orange-700">
-                        {overallHighestRoll} / {overallLowestRoll}
-                      </div>
-                      <div className="text-xs text-orange-600">
-                        {t.diceRoller.statistics.highestLowest}
-                      </div>
+                    <div className="text-sm text-green-600 font-semibold">
+                      {t.diceRoller.statistics.totalRolls}
+                    </div>
+                  </div>
+                  <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-4 rounded-2xl text-center border border-purple-200/50 shadow-lg">
+                    <div className="text-2xl font-black text-purple-700 mb-1">
+                      {overallAverageValue}
+                    </div>
+                    <div className="text-sm text-purple-600 font-semibold">
+                      {t.diceRoller.statistics.averageValue}
+                    </div>
+                  </div>
+                  <div className="bg-gradient-to-br from-orange-50 to-orange-100 p-4 rounded-2xl text-center border border-orange-200/50 shadow-lg">
+                    <div className="text-2xl font-black text-orange-700 mb-1">
+                      {overallHighestRoll} / {overallLowestRoll}
+                    </div>
+                    <div className="text-sm text-orange-600 font-semibold">
+                      {t.diceRoller.statistics.highestLowest}
                     </div>
                   </div>
                 </div>
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </ToolSection>
 
