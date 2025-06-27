@@ -57,4 +57,35 @@ export const services: ServicesTranslations = {
       description: "プログラミングとWeb開発を効率化",
     },
   },
+  // Hero section
+  heroSection: {
+    badge: "30以上の無料ツール",
+    stats: {
+      tools: "30+",
+      categories: "8",
+      free: "100%",
+      toolsLabel: "無料ツール",
+      categoriesLabel: "カテゴリ",
+      freeLabel: "無料",
+    },
+  },
+  // Category header
+  categoryHeader: {
+    categoryLabel: "カテゴリ",
+  },
+  // Tool cards
+  toolCard: {
+    numberPrefix: "#",
+  },
+  // Call to action
+  cta: {
+    title: "すべてのツールを無料でご利用いただけます",
+    subtitle:
+      "登録不要、インストール不要。今すぐブラウザで使い始めることができます。",
+    features: {
+      secure: "セキュア",
+      fast: "高速",
+      easyToUse: "使いやすい",
+    },
+  },
 };

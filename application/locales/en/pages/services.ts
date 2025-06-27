@@ -57,4 +57,35 @@ export const services: ServicesTranslations = {
       description: "Programming and web development utilities",
     },
   },
+  // Hero section
+  heroSection: {
+    badge: "30+ Free Tools",
+    stats: {
+      tools: "30+",
+      categories: "8",
+      free: "100%",
+      toolsLabel: "Free Tools",
+      categoriesLabel: "Categories",
+      freeLabel: "Free",
+    },
+  },
+  // Category header
+  categoryHeader: {
+    categoryLabel: "Category",
+  },
+  // Tool cards
+  toolCard: {
+    numberPrefix: "#",
+  },
+  // Call to action
+  cta: {
+    title: "All tools are available for free",
+    subtitle:
+      "No registration required, no installation needed. Start using them right now in your browser.",
+    features: {
+      secure: "Secure",
+      fast: "Fast",
+      easyToUse: "Easy to Use",
+    },
+  },
 };

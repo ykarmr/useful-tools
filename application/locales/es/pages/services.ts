@@ -58,4 +58,35 @@ export const services: ServicesTranslations = {
       description: "Utilidades de programación y desarrollo web",
     },
   },
+  // Hero section
+  heroSection: {
+    badge: "30+ Herramientas Gratuitas",
+    stats: {
+      tools: "30+",
+      categories: "8",
+      free: "100%",
+      toolsLabel: "Herramientas Gratuitas",
+      categoriesLabel: "Categorías",
+      freeLabel: "Gratis",
+    },
+  },
+  // Category header
+  categoryHeader: {
+    categoryLabel: "Categoría",
+  },
+  // Tool cards
+  toolCard: {
+    numberPrefix: "#",
+  },
+  // Call to action
+  cta: {
+    title: "Todas las herramientas están disponibles de forma gratuita",
+    subtitle:
+      "Sin registro requerido, sin instalación necesaria. Comienza a usarlas ahora mismo en tu navegador.",
+    features: {
+      secure: "Seguro",
+      fast: "Rápido",
+      easyToUse: "Fácil de Usar",
+    },
+  },
 };

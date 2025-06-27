@@ -57,4 +57,34 @@ export const services: ServicesTranslations = {
       description: "编程和Web开发实用程序",
     },
   },
+  // Hero section
+  heroSection: {
+    badge: "30多个免费工具",
+    stats: {
+      tools: "30+",
+      categories: "8",
+      free: "100%",
+      toolsLabel: "免费工具",
+      categoriesLabel: "类别",
+      freeLabel: "免费",
+    },
+  },
+  // Category header
+  categoryHeader: {
+    categoryLabel: "类别",
+  },
+  // Tool cards
+  toolCard: {
+    numberPrefix: "#",
+  },
+  // Call to action
+  cta: {
+    title: "所有工具均可免费使用",
+    subtitle: "无需注册，无需安装。立即在浏览器中开始使用。",
+    features: {
+      secure: "安全",
+      fast: "快速",
+      easyToUse: "易于使用",
+    },
+  },
 };

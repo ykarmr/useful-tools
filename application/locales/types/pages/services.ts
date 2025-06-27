@@ -37,4 +37,34 @@ export interface ServicesTranslations {
       description: string;
     };
   };
+  // Hero section
+  heroSection: {
+    badge: string;
+    stats: {
+      tools: string;
+      categories: string;
+      free: string;
+      toolsLabel: string;
+      categoriesLabel: string;
+      freeLabel: string;
+    };
+  };
+  // Category header
+  categoryHeader: {
+    categoryLabel: string;
+  };
+  // Tool cards
+  toolCard: {
+    numberPrefix: string;
+  };
+  // Call to action
+  cta: {
+    title: string;
+    subtitle: string;
+    features: {
+      secure: string;
+      fast: string;
+      easyToUse: string;
+    };
+  };
 }

@@ -58,4 +58,35 @@ export const services: ServicesTranslations = {
       description: "Утилиты программирования и веб-разработки",
     },
   },
+  // Hero section
+  heroSection: {
+    badge: "30+ Бесплатных Инструментов",
+    stats: {
+      tools: "30+",
+      categories: "8",
+      free: "100%",
+      toolsLabel: "Бесплатных Инструментов",
+      categoriesLabel: "Категорий",
+      freeLabel: "Бесплатно",
+    },
+  },
+  // Category header
+  categoryHeader: {
+    categoryLabel: "Категория",
+  },
+  // Tool cards
+  toolCard: {
+    numberPrefix: "#",
+  },
+  // Call to action
+  cta: {
+    title: "Все инструменты доступны бесплатно",
+    subtitle:
+      "Без регистрации, без установки. Начните использовать прямо сейчас в вашем браузере.",
+    features: {
+      secure: "Безопасный",
+      fast: "Быстрый",
+      easyToUse: "Простой в Использовании",
+    },
+  },
 };
