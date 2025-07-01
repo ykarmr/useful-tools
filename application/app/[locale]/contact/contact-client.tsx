@@ -113,7 +113,8 @@ export default function ContactClient({ locale, t }: ContactClientProps) {
   return (
     <div className="max-w-4xl mx-auto">
       <div className="bg-white rounded-lg shadow-sm p-8">
-        <div className="flex items-center gap-3 mb-6">
+        {/* Header Section */}
+        <div className="flex items-center gap-3 mb-8">
           <Mail className="h-8 w-8 text-blue-600" />
           <div>
             <h1 className="text-3xl font-bold text-gray-900">
@@ -123,96 +124,153 @@ export default function ContactClient({ locale, t }: ContactClientProps) {
           </div>
         </div>
 
-        <div className="prose max-w-none">
-          <p className="text-lg text-gray-700 mb-8 leading-relaxed">
+        {/* Description */}
+        <div className="mb-8">
+          <p className="text-lg text-gray-700 leading-relaxed">
             {t.contact.description}
           </p>
+        </div>
 
+        {/* Form Section */}
+        <div className="border-l-4 border-blue-200 pl-6 hover:border-blue-400 transition-colors duration-200">
           {submitStatus === "success" && (
-            <Alert className="mb-6 border-green-200 bg-green-50">
-              <CheckCircle className="h-4 w-4 text-green-600" />
-              <AlertDescription className="text-green-800">
+            <Alert className="mb-8 border-green-200/50 bg-green-50/70 backdrop-blur-sm rounded-xl">
+              <CheckCircle className="h-5 w-5 text-green-600" />
+              <AlertDescription className="text-green-800 font-medium">
                 {t.contact.form.success}
               </AlertDescription>
             </Alert>
           )}
 
           {submitStatus === "error" && (
-            <Alert className="mb-6 border-red-200 bg-red-50">
-              <AlertCircle className="h-4 w-4 text-red-600" />
-              <AlertDescription className="text-red-800">
+            <Alert className="mb-8 border-red-200/50 bg-red-50/70 backdrop-blur-sm rounded-xl">
+              <AlertCircle className="h-5 w-5 text-red-600" />
+              <AlertDescription className="text-red-800 font-medium">
                 {t.contact.form.error}
               </AlertDescription>
             </Alert>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
+          <form onSubmit={handleSubmit} className="space-y-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="group">
                 <label
                   htmlFor="name"
-                  className="block text-sm font-medium text-gray-700 mb-2"
+                  className="block text-sm font-semibold text-gray-900 mb-2"
                 >
                   {t.contact.form.name}
                 </label>
-                <Input
-                  id="name"
-                  type="text"
-                  value={formData.name}
-                  onChange={handleChange("name")}
-                  placeholder={t.contact.form.namePlaceholder}
-                  className={errors.name ? "border-red-500" : ""}
-                />
+                <div className="relative">
+                  <Input
+                    id="name"
+                    type="text"
+                    value={formData.name}
+                    onChange={handleChange("name")}
+                    placeholder={t.contact.form.namePlaceholder}
+                    className={`h-12 rounded-lg border-2 transition-all duration-200 ${
+                      errors.name
+                        ? "border-red-300 bg-red-50/50 focus:border-red-500"
+                        : "border-gray-200 bg-gray-50 focus:border-blue-500 focus:bg-white group-hover:border-gray-300"
+                    }`}
+                  />
+                </div>
                 {errors.name && (
-                  <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+                  <p className="text-red-500 text-sm font-medium flex items-center gap-1 mt-2">
+                    <AlertCircle className="h-3 w-3" />
+                    {errors.name}
+                  </p>
                 )}
               </div>
 
-              <div>
+              <div className="group">
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-gray-700 mb-2"
+                  className="block text-sm font-semibold text-gray-900 mb-2"
                 >
                   {t.contact.form.email}
                 </label>
-                <Input
-                  id="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={handleChange("email")}
-                  placeholder={t.contact.form.emailPlaceholder}
-                  className={errors.email ? "border-red-500" : ""}
-                />
+                <div className="relative">
+                  <Input
+                    id="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleChange("email")}
+                    placeholder={t.contact.form.emailPlaceholder}
+                    className={`h-12 rounded-lg border-2 transition-all duration-200 ${
+                      errors.email
+                        ? "border-red-300 bg-red-50/50 focus:border-red-500"
+                        : "border-gray-200 bg-gray-50 focus:border-blue-500 focus:bg-white group-hover:border-gray-300"
+                    }`}
+                  />
+                </div>
                 {errors.email && (
-                  <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                  <p className="text-red-500 text-sm font-medium flex items-center gap-1 mt-2">
+                    <AlertCircle className="h-3 w-3" />
+                    {errors.email}
+                  </p>
                 )}
               </div>
             </div>
 
-            <div>
+            <div className="group">
               <label
                 htmlFor="message"
-                className="block text-sm font-medium text-gray-700 mb-2"
+                className="block text-sm font-semibold text-gray-900 mb-2"
               >
                 {t.contact.form.message}
               </label>
-              <Textarea
-                id="message"
-                value={formData.message}
-                onChange={handleChange("message")}
-                placeholder={t.contact.form.messagePlaceholder}
-                rows={6}
-                className={errors.message ? "border-red-500" : ""}
-              />
+              <div className="relative">
+                <Textarea
+                  id="message"
+                  value={formData.message}
+                  onChange={handleChange("message")}
+                  placeholder={t.contact.form.messagePlaceholder}
+                  rows={6}
+                  className={`rounded-lg border-2 transition-all duration-200 resize-none ${
+                    errors.message
+                      ? "border-red-300 bg-red-50/50 focus:border-red-500"
+                      : "border-gray-200 bg-gray-50 focus:border-blue-500 focus:bg-white group-hover:border-gray-300"
+                  }`}
+                />
+              </div>
               {errors.message && (
-                <p className="text-red-500 text-sm mt-1">{errors.message}</p>
+                <p className="text-red-500 text-sm font-medium flex items-center gap-1 mt-2">
+                  <AlertCircle className="h-3 w-3" />
+                  {errors.message}
+                </p>
               )}
             </div>
 
-            <Button type="submit" disabled={isSubmitting} className="w-full">
-              {isSubmitting ? t.contact.form.submitting : t.contact.form.submit}
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full h-12 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-lg shadow-sm hover:shadow-md transition-all duration-200 disabled:opacity-60"
+            >
+              {isSubmitting ? (
+                <div className="flex items-center gap-3">
+                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  {t.contact.form.submitting}
+                </div>
+              ) : (
+                <div className="flex items-center gap-3">
+                  <Mail className="h-5 w-5" />
+                  {t.contact.form.submit}
+                </div>
+              )}
             </Button>
           </form>
+        </div>
+
+        {/* Footer Note */}
+        <div className="mt-12 pt-6 border-t border-gray-100">
+          <div className="flex items-center justify-center">
+            <div className="flex items-center gap-2 text-sm text-gray-500">
+              <Mail className="h-4 w-4" />
+              <span className="font-medium">{t.common.siteTitle}</span>
+              <span>•</span>
+              <span>{t.contact.title}</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
