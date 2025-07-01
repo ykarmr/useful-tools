@@ -2,7 +2,9 @@ import { UrlAnalyzerTranslations } from "@/locales/types/pages/tools/url-analyze
 
 export const urlAnalyzer: UrlAnalyzerTranslations = {
   title: "Analizador de URL",
-  description: "Analiza y extrae detalles de cualquier URL.",
+  subtitle: "Analiza y descompone la estructura de URL en detalle",
+  description:
+    "Herramienta integral para analizar componentes de URL y extraer información detallada incluyendo protocolo, nombre del host, ruta y parámetros de consulta.",
   keywords: [
     "Analizador de URL",
     "Analizador de URL",
@@ -62,20 +64,28 @@ export const urlAnalyzer: UrlAnalyzerTranslations = {
   },
   faqList: [
     {
-      q: "¿Qué tipos de URL puede analizar esta herramienta?",
-      a: "Puede analizar URLs de varios protocolos como HTTP, HTTPS, FTP, extrayendo información detallada como protocolo, nombre del host, puerto, ruta, parámetros de consulta, etc.",
+      q: "¿Qué es la herramienta Analizador de URL?",
+      a: "Es una herramienta integral que descompone las URL en sus componentes incluyendo protocolo, nombre del host, ruta, parámetros de consulta y más. Perfecta para desarrollo web, análisis SEO y depuración.",
     },
     {
-      q: "¿Se almacena la información de las URL analizadas?",
-      a: "No, todo el análisis de URL se realiza localmente en tu navegador. No almacenamos ni enviamos tus datos de URL a nuestros servidores.",
+      q: "¿Cómo se manejan los datos de mi URL?",
+      a: "Todo el análisis se realiza localmente solo en tu navegador. No se envían datos a servidores externos, garantizando protección completa de privacidad y procesamiento seguro.",
     },
     {
-      q: "¿Puedo analizar URLs que contengan información sensible?",
-      a: "Aunque el análisis se realiza localmente, recomendamos no analizar URLs que contengan información sensible como contraseñas o tokens.",
+      q: "¿Puedo analizar cualquier tipo de URL?",
+      a: "Sí, puedes analizar URL con la mayoría de protocolos comunes como HTTP, HTTPS, FTP y otros. Las URL inválidas o formatos malformados mostrarán mensajes de error apropiados.",
     },
     {
-      q: "¿Cómo se analizan los parámetros de consulta?",
-      a: "La herramienta analiza automáticamente la cadena de consulta en la URL, mostrando cada parámetro y su valor por separado para facilitar la visualización y comprensión de la estructura de la URL.",
+      q: "¿Qué pasa con URL que tienen muchos parámetros de consulta?",
+      a: "No hay límite en el número de parámetros de consulta que se pueden analizar. Todos los parámetros se muestran individualmente como pares nombre-valor organizados con separación clara.",
+    },
+    {
+      q: "¿Cómo funcionan las características de copiado?",
+      a: "Cada componente tiene un botón de copia para copiado individual. También puedes copiar todos los parámetros de consulta de una vez usando la función de copia masiva para gestión eficiente de datos.",
+    },
+    {
+      q: "¿Qué es la función de URL de ejemplo?",
+      a: "El botón de ejemplo carga una URL preconfigurada con múltiples parámetros de consulta para ayudarte a entender cómo funciona la herramienta y explorar su funcionalidad.",
     },
   ],
 };

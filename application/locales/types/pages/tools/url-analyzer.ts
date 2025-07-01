@@ -2,6 +2,7 @@ import { FAQItem } from "../../faq";
 
 export interface UrlAnalyzerTranslations {
   title: string;
+  subtitle: string;
   description: string;
   keywords: string[];
   analyze: string;

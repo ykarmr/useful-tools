@@ -1,25 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { useParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
-import {
-  Copy,
-  Globe,
-  Shield,
-  Zap,
-  Trash2,
-  Search,
-  LinkIcon,
-} from "lucide-react";
-import { getTranslations } from "@/lib/i18n";
+import { Copy, Globe, Zap, Search, LinkIcon } from "lucide-react";
 import ToolSection from "@/components/layout/tool-section";
-import ToolControls from "@/components/layout/tool-controls";
-import ToolResult from "@/components/layout/tool-result";
 import ToolLayout from "@/components/layout/tool-layout";
 import ToolFaq from "@/components/layout/tool-faq";
 import ToolHowToUse from "@/components/layout/tool-how-to-use";
@@ -150,6 +135,7 @@ export default function UrlAnalyzerClient({
       locale={locale}
       t={t}
       title={t.urlAnalyzer.title}
+      subtitle={t.urlAnalyzer.subtitle}
       description={t.urlAnalyzer.description}
       icon={LinkIcon}
     >
@@ -166,54 +152,80 @@ export default function UrlAnalyzerClient({
       </ToolSection>
 
       <ToolSection>
-        <div className="space-y-4">
-          {/* 入力フォームと操作ボタン（レスポンシブ対応） */}
-          <div className="flex flex-col gap-3 sm:gap-2">
-            <Input
-              type="url"
-              placeholder={t.urlAnalyzer.urlPlaceholder}
-              value={url}
-              onChange={(e) => setUrl(e.target.value)}
-              className="w-full text-sm sm:text-base"
-            />
-            <div className="flex flex-col sm:flex-row gap-2">
-              <Button
-                onClick={analyzeUrl}
-                variant="outline"
-                className="w-full sm:flex-1 text-sm sm:text-base"
-              >
-                {t.urlAnalyzer.analyze}
-              </Button>
-              <Button
-                variant="outline"
-                onClick={loadSample}
-                className="w-full sm:w-auto text-sm sm:text-base"
-              >
-                {t.urlAnalyzer.sample}
-              </Button>
+        <div className="space-y-6">
+          {/* 入力フォームと操作ボタン - Apple風のエレガントなデザイン */}
+          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8">
+            <div className="space-y-6">
+              <div className="space-y-3">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  {t.urlAnalyzer.urlPlaceholder}
+                </label>
+                <div className="relative">
+                  <Input
+                    type="url"
+                    placeholder={t.urlAnalyzer.urlPlaceholder}
+                    value={url}
+                    onChange={(e) => setUrl(e.target.value)}
+                    className="w-full h-12 px-4 text-base border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                  />
+                  <div className="absolute inset-y-0 right-0 flex items-center pr-3">
+                    <LinkIcon className="h-5 w-5 text-gray-400" />
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Button
+                  onClick={analyzeUrl}
+                  className="flex-1 h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-medium transition-all duration-200 shadow-sm hover:shadow-md"
+                >
+                  <Search className="h-4 w-4 mr-2" />
+                  {t.urlAnalyzer.analyze}
+                </Button>
+                <Button
+                  variant="outline"
+                  onClick={loadSample}
+                  className="sm:w-auto h-12 border-gray-200 text-gray-700 hover:bg-gray-50 rounded-xl font-medium transition-all duration-200"
+                >
+                  <Zap className="h-4 w-4 mr-2" />
+                  {t.urlAnalyzer.sample}
+                </Button>
+              </div>
             </div>
           </div>
 
           {error && (
-            <ToolResult>
-              <div className="text-red-600 text-center">{error}</div>
-            </ToolResult>
+            <div className="bg-red-50 border border-red-200 rounded-2xl p-6">
+              <div className="flex items-center">
+                <div className="flex-shrink-0">
+                  <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
+                    <span className="text-red-600 text-lg">⚠️</span>
+                  </div>
+                </div>
+                <div className="ml-4">
+                  <p className="text-red-800 font-medium">{error}</p>
+                </div>
+              </div>
+            </div>
           )}
 
           {urlInfo && (
-            <ToolResult>
-              <div className="space-y-6">
-                {/* Basic URL Information */}
-                <Card>
-                  <CardHeader className="pb-3 sm:pb-4">
-                    <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
-                      <Globe className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
-                      <span className="break-words">
-                        {t.urlAnalyzer.basicInfo}
-                      </span>
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-2">
+            <div className="space-y-6">
+              {/* 基本情報カード - Apple風のクリーンなデザイン */}
+              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 px-6 sm:px-8 py-6 border-b border-gray-100">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
+                      <Globe className="h-5 w-5 text-blue-600" />
+                    </div>
+                    <h3 className="text-lg sm:text-xl font-semibold text-gray-900">
+                      {t.urlAnalyzer.basicInfo}
+                    </h3>
+                  </div>
+                </div>
+
+                <div className="p-6 sm:p-8">
+                  <div className="grid grid-cols-1 gap-6">
                     <InfoRow
                       label={t.urlAnalyzer.protocol}
                       value={urlInfo.protocol}
@@ -253,118 +265,126 @@ export default function UrlAnalyzerClient({
                       value={urlInfo.origin}
                       copyable
                     />
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
+              </div>
 
-                {/* Query Parameters */}
-                <Card>
-                  <CardHeader className="pb-3 sm:pb-4">
-                    <CardTitle className="flex flex-col sm:flex-row sm:items-center gap-2 text-base sm:text-lg">
-                      <div className="flex items-center gap-2">
-                        <Search className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
-                        <span className="break-words">
-                          {t.urlAnalyzer.queryParams}
-                        </span>
+              {/* クエリパラメータカード */}
+              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+                <div className="bg-gradient-to-r from-green-50 to-emerald-50 px-6 sm:px-8 py-6 border-b border-gray-100">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center">
+                        <Search className="h-5 w-5 text-green-600" />
                       </div>
-                      {Object.keys(urlInfo.queryParams).length > 0 && (
-                        <Badge
-                          variant="secondary"
-                          className="text-xs sm:text-sm"
-                        >
-                          {t.urlAnalyzer.queryCount}:{" "}
-                          {Object.keys(urlInfo.queryParams).length}
-                        </Badge>
-                      )}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    {Object.keys(urlInfo.queryParams).length === 0 ? (
-                      <div className="text-gray-500 text-center py-4">
+                      <h3 className="text-lg sm:text-xl font-semibold text-gray-900">
+                        {t.urlAnalyzer.queryParams}
+                      </h3>
+                    </div>
+                    {Object.keys(urlInfo.queryParams).length > 0 && (
+                      <div className="bg-green-100 text-green-800 text-sm font-medium px-3 py-1 rounded-full">
+                        {t.urlAnalyzer.queryCount}:{" "}
+                        {Object.keys(urlInfo.queryParams).length}
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                <div className="p-6 sm:p-8">
+                  {Object.keys(urlInfo.queryParams).length === 0 ? (
+                    <div className="text-center py-12">
+                      <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <Search className="h-8 w-8 text-gray-400" />
+                      </div>
+                      <p className="text-gray-500 text-lg font-medium">
                         {t.urlAnalyzer.noQueryParams}
-                      </div>
-                    ) : (
-                      <div className="space-y-3">
-                        {Object.entries(urlInfo.queryParams).map(
-                          ([key, value], index) => (
-                            <div
-                              key={index}
-                              className="p-3 bg-gray-50 rounded-lg"
-                            >
-                              <div className="space-y-3">
-                                <div>
-                                  <div className="text-xs sm:text-sm font-medium text-gray-600 mb-1">
-                                    {t.urlAnalyzer.paramName}
-                                  </div>
-                                  <div className="flex items-center gap-2">
-                                    <code className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs sm:text-sm font-mono break-all flex-1">
-                                      {key}
-                                    </code>
-                                    <Button
-                                      variant="ghost"
-                                      size="sm"
-                                      onClick={() =>
-                                        copyToClipboard(
-                                          key,
-                                          `param-name-${index}`
-                                        )
-                                      }
-                                      className="h-6 w-6 p-0 flex-shrink-0"
-                                    >
-                                      <Copy className="h-3 w-3" />
-                                    </Button>
-                                  </div>
+                      </p>
+                      <p className="text-gray-400 text-sm mt-2">
+                        URLにクエリパラメータが含まれていません
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="space-y-4">
+                      {Object.entries(urlInfo.queryParams).map(
+                        ([key, value], index) => (
+                          <div
+                            key={index}
+                            className="bg-gray-50 rounded-xl p-6 border border-gray-100 hover:bg-gray-100 transition-colors duration-200"
+                          >
+                            <div className="space-y-4">
+                              <div>
+                                <div className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2">
+                                  {t.urlAnalyzer.paramName}
                                 </div>
-                                <div>
-                                  <div className="text-xs sm:text-sm font-medium text-gray-600 mb-1">
-                                    {t.urlAnalyzer.paramValue}
-                                  </div>
-                                  <div className="flex items-center gap-2">
-                                    <code className="bg-green-100 text-green-800 px-2 py-1 rounded text-xs sm:text-sm font-mono break-all flex-1">
-                                      {value}
-                                    </code>
-                                    <Button
-                                      variant="ghost"
-                                      size="sm"
-                                      onClick={() =>
-                                        copyToClipboard(
-                                          value,
-                                          `param-value-${index}`
-                                        )
-                                      }
-                                      className="h-6 w-6 p-0 flex-shrink-0"
-                                    >
-                                      <Copy className="h-3 w-3" />
-                                    </Button>
-                                  </div>
+                                <div className="flex items-center gap-3">
+                                  <code className="flex-1 bg-blue-50 text-blue-800 px-4 py-2 rounded-lg text-sm font-mono break-all border border-blue-100">
+                                    {key}
+                                  </code>
+                                  <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    onClick={() =>
+                                      copyToClipboard(
+                                        key,
+                                        `param-name-${index}`
+                                      )
+                                    }
+                                    className="h-8 w-8 p-0 hover:bg-blue-100 rounded-lg"
+                                  >
+                                    <Copy className="h-4 w-4 text-blue-600" />
+                                  </Button>
+                                </div>
+                              </div>
+                              <div>
+                                <div className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2">
+                                  {t.urlAnalyzer.paramValue}
+                                </div>
+                                <div className="flex items-center gap-3">
+                                  <code className="flex-1 bg-green-50 text-green-800 px-4 py-2 rounded-lg text-sm font-mono break-all border border-green-100">
+                                    {value}
+                                  </code>
+                                  <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    onClick={() =>
+                                      copyToClipboard(
+                                        value,
+                                        `param-value-${index}`
+                                      )
+                                    }
+                                    className="h-8 w-8 p-0 hover:bg-green-100 rounded-lg"
+                                  >
+                                    <Copy className="h-4 w-4 text-green-600" />
+                                  </Button>
                                 </div>
                               </div>
                             </div>
-                          )
-                        )}
-                        <div className="mt-4 pt-3 border-t">
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => {
-                              const queryString = Object.entries(
-                                urlInfo.queryParams
-                              )
-                                .map(([key, value]) => `${key}=${value}`)
-                                .join("&");
-                              copyToClipboard(queryString, "all-params");
-                            }}
-                            className="w-full text-xs sm:text-sm"
-                          >
-                            <Copy className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
-                            {t.urlAnalyzer.copy} {t.urlAnalyzer.queryParams}
-                          </Button>
-                        </div>
+                          </div>
+                        )
+                      )}
+
+                      <div className="pt-4 mt-6 border-t border-gray-200">
+                        <Button
+                          variant="outline"
+                          onClick={() => {
+                            const queryString = Object.entries(
+                              urlInfo.queryParams
+                            )
+                              .map(([key, value]) => `${key}=${value}`)
+                              .join("&");
+                            copyToClipboard(queryString, "all-params");
+                          }}
+                          className="w-full h-12 border-gray-200 text-gray-700 hover:bg-gray-50 rounded-xl font-medium transition-all duration-200"
+                        >
+                          <Copy className="h-4 w-4 mr-2" />
+                          {t.urlAnalyzer.copy} {t.urlAnalyzer.queryParams}
+                        </Button>
                       </div>
-                    )}
-                  </CardContent>
-                </Card>
+                    </div>
+                  )}
+                </div>
               </div>
-            </ToolResult>
+            </div>
           )}
         </div>
       </ToolSection>
@@ -375,8 +395,13 @@ export default function UrlAnalyzerClient({
       </ToolSection>
 
       {copiedField && (
-        <div className="fixed bottom-4 right-4 bg-green-500 text-white px-3 py-2 sm:px-4 sm:py-2 rounded-md shadow-lg text-sm sm:text-base z-50">
-          {t.urlAnalyzer.copied}
+        <div className="fixed bottom-6 right-6 bg-green-500 text-white px-4 py-3 rounded-xl shadow-lg text-sm font-medium z-50 backdrop-blur-sm bg-opacity-90">
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+              <span className="text-xs">✓</span>
+            </div>
+            {t.urlAnalyzer.copied}
+          </div>
         </div>
       )}
     </ToolLayout>

@@ -2,7 +2,9 @@ import { UrlAnalyzerTranslations } from "@/locales/types/pages/tools/url-analyze
 
 export const urlAnalyzer: UrlAnalyzerTranslations = {
   title: "URL Analyzer",
-  description: "Analyze and extract detailed information from any URL",
+  subtitle: "Analyze and parse URL structure in detail",
+  description:
+    "Comprehensive tool to analyze URL components and extract detailed information including protocol, hostname, path, and query parameters.",
   keywords: [
     "URL Analyzer",
     "URL Parser",
@@ -62,20 +64,28 @@ export const urlAnalyzer: UrlAnalyzerTranslations = {
   },
   faqList: [
     {
-      q: "What does the URL Analyzer do?",
-      a: "It breaks down URLs into their components including protocol, hostname, path, query parameters, and more. This is useful for SEO analysis and web development.",
+      q: "What is the URL Analyzer tool?",
+      a: "It's a comprehensive tool that breaks down URLs into their components including protocol, hostname, path, query parameters, and more. Perfect for web development, SEO analysis, and debugging.",
     },
     {
-      q: "Where is the analysis data stored?",
-      a: "All analysis is performed locally in your browser and no data is sent to external servers, ensuring complete privacy protection.",
+      q: "How is my URL data handled?",
+      a: "All analysis is performed locally in your browser only. No data is sent to external servers, ensuring complete privacy protection and secure processing.",
     },
     {
       q: "Can I analyze any type of URL?",
-      a: "You can analyze most URLs with protocols like HTTPS, HTTP, FTP, and others. Invalid URLs will display an error message.",
+      a: "Yes, you can analyze URLs with most common protocols like HTTP, HTTPS, FTP, and others. Invalid URLs or malformed formats will display appropriate error messages.",
     },
     {
       q: "What happens with URLs that have many query parameters?",
-      a: "All query parameters are displayed individually as name-value pairs in an organized table. There's no limit to the number of parameters.",
+      a: "There's no limit to the number of query parameters that can be analyzed. All parameters are displayed individually as organized name-value pairs with clear separation.",
+    },
+    {
+      q: "How do the copy features work?",
+      a: "Each component has a copy button for individual copying. You can also copy all query parameters at once using the bulk copy feature for efficient data management.",
+    },
+    {
+      q: "What is the sample URL feature?",
+      a: "The sample button loads a pre-configured URL with multiple query parameters to help you understand how the tool works and explore its functionality.",
     },
   ],
 };
