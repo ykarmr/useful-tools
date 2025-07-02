@@ -36,6 +36,7 @@ import { pixelArtEditor } from "./pages/tools/pixel-art-editor";
 import { dataConverter } from "./pages/tools/data-converter";
 import { baseConverter } from "./pages/tools/base-converter";
 import idGeneratorEs from "./pages/tools/id-generator";
+import { ageCalculator } from "./pages/tools/age-calculator";
 import { ad } from "./ad";
 import { common } from "./common";
 import { footer } from "./footer";
@@ -83,6 +84,7 @@ const es: Translations = {
   dataConverter,
   baseConverter,
   idGenerator: idGeneratorEs,
+  ageCalculator,
 };
 
 export default es;

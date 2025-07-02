@@ -50,6 +50,7 @@ export default async function sitemap({
     "/color-palette",
     "/text-statistics",
     "/bmi-calculator",
+    "/age-calculator",
     "/html-escape",
     "/pixel-art-editor",
     "/data-converter",

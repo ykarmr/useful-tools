@@ -43,6 +43,8 @@ import { PixelArtEditorTranslations } from "./pages/tools/pixel-art-editor";
 import { DataConverterTranslations } from "./pages/tools/data-converter";
 import { BaseConverterTranslations } from "./pages/tools/base-converter";
 import { IdGeneratorTranslations } from "./pages/tools/id-generator";
+import { AgeCalculatorTranslations } from "./pages/tools/age-calculator";
+export type { AgeCalculatorTranslations } from "./pages/tools/age-calculator";
 
 export interface Translations {
   common: CommonTranslations;
@@ -86,4 +88,5 @@ export interface Translations {
   dataConverter: DataConverterTranslations;
   baseConverter: BaseConverterTranslations;
   idGenerator: IdGeneratorTranslations;
+  ageCalculator: AgeCalculatorTranslations;
 }

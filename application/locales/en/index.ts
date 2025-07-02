@@ -40,6 +40,7 @@ import { ad } from "./ad";
 import { common } from "./common";
 import { footer } from "./footer";
 import { header } from "./header";
+import { ageCalculator } from "./pages/tools/age-calculator";
 
 const en: Translations = {
   common,
@@ -83,6 +84,7 @@ const en: Translations = {
   dataConverter,
   baseConverter,
   idGenerator: idGeneratorEn,
+  ageCalculator,
 };
 
 export default en;

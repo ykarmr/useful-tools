@@ -33,6 +33,7 @@ import {
   Activity,
   Code,
   Binary,
+  Calendar,
 } from "lucide-react";
 import { Locale, Translations } from "@/locales";
 
@@ -103,7 +104,10 @@ const toolCategories = [
   },
   {
     key: "health",
-    tools: [{ key: "bmiCalculator", icon: Activity, href: "/bmi-calculator" }],
+    tools: [
+      { key: "bmiCalculator", icon: Activity, href: "/bmi-calculator" },
+      { key: "ageCalculator", icon: Calendar, href: "/age-calculator" },
+    ],
   },
   {
     key: "code",
