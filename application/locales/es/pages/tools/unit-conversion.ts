@@ -1,8 +1,10 @@
 import { UnitConversionTranslations } from "@/locales/types/pages/tools/unit-conversion";
 
 export const unitConversion: UnitConversionTranslations = {
-  title: "Conversión de Unidades",
-  description: "Convierte fácilmente entre diferentes unidades de medida",
+  title: "Herramienta de Conversión de Unidades",
+  subtitle: "Convierte cualquier unidad de medida con precisión",
+  description:
+    "Convierte instantáneamente entre varias unidades de medida incluyendo longitud, peso, área, volumen, temperatura y más. Perfecto para uso diario y aplicaciones profesionales.",
   keywords: [
     "conversión de unidades",
     "medición",
@@ -11,9 +13,36 @@ export const unitConversion: UnitConversionTranslations = {
     "conversión de peso",
     "conversión de temperatura",
     "conversión de volumen",
+    "conversión de área",
+    "conversión de velocidad",
+    "conversión de tiempo",
+    "conversión de presión",
+    "conversión de energía",
+    "conversión de datos",
   ],
-  placeholder: "Ingresa el valor y selecciona las unidades...",
-  resultPlaceholder: "El valor convertido aparecerá aquí...",
+  placeholder: "Ingresa el valor a convertir",
+  resultPlaceholder: "El resultado de la conversión aparecerá aquí",
+
+  howToUse: {
+    title: "Cómo Usar",
+    steps: [
+      "Selecciona la categoría que deseas convertir (longitud, peso, etc.)",
+      "Ingresa el valor que deseas convertir en el campo de entrada",
+      "Elige la unidad de origen y la unidad de destino de las listas desplegables",
+      "El resultado de la conversión se mostrará automáticamente",
+    ],
+  },
+  features: {
+    title: "Características Principales",
+    items: [
+      "Admite 10 categorías de conversión de unidades",
+      "Cálculos de conversión de alta precisión",
+      "Conversión en tiempo real",
+      "Compatible con unidades SI e imperiales",
+      "Manejo especial para conversión de temperatura",
+      "Conversión de almacenamiento de datos (unidades binarias)",
+    ],
+  },
   length: "longitud",
   weight: "peso",
   area: "área",
@@ -32,19 +61,23 @@ export const unitConversion: UnitConversionTranslations = {
   faqList: [
     {
       q: "¿Qué tipos de conversiones de unidades se admiten?",
-      a: "Admitimos 10 categorías de conversiones de unidades: longitud, peso, área, volumen, temperatura, velocidad, tiempo, presión, energía y almacenamiento de datos.",
+      a: "Admitimos 10 categorías de conversiones de unidades: longitud, peso, área, volumen, temperatura, velocidad, tiempo, presión, energía y almacenamiento de datos. Puedes convertir entre sistemas métricos, imperiales y otros sistemas de medida.",
     },
     {
       q: "¿Qué tan precisas son las conversiones?",
-      a: "Las conversiones utilizan factores de conversión precisos y son exactas hasta múltiples lugares decimales. Sin embargo, para aplicaciones científicas, verifique que la precisión cumpla con sus requisitos.",
+      a: "Las conversiones utilizan factores de conversión estándar internacionales y son precisas hasta 8 decimales para uso general. Para cálculos científicos e ingenieriles, recomendamos usar herramientas especializadas.",
     },
     {
-      q: "¿Puedo convertir entre diferentes sistemas de medida?",
-      a: "Sí, puedes convertir entre sistemas métricos, imperiales y otros sistemas de medida. Por ejemplo, convertir de pies a metros o de Fahrenheit a Celsius.",
+      q: "¿Las conversiones de temperatura se manejan de manera diferente a otras unidades?",
+      a: "Sí, las conversiones de temperatura usan fórmulas especiales en lugar de multiplicación simple porque involucran cálculos de desplazamiento (ej., °C = (°F - 32) × 5/9).",
     },
     {
-      q: "¿Las conversiones de temperatura se manejan de manera diferente?",
-      a: "Sí, las conversiones de temperatura usan fórmulas especiales en lugar de multiplicación simple, ya que involucran cálculos de desplazamiento (ej., Celsius a Fahrenheit: °F = °C × 9/5 + 32).",
+      q: "Para conversiones de datos, ¿usan sistemas binarios o decimales?",
+      a: "Las conversiones de almacenamiento de datos usan el sistema binario (base 1024), lo que proporciona conversiones precisas comúnmente usadas en sistemas informáticos (ej., 1KB = 1024 bytes).",
+    },
+    {
+      q: "¿Puedo agregar unidades personalizadas?",
+      a: "Actualmente, solo están disponibles unidades predefinidas. Planeamos agregar más unidades en futuras actualizaciones.",
     },
   ],
 };

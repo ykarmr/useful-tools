@@ -2,11 +2,12 @@
 "use client";
 
 import { useState } from "react";
-import { Calculator } from "lucide-react";
+import { Calculator, ArrowRightLeft, Zap, Settings } from "lucide-react";
 import ToolLayout from "@/components/layout/tool-layout";
 import ToolSection from "@/components/layout/tool-section";
 import ToolDisplay from "@/components/layout/tool-display";
 import ToolFaq from "@/components/layout/tool-faq";
+import ToolHowToUse from "@/components/layout/tool-how-to-use";
 import { Locale, Translations } from "@/locales";
 
 interface UnitConversionProps {
@@ -402,148 +403,190 @@ export default function UnitConversionClient({
       locale={locale}
       t={t}
       title={t.unitConversion.title}
+      subtitle={t.unitConversion.subtitle}
       description={t.unitConversion.description}
       icon={Calculator}
     >
+      {/* How To Use セクション */}
       <ToolSection>
-        <div className="flex flex-col gap-6 w-full max-w-xl mx-auto px-2 sm:px-0">
-          {/* カテゴリ選択（セレクトボックスに変更） */}
-          <div className="flex flex-col w-full gap-1">
-            <label
-              className="text-sm text-gray-600 font-medium mb-1"
-              htmlFor="category-select"
-              id="category-select-label"
-            >
+        <ToolHowToUse
+          title={t.unitConversion.howToUse.title}
+          steps={t.unitConversion.howToUse.steps}
+          features={{
+            title: t.unitConversion.features.title,
+            items: t.unitConversion.features.items,
+          }}
+        />
+      </ToolSection>
+      {/* メイン変換機能 */}
+      <ToolSection>
+        <div className="bg-gradient-to-br from-white to-blue-50/30 border border-blue-100/50 rounded-3xl p-6 sm:p-8 shadow-xl backdrop-blur-sm">
+          <div className="flex items-center gap-3 mb-8">
+            <div className="p-2.5 bg-blue-500 rounded-xl">
+              <Settings className="w-5 h-5 text-white" />
+            </div>
+            <h3 className="text-xl font-bold text-gray-800">
               {t.unitConversion?.categoryLabel ?? "カテゴリ"}
-            </label>
-            <select
-              id="category-select"
-              aria-labelledby="category-select-label"
-              aria-describedby="category-select-desc"
-              value={category}
-              onChange={(e) => handleCategoryChange(e.target.value)}
-              className="select-field rounded-full px-4 py-2 border border-gray-300 shadow-sm focus:ring-2 focus:ring-primary-200 transition font-semibold w-full sm:w-auto"
-              style={{ minWidth: 0 }}
-              aria-live="polite"
-            >
-              {unitCategories.map((cat) => (
-                <option key={cat.key} value={cat.key}>
-                  {categoryLabels[cat.key] ?? cat.labelKey}
-                </option>
-              ))}
-            </select>
+            </h3>
           </div>
-          {/* 入力・単位選択 */}
-          <div className="w-full flex flex-col gap-1">
-            <label
-              className="text-sm text-gray-600 font-medium mb-1"
-              htmlFor="unit-input"
-              id="unit-input-label"
-            >
-              {t.unitConversion?.inputLabel ?? "変換する数値"}
-            </label>
-            <input
-              id="unit-input"
-              aria-labelledby="unit-input-label"
-              aria-describedby="unit-input-desc"
-              type="number"
-              inputMode="decimal"
-              autoComplete="off"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder={t.unitConversion?.placeholder ?? "数値"}
-              className="input-field w-full rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-primary-200 transition"
-            />
-          </div>
-          <div className="flex flex-col sm:flex-row items-stretch gap-2 w-full">
-            <div className="flex flex-col gap-1 w-full sm:w-auto">
+
+          <div className="grid gap-6 w-full max-w-2xl mx-auto">
+            {/* カテゴリ選択 */}
+            <div className="flex flex-col gap-2">
               <label
-                className="text-xs text-gray-500 mb-1"
-                htmlFor="from-unit"
-                id="from-unit-label"
+                className="text-sm font-semibold text-gray-700"
+                htmlFor="category-select"
+                id="category-select-label"
               >
-                {t.unitConversion?.fromLabel ?? "変換元単位"}
+                {t.unitConversion?.categoryLabel ?? "カテゴリ"}
               </label>
               <select
-                id="from-unit"
-                aria-labelledby="from-unit-label"
-                value={fromUnit}
-                onChange={(e) => setFromUnit(e.target.value)}
-                className="select-field w-full rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-primary-200 transition"
+                id="category-select"
+                aria-labelledby="category-select-label"
+                value={category}
+                onChange={(e) => handleCategoryChange(e.target.value)}
+                className="w-full px-4 py-3 rounded-xl border-2 border-blue-200 bg-white/70 backdrop-blur-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 font-medium text-gray-800 shadow-sm"
                 aria-live="polite"
               >
-                {currentCategory.units.map((u) => (
-                  <option key={u.value} value={u.value}>
-                    {unitLabels[u.labelKey] ?? u.value}
+                {unitCategories.map((cat) => (
+                  <option key={cat.key} value={cat.key}>
+                    {categoryLabels[cat.key] ?? cat.labelKey}
                   </option>
                 ))}
               </select>
             </div>
-            <span
-              className="mx-2 text-2xl font-bold text-primary-500 flex items-center justify-center h-full sm:mt-[1.7em]"
-              aria-hidden="true"
-            >
-              →
-            </span>
-            <div className="flex flex-col gap-1 w-full sm:w-auto">
+
+            {/* 入力フィールド */}
+            <div className="flex flex-col gap-2">
               <label
-                className="text-xs text-gray-500 mb-1"
-                htmlFor="to-unit"
-                id="to-unit-label"
+                className="text-sm font-semibold text-gray-700 flex items-center gap-2"
+                htmlFor="unit-input"
+                id="unit-input-label"
               >
-                {t.unitConversion?.toLabel ?? "変換先単位"}
+                <Zap className="w-4 h-4 text-blue-500" />
+                {t.unitConversion?.inputLabel ?? "変換する数値"}
               </label>
-              <select
-                id="to-unit"
-                aria-labelledby="to-unit-label"
-                value={toUnit}
-                onChange={(e) => setToUnit(e.target.value)}
-                className="select-field w-full sm:max-w-[120px] rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-primary-200 transition"
-                aria-live="polite"
-              >
-                {currentCategory.units.map((u) => (
-                  <option key={u.value} value={u.value}>
-                    {unitLabels[u.labelKey] ?? u.value}
-                  </option>
-                ))}
-              </select>
+              <input
+                id="unit-input"
+                aria-labelledby="unit-input-label"
+                type="number"
+                inputMode="decimal"
+                autoComplete="off"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder={t.unitConversion?.placeholder ?? "数値"}
+                className="w-full px-4 py-4 text-lg rounded-xl border-2 border-blue-200 bg-white/70 backdrop-blur-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 font-medium text-gray-800 shadow-sm placeholder:text-gray-400"
+              />
+            </div>
+
+            {/* 単位選択 */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-end">
+              <div className="flex flex-col gap-2">
+                <label
+                  className="text-sm font-semibold text-gray-700"
+                  htmlFor="from-unit"
+                  id="from-unit-label"
+                >
+                  {t.unitConversion?.fromLabel ?? "変換元単位"}
+                </label>
+                <select
+                  id="from-unit"
+                  aria-labelledby="from-unit-label"
+                  value={fromUnit}
+                  onChange={(e) => setFromUnit(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl border-2 border-green-200 bg-white/70 backdrop-blur-sm focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all duration-200 font-medium text-gray-800 shadow-sm"
+                  aria-live="polite"
+                >
+                  {currentCategory.units.map((u) => (
+                    <option key={u.value} value={u.value}>
+                      {unitLabels[u.labelKey] ?? u.value}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="flex justify-center items-center py-3">
+                <div className="p-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full shadow-lg">
+                  <ArrowRightLeft className="w-6 h-6 text-white" />
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label
+                  className="text-sm font-semibold text-gray-700"
+                  htmlFor="to-unit"
+                  id="to-unit-label"
+                >
+                  {t.unitConversion?.toLabel ?? "変換先単位"}
+                </label>
+                <select
+                  id="to-unit"
+                  aria-labelledby="to-unit-label"
+                  value={toUnit}
+                  onChange={(e) => setToUnit(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl border-2 border-purple-200 bg-white/70 backdrop-blur-sm focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all duration-200 font-medium text-gray-800 shadow-sm"
+                  aria-live="polite"
+                >
+                  {currentCategory.units.map((u) => (
+                    <option key={u.value} value={u.value}>
+                      {unitLabels[u.labelKey] ?? u.value}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
           </div>
         </div>
-      </ToolSection>
+      </ToolSection>{" "}
+      {/* 結果表示 */}
       <ToolSection>
-        <div className="flex justify-center w-full max-w-xl mx-auto px-2 sm:px-0">
-          <div
-            className="bg-white/90 shadow-xl rounded-2xl px-4 sm:px-8 py-6 border border-gray-100 text-center w-full"
-            role="status"
-            aria-live="polite"
-          >
+        <ToolDisplay background="glass" variant="elevated" size="large">
+          <div className="text-center space-y-4">
             {input === "" ? (
-              <span className="text-gray-400">
-                {t.unitConversion?.resultPlaceholder}
-              </span>
+              <div className="py-12">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
+                  <Calculator className="w-8 h-8 text-blue-500" />
+                </div>
+                <p className="text-gray-500 text-lg">
+                  {t.unitConversion?.resultPlaceholder ??
+                    "変換結果がここに表示されます"}
+                </p>
+              </div>
             ) : (
-              <span className="text-lg font-medium text-gray-700">
-                {input}{" "}
-                {
-                  unitLabels[
-                    currentCategory.units.find((u) => u.value === fromUnit)
-                      ?.labelKey ?? fromUnit
-                  ]
-                }{" "}
-                = <b className="text-primary-700 text-2xl">{converted}</b>{" "}
-                {
-                  unitLabels[
-                    currentCategory.units.find((u) => u.value === toUnit)
-                      ?.labelKey ?? toUnit
-                  ]
-                }
-              </span>
+              <div className="py-8">
+                <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-6 border border-blue-200">
+                  <div className="text-lg text-gray-600 mb-2">
+                    {input}{" "}
+                    <span className="font-semibold text-green-600">
+                      {
+                        unitLabels[
+                          currentCategory.units.find(
+                            (u) => u.value === fromUnit
+                          )?.labelKey ?? fromUnit
+                        ]
+                      }
+                    </span>
+                  </div>
+                  <div className="text-xs text-gray-400 mb-3">↓</div>
+                  <div className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                    {converted}
+                  </div>
+                  <div className="text-lg text-gray-600 mt-2">
+                    <span className="font-semibold text-purple-600">
+                      {
+                        unitLabels[
+                          currentCategory.units.find((u) => u.value === toUnit)
+                            ?.labelKey ?? toUnit
+                        ]
+                      }
+                    </span>
+                  </div>
+                </div>
+              </div>
             )}
           </div>
-        </div>
+        </ToolDisplay>
       </ToolSection>
-
       {/* FAQ セクション */}
       <ToolSection>
         <ToolFaq faqList={t.unitConversion.faqList} t={t} />

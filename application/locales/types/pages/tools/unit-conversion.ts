@@ -2,10 +2,20 @@ import { FAQItem } from "../../faq";
 
 export interface UnitConversionTranslations {
   title: string;
+  subtitle: string;
   description: string;
   keywords: string[];
   placeholder: string;
   resultPlaceholder: string;
+
+  howToUse: {
+    title: string;
+    steps: string[];
+  };
+  features: {
+    title: string;
+    items: string[];
+  };
 
   length: string;
   weight: string;
