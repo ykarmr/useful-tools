@@ -1,15 +1,38 @@
 import { PetAgeConversionTranslations } from "@/locales/types/pages/tools/pet-age-conversion";
 
 export const petAgeConversion: PetAgeConversionTranslations = {
-  title: "Conversión de Edad de Mascotas",
-  description: "Convierte la edad de un perro o gato a años humanos",
+  title: "Conversor de Edad de Mascotas",
+  subtitle: "Convierte la edad de tu querida mascota a años humanos",
+  description:
+    "Convierte la edad de varias mascotas incluyendo perros y gatos a años humanos. Compatible con 12 animales diferentes usando fórmulas de conversión especializadas para resultados precisos.",
   keywords: [
     "edad de mascotas",
-    "perro",
-    "gato",
+    "conversor de edad",
+    "edad de perro",
+    "edad de gato",
+    "edad animal",
     "años humanos",
+    "salud de mascotas",
     "calculadora de edad",
   ],
+  howToUse: {
+    title: "Cómo Usar",
+    steps: [
+      "Selecciona el tipo de mascota del menú desplegable",
+      "Ingresa la edad de tu mascota en años",
+      "Ve el equivalente en años humanos calculado automáticamente",
+    ],
+  },
+  features: {
+    title: "Características Principales",
+    items: [
+      "Compatible con 12 animales diferentes (perros, gatos, conejos, hámsters, etc.)",
+      "Fórmulas de conversión especializadas para cada especie",
+      "Soporte para entrada de edad decimal",
+      "Visualización de cálculo en tiempo real",
+      "Interfaz intuitiva y fácil de usar",
+    ],
+  },
   petTypeLabel: "Tipo de Mascota",
   dog: "Perro",
   cat: "Gato",

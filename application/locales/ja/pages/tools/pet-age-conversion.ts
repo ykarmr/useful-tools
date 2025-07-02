@@ -2,8 +2,37 @@ import { PetAgeConversionTranslations } from "@/locales/types/pages/tools/pet-ag
 
 export const petAgeConversion: PetAgeConversionTranslations = {
   title: "ペット年齢換算",
-  description: "犬や猫の年齢を人間の年齢に換算します",
-  keywords: ["ペット年齢", "犬", "猫", "人間換算", "年齢計算"],
+  subtitle: "愛するペットの年齢を人間の年齢に換算",
+  description:
+    "犬や猫をはじめ、さまざまなペットの年齢を人間の年齢に換算するツールです。12種類の動物に対応し、それぞれに適した換算式を使用して正確な結果を提供します。",
+  keywords: [
+    "ペット年齢",
+    "年齢換算",
+    "犬の年齢",
+    "猫の年齢",
+    "動物年齢",
+    "人間換算",
+    "年齢計算",
+    "ペット健康管理",
+  ],
+  howToUse: {
+    title: "使い方",
+    steps: [
+      "換算したいペットの種類を選択",
+      "ペットの年齢を入力",
+      "自動的に人間の年齢に換算された結果を確認",
+    ],
+  },
+  features: {
+    title: "主な機能",
+    items: [
+      "12種類の動物に対応（犬・猫・うさぎ・ハムスターなど）",
+      "種類別の専用換算式を採用",
+      "小数点以下の年齢入力に対応",
+      "リアルタイム計算表示",
+      "直感的で使いやすいインターフェース",
+    ],
+  },
   petTypeLabel: "ペットの種類",
   dog: "犬",
   cat: "猫",

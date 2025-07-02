@@ -2,8 +2,17 @@ import { FAQItem } from "../../faq";
 
 export interface PetAgeConversionTranslations {
   title: string;
+  subtitle: string;
   description: string;
   keywords: string[];
+  howToUse: {
+    title: string;
+    steps: string[];
+  };
+  features: {
+    title: string;
+    items: string[];
+  };
   petTypeLabel: string;
   dog: string;
   cat: string;

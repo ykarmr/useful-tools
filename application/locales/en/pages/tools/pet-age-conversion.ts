@@ -1,9 +1,38 @@
 import { PetAgeConversionTranslations } from "@/locales/types/pages/tools/pet-age-conversion";
 
 export const petAgeConversion: PetAgeConversionTranslations = {
-  title: "Pet Age Conversion",
-  description: "Convert dog or cat age to human years",
-  keywords: ["pet age", "dog", "cat", "human years", "age calculator"],
+  title: "Pet Age Converter",
+  subtitle: "Convert your beloved pet's age to human years",
+  description:
+    "Convert the age of various pets including dogs and cats to human years. Supporting 12 different animals with specialized conversion formulas for accurate results.",
+  keywords: [
+    "pet age",
+    "age converter",
+    "dog age",
+    "cat age",
+    "animal age",
+    "human years",
+    "pet health",
+    "age calculator",
+  ],
+  howToUse: {
+    title: "How to Use",
+    steps: [
+      "Select your pet type from the dropdown",
+      "Enter your pet's age in years",
+      "View the automatically converted human age equivalent",
+    ],
+  },
+  features: {
+    title: "Key Features",
+    items: [
+      "Support for 12 different animals (dogs, cats, rabbits, hamsters, etc.)",
+      "Specialized conversion formulas for each species",
+      "Decimal age input support",
+      "Real-time calculation display",
+      "Intuitive and user-friendly interface",
+    ],
+  },
   petTypeLabel: "Pet Type",
   dog: "Dog",
   cat: "Cat",

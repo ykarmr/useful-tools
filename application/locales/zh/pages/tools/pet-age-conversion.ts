@@ -1,9 +1,38 @@
 import { PetAgeConversionTranslations } from "@/locales/types/pages/tools/pet-age-conversion";
 
 export const petAgeConversion: PetAgeConversionTranslations = {
-  title: "宠物年龄转换",
-  description: "将狗或猫的年龄转换为人类年龄",
-  keywords: ["宠物年龄", "狗", "猫", "人类转换", "年龄计算"],
+  title: "宠物年龄转换器",
+  subtitle: "将您爱宠的年龄转换为人类年龄",
+  description:
+    "将包括狗和猫在内的各种宠物年龄转换为人类年龄。支持12种不同动物，使用专门的转换公式提供准确结果。",
+  keywords: [
+    "宠物年龄",
+    "年龄转换器",
+    "狗的年龄",
+    "猫的年龄",
+    "动物年龄",
+    "人类年龄",
+    "宠物健康",
+    "年龄计算器",
+  ],
+  howToUse: {
+    title: "使用方法",
+    steps: [
+      "从下拉菜单中选择您的宠物类型",
+      "输入您宠物的年龄（年）",
+      "查看自动计算的人类年龄等值",
+    ],
+  },
+  features: {
+    title: "主要功能",
+    items: [
+      "支持12种不同动物（狗、猫、兔子、仓鼠等）",
+      "每个物种专门的转换公式",
+      "支持小数年龄输入",
+      "实时计算显示",
+      "直观易用的界面",
+    ],
+  },
   petTypeLabel: "宠物类型",
   dog: "狗",
   cat: "猫",

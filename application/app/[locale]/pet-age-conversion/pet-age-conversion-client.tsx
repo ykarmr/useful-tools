@@ -5,6 +5,7 @@ import { PawPrint } from "lucide-react";
 import ToolLayout from "@/components/layout/tool-layout";
 import ToolSection from "@/components/layout/tool-section";
 import ToolFaq from "@/components/layout/tool-faq";
+import ToolHowToUse from "@/components/layout/tool-how-to-use";
 import { Locale, Translations } from "@/locales";
 
 interface PetAgeConversionProps {
@@ -134,74 +135,141 @@ export default function PetAgeConversionClient({
       locale={locale}
       t={t}
       title={t.petAgeConversion.title}
+      subtitle={t.petAgeConversion.subtitle}
       description={t.petAgeConversion.description}
       icon={PawPrint}
     >
+      {/* How To Use セクション */}
       <ToolSection>
-        <div className="flex flex-col gap-6 w-full max-w-xl mx-auto px-2 sm:px-0">
-          <div className="flex flex-col w-full gap-1">
-            <label
-              className="text-sm text-gray-600 font-medium mb-1"
-              htmlFor="pet-select"
-            >
-              {t.petAgeConversion.petTypeLabel}
-            </label>
-            <select
-              id="pet-select"
-              value={pet}
-              onChange={(e) => setPet(e.target.value)}
-              className="select-field rounded-full px-4 py-2 border border-gray-300 shadow-sm focus:ring-2 focus:ring-primary-200 transition font-semibold w-full sm:w-auto"
-            >
-              {petTypes.map((p) => (
-                <option key={p.key} value={p.key}>
-                  {p.icon}: {p.labelKey}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="w-full flex flex-col gap-1">
-            <label
-              className="text-sm text-gray-600 font-medium mb-1"
-              htmlFor="pet-age-input"
-            >
-              {t.petAgeConversion.petAgeLabel}
-            </label>
-            <input
-              id="pet-age-input"
-              type="number"
-              inputMode="decimal"
-              autoComplete="off"
-              value={age}
-              onChange={(e) => setAge(e.target.value)}
-              placeholder={t.petAgeConversion.petAgePlaceholder}
-              className="input-field w-full rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-primary-200 transition"
-              min={0}
-            />
+        <ToolHowToUse
+          title={t.petAgeConversion.howToUse.title}
+          steps={t.petAgeConversion.howToUse.steps}
+          features={{
+            title: t.petAgeConversion.features.title,
+            items: t.petAgeConversion.features.items,
+          }}
+        />
+      </ToolSection>
+
+      {/* メイン機能セクション */}
+      <ToolSection>
+        <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-3xl p-8 shadow-lg border border-orange-100">
+          <div className="flex flex-col gap-8 w-full max-w-2xl mx-auto">
+            {/* ペット選択 */}
+            <div className="flex flex-col gap-3">
+              <label
+                className="text-lg font-semibold text-gray-700 flex items-center gap-2"
+                htmlFor="pet-select"
+              >
+                <span className="text-2xl">🐾</span>
+                {t.petAgeConversion.petTypeLabel}
+              </label>
+              <div className="relative">
+                <select
+                  id="pet-select"
+                  value={pet}
+                  onChange={(e) => setPet(e.target.value)}
+                  className="w-full appearance-none bg-white rounded-2xl px-6 py-4 text-lg font-medium border-2 border-orange-200 shadow-sm focus:border-orange-400 focus:ring-4 focus:ring-orange-100 transition-all duration-200 cursor-pointer"
+                >
+                  {petTypes.map((p) => (
+                    <option key={p.key} value={p.key}>
+                      {p.icon} {p.labelKey}
+                    </option>
+                  ))}
+                </select>
+                <div className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
+                  <svg
+                    className="w-5 h-5 text-orange-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            {/* 年齢入力 */}
+            <div className="flex flex-col gap-3">
+              <label
+                className="text-lg font-semibold text-gray-700 flex items-center gap-2"
+                htmlFor="pet-age-input"
+              >
+                <span className="text-2xl">📅</span>
+                {t.petAgeConversion.petAgeLabel}
+              </label>
+              <input
+                id="pet-age-input"
+                type="number"
+                inputMode="decimal"
+                autoComplete="off"
+                value={age}
+                onChange={(e) => setAge(e.target.value)}
+                placeholder={t.petAgeConversion.petAgePlaceholder}
+                className="w-full bg-white rounded-2xl px-6 py-4 text-lg font-medium border-2 border-orange-200 shadow-sm focus:border-orange-400 focus:ring-4 focus:ring-orange-100 transition-all duration-200"
+                min={0}
+                step="0.1"
+              />
+            </div>
           </div>
         </div>
       </ToolSection>
+
+      {/* 結果表示セクション */}
       <ToolSection>
-        <div className="flex justify-center w-full max-w-xl mx-auto px-2 sm:px-0">
+        <div className="flex justify-center w-full max-w-2xl mx-auto">
           <div
-            className="bg-white/90 shadow-xl rounded-2xl px-4 sm:px-8 py-6 border border-gray-100 text-center w-full"
+            className="bg-gradient-to-br from-blue-50 to-indigo-50 shadow-2xl rounded-3xl px-8 py-10 border-2 border-blue-100 text-center w-full relative overflow-hidden"
             role="status"
             aria-live="polite"
           >
-            {age === "" ? (
-              <span className="text-gray-400">
-                {t.petAgeConversion.resultPlaceholder}
-              </span>
-            ) : (
-              <span className="text-lg font-medium text-gray-700">
-                {t.petAgeConversion.petAgeResult
-                  .replace("{petAge}", age)
-                  .replace(
-                    "{petType}",
-                    petTypes.find((p) => p.key === pet)?.labelKey || ""
-                  )
-                  .replace("{humanAge}", humanAge)}
-              </span>
-            )}
+            {/* 背景装飾 */}
+            <div className="absolute top-4 right-4 text-6xl opacity-10">🎯</div>
+            <div className="absolute bottom-4 left-4 text-4xl opacity-10">
+              ✨
+            </div>
+
+            <div className="relative z-10">
+              <div className="text-sm font-medium text-blue-600 mb-2 uppercase tracking-wider">
+                {age === "" ? "結果" : "換算結果"}
+              </div>
+              {age === "" ? (
+                <div className="text-gray-400 text-lg">
+                  {t.petAgeConversion.resultPlaceholder}
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  <div className="text-3xl font-bold text-gray-800 leading-tight">
+                    {t.petAgeConversion.petAgeResult
+                      .replace("{petAge}", age)
+                      .replace(
+                        "{petType}",
+                        petTypes.find((p) => p.key === pet)?.labelKey || ""
+                      )
+                      .replace("{humanAge}", humanAge)}
+                  </div>
+                  <div className="flex justify-center items-center gap-4 text-sm text-gray-600">
+                    <div className="flex items-center gap-1">
+                      <span className="text-2xl">
+                        {petTypes.find((p) => p.key === pet)?.icon}
+                      </span>
+                      <span>{age}歳</span>
+                    </div>
+                    <span className="text-blue-400">→</span>
+                    <div className="flex items-center gap-1">
+                      <span className="text-2xl">👤</span>
+                      <span>{humanAge}歳</span>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </ToolSection>
