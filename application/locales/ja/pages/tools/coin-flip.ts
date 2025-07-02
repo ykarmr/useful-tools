@@ -21,6 +21,9 @@ export const coinFlip: CoinFlipTranslations = {
   tails: "裏",
   flipping: "投げています...",
   selectCount: "投げるコインの枚数",
+  coinSingular: "枚",
+  coinPlural: "枚",
+  result: "結果",
   howToUse: {
     title: "使い方",
     steps: [
@@ -33,7 +36,7 @@ export const coinFlip: CoinFlipTranslations = {
       title: "機能",
       items: [
         "複数コインの同時投げ（最大10枚）",
-        "リアルタイムアニメーション",
+        "リアルタイムアニメーション表示",
         "瞬時の結果表示",
         "完全ランダムな結果生成",
       ],

@@ -21,6 +21,9 @@ export const coinFlip: CoinFlipTranslations = {
   tails: "反面",
   flipping: "翻转中...",
   selectCount: "硬币数量",
+  coinSingular: "枚",
+  coinPlural: "枚",
+  result: "结果",
   howToUse: {
     title: "使用方法",
     steps: [

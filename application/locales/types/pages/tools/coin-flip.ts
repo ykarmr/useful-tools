@@ -10,6 +10,9 @@ export interface CoinFlipTranslations {
   tails: string;
   flipping: string;
   selectCount: string;
+  coinSingular: string;
+  coinPlural: string;
+  result: string;
   howToUse: {
     title: string;
     steps: string[];

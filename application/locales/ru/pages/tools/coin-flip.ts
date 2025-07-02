@@ -21,6 +21,9 @@ export const coinFlip: CoinFlipTranslations = {
   tails: "Решка",
   flipping: "Подбрасываем...",
   selectCount: "Количество монет",
+  coinSingular: "монета",
+  coinPlural: "монет",
+  result: "Результат",
   howToUse: {
     title: "Как Пользоваться",
     steps: [
