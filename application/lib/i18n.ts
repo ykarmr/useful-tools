@@ -60,7 +60,7 @@ export const getLocaleMapping = (locale: SupportedLocale) => {
 };
 
 export const getAlternates = (locale: SupportedLocale, path: string = "") => {
-  let languages: Record<string, string> = {};
+  const languages: Record<string, string> = {};
   locales.forEach((loc) => {
     const langCode = getLocaleMapping(loc);
     languages[langCode] = `${baseUrl}/${loc}${path}`;

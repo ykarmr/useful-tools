@@ -5,8 +5,6 @@ import {
 } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { baseUrl } from "@/lib/const";
-import { getAlternates } from "@/lib/i18n";
 import BaseConverterClient from "./base-converter-client";
 import { generateToolMetadata } from "@/lib/metadata";
 import { generateToolStructuredData } from "@/lib/structured-data";

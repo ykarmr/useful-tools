@@ -5,8 +5,6 @@ import {
   Binary,
   Copy,
   Trash2,
-  ChevronDown,
-  ChevronUp,
   Calculator,
   AlertCircle,
   CheckCircle2,
@@ -117,7 +115,7 @@ export default function BaseConverterClient({
           octal: decimalValue.toString(8),
           hexadecimal: decimalValue.toString(16).toUpperCase(),
         };
-      } catch (error) {
+      } catch {
         return {
           decimal: t.baseConverter.invalidInput,
           binary: t.baseConverter.invalidInput,
@@ -307,7 +305,7 @@ export default function BaseConverterClient({
       }
 
       setOperationError(""); // 成功時はエラーメッセージをクリア
-    } catch (error) {
+    } catch {
       setOperationError(t.baseConverter.invalidInput);
       setOperationResult("");
     }
