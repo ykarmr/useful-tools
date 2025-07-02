@@ -2,6 +2,8 @@ import { SubnetCalculatorTranslations } from "@/locales/types/pages/tools/subnet
 
 export const subnetCalculator: SubnetCalculatorTranslations = {
   title: "Калькулятор подсетей",
+  subtitle:
+    "Мгновенно вычисляйте информацию о подсети, необходимую для проектирования сети",
   description:
     "Вычисляйте сетевую информацию по IP-адресу и длине маски подсети.",
   keywords: ["подсеть", "IP-адрес", "сеть", "вычисление", "маска"],
@@ -52,6 +54,12 @@ export const subnetCalculator: SubnetCalculatorTranslations = {
       "Проверка ввода в реальном времени и отображение ошибок",
       "Отзывчивый дизайн для мобильных устройств",
     ],
+  },
+
+  // UI Метки
+  labels: {
+    networkInfo: "Сетевая информация",
+    hostInfo: "Информация о хостах",
   },
 
   faqList: [

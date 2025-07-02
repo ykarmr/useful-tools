@@ -2,6 +2,8 @@ import { SubnetCalculatorTranslations } from "@/locales/types/pages/tools/subnet
 
 export const subnetCalculator: SubnetCalculatorTranslations = {
   title: "Subnet Calculator",
+  subtitle:
+    "Instantly calculate subnet information essential for network design",
   description:
     "Calculate network information from IP address and subnet mask length.",
   keywords: ["subnet", "IP address", "network", "calculator", "mask"],
@@ -19,10 +21,10 @@ export const subnetCalculator: SubnetCalculatorTranslations = {
   binary: "Binary",
   decimal: "Decimal",
   hexadecimal: "Hexadecimal",
-  errorEmptyIp: "IP address cannot be empty",
+  errorEmptyIp: "Please enter an IP address",
   errorInvalidIp: "Invalid IP address format",
-  errorEmptyMask: "Subnet mask length cannot be empty",
-  errorInvalidMask: "Invalid subnet mask length",
+  errorEmptyMask: "Please enter subnet mask length",
+  errorInvalidMask: "Subnet mask length must be between 0 and 32",
   calculate: "Calculate",
 
   // How to use guide
@@ -51,6 +53,12 @@ export const subnetCalculator: SubnetCalculatorTranslations = {
       "Real-time input validation and error display",
       "Responsive design for mobile devices",
     ],
+  },
+
+  // UI Labels
+  labels: {
+    networkInfo: "Network Information",
+    hostInfo: "Host Information",
   },
 
   faqList: [

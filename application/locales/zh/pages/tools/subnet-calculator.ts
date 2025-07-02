@@ -2,6 +2,7 @@ import { SubnetCalculatorTranslations } from "@/locales/types/pages/tools/subnet
 
 export const subnetCalculator: SubnetCalculatorTranslations = {
   title: "子网计算器",
+  subtitle: "快速计算网络设计所需的子网信息",
   description: "根据IP地址和子网掩码长度计算网络信息。",
   keywords: ["子网", "IP地址", "网络", "计算器", "掩码"],
   ipAddress: "IP地址",
@@ -18,10 +19,10 @@ export const subnetCalculator: SubnetCalculatorTranslations = {
   binary: "二进制",
   decimal: "十进制",
   hexadecimal: "十六进制",
-  errorEmptyIp: "IP地址不能为空",
-  errorInvalidIp: "无效的IP地址格式",
-  errorEmptyMask: "子网掩码长度不能为空",
-  errorInvalidMask: "无效的子网掩码长度",
+  errorEmptyIp: "请输入IP地址",
+  errorInvalidIp: "IP地址格式无效",
+  errorEmptyMask: "请输入子网掩码长度",
+  errorInvalidMask: "子网掩码长度必须在0到32之间",
   calculate: "计算",
 
   // 使用指南
@@ -50,6 +51,12 @@ export const subnetCalculator: SubnetCalculatorTranslations = {
       "实时输入验证和错误显示",
       "响应式设计支持移动设备",
     ],
+  },
+
+  // UI 标签
+  labels: {
+    networkInfo: "网络信息",
+    hostInfo: "主机信息",
   },
 
   faqList: [

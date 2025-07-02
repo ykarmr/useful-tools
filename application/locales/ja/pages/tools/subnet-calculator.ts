@@ -2,6 +2,7 @@ import { SubnetCalculatorTranslations } from "@/locales/types/pages/tools/subnet
 
 export const subnetCalculator: SubnetCalculatorTranslations = {
   title: "サブネット計算機",
+  subtitle: "ネットワーク設計に必要なサブネット情報を瞬時に計算",
   description:
     "IPアドレスとサブネットマスク長からネットワーク情報を計算します。",
   keywords: ["サブネット", "IPアドレス", "ネットワーク", "計算", "マスク"],
@@ -52,6 +53,12 @@ export const subnetCalculator: SubnetCalculatorTranslations = {
       "リアルタイムの入力値検証とエラー表示",
       "レスポンシブデザインでモバイル対応",
     ],
+  },
+
+  // UI ラベル
+  labels: {
+    networkInfo: "ネットワーク情報",
+    hostInfo: "ホスト情報",
   },
 
   faqList: [

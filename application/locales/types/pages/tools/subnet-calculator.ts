@@ -2,6 +2,7 @@ import { FAQItem } from "../../faq";
 
 export interface SubnetCalculatorTranslations {
   title: string;
+  subtitle: string;
   description: string;
   keywords: string[];
   ipAddress: string;
@@ -36,6 +37,12 @@ export interface SubnetCalculatorTranslations {
   features: {
     title: string;
     items: string[];
+  };
+
+  // UI ラベル
+  labels: {
+    networkInfo: string;
+    hostInfo: string;
   };
 
   faqList: FAQItem[];

@@ -2,6 +2,8 @@ import { SubnetCalculatorTranslations } from "@/locales/types/pages/tools/subnet
 
 export const subnetCalculator: SubnetCalculatorTranslations = {
   title: "Calculadora de Subred",
+  subtitle:
+    "Calcula instantáneamente información de subred esencial para el diseño de redes",
   description:
     "Calcula información de red a partir de la dirección IP y la longitud de la máscara.",
   keywords: ["subred", "dirección IP", "red", "calculadora", "máscara"],
@@ -52,6 +54,12 @@ export const subnetCalculator: SubnetCalculatorTranslations = {
       "Validación de entrada en tiempo real y visualización de errores",
       "Diseño responsivo para dispositivos móviles",
     ],
+  },
+
+  // Etiquetas de UI
+  labels: {
+    networkInfo: "Información de Red",
+    hostInfo: "Información de Host",
   },
 
   faqList: [
