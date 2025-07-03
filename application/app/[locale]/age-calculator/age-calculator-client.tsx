@@ -152,6 +152,7 @@ export default function AgeCalculatorClient({
       locale={locale}
       t={t}
       title={t.ageCalculator.title}
+      subtitle={t.ageCalculator.subtitle}
       description={t.ageCalculator.description}
       icon={Calendar}
     >
