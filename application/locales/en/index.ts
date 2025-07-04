@@ -41,6 +41,7 @@ import { common } from "./common";
 import { footer } from "./footer";
 import { header } from "./header";
 import { ageCalculator } from "./pages/tools/age-calculator";
+import { flexboxPlayground } from "./pages/tools/flexbox-playground";
 
 const en: Translations = {
   common,
@@ -85,6 +86,7 @@ const en: Translations = {
   baseConverter,
   idGenerator: idGeneratorEn,
   ageCalculator,
+  flexboxPlayground,
 };
 
 export default en;

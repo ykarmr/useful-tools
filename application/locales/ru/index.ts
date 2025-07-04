@@ -37,6 +37,7 @@ import { dataConverter } from "./pages/tools/data-converter";
 import { baseConverter } from "./pages/tools/base-converter";
 import idGeneratorRu from "./pages/tools/id-generator";
 import { ageCalculator } from "./pages/tools/age-calculator";
+import { flexboxPlayground } from "./pages/tools/flexbox-playground";
 import { ad } from "./ad";
 import { common } from "./common";
 import { footer } from "./footer";
@@ -85,6 +86,7 @@ const ru: Translations = {
   baseConverter,
   idGenerator: idGeneratorRu,
   ageCalculator,
+  flexboxPlayground,
 };
 
 export default ru;

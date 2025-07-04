@@ -34,6 +34,7 @@ import {
   Code,
   Binary,
   Calendar,
+  Layout,
 } from "lucide-react";
 import { Locale, Translations } from "@/locales";
 
@@ -114,6 +115,7 @@ const toolCategories = [
     tools: [
       { key: "htmlEscape", icon: Code, href: "/html-escape" },
       { key: "baseConverter", icon: Binary, href: "/base-converter" },
+      { key: "flexboxPlayground", icon: Layout, href: "/flexbox-playground" },
     ],
   },
 ];
