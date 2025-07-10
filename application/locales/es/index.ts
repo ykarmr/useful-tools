@@ -38,6 +38,7 @@ import { baseConverter } from "./pages/tools/base-converter";
 import idGeneratorEs from "./pages/tools/id-generator";
 import { ageCalculator } from "./pages/tools/age-calculator";
 import { flexboxPlayground } from "./pages/tools/flexbox-playground";
+import { gridPlayground } from "./pages/tools/grid-playground";
 import { ad } from "./ad";
 import { common } from "./common";
 import { footer } from "./footer";
@@ -87,6 +88,7 @@ const es: Translations = {
   idGenerator: idGeneratorEs,
   ageCalculator,
   flexboxPlayground,
+  gridPlayground,
 };
 
 export default es;

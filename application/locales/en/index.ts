@@ -42,6 +42,7 @@ import { footer } from "./footer";
 import { header } from "./header";
 import { ageCalculator } from "./pages/tools/age-calculator";
 import { flexboxPlayground } from "./pages/tools/flexbox-playground";
+import { gridPlayground } from "./pages/tools/grid-playground";
 
 const en: Translations = {
   common,
@@ -87,6 +88,7 @@ const en: Translations = {
   idGenerator: idGeneratorEn,
   ageCalculator,
   flexboxPlayground,
+  gridPlayground,
 };
 
 export default en;

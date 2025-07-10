@@ -35,6 +35,7 @@ import {
   Binary,
   Calendar,
   Layout,
+  Grid3X3,
 } from "lucide-react";
 import { Locale, Translations } from "@/locales";
 
@@ -116,6 +117,7 @@ const toolCategories = [
       { key: "htmlEscape", icon: Code, href: "/html-escape" },
       { key: "baseConverter", icon: Binary, href: "/base-converter" },
       { key: "flexboxPlayground", icon: Layout, href: "/flexbox-playground" },
+      { key: "gridPlayground", icon: Grid3X3, href: "/grid-playground" },
     ],
   },
 ];
