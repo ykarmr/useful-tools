@@ -716,16 +716,18 @@ export default function MermaidGeneratorClient({
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                 {templateList.map(([key, template]) => (
                   <Button
                     key={key}
                     variant={selectedTemplate === key ? "default" : "outline"}
-                    className="h-auto p-4 flex flex-col items-start gap-2"
+                    className="h-auto p-3 flex flex-col items-start gap-2 text-left"
                     onClick={() => applyTemplate(key)}
                   >
-                    <div className="font-semibold text-sm">{template.name}</div>
-                    <div className="text-xs text-left opacity-80">
+                    <div className="font-semibold text-sm leading-tight">
+                      {template.name}
+                    </div>
+                    <div className="text-xs text-left opacity-80 leading-tight">
                       {template.description}
                     </div>
                   </Button>
@@ -745,15 +747,17 @@ export default function MermaidGeneratorClient({
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
                 {diagramTypeList.map(({ key, label, icon: IconComponent }) => (
                   <Badge
                     key={key}
                     variant="secondary"
-                    className="p-3 flex items-center gap-2 justify-start"
+                    className="p-2 sm:p-3 flex items-center gap-1 sm:gap-2 justify-start text-left"
                   >
-                    <IconComponent className="w-4 h-4" />
-                    <span className="text-xs">{label}</span>
+                    <IconComponent className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+                    <span className="text-xs leading-tight truncate">
+                      {label}
+                    </span>
                   </Badge>
                 ))}
               </div>
@@ -763,14 +767,16 @@ export default function MermaidGeneratorClient({
 
         {/* エディターとプレビュー */}
         <ToolSection>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="space-y-6 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-6">
             {/* コード入力エリア */}
             <Card>
               <CardHeader className="pb-3">
                 <CardTitle className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <Code2 className="w-5 h-5" />
-                    {t.mermaidGenerator.input.title}
+                    <span className="text-sm sm:text-base">
+                      {t.mermaidGenerator.input.title}
+                    </span>
                   </div>
                 </CardTitle>
               </CardHeader>
@@ -779,7 +785,7 @@ export default function MermaidGeneratorClient({
                   <Textarea
                     value={code}
                     onChange={(e) => handleCodeChange(e.target.value)}
-                    className={`min-h-[400px] font-mono text-sm resize-none transition-colors ${
+                    className={`min-h-[300px] sm:min-h-[400px] font-mono text-sm resize-none transition-colors ${
                       previewError
                         ? "border-red-300 focus:border-red-500"
                         : "border-gray-200 focus:border-blue-500"
@@ -787,7 +793,7 @@ export default function MermaidGeneratorClient({
                   />
 
                   {/* 入力ヘルプとエラー表示 */}
-                  <div className="flex items-start justify-between gap-4">
+                  <div className="flex flex-col sm:flex-row items-start justify-between gap-2 sm:gap-4">
                     <div className="text-xs text-gray-500 flex-1">
                       {t.mermaidGenerator.input.syntaxHelp}
                     </div>
@@ -815,15 +821,17 @@ export default function MermaidGeneratorClient({
             {/* プレビューエリア */}
             <Card>
               <CardHeader className="pb-3">
-                <CardTitle className="flex items-center justify-between">
+                <CardTitle className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
                   <div className="flex items-center gap-2">
                     <Play className="w-5 h-5" />
-                    {t.mermaidGenerator.preview.title}
+                    <span className="text-sm sm:text-base">
+                      {t.mermaidGenerator.preview.title}
+                    </span>
                     {isPreviewLoading && (
-                      <div className="w-4 h-4 border-2 border-gray-300 border-t-blue-500 rounded-full animate-spin ml-2"></div>
+                      <div className="w-4 h-4 border-2 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
                     )}
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1 sm:gap-2">
                     {/* ズームコントロール */}
                     <div className="flex items-center gap-1 border rounded-md">
                       <Button
@@ -831,11 +839,11 @@ export default function MermaidGeneratorClient({
                         size="sm"
                         onClick={handleZoomOut}
                         disabled={zoomLevel <= 0.25}
-                        className="h-8 w-8 p-0"
+                        className="h-6 w-6 sm:h-8 sm:w-8 p-0"
                       >
-                        <ZoomOut className="w-4 h-4" />
+                        <ZoomOut className="w-3 h-3 sm:w-4 sm:h-4" />
                       </Button>
-                      <div className="px-2 text-sm font-mono min-w-[60px] text-center">
+                      <div className="px-1 sm:px-2 text-xs sm:text-sm font-mono min-w-[40px] sm:min-w-[60px] text-center">
                         {Math.round(zoomLevel * 100)}%
                       </div>
                       <Button
@@ -843,28 +851,29 @@ export default function MermaidGeneratorClient({
                         size="sm"
                         onClick={handleZoomIn}
                         disabled={zoomLevel >= 3}
-                        className="h-8 w-8 p-0"
+                        className="h-6 w-6 sm:h-8 sm:w-8 p-0"
                       >
-                        <ZoomIn className="w-4 h-4" />
+                        <ZoomIn className="w-3 h-3 sm:w-4 sm:h-4" />
                       </Button>
                       <Button
                         variant="ghost"
                         size="sm"
                         onClick={handleZoomReset}
-                        className="h-8 w-8 p-0"
+                        className="h-6 w-6 sm:h-8 sm:w-8 p-0"
                       >
-                        <RotateCcw className="w-4 h-4" />
+                        <RotateCcw className="w-3 h-3 sm:w-4 sm:h-4" />
                       </Button>
                     </div>
                     <Button
                       variant="outline"
                       size="sm"
                       onClick={toggleFullscreen}
-                      className="flex items-center gap-2"
+                      className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3"
                       disabled={isPreviewDisabled}
                     >
-                      <Maximize2 className="w-4 h-4" />
-                      全画面表示
+                      <Maximize2 className="w-3 h-3 sm:w-4 sm:h-4" />
+                      <span className="hidden sm:inline">全画面表示</span>
+                      <span className="sm:hidden">全画面</span>
                     </Button>
                   </div>
                 </CardTitle>
@@ -872,7 +881,7 @@ export default function MermaidGeneratorClient({
               <CardContent>
                 <div
                   ref={previewContainerRef}
-                  className="min-h-[400px] border border-gray-200 rounded-lg bg-white overflow-hidden relative"
+                  className="min-h-[300px] sm:min-h-[400px] border border-gray-200 rounded-lg bg-white overflow-hidden relative"
                   style={{
                     cursor: isDragging ? "grabbing" : "grab",
                     touchAction: "none", // タッチイベントによるスクロール防止
@@ -913,9 +922,7 @@ export default function MermaidGeneratorClient({
                         <span className="hidden sm:inline">
                           ドラッグで移動 | ボタンでズーム
                         </span>
-                        <span className="sm:hidden">
-                          ドラッグで移動 | ピンチでズーム
-                        </span>
+                        <span className="sm:hidden">ドラッグ/ピンチで操作</span>
                       </div>
                     </div>
                   )}
@@ -964,32 +971,41 @@ export default function MermaidGeneratorClient({
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-2 sm:gap-3">
                 <Button
                   onClick={copyCode}
                   variant="outline"
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-1 sm:gap-2 px-3 sm:px-4"
+                  size="sm"
                 >
-                  <Copy className="w-4 h-4" />
-                  {t.mermaidGenerator.export.copyCode}
+                  <Copy className="w-3 h-3 sm:w-4 sm:h-4" />
+                  <span className="text-xs sm:text-sm">
+                    {t.mermaidGenerator.export.copyCode}
+                  </span>
                 </Button>
                 <Button
                   onClick={downloadSvg}
                   variant="outline"
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-1 sm:gap-2 px-3 sm:px-4"
+                  size="sm"
                   disabled={isPreviewDisabled}
                 >
-                  <FileImage className="w-4 h-4" />
-                  {t.mermaidGenerator.export.downloadSvg}
+                  <FileImage className="w-3 h-3 sm:w-4 sm:h-4" />
+                  <span className="text-xs sm:text-sm">
+                    {t.mermaidGenerator.export.downloadSvg}
+                  </span>
                 </Button>
                 <Button
                   onClick={downloadPng}
                   variant="outline"
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-1 sm:gap-2 px-3 sm:px-4"
+                  size="sm"
                   disabled={isPreviewDisabled}
                 >
-                  <FileImage className="w-4 h-4" />
-                  {t.mermaidGenerator.export.downloadPng}
+                  <FileImage className="w-3 h-3 sm:w-4 sm:h-4" />
+                  <span className="text-xs sm:text-sm">
+                    {t.mermaidGenerator.export.downloadPng}
+                  </span>
                 </Button>
               </div>
               {isPreviewDisabled && (
@@ -1011,17 +1027,17 @@ export default function MermaidGeneratorClient({
       {isFullscreen && (
         <div className="fixed inset-0 z-50 bg-black bg-opacity-95 flex flex-col">
           {/* フルスクリーンヘッダー */}
-          <div className="flex items-center justify-between p-4 bg-white border-b">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 sm:p-4 bg-white border-b gap-2">
             <div className="flex items-center gap-2">
               <Play className="w-5 h-5" />
-              <h2 className="text-lg font-semibold">
+              <h2 className="text-base sm:text-lg font-semibold">
                 {t.mermaidGenerator.preview.title}
               </h2>
               {isPreviewLoading && (
-                <div className="w-4 h-4 border-2 border-gray-300 border-t-blue-500 rounded-full animate-spin ml-2"></div>
+                <div className="w-4 h-4 border-2 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
               )}
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1 sm:gap-2 w-full sm:w-auto">
               {/* フルスクリーンズームコントロール */}
               <div className="flex items-center gap-1 border rounded-md">
                 <Button
@@ -1029,11 +1045,11 @@ export default function MermaidGeneratorClient({
                   size="sm"
                   onClick={handleZoomOut}
                   disabled={zoomLevel <= 0.25}
-                  className="h-8 w-8 p-0"
+                  className="h-7 w-7 sm:h-8 sm:w-8 p-0"
                 >
-                  <ZoomOut className="w-4 h-4" />
+                  <ZoomOut className="w-3 h-3 sm:w-4 sm:h-4" />
                 </Button>
-                <div className="px-2 text-sm font-mono min-w-[60px] text-center">
+                <div className="px-1 sm:px-2 text-xs sm:text-sm font-mono min-w-[40px] sm:min-w-[60px] text-center">
                   {Math.round(zoomLevel * 100)}%
                 </div>
                 <Button
@@ -1041,36 +1057,38 @@ export default function MermaidGeneratorClient({
                   size="sm"
                   onClick={handleZoomIn}
                   disabled={zoomLevel >= 3}
-                  className="h-8 w-8 p-0"
+                  className="h-7 w-7 sm:h-8 sm:w-8 p-0"
                 >
-                  <ZoomIn className="w-4 h-4" />
+                  <ZoomIn className="w-3 h-3 sm:w-4 sm:h-4" />
                 </Button>
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={handleZoomReset}
-                  className="h-8 w-8 p-0"
+                  className="h-7 w-7 sm:h-8 sm:w-8 p-0"
                 >
-                  <RotateCcw className="w-4 h-4" />
+                  <RotateCcw className="w-3 h-3 sm:w-4 sm:h-4" />
                 </Button>
               </div>
               <Button
                 variant="outline"
                 size="sm"
                 onClick={toggleFullscreen}
-                className="flex items-center gap-2"
+                className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3"
               >
-                <Minimize2 className="w-4 h-4" />
-                通常表示
+                <Minimize2 className="w-3 h-3 sm:w-4 sm:h-4" />
+                <span className="hidden sm:inline">通常表示</span>
+                <span className="sm:hidden">通常</span>
               </Button>
               <Button
                 variant="outline"
                 size="sm"
                 onClick={toggleFullscreen}
-                className="flex items-center gap-2"
+                className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3"
               >
-                <X className="w-4 h-4" />
-                閉じる
+                <X className="w-3 h-3 sm:w-4 sm:h-4" />
+                <span className="hidden sm:inline">閉じる</span>
+                <span className="sm:hidden">×</span>
               </Button>
             </div>
           </div>
@@ -1122,14 +1140,14 @@ export default function MermaidGeneratorClient({
 
             {/* フルスクリーンズーム・パン操作のヒント */}
             {!previewError && previewRef.current?.innerHTML && (
-              <div className="absolute bottom-4 left-4 text-sm text-gray-600 bg-white/90 px-3 py-2 rounded-lg shadow-lg">
-                <div className="flex items-center gap-2">
-                  <Move className="w-4 h-4" />
+              <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 text-xs sm:text-sm text-gray-600 bg-white/90 px-2 sm:px-3 py-1 sm:py-2 rounded-lg shadow-lg">
+                <div className="flex items-center gap-1 sm:gap-2">
+                  <Move className="w-3 h-3 sm:w-4 sm:h-4" />
                   <span className="hidden sm:inline">
                     ドラッグで移動 | ボタンでズーム | ESCで終了
                   </span>
                   <span className="sm:hidden">
-                    ドラッグで移動 | ピンチでズーム | ESCで終了
+                    ドラッグ/ピンチで操作 | ESCで終了
                   </span>
                 </div>
               </div>
@@ -1137,12 +1155,12 @@ export default function MermaidGeneratorClient({
 
             {/* フルスクリーンエラー表示 */}
             {previewError && (
-              <div className="absolute inset-6 flex items-center justify-center">
-                <div className="max-w-md p-6 bg-red-50 border border-red-200 rounded-lg">
-                  <div className="flex items-start gap-3">
-                    <AlertCircle className="w-6 h-6 text-red-500 flex-shrink-0 mt-0.5" />
+              <div className="absolute inset-3 sm:inset-6 flex items-center justify-center">
+                <div className="max-w-sm sm:max-w-md p-4 sm:p-6 bg-red-50 border border-red-200 rounded-lg">
+                  <div className="flex items-start gap-2 sm:gap-3">
+                    <AlertCircle className="w-5 h-5 sm:w-6 sm:h-6 text-red-500 flex-shrink-0 mt-0.5" />
                     <div className="flex-1">
-                      <h4 className="font-semibold text-red-700 mb-2 text-lg">
+                      <h4 className="font-semibold text-red-700 mb-2 text-base sm:text-lg">
                         構文エラー
                       </h4>
                       <p className="text-sm text-red-600 mb-3">
@@ -1159,30 +1177,30 @@ export default function MermaidGeneratorClient({
           </div>
 
           {/* フルスクリーンフッター */}
-          <div className="p-4 bg-white border-t">
-            <div className="flex items-center justify-between">
-              <div className="text-sm text-gray-500">
+          <div className="p-3 sm:p-4 bg-white border-t">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+              <div className="text-xs sm:text-sm text-gray-500">
                 ESCキーまたは「閉じる」ボタンで通常表示に戻ります
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1 sm:gap-2 w-full sm:w-auto">
                 <Button
                   onClick={downloadSvg}
                   variant="outline"
                   size="sm"
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 flex-1 sm:flex-none"
                   disabled={isPreviewDisabled}
                 >
-                  <FileImage className="w-4 h-4" />
+                  <FileImage className="w-3 h-3 sm:w-4 sm:h-4" />
                   SVG
                 </Button>
                 <Button
                   onClick={downloadPng}
                   variant="outline"
                   size="sm"
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 flex-1 sm:flex-none"
                   disabled={isPreviewDisabled}
                 >
-                  <FileImage className="w-4 h-4" />
+                  <FileImage className="w-3 h-3 sm:w-4 sm:h-4" />
                   PNG
                 </Button>
               </div>
