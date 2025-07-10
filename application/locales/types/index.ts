@@ -46,9 +46,11 @@ import { IdGeneratorTranslations } from "./pages/tools/id-generator";
 import { AgeCalculatorTranslations } from "./pages/tools/age-calculator";
 import { FlexboxPlaygroundTranslations } from "./pages/tools/flexbox-playground";
 import { GridPlaygroundTranslations } from "./pages/tools/grid-playground";
+import { MermaidGeneratorTranslations } from "./pages/tools/mermaidGenerator";
 export type { AgeCalculatorTranslations } from "./pages/tools/age-calculator";
 export type { FlexboxPlaygroundTranslations } from "./pages/tools/flexbox-playground";
 export type { GridPlaygroundTranslations } from "./pages/tools/grid-playground";
+export type { MermaidGeneratorTranslations } from "./pages/tools/mermaidGenerator";
 
 export interface Translations {
   common: CommonTranslations;
@@ -95,4 +97,5 @@ export interface Translations {
   ageCalculator: AgeCalculatorTranslations;
   flexboxPlayground: FlexboxPlaygroundTranslations;
   gridPlayground: GridPlaygroundTranslations;
+  mermaidGenerator: MermaidGeneratorTranslations;
 }

@@ -43,6 +43,7 @@ import { header } from "./header";
 import { ageCalculator } from "./pages/tools/age-calculator";
 import { flexboxPlayground } from "./pages/tools/flexbox-playground";
 import { gridPlayground } from "./pages/tools/grid-playground";
+import { mermaidGenerator } from "./pages/tools/mermaidGenerator";
 
 const en: Translations = {
   common,
@@ -89,6 +90,7 @@ const en: Translations = {
   ageCalculator,
   flexboxPlayground,
   gridPlayground,
+  mermaidGenerator,
 };
 
 export default en;

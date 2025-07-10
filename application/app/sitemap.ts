@@ -58,6 +58,7 @@ export default async function sitemap({
     "/id-generator",
     "/flexbox-playground",
     "/grid-playground",
+    "/mermaid-generator",
   ];
 
   const sitemap: MetadataRoute.Sitemap = [];

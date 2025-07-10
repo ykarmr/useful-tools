@@ -36,6 +36,7 @@ import {
   Calendar,
   Layout,
   Grid3X3,
+  GitBranch,
 } from "lucide-react";
 import { Locale, Translations } from "@/locales";
 
@@ -118,6 +119,7 @@ const toolCategories = [
       { key: "baseConverter", icon: Binary, href: "/base-converter" },
       { key: "flexboxPlayground", icon: Layout, href: "/flexbox-playground" },
       { key: "gridPlayground", icon: Grid3X3, href: "/grid-playground" },
+      { key: "mermaidGenerator", icon: GitBranch, href: "/mermaid-generator" },
     ],
   },
 ];
