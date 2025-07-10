@@ -19,6 +19,10 @@ import {
   Maximize2,
   Minimize2,
   X,
+  ZoomIn,
+  ZoomOut,
+  RotateCcw,
+  Move,
 } from "lucide-react";
 import ToolLayout from "@/components/layout/tool-layout";
 import ToolSection from "@/components/layout/tool-section";
@@ -82,7 +86,15 @@ export default function MermaidGeneratorClient({
   const [selectedTemplate, setSelectedTemplate] =
     useState<string>("flowchartBasic");
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [zoomLevel, setZoomLevel] = useState(1);
+  const [panPosition, setPanPosition] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [isTouch, setIsTouch] = useState(false);
+  const [touchStartDistance, setTouchStartDistance] = useState(0);
+  const [touchStartZoom, setTouchStartZoom] = useState(1);
   const previewRef = useRef<HTMLDivElement>(null);
+  const previewContainerRef = useRef<HTMLDivElement>(null);
   const renderTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const mermaidRef = useRef<any>(null);
   const { toast } = useToast();
@@ -454,6 +466,151 @@ export default function MermaidGeneratorClient({
     [previewError]
   );
 
+  // ズーム機能
+  const handleZoomIn = useCallback(() => {
+    setZoomLevel((prev) => Math.min(prev + 0.25, 3));
+  }, []);
+
+  const handleZoomOut = useCallback(() => {
+    setZoomLevel((prev) => Math.max(prev - 0.25, 0.25));
+  }, []);
+
+  const handleZoomReset = useCallback(() => {
+    setZoomLevel(1);
+    setPanPosition({ x: 0, y: 0 });
+  }, []);
+
+  // パン機能（ドラッグ）
+  const handleMouseDown = useCallback(
+    (e: React.MouseEvent) => {
+      if (e.button === 0) {
+        // 左クリックのみ
+        setIsDragging(true);
+        setDragStart({
+          x: e.clientX - panPosition.x,
+          y: e.clientY - panPosition.y,
+        });
+      }
+    },
+    [panPosition]
+  );
+
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent) => {
+      if (isDragging) {
+        setPanPosition({
+          x: e.clientX - dragStart.x,
+          y: e.clientY - dragStart.y,
+        });
+      }
+    },
+    [isDragging, dragStart]
+  );
+
+  const handleMouseUp = useCallback(() => {
+    setIsDragging(false);
+  }, []);
+
+  // タッチイベントのヘルパー関数
+  const getTouchDistance = useCallback((touches: React.TouchList) => {
+    if (touches.length < 2) return 0;
+    const touch1 = touches[0];
+    const touch2 = touches[1];
+    return Math.sqrt(
+      Math.pow(touch2.clientX - touch1.clientX, 2) +
+        Math.pow(touch2.clientY - touch1.clientY, 2)
+    );
+  }, []);
+
+  const getTouchCenter = useCallback((touches: React.TouchList) => {
+    if (touches.length < 2) return { x: 0, y: 0 };
+    const touch1 = touches[0];
+    const touch2 = touches[1];
+    return {
+      x: (touch1.clientX + touch2.clientX) / 2,
+      y: (touch1.clientY + touch2.clientY) / 2,
+    };
+  }, []);
+
+  // タッチ開始イベント
+  const handleTouchStart = useCallback(
+    (e: React.TouchEvent) => {
+      if (e.touches.length === 1) {
+        // 単一タッチ - パン操作
+        setIsTouch(true);
+        setIsDragging(true);
+        const touch = e.touches[0];
+        setDragStart({
+          x: touch.clientX - panPosition.x,
+          y: touch.clientY - panPosition.y,
+        });
+      } else if (e.touches.length === 2) {
+        // マルチタッチ - ピンチズーム
+        setIsTouch(true);
+        setIsDragging(false);
+        const distance = getTouchDistance(e.touches);
+        setTouchStartDistance(distance);
+        setTouchStartZoom(zoomLevel);
+      }
+    },
+    [panPosition, zoomLevel, getTouchDistance]
+  );
+
+  // タッチ移動イベント
+  const handleTouchMove = useCallback(
+    (e: React.TouchEvent) => {
+      e.preventDefault(); // スクロールを防止
+
+      if (e.touches.length === 1 && isDragging && isTouch) {
+        // 単一タッチ - パン操作
+        const touch = e.touches[0];
+        setPanPosition({
+          x: touch.clientX - dragStart.x,
+          y: touch.clientY - dragStart.y,
+        });
+      } else if (e.touches.length === 2 && touchStartDistance > 0) {
+        // マルチタッチ - ピンチズーム
+        const currentDistance = getTouchDistance(e.touches);
+        const scale = currentDistance / touchStartDistance;
+        const newZoom = Math.max(0.25, Math.min(3, touchStartZoom * scale));
+        setZoomLevel(newZoom);
+      }
+    },
+    [
+      isDragging,
+      isTouch,
+      touchStartDistance,
+      touchStartZoom,
+      dragStart,
+      getTouchDistance,
+    ]
+  );
+
+  // タッチ終了イベント
+  const handleTouchEnd = useCallback(
+    (e: React.TouchEvent) => {
+      if (e.touches.length === 0) {
+        // 全てのタッチが終了
+        setIsTouch(false);
+        setIsDragging(false);
+        setTouchStartDistance(0);
+        setTouchStartZoom(1);
+      } else if (e.touches.length === 1) {
+        // マルチタッチから単一タッチに変更
+        setTouchStartDistance(0);
+        setTouchStartZoom(1);
+        if (isDragging) {
+          const touch = e.touches[0];
+          setDragStart({
+            x: touch.clientX - panPosition.x,
+            y: touch.clientY - panPosition.y,
+          });
+        }
+      }
+    },
+    [isDragging, panPosition]
+  );
+
   // 図表タイプのアイコンマッピングをメモ化
   const diagramIcons = useMemo(
     () => ({
@@ -666,20 +823,61 @@ export default function MermaidGeneratorClient({
                       <div className="w-4 h-4 border-2 border-gray-300 border-t-blue-500 rounded-full animate-spin ml-2"></div>
                     )}
                   </div>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={toggleFullscreen}
-                    className="flex items-center gap-2"
-                    disabled={isPreviewDisabled}
-                  >
-                    <Maximize2 className="w-4 h-4" />
-                    全画面表示
-                  </Button>
+                  <div className="flex items-center gap-2">
+                    {/* ズームコントロール */}
+                    <div className="flex items-center gap-1 border rounded-md">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={handleZoomOut}
+                        disabled={zoomLevel <= 0.25}
+                        className="h-8 w-8 p-0"
+                      >
+                        <ZoomOut className="w-4 h-4" />
+                      </Button>
+                      <div className="px-2 text-sm font-mono min-w-[60px] text-center">
+                        {Math.round(zoomLevel * 100)}%
+                      </div>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={handleZoomIn}
+                        disabled={zoomLevel >= 3}
+                        className="h-8 w-8 p-0"
+                      >
+                        <ZoomIn className="w-4 h-4" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={handleZoomReset}
+                        className="h-8 w-8 p-0"
+                      >
+                        <RotateCcw className="w-4 h-4" />
+                      </Button>
+                    </div>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={toggleFullscreen}
+                      className="flex items-center gap-2"
+                      disabled={isPreviewDisabled}
+                    >
+                      <Maximize2 className="w-4 h-4" />
+                      全画面表示
+                    </Button>
+                  </div>
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="min-h-[400px] border border-gray-200 rounded-lg p-4 bg-white overflow-auto">
+                <div
+                  ref={previewContainerRef}
+                  className="min-h-[400px] border border-gray-200 rounded-lg bg-white overflow-hidden relative"
+                  style={{
+                    cursor: isDragging ? "grabbing" : "grab",
+                    touchAction: "none", // タッチイベントによるスクロール防止
+                  }}
+                >
                   {isPreviewLoading && !previewRef.current?.innerHTML && (
                     <div className="flex items-center justify-center h-40 text-gray-500">
                       <div className="flex items-center gap-2">
@@ -688,7 +886,39 @@ export default function MermaidGeneratorClient({
                       </div>
                     </div>
                   )}
-                  <div ref={previewRef} className="mermaid-container w-full" />
+                  <div
+                    ref={previewRef}
+                    className="mermaid-container w-full h-full flex items-center justify-center"
+                    style={{
+                      transform: `scale(${zoomLevel}) translate(${panPosition.x}px, ${panPosition.y}px)`,
+                      transformOrigin: "center",
+                      transition: isDragging
+                        ? "none"
+                        : "transform 0.2s ease-out",
+                    }}
+                    onMouseDown={handleMouseDown}
+                    onMouseMove={handleMouseMove}
+                    onMouseUp={handleMouseUp}
+                    onMouseLeave={handleMouseUp}
+                    onTouchStart={handleTouchStart}
+                    onTouchMove={handleTouchMove}
+                    onTouchEnd={handleTouchEnd}
+                  />
+
+                  {/* ズーム・パン操作のヒント */}
+                  {!previewError && previewRef.current?.innerHTML && (
+                    <div className="absolute bottom-2 left-2 text-xs text-gray-500 bg-white/80 px-2 py-1 rounded">
+                      <div className="flex items-center gap-1">
+                        <Move className="w-3 h-3" />
+                        <span className="hidden sm:inline">
+                          ドラッグで移動 | ボタンでズーム
+                        </span>
+                        <span className="sm:hidden">
+                          ドラッグで移動 | ピンチでズーム
+                        </span>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* エラー状態の詳細説明 */}
@@ -792,6 +1022,38 @@ export default function MermaidGeneratorClient({
               )}
             </div>
             <div className="flex items-center gap-2">
+              {/* フルスクリーンズームコントロール */}
+              <div className="flex items-center gap-1 border rounded-md">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={handleZoomOut}
+                  disabled={zoomLevel <= 0.25}
+                  className="h-8 w-8 p-0"
+                >
+                  <ZoomOut className="w-4 h-4" />
+                </Button>
+                <div className="px-2 text-sm font-mono min-w-[60px] text-center">
+                  {Math.round(zoomLevel * 100)}%
+                </div>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={handleZoomIn}
+                  disabled={zoomLevel >= 3}
+                  className="h-8 w-8 p-0"
+                >
+                  <ZoomIn className="w-4 h-4" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={handleZoomReset}
+                  className="h-8 w-8 p-0"
+                >
+                  <RotateCcw className="w-4 h-4" />
+                </Button>
+              </div>
               <Button
                 variant="outline"
                 size="sm"
@@ -814,7 +1076,16 @@ export default function MermaidGeneratorClient({
           </div>
 
           {/* フルスクリーンコンテンツ */}
-          <div className="flex-1 p-6 overflow-auto bg-white">
+          <div
+            className="flex-1 bg-white overflow-hidden relative"
+            style={{
+              cursor: isDragging ? "grabbing" : "grab",
+              touchAction: "none", // タッチイベントによるスクロール防止
+            }}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
             <div className="w-full h-full flex items-center justify-center">
               {isPreviewLoading && !previewRef.current?.innerHTML && (
                 <div className="flex items-center justify-center text-gray-500">
@@ -826,7 +1097,18 @@ export default function MermaidGeneratorClient({
                   </div>
                 </div>
               )}
-              <div className="mermaid-container w-full h-full flex items-center justify-center">
+              <div
+                className="mermaid-container w-full h-full flex items-center justify-center"
+                style={{
+                  transform: `scale(${zoomLevel}) translate(${panPosition.x}px, ${panPosition.y}px)`,
+                  transformOrigin: "center",
+                  transition: isDragging ? "none" : "transform 0.2s ease-out",
+                }}
+                onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+                onMouseLeave={handleMouseUp}
+              >
                 {previewRef.current?.innerHTML && (
                   <div
                     dangerouslySetInnerHTML={{
@@ -837,6 +1119,21 @@ export default function MermaidGeneratorClient({
                 )}
               </div>
             </div>
+
+            {/* フルスクリーンズーム・パン操作のヒント */}
+            {!previewError && previewRef.current?.innerHTML && (
+              <div className="absolute bottom-4 left-4 text-sm text-gray-600 bg-white/90 px-3 py-2 rounded-lg shadow-lg">
+                <div className="flex items-center gap-2">
+                  <Move className="w-4 h-4" />
+                  <span className="hidden sm:inline">
+                    ドラッグで移動 | ボタンでズーム | ESCで終了
+                  </span>
+                  <span className="sm:hidden">
+                    ドラッグで移動 | ピンチでズーム | ESCで終了
+                  </span>
+                </div>
+              </div>
+            )}
 
             {/* フルスクリーンエラー表示 */}
             {previewError && (
