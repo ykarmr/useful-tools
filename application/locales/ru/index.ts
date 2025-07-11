@@ -40,6 +40,7 @@ import { ageCalculator } from "./pages/tools/age-calculator";
 import { flexboxPlayground } from "./pages/tools/flexbox-playground";
 import { gridPlayground } from "./pages/tools/grid-playground";
 import { mermaidGenerator } from "./pages/tools/mermaidGenerator";
+import { chartGenerator } from "./pages/tools/chart-generator";
 import { ad } from "./ad";
 import { common } from "./common";
 import { footer } from "./footer";
@@ -91,6 +92,7 @@ const ru: Translations = {
   flexboxPlayground,
   gridPlayground,
   mermaidGenerator,
+  chartGenerator,
 };
 
 export default ru;

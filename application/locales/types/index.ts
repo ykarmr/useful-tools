@@ -47,6 +47,7 @@ import { AgeCalculatorTranslations } from "./pages/tools/age-calculator";
 import { FlexboxPlaygroundTranslations } from "./pages/tools/flexbox-playground";
 import { GridPlaygroundTranslations } from "./pages/tools/grid-playground";
 import { MermaidGeneratorTranslations } from "./pages/tools/mermaidGenerator";
+import { ChartGeneratorTranslations } from "./pages/tools/chart-generator";
 export type { AgeCalculatorTranslations } from "./pages/tools/age-calculator";
 export type { FlexboxPlaygroundTranslations } from "./pages/tools/flexbox-playground";
 export type { GridPlaygroundTranslations } from "./pages/tools/grid-playground";
@@ -98,4 +99,5 @@ export interface Translations {
   flexboxPlayground: FlexboxPlaygroundTranslations;
   gridPlayground: GridPlaygroundTranslations;
   mermaidGenerator: MermaidGeneratorTranslations;
+  chartGenerator: ChartGeneratorTranslations;
 }

@@ -44,6 +44,7 @@ import { ageCalculator } from "./pages/tools/age-calculator";
 import { flexboxPlayground } from "./pages/tools/flexbox-playground";
 import { gridPlayground } from "./pages/tools/grid-playground";
 import { mermaidGenerator } from "./pages/tools/mermaidGenerator";
+import { chartGenerator } from "./pages/tools/chart-generator";
 
 const en: Translations = {
   common,
@@ -91,6 +92,7 @@ const en: Translations = {
   flexboxPlayground,
   gridPlayground,
   mermaidGenerator,
+  chartGenerator,
 };
 
 export default en;

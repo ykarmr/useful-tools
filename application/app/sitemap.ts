@@ -59,6 +59,7 @@ export default async function sitemap({
     "/flexbox-playground",
     "/grid-playground",
     "/mermaid-generator",
+    "/chart-generator",
   ];
 
   const sitemap: MetadataRoute.Sitemap = [];

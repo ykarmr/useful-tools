@@ -103,6 +103,7 @@ const toolCategories = [
       { key: "colorPalette", icon: Palette, href: "/color-palette" },
       { key: "pixelArtEditor", icon: Palette, href: "/pixel-art-editor" },
       { key: "dataConverter", icon: Code, href: "/data-converter" },
+      { key: "chartGenerator", icon: BarChart3, href: "/chart-generator" },
     ],
   },
   {
