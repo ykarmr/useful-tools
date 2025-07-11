@@ -69,6 +69,43 @@ export const mermaidGenerator: MermaidGeneratorTranslations = {
     noContent: "Пожалуйста, введите код Mermaid",
   },
 
+  errorMessages: {
+    syntaxError: "Синтаксическая ошибка: проверьте формат кода",
+    expectedElement: "Синтаксическая ошибка: ожидаемый элемент не найден",
+    undefinedElement: "Включены неопределенные элементы",
+    duplicateElement: "Существуют дублирующиеся определения",
+    invalidCharacter: "Включены недопустимые символы",
+    flowchartError: "Ошибка синтаксиса блок-схемы",
+    sequenceError: "Ошибка синтаксиса диаграммы последовательности",
+    ganttError: "Ошибка синтаксиса диаграммы Ганта",
+    libraryError: "Не удалось загрузить библиотеку Mermaid",
+  },
+
+  ui: {
+    characters: "символов",
+    syntaxErrorDetected: "Обнаружена синтаксическая ошибка",
+    checkPreview: "Проверьте детали в правом предварительном просмотре",
+    fullScreen: "Полный экран",
+    normal: "Обычный",
+    close: "Закрыть",
+    exportNotAvailable: "Нет диаграммы для экспорта",
+    dragToMove: "Перетащите для перемещения",
+    dragPinchToOperate: "Перетащите/сожмите для работы",
+    buttonForZoom: "Кнопка для масштабирования",
+    syntaxErrorDetails: "Детали синтаксической ошибки",
+    checkMermaidSyntax: "Проверьте, следуете ли вы правилам синтаксиса Mermaid",
+    referToTemplate: "Обратитесь к шаблонам для исправления вашего кода",
+    checkSpelling: "Проверьте орфографические ошибки или недопустимые символы",
+    checkBrackets: "Проверьте соответствие скобок и кавычек",
+    exportOnlyWhenGenerated:
+      "Загрузка доступна только при правильной генерации диаграммы",
+    escToExit: "Нажмите ESC или кнопку 'Закрыть' для возврата к обычному виду",
+    escToNormal: "ESC для выхода",
+    imageLoadFailed: "Не удалось загрузить изображение",
+    previewRightSide: "Проверьте детали в правом предварительном просмотре",
+    fixCodeFirst: "Исправьте код и попробуйте снова",
+  },
+
   export: {
     title: "Экспорт",
     copyCode: "Копировать код",

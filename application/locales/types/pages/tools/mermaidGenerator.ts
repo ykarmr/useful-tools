@@ -54,6 +54,44 @@ export interface MermaidGeneratorTranslations {
     noContent: string;
   };
 
+  // エラーメッセージ
+  errorMessages: {
+    syntaxError: string;
+    expectedElement: string;
+    undefinedElement: string;
+    duplicateElement: string;
+    invalidCharacter: string;
+    flowchartError: string;
+    sequenceError: string;
+    ganttError: string;
+    libraryError: string;
+  };
+
+  // UI テキスト
+  ui: {
+    characters: string;
+    syntaxErrorDetected: string;
+    checkPreview: string;
+    fullScreen: string;
+    normal: string;
+    close: string;
+    exportNotAvailable: string;
+    dragToMove: string;
+    dragPinchToOperate: string;
+    buttonForZoom: string;
+    syntaxErrorDetails: string;
+    checkMermaidSyntax: string;
+    referToTemplate: string;
+    checkSpelling: string;
+    checkBrackets: string;
+    exportOnlyWhenGenerated: string;
+    escToExit: string;
+    escToNormal: string;
+    imageLoadFailed: string;
+    previewRightSide: string;
+    fixCodeFirst: string;
+  };
+
   // エクスポート
   export: {
     title: string;

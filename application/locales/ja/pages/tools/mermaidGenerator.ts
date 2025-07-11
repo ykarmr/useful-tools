@@ -69,6 +69,43 @@ export const mermaidGenerator: MermaidGeneratorTranslations = {
     noContent: "Mermaidコードを入力してください",
   },
 
+  errorMessages: {
+    syntaxError: "構文エラー: コードの書式を確認してください",
+    expectedElement: "構文エラー: 期待される要素が見つかりません",
+    undefinedElement: "未定義の要素が含まれています",
+    duplicateElement: "重複する定義があります",
+    invalidCharacter: "無効な文字が含まれています",
+    flowchartError: "フローチャートの構文に問題があります",
+    sequenceError: "シーケンス図の構文に問題があります",
+    ganttError: "ガントチャートの構文に問題があります",
+    libraryError: "Mermaidライブラリの読み込みに失敗しました",
+  },
+
+  ui: {
+    characters: "文字",
+    syntaxErrorDetected: "構文エラーが検出されました",
+    checkPreview: "右側のプレビューで詳細を確認",
+    fullScreen: "全画面表示",
+    normal: "通常表示",
+    close: "閉じる",
+    exportNotAvailable: "エクスポートできる図表がありません",
+    dragToMove: "ドラッグで移動",
+    dragPinchToOperate: "ドラッグ/ピンチで操作",
+    buttonForZoom: "ボタンでズーム",
+    syntaxErrorDetails: "構文エラーの詳細",
+    checkMermaidSyntax: "Mermaidの構文ルールに従っているか確認してください",
+    referToTemplate: "テンプレートを参考にしてコードを修正してください",
+    checkSpelling: "スペルミスや不正な文字がないかチェックしてください",
+    checkBrackets: "括弧やクォートの対応関係を確認してください",
+    exportOnlyWhenGenerated:
+      "図表が正常に生成されている場合のみダウンロード可能です",
+    escToExit: "ESCキーまたは「閉じる」ボタンで通常表示に戻ります",
+    escToNormal: "ESCで終了",
+    imageLoadFailed: "画像の読み込みに失敗しました",
+    previewRightSide: "右側のプレビューで詳細を確認",
+    fixCodeFirst: "コードを修正してから再度お試しください",
+  },
+
   export: {
     title: "エクスポート",
     copyCode: "コードをコピー",

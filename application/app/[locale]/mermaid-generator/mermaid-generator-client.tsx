@@ -133,42 +133,42 @@ export default function MermaidGeneratorClient({
         errorMessage.includes("syntax error") ||
         errorMessage.includes("parse error")
       ) {
-        return "構文エラー: コードの書式を確認してください";
+        return t.mermaidGenerator.errorMessages.syntaxError;
       }
       if (errorMessage.includes("expected")) {
-        return "構文エラー: 期待される要素が見つかりません";
+        return t.mermaidGenerator.errorMessages.expectedElement;
       }
       if (
         errorMessage.includes("undefined") ||
         errorMessage.includes("not defined")
       ) {
-        return "未定義の要素が含まれています";
+        return t.mermaidGenerator.errorMessages.undefinedElement;
       }
       if (
         errorMessage.includes("duplicate") ||
         errorMessage.includes("already defined")
       ) {
-        return "重複する定義があります";
+        return t.mermaidGenerator.errorMessages.duplicateElement;
       }
       if (
         errorMessage.includes("invalid character") ||
         errorMessage.includes("unexpected character")
       ) {
-        return "無効な文字が含まれています";
+        return t.mermaidGenerator.errorMessages.invalidCharacter;
       }
       if (errorMessage.includes("flowchart")) {
-        return "フローチャートの構文に問題があります";
+        return t.mermaidGenerator.errorMessages.flowchartError;
       }
       if (errorMessage.includes("sequence")) {
-        return "シーケンス図の構文に問題があります";
+        return t.mermaidGenerator.errorMessages.sequenceError;
       }
       if (errorMessage.includes("gantt")) {
-        return "ガントチャートの構文に問題があります";
+        return t.mermaidGenerator.errorMessages.ganttError;
       }
 
-      return `エラー: ${error.message}`;
+      return `${t.mermaidGenerator.errorMessages.syntaxError}: ${error.message}`;
     },
-    [t.mermaidGenerator.preview.error]
+    [t.mermaidGenerator.preview.error, t.mermaidGenerator.errorMessages]
   );
 
   // 図表レンダリングを最適化
@@ -209,11 +209,11 @@ export default function MermaidGeneratorClient({
                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
                 </svg>
-                <span class="font-semibold">構文エラー</span>
+                <span class="font-semibold">${t.mermaidGenerator.ui.syntaxErrorDetails}</span>
               </div>
               <div class="text-sm text-center max-w-md">${errorMessage}</div>
               <div class="text-xs text-gray-500 mt-2 text-center">
-                コードを確認してください。テンプレートを参考にすることをお勧めします。
+                ${t.mermaidGenerator.ui.referToTemplate}
               </div>
             </div>
           `;
@@ -222,8 +222,8 @@ export default function MermaidGeneratorClient({
       }
     } catch (error: any) {
       console.error("Failed to load Mermaid:", error);
-      const errorMessage = `ライブラリエラー: ${
-        error?.message || "Mermaidライブラリの読み込みに失敗しました"
+      const errorMessage = `${t.mermaidGenerator.errorMessages.libraryError}: ${
+        error?.message || t.mermaidGenerator.errorMessages.libraryError
       }`;
       setPreviewError(errorMessage);
 
@@ -234,10 +234,10 @@ export default function MermaidGeneratorClient({
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
               </svg>
-              <span class="font-semibold">読み込みエラー</span>
+              <span class="font-semibold">${t.mermaidGenerator.errorMessages.libraryError}</span>
             </div>
             <div class="text-sm text-center">${errorMessage}</div>
-            <div class="text-xs text-gray-500 mt-2">ページを再読み込みしてお試しください。</div>
+            <div class="text-xs text-gray-500 mt-2">${t.mermaidGenerator.ui.fixCodeFirst}</div>
           </div>
         `;
       }
@@ -291,6 +291,7 @@ export default function MermaidGeneratorClient({
       await navigator.clipboard.writeText(code);
       toast({
         title: t.mermaidGenerator.export.copySuccess,
+        variant: "success",
         duration: 2000,
       });
     } catch (error) {
@@ -328,12 +329,13 @@ export default function MermaidGeneratorClient({
 
         toast({
           title: t.mermaidGenerator.export.downloadSuccess,
+          variant: "success",
           duration: 2000,
         });
       } else {
         toast({
-          title: "エクスポートできる図表がありません",
-          variant: "destructive",
+          title: t.mermaidGenerator.ui.exportNotAvailable,
+          variant: "warning",
           duration: 2000,
         });
       }
@@ -347,6 +349,7 @@ export default function MermaidGeneratorClient({
   }, [
     t.mermaidGenerator.export.downloadSuccess,
     t.mermaidGenerator.export.exportError,
+    t.mermaidGenerator.ui.exportNotAvailable,
     toast,
   ]);
 
@@ -356,8 +359,8 @@ export default function MermaidGeneratorClient({
       const svgElement = previewRef.current?.querySelector("svg");
       if (!svgElement) {
         toast({
-          title: "エクスポートできる図表がありません",
-          variant: "destructive",
+          title: t.mermaidGenerator.ui.exportNotAvailable,
+          variant: "warning",
           duration: 2000,
         });
         return;
@@ -412,6 +415,7 @@ export default function MermaidGeneratorClient({
 
                 toast({
                   title: t.mermaidGenerator.export.downloadSuccess,
+                  variant: "success",
                   duration: 2000,
                 });
               } else {
@@ -433,7 +437,7 @@ export default function MermaidGeneratorClient({
 
       img.onerror = () => {
         toast({
-          title: "画像の読み込みに失敗しました",
+          title: t.mermaidGenerator.ui.imageLoadFailed,
           variant: "destructive",
           duration: 2000,
         });
@@ -452,6 +456,7 @@ export default function MermaidGeneratorClient({
   }, [
     t.mermaidGenerator.export.downloadSuccess,
     t.mermaidGenerator.export.exportError,
+    t.mermaidGenerator.ui.imageLoadFailed,
     toast,
   ]);
 
@@ -691,6 +696,7 @@ export default function MermaidGeneratorClient({
         locale={locale}
         t={t}
         title={t.mermaidGenerator.title}
+        subtitle={t.mermaidGenerator.subtitle}
         description={t.mermaidGenerator.description}
         icon={Network}
       >
@@ -800,7 +806,7 @@ export default function MermaidGeneratorClient({
 
                     {/* 文字数カウンター */}
                     <div className="text-xs text-gray-400">
-                      {codeLength} 文字
+                      {codeLength} {t.mermaidGenerator.ui.characters}
                     </div>
                   </div>
 
@@ -809,8 +815,8 @@ export default function MermaidGeneratorClient({
                     <div className="flex items-center gap-2 text-sm text-red-600 bg-red-50 p-3 rounded-md border border-red-200">
                       <AlertCircle className="w-4 h-4 flex-shrink-0" />
                       <span>
-                        構文エラーが検出されました -
-                        右側のプレビューで詳細を確認
+                        {t.mermaidGenerator.ui.syntaxErrorDetected} -
+                        {t.mermaidGenerator.ui.checkPreview}
                       </span>
                     </div>
                   )}
@@ -872,8 +878,12 @@ export default function MermaidGeneratorClient({
                       disabled={isPreviewDisabled}
                     >
                       <Maximize2 className="w-3 h-3 sm:w-4 sm:h-4" />
-                      <span className="hidden sm:inline">全画面表示</span>
-                      <span className="sm:hidden">全画面</span>
+                      <span className="hidden sm:inline">
+                        {t.mermaidGenerator.ui.fullScreen}
+                      </span>
+                      <span className="sm:hidden">
+                        {t.mermaidGenerator.ui.fullScreen}
+                      </span>
                     </Button>
                   </div>
                 </CardTitle>
@@ -920,9 +930,12 @@ export default function MermaidGeneratorClient({
                       <div className="flex items-center gap-1">
                         <Move className="w-3 h-3" />
                         <span className="hidden sm:inline">
-                          ドラッグで移動 | ボタンでズーム
+                          {t.mermaidGenerator.ui.dragToMove} |{" "}
+                          {t.mermaidGenerator.ui.buttonForZoom}
                         </span>
-                        <span className="sm:hidden">ドラッグ/ピンチで操作</span>
+                        <span className="sm:hidden">
+                          {t.mermaidGenerator.ui.dragPinchToOperate}
+                        </span>
                       </div>
                     </div>
                   )}
@@ -935,22 +948,16 @@ export default function MermaidGeneratorClient({
                       <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
                       <div className="flex-1">
                         <h4 className="font-semibold text-red-700 mb-2">
-                          構文エラーの詳細
+                          {t.mermaidGenerator.ui.syntaxErrorDetails}
                         </h4>
                         <p className="text-sm text-red-600 mb-3">
                           {previewError}
                         </p>
                         <div className="text-xs text-red-500 space-y-1">
-                          <p>
-                            • Mermaidの構文ルールに従っているか確認してください
-                          </p>
-                          <p>
-                            • テンプレートを参考にしてコードを修正してください
-                          </p>
-                          <p>
-                            • スペルミスや不正な文字がないかチェックしてください
-                          </p>
-                          <p>• 括弧やクォートの対応関係を確認してください</p>
+                          <p>• {t.mermaidGenerator.ui.checkMermaidSyntax}</p>
+                          <p>• {t.mermaidGenerator.ui.referToTemplate}</p>
+                          <p>• {t.mermaidGenerator.ui.checkSpelling}</p>
+                          <p>• {t.mermaidGenerator.ui.checkBrackets}</p>
                         </div>
                       </div>
                     </div>
@@ -1010,7 +1017,7 @@ export default function MermaidGeneratorClient({
               </div>
               {isPreviewDisabled && (
                 <p className="text-xs text-gray-500 mt-2">
-                  * 図表が正常に生成されている場合のみダウンロード可能です
+                  * {t.mermaidGenerator.ui.exportOnlyWhenGenerated}
                 </p>
               )}
             </CardContent>
@@ -1077,8 +1084,12 @@ export default function MermaidGeneratorClient({
                 className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3"
               >
                 <Minimize2 className="w-3 h-3 sm:w-4 sm:h-4" />
-                <span className="hidden sm:inline">通常表示</span>
-                <span className="sm:hidden">通常</span>
+                <span className="hidden sm:inline">
+                  {t.mermaidGenerator.ui.normal}
+                </span>
+                <span className="sm:hidden">
+                  {t.mermaidGenerator.ui.normal}
+                </span>
               </Button>
               <Button
                 variant="outline"
@@ -1087,7 +1098,9 @@ export default function MermaidGeneratorClient({
                 className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3"
               >
                 <X className="w-3 h-3 sm:w-4 sm:h-4" />
-                <span className="hidden sm:inline">閉じる</span>
+                <span className="hidden sm:inline">
+                  {t.mermaidGenerator.ui.close}
+                </span>
                 <span className="sm:hidden">×</span>
               </Button>
             </div>
@@ -1144,10 +1157,13 @@ export default function MermaidGeneratorClient({
                 <div className="flex items-center gap-1 sm:gap-2">
                   <Move className="w-3 h-3 sm:w-4 sm:h-4" />
                   <span className="hidden sm:inline">
-                    ドラッグで移動 | ボタンでズーム | ESCで終了
+                    {t.mermaidGenerator.ui.dragToMove} |{" "}
+                    {t.mermaidGenerator.ui.buttonForZoom} |{" "}
+                    {t.mermaidGenerator.ui.escToNormal}
                   </span>
                   <span className="sm:hidden">
-                    ドラッグ/ピンチで操作 | ESCで終了
+                    {t.mermaidGenerator.ui.dragPinchToOperate} |{" "}
+                    {t.mermaidGenerator.ui.escToNormal}
                   </span>
                 </div>
               </div>
@@ -1161,13 +1177,13 @@ export default function MermaidGeneratorClient({
                     <AlertCircle className="w-5 h-5 sm:w-6 sm:h-6 text-red-500 flex-shrink-0 mt-0.5" />
                     <div className="flex-1">
                       <h4 className="font-semibold text-red-700 mb-2 text-base sm:text-lg">
-                        構文エラー
+                        {t.mermaidGenerator.ui.syntaxErrorDetails}
                       </h4>
                       <p className="text-sm text-red-600 mb-3">
                         {previewError}
                       </p>
                       <div className="text-xs text-red-500 space-y-1">
-                        <p>コードを修正してから再度お試しください</p>
+                        <p>{t.mermaidGenerator.ui.fixCodeFirst}</p>
                       </div>
                     </div>
                   </div>
@@ -1180,7 +1196,7 @@ export default function MermaidGeneratorClient({
           <div className="p-3 sm:p-4 bg-white border-t">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
               <div className="text-xs sm:text-sm text-gray-500">
-                ESCキーまたは「閉じる」ボタンで通常表示に戻ります
+                {t.mermaidGenerator.ui.escToExit}
               </div>
               <div className="flex items-center gap-1 sm:gap-2 w-full sm:w-auto">
                 <Button

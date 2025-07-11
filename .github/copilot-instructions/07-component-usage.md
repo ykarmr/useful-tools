@@ -17,6 +17,7 @@
     {/* ツールの使い方を説明するコンテンツ */}
     <ToolHowToUse
       title={t.[機能名].howToUse.title}
+      subtitle={t.[機能名].subtitle}
       steps={t.[機能名].howToUse.steps}
       features={{
         title: t.[機能名].features.title,

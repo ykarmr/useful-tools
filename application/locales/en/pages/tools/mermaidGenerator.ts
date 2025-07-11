@@ -69,6 +69,43 @@ export const mermaidGenerator: MermaidGeneratorTranslations = {
     noContent: "Please enter Mermaid code",
   },
 
+  errorMessages: {
+    syntaxError: "Syntax error: Please check code format",
+    expectedElement: "Syntax error: Expected element not found",
+    undefinedElement: "Undefined elements are included",
+    duplicateElement: "Duplicate definitions exist",
+    invalidCharacter: "Invalid characters are included",
+    flowchartError: "Flowchart syntax error",
+    sequenceError: "Sequence diagram syntax error",
+    ganttError: "Gantt chart syntax error",
+    libraryError: "Failed to load Mermaid library",
+  },
+
+  ui: {
+    characters: "characters",
+    syntaxErrorDetected: "Syntax error detected",
+    checkPreview: "Check details in the right preview",
+    fullScreen: "Full Screen",
+    normal: "Normal",
+    close: "Close",
+    exportNotAvailable: "No diagram available for export",
+    dragToMove: "Drag to move",
+    dragPinchToOperate: "Drag/Pinch to operate",
+    buttonForZoom: "Button for zoom",
+    syntaxErrorDetails: "Syntax Error Details",
+    checkMermaidSyntax: "Please check if you follow Mermaid syntax rules",
+    referToTemplate: "Please refer to templates to fix your code",
+    checkSpelling: "Check for spelling mistakes or invalid characters",
+    checkBrackets: "Check brackets and quote correspondence",
+    exportOnlyWhenGenerated:
+      "Download available only when diagram is generated correctly",
+    escToExit: "Press ESC key or 'Close' button to return to normal view",
+    escToNormal: "ESC to exit",
+    imageLoadFailed: "Failed to load image",
+    previewRightSide: "Check details in the right preview",
+    fixCodeFirst: "Please fix the code and try again",
+  },
+
   export: {
     title: "Export",
     copyCode: "Copy Code",

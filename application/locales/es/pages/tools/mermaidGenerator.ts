@@ -69,6 +69,43 @@ export const mermaidGenerator: MermaidGeneratorTranslations = {
     noContent: "Por favor ingrese código Mermaid",
   },
 
+  errorMessages: {
+    syntaxError: "Error de sintaxis: Verifique el formato del código",
+    expectedElement: "Error de sintaxis: Elemento esperado no encontrado",
+    undefinedElement: "Se incluyen elementos no definidos",
+    duplicateElement: "Existen definiciones duplicadas",
+    invalidCharacter: "Se incluyen caracteres inválidos",
+    flowchartError: "Error de sintaxis en el diagrama de flujo",
+    sequenceError: "Error de sintaxis en el diagrama de secuencia",
+    ganttError: "Error de sintaxis en el diagrama de Gantt",
+    libraryError: "Error al cargar la biblioteca Mermaid",
+  },
+
+  ui: {
+    characters: "caracteres",
+    syntaxErrorDetected: "Error de sintaxis detectado",
+    checkPreview: "Verifique los detalles en la vista previa derecha",
+    fullScreen: "Pantalla Completa",
+    normal: "Normal",
+    close: "Cerrar",
+    exportNotAvailable: "No hay diagrama disponible para exportar",
+    dragToMove: "Arrastrar para mover",
+    dragPinchToOperate: "Arrastrar/Pellizcar para operar",
+    buttonForZoom: "Botón para zoom",
+    syntaxErrorDetails: "Detalles del Error de Sintaxis",
+    checkMermaidSyntax: "Verifique si sigue las reglas de sintaxis de Mermaid",
+    referToTemplate: "Consulte las plantillas para corregir su código",
+    checkSpelling: "Verifique errores de ortografía o caracteres inválidos",
+    checkBrackets: "Verifique la correspondencia de corchetes y comillas",
+    exportOnlyWhenGenerated:
+      "Descarga disponible solo cuando el diagrama se genera correctamente",
+    escToExit: "Presione ESC o el botón 'Cerrar' para volver a la vista normal",
+    escToNormal: "ESC para salir",
+    imageLoadFailed: "Error al cargar la imagen",
+    previewRightSide: "Verifique los detalles en la vista previa derecha",
+    fixCodeFirst: "Corrija el código e inténtelo de nuevo",
+  },
+
   export: {
     title: "Exportar",
     copyCode: "Copiar Código",
