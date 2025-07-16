@@ -170,16 +170,16 @@ export default function AgeCalculatorClient({
 
       {/* メイン機能セクション */}
       <ToolSection>
-        <div className="flex flex-col gap-8 w-full max-w-2xl mx-auto">
+        <div className="flex flex-col gap-6 sm:gap-8 w-full max-w-2xl mx-auto">
           {/* 入力フォーム */}
-          <div className="space-y-6">
+          <div className="space-y-5 sm:space-y-6">
             {/* 生年月日入力 */}
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-2 sm:gap-3">
               <label
-                className="text-lg font-semibold text-gray-700 flex items-center gap-2"
+                className="text-base sm:text-lg font-semibold text-gray-700 flex items-center gap-2"
                 htmlFor="birthdate-input"
               >
-                <Calendar className="w-5 h-5 text-blue-500" />
+                <Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500" />
                 {t.ageCalculator.birthdateLabel}
               </label>
               <input
@@ -187,18 +187,18 @@ export default function AgeCalculatorClient({
                 type="date"
                 value={birthdate}
                 onChange={(e) => setBirthdate(e.target.value)}
-                className="w-full bg-white rounded-2xl px-6 py-4 text-lg font-medium border-2 border-blue-200 shadow-sm focus:border-blue-400 focus:ring-4 focus:ring-blue-100 transition-all duration-200"
+                className="w-full bg-white rounded-xl sm:rounded-2xl px-4 py-3 sm:px-6 sm:py-4 text-base sm:text-lg font-medium border-2 border-blue-200 shadow-sm focus:border-blue-400 focus:ring-4 focus:ring-blue-100 transition-all duration-200"
                 max={new Date().toISOString().split("T")[0]}
               />
             </div>
 
             {/* 基準日入力 */}
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-2 sm:gap-3">
               <label
-                className="text-lg font-semibold text-gray-700 flex items-center gap-2"
+                className="text-base sm:text-lg font-semibold text-gray-700 flex items-center gap-2"
                 htmlFor="target-date-input"
               >
-                <Calendar className="w-5 h-5 text-green-500" />
+                <Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-green-500" />
                 {t.ageCalculator.targetDateLabel}
               </label>
               <input
@@ -206,26 +206,30 @@ export default function AgeCalculatorClient({
                 type="date"
                 value={targetDate}
                 onChange={(e) => setTargetDate(e.target.value)}
-                className="w-full bg-white rounded-2xl px-6 py-4 text-lg font-medium border-2 border-green-200 shadow-sm focus:border-green-400 focus:ring-4 focus:ring-green-100 transition-all duration-200"
+                className="w-full bg-white rounded-xl sm:rounded-2xl px-4 py-3 sm:px-6 sm:py-4 text-base sm:text-lg font-medium border-2 border-green-200 shadow-sm focus:border-green-400 focus:ring-4 focus:ring-green-100 transition-all duration-200"
               />
             </div>
 
             {/* ボタン */}
-            <div className="flex gap-4">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <button
                 onClick={handleCalculate}
                 disabled={!birthdate || !targetDate}
-                className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold py-4 px-6 rounded-2xl shadow-lg hover:from-blue-600 hover:to-blue-700 focus:ring-4 focus:ring-blue-200 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold py-3 px-4 sm:py-4 sm:px-6 rounded-xl sm:rounded-2xl shadow-lg hover:from-blue-600 hover:to-blue-700 focus:ring-4 focus:ring-blue-200 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <Calculator className="w-5 h-5" />
-                {t.ageCalculator.calculateButton}
+                <Calculator className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span className="text-sm sm:text-base">
+                  {t.ageCalculator.calculateButton}
+                </span>
               </button>
               <button
                 onClick={handleClear}
-                className="flex items-center justify-center gap-2 bg-gray-500 text-white font-semibold py-4 px-6 rounded-2xl shadow-lg hover:bg-gray-600 focus:ring-4 focus:ring-gray-200 transition-all duration-200"
+                className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-gray-500 text-white font-semibold py-3 px-4 sm:py-4 sm:px-6 rounded-xl sm:rounded-2xl shadow-lg hover:bg-gray-600 focus:ring-4 focus:ring-gray-200 transition-all duration-200"
               >
-                <RotateCcw className="w-5 h-5" />
-                {t.ageCalculator.clearButton}
+                <RotateCcw className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span className="text-sm sm:text-base">
+                  {t.ageCalculator.clearButton}
+                </span>
               </button>
             </div>
           </div>
@@ -236,20 +240,20 @@ export default function AgeCalculatorClient({
       <ToolSection>
         <ToolDisplay>
           {!result ? (
-            <div className="text-center text-gray-500 text-lg py-12">
+            <div className="text-center text-gray-500 text-base sm:text-lg py-8 sm:py-12">
               {t.ageCalculator.resultPlaceholder}
             </div>
           ) : (
-            <div className="space-y-8">
+            <div className="space-y-6 sm:space-y-8">
               {/* メイン年齢表示 */}
               <div className="text-center">
-                <h3 className="text-2xl font-bold text-gray-800 mb-4">
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-3 sm:mb-4">
                   {t.ageCalculator.currentAge}
                 </h3>
-                <div className="text-6xl font-bold text-blue-600 mb-2">
+                <div className="text-4xl sm:text-6xl font-bold text-blue-600 mb-2">
                   {result.years}
                 </div>
-                <div className="text-xl text-gray-600">
+                <div className="text-base sm:text-xl text-gray-600">
                   {result.years} {t.ageCalculator.yearsOld}
                   {result.months > 0 && (
                     <>
@@ -267,51 +271,51 @@ export default function AgeCalculatorClient({
               </div>
 
               {/* 詳細情報 */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-6 text-center">
-                  <div className="text-3xl font-bold text-purple-600">
+              <div className="grid grid-cols-2 gap-3 sm:gap-6 md:grid-cols-4">
+                <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl sm:rounded-2xl p-4 sm:p-6 text-center">
+                  <div className="text-xl sm:text-3xl font-bold text-purple-600">
                     {formatNumber(result.weeks)}
                   </div>
-                  <div className="text-sm text-purple-500 font-medium mt-1">
+                  <div className="text-xs sm:text-sm text-purple-500 font-medium mt-1">
                     {t.ageCalculator.weeksOld}
                   </div>
                 </div>
-                <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-6 text-center">
-                  <div className="text-3xl font-bold text-green-600">
+                <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl sm:rounded-2xl p-4 sm:p-6 text-center">
+                  <div className="text-xl sm:text-3xl font-bold text-green-600">
                     {formatNumber(result.totalDays)}
                   </div>
-                  <div className="text-sm text-green-500 font-medium mt-1">
+                  <div className="text-xs sm:text-sm text-green-500 font-medium mt-1">
                     {t.ageCalculator.daysOld}
                   </div>
                 </div>
-                <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl p-6 text-center">
-                  <div className="text-3xl font-bold text-orange-600">
+                <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl sm:rounded-2xl p-4 sm:p-6 text-center">
+                  <div className="text-xl sm:text-3xl font-bold text-orange-600">
                     {formatNumber(result.hours)}
                   </div>
-                  <div className="text-sm text-orange-500 font-medium mt-1">
+                  <div className="text-xs sm:text-sm text-orange-500 font-medium mt-1">
                     {t.ageCalculator.hoursOld}
                   </div>
                 </div>
-                <div className="bg-gradient-to-br from-pink-50 to-pink-100 rounded-2xl p-6 text-center">
-                  <div className="text-3xl font-bold text-pink-600">
+                <div className="bg-gradient-to-br from-pink-50 to-pink-100 rounded-xl sm:rounded-2xl p-4 sm:p-6 text-center">
+                  <div className="text-xl sm:text-3xl font-bold text-pink-600">
                     {formatNumber(result.minutes)}
                   </div>
-                  <div className="text-sm text-pink-500 font-medium mt-1">
+                  <div className="text-xs sm:text-sm text-pink-500 font-medium mt-1">
                     {t.ageCalculator.minutesOld}
                   </div>
                 </div>
               </div>
 
               {/* 次の誕生日情報 */}
-              <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-3xl p-8 text-center">
-                <h4 className="text-xl font-bold text-yellow-800 mb-4">
+              <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-2xl sm:rounded-3xl p-6 sm:p-8 text-center">
+                <h4 className="text-lg sm:text-xl font-bold text-yellow-800 mb-3 sm:mb-4">
                   🎉 {t.ageCalculator.nextBirthday}
                 </h4>
-                <div className="text-lg text-yellow-700">
+                <div className="text-base sm:text-lg text-yellow-700">
                   {t.ageCalculator.daysUntilBirthday}:{" "}
                   {result.daysUntilBirthday} {t.ageCalculator.daysOld}
                 </div>
-                <div className="text-lg text-yellow-700 mt-2">
+                <div className="text-base sm:text-lg text-yellow-700 mt-2">
                   {result.nextBirthdayAge} {t.ageCalculator.nextBirthdayAge}
                 </div>
               </div>

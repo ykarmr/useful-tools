@@ -23,5 +23,9 @@ export interface CalculatorTranslations {
     title: string;
     items: (string | Feature)[];
   };
+  history: {
+    title: string;
+    empty: string;
+  };
   faqList: FAQItem[];
 }
