@@ -30,17 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // 一旦日本語で作成するため、jaの翻訳を使用
   const t = getTranslations("ja");
 
-  return {
-    title: `サイト運用者について | ${t.common.siteTitle}`,
-    description:
-      "USEFUL TOOLSの開発者・運用者についてご紹介します。このサイトの目的やビジョン、開発の経緯などをお伝えします。",
-    keywords: ["サイト運用者", "開発者", "USEFUL TOOLS", "運営者情報"],
-    openGraph: {
-      title: "サイト運用者について",
-      description: "USEFUL TOOLSの開発者・運用者についてご紹介します。",
-      type: "website",
-    },
-  };
+  return generatePageMetadata(locale, "about", t.about, t.common);
 }
 
 export default async function AboutPage({ params }: Props) {
