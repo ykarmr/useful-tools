@@ -45,6 +45,7 @@ import { ad } from "./ad";
 import { common } from "./common";
 import { footer } from "./footer";
 import { header } from "./header";
+import { about } from "./pages/about";
 
 const ru: Translations = {
   common,
@@ -93,6 +94,7 @@ const ru: Translations = {
   gridPlayground,
   mermaidGenerator,
   chartGenerator,
+  about,
 };
 
 export default ru;

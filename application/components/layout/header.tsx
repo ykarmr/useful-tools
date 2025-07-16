@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
-import { Menu, X, Home, Grid3X3, ChevronDown } from "lucide-react";
+import { Menu, X, Home, Grid3X3, ChevronDown, User } from "lucide-react";
 import { Locale, Translations } from "@/locales";
 import { getSupportedLocales } from "@/locales";
 import { localeIcons, localeLabels } from "@/lib/i18n";
@@ -20,6 +20,7 @@ export default function Header({ locale, t }: HeaderProps) {
   const navigation = [
     { name: t.common.home, href: `/${locale}`, icon: Home },
     { name: t.common.services, href: `/${locale}/services`, icon: Grid3X3 },
+    { name: t.header.about, href: `/${locale}/about`, icon: User },
   ];
 
   const isActive = (href: string) => {

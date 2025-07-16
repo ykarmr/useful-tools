@@ -19,6 +19,7 @@ export default async function sitemap({
   // 共通ルート
   const routes = [
     "",
+    "/about",
     "/calculator",
     "/coin-flip",
     "/contact",

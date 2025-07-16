@@ -1,5 +1,6 @@
 export * from "./common";
 export * from "./pages/tools/image-converter";
+export * from "./pages/about";
 
 import type { CommonTranslations } from "./common";
 
@@ -48,10 +49,12 @@ import { FlexboxPlaygroundTranslations } from "./pages/tools/flexbox-playground"
 import { GridPlaygroundTranslations } from "./pages/tools/grid-playground";
 import { MermaidGeneratorTranslations } from "./pages/tools/mermaidGenerator";
 import { ChartGeneratorTranslations } from "./pages/tools/chart-generator";
+import { AboutTranslations } from "./pages/about";
 export type { AgeCalculatorTranslations } from "./pages/tools/age-calculator";
 export type { FlexboxPlaygroundTranslations } from "./pages/tools/flexbox-playground";
 export type { GridPlaygroundTranslations } from "./pages/tools/grid-playground";
 export type { MermaidGeneratorTranslations } from "./pages/tools/mermaidGenerator";
+export type { AboutTranslations } from "./pages/about";
 
 export interface Translations {
   common: CommonTranslations;
@@ -100,4 +103,5 @@ export interface Translations {
   gridPlayground: GridPlaygroundTranslations;
   mermaidGenerator: MermaidGeneratorTranslations;
   chartGenerator: ChartGeneratorTranslations;
+  about: AboutTranslations;
 }

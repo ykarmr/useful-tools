@@ -6,6 +6,7 @@ export const footer: FooterTranslations = {
   legal: "Legal",
   helpCenter: "Centro de Ayuda",
   contact: "Contacto",
+  about: "Acerca del Desarrollador",
   privacyPolicy: "Política de Privacidad",
   termsOfService: "Términos de Servicio",
   copyright: "USEFUL TOOLS. Todos los derechos reservados.",

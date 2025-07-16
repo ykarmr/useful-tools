@@ -45,6 +45,7 @@ import { flexboxPlayground } from "./pages/tools/flexbox-playground";
 import { gridPlayground } from "./pages/tools/grid-playground";
 import { mermaidGenerator } from "./pages/tools/mermaidGenerator";
 import { chartGenerator } from "./pages/tools/chart-generator";
+import { about } from "./pages/about";
 
 const en: Translations = {
   common,
@@ -93,6 +94,7 @@ const en: Translations = {
   gridPlayground,
   mermaidGenerator,
   chartGenerator,
+  about,
 };
 
 export default en;

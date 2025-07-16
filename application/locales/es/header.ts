@@ -4,4 +4,5 @@ export const header: HeaderTranslations = {
   logo: "USEFUL TOOLS",
   toggleMenu: "Alternar menú de navegación",
   changeLanguage: "Cambiar idioma",
+  about: "Acerca de",
 };

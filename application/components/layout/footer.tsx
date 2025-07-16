@@ -15,7 +15,10 @@ export default function Footer({ locale, t }: FooterProps) {
     },
     {
       title: t.footer.support,
-      links: [{ name: t.footer.contact, href: `/${locale}/contact` }],
+      links: [
+        { name: t.footer.contact, href: `/${locale}/contact` },
+        { name: t.footer.about, href: `/${locale}/about` },
+      ],
     },
     {
       title: t.footer.legal,
